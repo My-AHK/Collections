@@ -29,7 +29,7 @@ GoSub, TrayMenu
 
 
 
-Exclude_Folder := "C:\Users\rjcof\Downloads\Auto HotKey\AHK Collections"    ;; <--Example
+Exclude_Folder := "C:\Users\Full\Path\To\Folder"    ;; <--Example folder.
 
 DetectHiddenWindows, % ( ( DHW:=A_DetectHiddenWindows ) + 0 ) . "On"
 WinGet, L, List, ahk_class AutoHotkey
