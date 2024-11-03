@@ -1,5 +1,5 @@
 
-• Keep one or both of the .exe files in the same folder as a script to allow portable operation without any installation. 
+• Keep one or both of the .exe files in the same folder as a script with the same name to allow portable operation without any installation. 
 
 ----------------------------------------------------------------------------
 
