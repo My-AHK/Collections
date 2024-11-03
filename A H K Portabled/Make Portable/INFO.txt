@@ -1,0 +1,8 @@
+
+• Keep one or both of the .exe files in the same folder as a script to allow portable operation without any installation. 
+
+----------------------------------------------------------------------------
+
+• AutoHotkeyU32.exe: This is the Unicode version of the 32-bit AutoHotkey. It supports Unicode text, which includes handling BOM (Byte Order Mark) properly for files with Unicode encoding. It can read and write files with BOM, ensuring proper handling of different character encodings.
+
+• AutoHotkeyU64.exe: This is the 64-bit Unicode version. It also supports Unicode text and handles BOM for Unicode files. It is capable of working with BOM in text files and supports various character encodings.
