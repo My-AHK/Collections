@@ -1,0 +1,19 @@
+
+	* Volume Display.ahk *
+
+
+
+* Full Summary:
+Display and control the system volume in real-time, providing a GUI with a color-coded volume indicator. 
+The window remains always on top and updates the volume percentage dynamically, with different colors indicating volume level ranges. Users can reset the volume to the default by clicking the "VOLUME" text in the Gui and adjust the volume via mouse wheel in the taskbar area over the Gui volume display. It also features a close button to terminate the app via a dark red 'X'.
+* Option to auto-reload the script every 9 minutes if uncommented in the script.
+
+
+
+** Brief Summary:
+Displays a real-time, color-coded volume indicator, updating every 50ms, and allows volume reset via clicking the "VOLUME" text. It supports adjusting volume with the mouse wheel in the taskbar area, includes a close button, and can be set to auto-reload every 9 minutes.
+
+
+
+*** Headliner:
+Real-time volume indicator with reset and mouse wheel control.
