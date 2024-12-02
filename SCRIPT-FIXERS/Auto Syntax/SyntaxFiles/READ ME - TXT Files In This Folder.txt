@@ -1,2 +1,0 @@
-
-TXT files in this folder are part of Auto Syntax.ahk script.
