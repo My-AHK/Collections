@@ -9,72 +9,113 @@
           running without manual intervention.
 ∙--------∙Origins∙-------------------------∙
 » Author:  Laszlo
-» Original Source:  
-» https://www.autohotkey.com/board/topic/34174-dual-slider/
+» Original Source:  https://www.autohotkey.com/board/topic/34174-dual-slider/
+» 
 ∙=============================================================∙
 */
 ;;∙------------------------------------------------------------------------------------------∙
 ;;∙======∙Auto-Execute∙==========================================∙
-ScriptID := "Volume_Limits"    ;;∙------∙Also change in 'MENU CALLS' at script end.
+ScriptID := "!_Volume_Limits_!"    ;;∙------∙Also change in 'MENU CALLS' at script end.
 GoSub, AutoExecute
 GoSub, TrayMenu
 ;;∙============================================================∙
 ;;∙------------------------------------------------------------------------------------------∙
 
 
+;;∙======∙SETTINGS∙=============================================∙
+;;∙------------∙Gui Coloring∙-------------------∙
+guiNormColor := "283548"    ;;∙------∙Dark gray blue.
+guiMuteColor := "6F0000"    ;;∙------∙Dark red.
+;;∙------------∙Gui Positioning∙---------------∙
+guiXaxis := 1600
+guiYaxis := 950
+;;∙------------∙Gui Dimensions∙---------------∙
+guiW := 300
+guiH := 80
+;;∙------------∙Text Attributes∙----------------∙
+guiFont := "Arial"
+guiFontSize := "12"
+guiFontColor := "3094E4"
+guiFontWeight := "Bold"
+;;∙------------∙Volume Limits∙----------------∙
+minVolume := 3    ;;∙------∙Default MINimum slider position. (0...100)
+maxVolume := 17    ;;∙------∙Default MAXimum slider position. (0...100)
+volumeSliderWidth := 199    ;;∙------∙Slider scale width.
+frequencyCheck := 300    ;;∙------∙Frequency to check volume level. (Milliseconds)
+;;∙-----------------------------------------------------------------------------------------∙
 
-
-;;∙============================================================∙
+;;∙======∙Gui Build∙=============================================∙
 Gui, Destroy
-Gui, +AlwaysOnTop -Caption +Border
-
-DualSlide1 := 1    ;;∙------∙Current MINimum slider position. (0...100)
-DualSlide2 := 17    ;;∙------∙Current MAXimum slider position. (0...100)
-DualSlideW := 199    ;;∙------∙Scale width.
-    DualSlideK := DualSlideW/100    ;;∙------∙Auxiliary variables.
-    DualSlideU := DualSlideW+18
-    DualSlideV := DualSlideU-1
+Gui, +AlwaysOnTop -Caption +Border +Owner +E0x02000000
+    DualSlide1 := minVolume , DualSlide2 := maxVolume
+    DualSlideW := volumeSliderWidth
+        DualSlideK := DualSlideW/100
+        DualSlideU := DualSlideW+18
+        DualSlideV := DualSlideU-1
 Loop 2
-
-
-Gui, Add, Slider, x40 y40 w%DualSlideU% vDualSlide%A_Index% gDualSlide%A_Index% hwndDualSlideHwnd%A_Index% AltSubmit Range0-100 TickInterval10 Thick13 -Theme ToolTip
-
-Gui, Color, Silver
-Gui, Font, s14 cBlue, Arial
-Gui, Add, Text, x0 y10 w300 Center, Volume Limits
-Gui, Add, Picture, x5 y5 w21 h21 Icon239 gReload, shell32.dll    ;;∙------∙Reload Icon.
-Gui, Add, Picture, x275 y5 w21 h21 Icon132 gExit, shell32.dll    ;;∙------∙Exit Icon.
-
-GoSub, DualSlide
-Gui, Show, x750 y600 w300 h80
-SetTimer, VolumeLimits, 500    ;;∙------∙Check and maintain volume level parameters.
+Gui, Add, Slider, x40 y40 w%DualSlideU% vDualSlide%A_Index% gDualSlide%A_Index% hwndDualSlideHwnd%A_Index% AltSubmit Range0-100 TickInterval10 Thick13 -Theme ToolTipTop
+Gui, Color, %guiNormColor%
+Gui, Font, s%guiFontSize% %guiFontWeight% c%guiFontColor%, %guiFont%
+Gui, Add, Text, x0 y10 w300 BackgroundTrans Center, !  Volume Limits  !
+Gui, Add, Picture, x10 y5 w21 h21 Icon239 BackgroundTrans gReload, shell32.dll
+Gui, Add, Picture, xp y50 w24 h24 Icon2 BackgroundTrans gMuted, SndVolSSO.dll
+    Gosub Update
+Gui, Add, Picture, x270 y5 w21 h21 Icon132 BackgroundTrans gExit, shell32.dll
+Gui, Add, Picture, xp y50 w21 h21 BackgroundTrans Icon289 gHide, shell32.dll
+Gui, Hide
+    GoSub, DualSlide
+Gui, Show, x%guiXaxis% y%guiYaxis% w%guiW% h%guiH%
+SetTimer, VolumeLimits, %frequencyCheck%
 Return
+;;∙-----------------------------------------------------------------------------------------∙
 
+;;∙======∙Routines and Functions∙=================================∙
+Muted:
+    SoundSet +1, , MUTE
+Update:
+SoundGet mute, , MUTE
+    If (mute = "On") {
+        Menu Tray, Icon, SndVolSSO.dll, 7
+        Gui, Color, %guiMuteColor%
+        Gui, Show, , Mute = ON
+    } Else {
+        Menu Tray, Icon, SndVolSSO.dll, 8
+        Gui Color, %guiNormColor%
+        Gui, Show, , Mute = OFF
+    }
+Return
+;;∙------------------------∙
+Hide:
+    Gui, Hide
+Return
+;;∙------------------------∙
 DualSlide1:
-   DualSlide2 := DualSlide1 < DualSlide2 ? DualSlide2 : DualSlide1
-   GoTo DualSlide
-
+    DualSlide2 := DualSlide1 < DualSlide2 ? DualSlide2 : DualSlide1
+    GoTo DualSlide
 DualSlide2:
-   DualSlide1 := DualSlide1 < DualSlide2 ? DualSlide1 : DualSlide2
-
+    DualSlide1 := DualSlide1 < DualSlide2 ? DualSlide1 : DualSlide2
 DualSlide:
-   GuiControl,,DualSlide1, %DualSlide1%
-   GuiControl,,DualSlide2, %DualSlide2%
-   DualSlideX := round(DualSlideK*DualSlide1+13)
-   WinSet Region,% "1-1 " DualSlideX "-1 " DualSlideX "-19 1-19", ahk_id %DualSlideHwnd1%
-   WinSet Region,% DualSlideX "-1 " DualSlideV "-1 " DualSlideV "-19 " DualSlideX "-19", ahk_id %DualSlideHwnd2%
+    GuiControl,,DualSlide1, %DualSlide1%
+    GuiControl,,DualSlide2, %DualSlide2%
+    DualSlideX := round(DualSlideK*DualSlide1+13)
+    WinSet Region,% "1-1 " DualSlideX "-1 " DualSlideX "-19 1-19", ahk_id %DualSlideHwnd1%
+    WinSet Region,% DualSlideX "-1 " DualSlideV "-1 " DualSlideV "-19 " DualSlideX "-19", ahk_id %DualSlideHwnd2%
 Return
-
+;;∙------------------------∙
 VolumeLimits:
-   SoundGet, currentVolume, Master, Volume
-   if (currentVolume < DualSlide1)    ;;∙------∙Maintain minimum level.
-       SoundSet, %DualSlide1%, Master, Volume
-   else if (currentVolume > DualSlide2)    ;;∙------∙Maintain maximum level.
-       SoundSet, %DualSlide2%, Master, Volume
+    SoundGet, isMuted, Master, Mute
+    SoundGet, currentVolume, Master, Volume
+        If (isMuted = 1 || currentVolume < DualSlide1)
+            {
+            SoundSet, 0, Master, Mute
+            SoundSet, %DualSlide1%, Master, Volume
+            }
+        Else if (currentVolume > DualSlide2)
+            {
+            SoundSet, %DualSlide2%, Master, Volume
+            }
 Return
 ;;∙============================================================∙
-
-
 
 
 ;;∙============================================================∙
@@ -134,7 +175,7 @@ SetBatchLines -1
 SetTimer, UpdateCheck, 500
 SetTitleMatchMode 2
 SetWinDelay 0
-Menu, Tray, Icon, imageres.dll, 3
+Menu, Tray, Icon, SndVolSSO.dll, 8
 Return
 ;;∙============================================================∙
 ;;∙------------------------------------------------------------------------------------------∙
@@ -146,9 +187,9 @@ Menu, Tray, Click, 2
 Menu, Tray, Color, ABCDEF
 Menu, Tray, Add
 Menu, Tray, Add
-Menu, Tray, Add, Suspend / Pause, %ScriptID%    ;;∙------∙Script Header.
-Menu, Tray, Icon, Suspend / Pause, shell32, 28
-Menu, Tray, Default, Suspend / Pause    ;;∙------∙Makes Bold.
+Menu, Tray, Add, %ScriptID%, %ScriptID%    ;;∙------∙Script Header.
+Menu, Tray, Icon, %ScriptID%, shell32, 35
+Menu, Tray, Default, %ScriptID%    ;;∙------∙Makes Bold.
 ;;∙------∙Script∙Extentions∙------------∙
 Menu, Tray, Add
 Menu, Tray, Add, Help Docs, Documentation
@@ -186,11 +227,21 @@ Return
 ;;∙============================================================∙
 ;;∙------------------------------------------------------------------------------------------∙
 ;;∙======∙MENU CALLS∙==========================================∙
+!_Volume_Limits_!:    ;;∙------∙
+    Soundbeep, 700, 100
+    Gui, Show
+Return
+
+
+
+/*        ∙------------∙ORIGINAL HEADER∙------------∙
 Volume_Limits:    ;;∙------∙Suspends hotkeys then pauses script. (Script Header)
     Suspend
     Soundbeep, 700, 100
     Pause
 Return
+*/
+
 ;;∙============================================================∙
 ;;∙------------------------------------------------------------------------------------------∙
 ;;∙======∙TRAY MENU POSITION∙==================================∙
