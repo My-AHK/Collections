@@ -4,7 +4,7 @@
 » Reload Script∙------∙DoubleTap∙------∙(Ctrl + [HOME])
 » Exit Script∙----------∙DoubleTap∙------∙(Ctrl + [Esc])
 » Script Updater: Auto-reload script upon saved changes.
-    ▹ If you make any changes to the script file and save it, 
+    ▹ If you make any changes to the script file and save it,
           the script will automatically reload itself and continue
           running without manual intervention.
 ∙--------∙Origins∙-------------------------∙
