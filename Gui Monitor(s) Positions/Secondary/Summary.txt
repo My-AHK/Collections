@@ -1,0 +1,45 @@
+
+Creates a simple GUI for testing and offers a flexible system for positioning the GUI on a secondary monitor using keyboard shortcuts. The core features include a visually styled GUI and precise control over its placement using Alt + alphanumeric or Numpad keys. Below are the details:
+
+Key Features
+GUI Design:
+
+Dimensions: 200x150 pixels.
+Appearance:
+Background: Red.
+Fonts:
+Large yellow text for the title ("Basic Gui For Testing").
+Smaller black text for instructions.
+Initial Placement: Bottom-center of the secondary monitor.
+Hotkey Functionality:
+
+Alt + numeric keys (1-9) or Numpad keys are used to reposition the GUI.
+Predefined positions:
+1/Numpad1: Bottom-left.
+2/Numpad2: Bottom-center.
+3/Numpad3: Bottom-right.
+4/Numpad4: Center-left.
+5/Numpad5: Center.
+6/Numpad6: Center-right.
+7/Numpad7: Top-left.
+8/Numpad8: Top-center.
+9/Numpad9: Top-right.
+Custom WinMove Function:
+
+A robust function to calculate and set positions based on a shorthand coordinate system:
+Horizontal (L, HC, R).
+Vertical (U, VC, D).
+Supports a dual-monitor setup, focusing on placing the GUI on the secondary monitor.
+Coordinate System:
+
+Cartesian shorthand makes positions intuitive and maintainable.
+Shorthand conversion (e.g., replacing b with d) ensures compatibility with internal logic.
+Workflow:
+
+On startup, the GUI is created and positioned in the bottom-center of the secondary monitor.
+Users can move the GUI dynamically using predefined Alt + key shortcuts.
+Efficiency and Adaptability:
+Uses SysGet to fetch monitor dimensions, ensuring accurate placement regardless of screen resolution or layout.
+StringReplace and InStr methods handle coordinate parsing, reducing potential for error.
+Brief Summary
+Alt + Numpad script moves GUI across secondary monitor.

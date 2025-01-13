@@ -1,0 +1,38 @@
+
+Designed to create a minimalistic, movable GUI that can be positioned on the screen using predefined hotkeys. It utilizes the Cartesian coordinate system for maintainability and clarity when defining positions. Below are the key details:
+
+GUI Layout:
+
+The GUI is always on top, has no caption, and features a border for visibility.
+Default dimensions are 200x150 pixels with a red background and centered yellow and black text for instructions.
+Positioning System:
+
+Uses shorthand position indicators:
+Horizontal: L (Left), HC (Horizontal Center), R (Right).
+Vertical: U (Up), VC (Vertical Center), D (Down).
+Default position is at the bottom center of the primary monitor (D HC).
+Hotkey Functionality:
+
+Hotkeys are defined for cycling through GUI positions.
+Supports both alphanumeric keys (1-9) and corresponding numpad keys.
+Each hotkey adjusts the GUI position as follows:
+1: Bottom-left (D L).
+2: Bottom-center (D HC).
+3: Bottom-right (D R).
+4: Center-left (VC L).
+5: Center (VC HC).
+6: Center-right (VC R).
+7: Top-left (U L).
+8: Top-center (U HC).
+9: Top-right (U R).
+Positioning Logic:
+
+A WinMove function calculates the GUI's position based on monitor work area dimensions:
+Retrieves the monitor's boundaries via SysGet.
+Computes coordinates based on the position string.
+Moves the GUI to the calculated location.
+Custom Function:
+
+The WinMove function replaces shorthand notations (e.g., b with d) and handles calculations for GUI placement using current screen dimensions and desired alignment.
+Brief Summary
+Hotkey-driven script to move a GUI to defined screen positions.
