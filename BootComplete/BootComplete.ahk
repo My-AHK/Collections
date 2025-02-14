@@ -1,4 +1,4 @@
-﻿
+
 /*∙=====∙NOTES∙===============================================∙
 ∙--------∙Script∙Defaults∙---------------∙
 » Reload Script∙------∙DoubleTap∙------∙🔥∙(Ctrl + [HOME])
@@ -27,35 +27,57 @@ GoSub, TrayMenu
 #NoEnv
 #Persistent 
 #SingleInstance, Force
-
+;;∙------------------------------------------------∙
 ^t::    ;;∙------∙🔥∙(Ctrl+T)
    SoundBeep, 1100, 200
+    global startTime := A_TickCount    ;;∙------∙Track start time.
+    Menu, Tray, Icon, actioncentercpl.dll, 2    ;;∙------∙Green.
     SetTimer, CheckStartup, 1500
 Return
 
-CheckStartup() {
-    static startupProcesses := ["explorer.exe", "OneDrive.exe", "SecurityHealthSystray.exe", "Ditto.exe", "FSCapture.exe"]    ;;<∙------∙Edit as needed.
-    static cpuThreshold     := 17    ;;∙------∙CPU threshold limit.
-    static diskThreshold    := 10    ;;∙------∙Disk threshold limit.
-    static retryCount       := 0    ;;∙------∙Initialize retry counter.
-    static maxRetries       := 3    ;;∙------∙Maximum allowed retry attempts.
-    static retryDelay       := 3000    ;;∙------∙3 second delay between retries.
+
+;;∙------------------------------------------------∙
+CheckStartup() {  		;;∙------∙Remove/Add processes as needed.
+static startupProcesses := ["explorer.exe"  		;;∙------∙Windows Explorer.
+    	        	    , "OneDrive.exe"  			;;∙------∙Microsoft OneDrive.
+    	        	    , "SecurityHealthSystray.exe"   	;;∙------∙Windows Security Health.
+    	        	    , "Ditto.exe"  			;;∙------∙Clipboard Manager.
+    	        	    , "FSCapture.exe"]  		;;∙------∙Screen Capture Utility.
+;;∙------------------------------------------------∙
+    static cpuThreshold := 17    ;;∙------∙CPU threshold limit (set as needed).
+    static diskThreshold := 10    ;;∙------∙Disk threshold limit (set as needed).
+
+    static retryCount := 0    ;;∙------∙Initialize retry counter.
+    static maxRetries := 2    ;;∙------∙Maximum allowed retry attempts (adjust as needed).
+    static retryDelay := 2000    ;;∙------∙2 second delay between retries (adjust as needed).
 
     missingProcesses := ""    ;;∙------∙Track missing processes.
-
+;;∙------------------------------------------------∙
     if !AllProcessesLoaded(startupProcesses, missingProcesses) {    ;;∙------∙Pass missingProcesses by reference.
         if (retryCount >= maxRetries) {
             Gui +OwnDialogs    ;;∙------∙Prevent taskbar button.
-            ClipBoard := "Critical processes missing`nafter " . maxRetries . " attempts:`n`n" . missingProcesses
-            MsgBox, 4096,, Critical processes missing after %maxRetries% attempts:`n%missingProcesses%, 5    ;;∙------∙Show missing process(es).
-            Reload    ;;∙------∙(For testing/troubleshooting)∙--∙(Comment for production)
-            ;;∙------∙ExitApp    ;;∙------∙(Uncomment for production)
+            ;;∙------∙Calculate elapsed time since hotkey was pressed.
+            elapsedTime := (A_TickCount - startTime) / 1000    ;;∙------∙Convert milliseconds to seconds.
+            ;;∙------∙Format time string based on elapsed time
+            if (elapsedTime >= 60) {
+                minutes := Floor(elapsedTime / 60)
+                seconds := Round(Mod(elapsedTime, 60), 1)
+                minuteText := (minutes = 1) ? "minute" : "minutes"
+                timeString := (seconds = 0) ? minutes " " minuteText : minutes " " minuteText " and " seconds " seconds"
+            } else {
+                timeString := Round(elapsedTime, 1) " seconds"
+            }
+            ClipBoard := "Critical Processes Missing After...`n" . maxRetries . " Attempts In " . timeString . "`n`n" . missingProcesses
+            Menu, Tray, Icon, actioncentercpl.dll, 3    ;;∙------∙Yellow.
+            MsgBox, 4144,, Critical Processes Missing After...`n %maxRetries% Attempts In %timeString%`n`n%missingProcesses%, 15
+            Reload    ;;∙------∙(For testing/troubleshooting)∙--∙(Comment for production)(!X!X!X!X!)
+            ;;∙------∙ExitApp    ;;∙------∙(Uncomment for production)(!X!X!X!X!)
         }
         retryCount++    ;;∙------∙Increment retry counter.
+        ;;∙------∙SoundBeep, 1500, 250    ;;∙------∙Retry verification.
         SetTimer, CheckStartup, %retryDelay%    ;;∙------∙Slow down retry checks.
         return
     }
-
     SetTimer, CheckStartup, 1500    ;;∙------∙Restore original speed.
     if !SystemIdle(cpuThreshold, diskThreshold)    ;;∙------∙Verify system resources are below thresholds and pass both to SystemIdle.
         return
@@ -94,6 +116,7 @@ GetCPUUsage() {
         errMsg := e.Message
         Gui +OwnDialogs
         ClipBoard := "Failed to initialize WMI service for CPU usage.`nError: " . errMsg
+        Menu, Tray, Icon, actioncentercpl.dll, 4    ;;∙------∙Red.
         MsgBox, 16, Error, Failed to initialize WMI service for CPU usage.`nError: %errMsg%, 5
         return cpuUsage
     }
@@ -104,6 +127,7 @@ GetCPUUsage() {
         errMsg := e.Message
         Gui +OwnDialogs
         ClipBoard := "Failed to execute CPU usage query.`nError: " . errMsg
+        Menu, Tray, Icon, actioncentercpl.dll, 4    ;;∙------∙Red.
         MsgBox, 16, Error, Failed to execute CPU usage query.`nError: %errMsg%, 5
         return cpuUsage
     }
@@ -116,6 +140,7 @@ GetCPUUsage() {
         errMsg := e.Message
         Gui +OwnDialogs
         ClipBoard := "Failed to parse CPU usage data.`nError: " . errMsg
+        Menu, Tray, Icon, actioncentercpl.dll, 4    ;;∙------∙Red.
         MsgBox, 16, Error, Failed to parse CPU usage data.`nError: %errMsg%, 5
         return cpuUsage
     }
@@ -130,6 +155,7 @@ GetDiskUsage() {
         errMsg := e.Message
         Gui +OwnDialogs
         ClipBoard := "Failed to initialize WMI service for Disk usage.`nError: " . errMsg
+        Menu, Tray, Icon, actioncentercpl.dll, 4    ;;∙------∙Red.
         MsgBox, 16, Error, Failed to initialize WMI service for Disk usage.`nError: %errMsg%, 5
         return diskUsage
     }
@@ -140,6 +166,7 @@ GetDiskUsage() {
         errMsg := e.Message
         Gui +OwnDialogs
         ClipBoard := "Failed to execute Disk usage query.`nError: " . errMsg
+        Menu, Tray, Icon, actioncentercpl.dll, 4    ;;∙------∙Red.
         MsgBox, 16, Error, Failed to execute Disk usage query.`nError: %errMsg%, 5
         return diskUsage
     }
@@ -152,13 +179,14 @@ GetDiskUsage() {
         errMsg := e.Message
         Gui +OwnDialogs
         ClipBoard := "Failed to parse Disk usage data.`nError: " . errMsg
+        Menu, Tray, Icon, actioncentercpl.dll, 4    ;;∙------∙Red.
         MsgBox, 16, Error, Failed to parse Disk usage data.`nError: %errMsg%, 5
         return diskUsage
     }
     return diskUsage
 }
 Return
-;;============================================================
+;;∙============================================================∙
 
 
 
