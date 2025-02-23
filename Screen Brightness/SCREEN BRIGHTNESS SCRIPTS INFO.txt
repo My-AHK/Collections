@@ -1,0 +1,178 @@
+
+
+
+BRIGHTNESS - MULTI-SCREEN - DIRECT SET - ALL MONITORS
+  * Adjusts monitor brightness via DXVA2 API calls.
+
+Adjusts the brightness of all detected monitors using DXVA2 (DirectX Video Acceleration). 
+It retrieves monitor handles, queries their brightness capabilities, and sets a new brightness level while providing feedback via message boxes.
+
+KEY FUNCTIONS & FLOW
+1. Load DXVA2 Library
+   • Loads dxva2.dll using DllCall("LoadLibrary"). If it fails, the script throws an error.
+
+2. Retrieve Monitor Handles
+   • Uses EnumDisplayMonitors to enumerate all connected display monitors.
+   • The callback function MonitorEnumProc stores the monitor handles in an array.
+
+3. Get Physical Monitors from Handles
+   • Iterates through each detected monitor handle.
+   • Calls GetNumberOfPhysicalMonitorsFromHMONITOR to determine the number of physical monitors attached to each handle.
+   • Allocates memory for storing physical monitor information.
+   • Calls GetPhysicalMonitorsFromHMONITOR to retrieve monitor handles.
+
+4. Retrieve & Adjust Brightness
+   • Calls GetMonitorBrightness to retrieve minimum, current, and maximum brightness levels.
+   • Displays the original brightness settings in a message box.
+   • Computes the new brightness (NewBrightness variable, set to 35) while ensuring it falls within the min-max range.
+   • Calls SetMonitorBrightness to update the brightness.
+   • Retrieves and displays the updated brightness to confirm the change.
+
+5. Cleanup & Exit
+   • Calls DestroyPhysicalMonitors to release resources before the script ends.
+
+Error Handling & Feedback
+   • If any DLL function fails (e.g., retrieving brightness or setting brightness), the script displays an error message using MsgBox.
+
+Customization
+   • The brightness level can be adjusted by changing the NewBrightness variable.
+   • The script ensures brightness values remain within valid limits to prevent errors.
+-------------------------------------------------------------------------------
+
+
+BRIGHTNESS - MULTI-SCREEN - DIRECT SET  - INDIVIDUAL MONITORS
+  * Assigns brightness per monitor using DXVA2 API.
+
+Adjusts the brightness of multiple monitors using the DXVA2 API. 
+It assigns predefined brightness values to individual monitors, ensuring they stay within valid brightness ranges.
+
+KEY FUNCTIONS & FLOW
+1. Load DXVA2 Library
+   • Loads dxva2.dll using DllCall("LoadLibrary"). The script terminates if the library fails to load.
+
+2. Retrieve Monitor Handles
+   • Uses EnumDisplayMonitors to enumerate all connected monitors.
+   • Stores monitor handles in an array via the callback function MonitorEnumProc.
+
+3. Assign Monitor Brightness Levels
+   • Uses a predefined array MonitorBrightness := [50, 70, 20], which specifies brightness levels for individual monitors.
+
+4. Retrieve and Adjust Brightness
+   • Iterates through detected monitors and checks if a brightness level is assigned.
+   • Calls GetMonitorBrightness to retrieve the minimum, current, and maximum brightness values.
+   • Adjusts the brightness while ensuring it stays within the min-max range.
+   • Calls SetMonitorBrightness to apply the new brightness.
+
+5. Feedback and Error Handling
+   • Displays message boxes showing the original and updated brightness settings.
+   • If a brightness adjustment fails, an error message is displayed.
+
+6. Cleanup
+   • Calls DestroyPhysicalMonitors to release resources before the script ends.
+
+Customization
+   • The brightness levels can be modified in MonitorBrightness := [50, 70, 20].
+   • Additional monitors beyond the predefined values are ignored.
+-------------------------------------------------------------------------------
+
+
+BRIGHTNESS - MULTI-SCREEN - GET BRIGHNESS LEVELS
+  * Displays current brightness for all monitors.
+
+Retrieves and displays the brightness levels of all detected monitors using the DXVA2 API. 
+It enumerates monitors, fetches their brightness settings, and presents the values in a message box.
+
+KEY FUNCTIONS & FLOW
+1. Load DXVA2 Library
+   • Loads dxva2.dll using DllCall("LoadLibrary"). If it fails, the script exits.
+
+2. Retrieve Monitor Handles
+   • Uses EnumDisplayMonitors to enumerate connected monitors.
+   • Stores monitor handles in an array via the callback function MonitorEnumProc.
+
+3. Retrieve Brightness Levels
+   • Iterates through each detected monitor.
+   • Calls GetMonitorBrightness to obtain minimum, current, and maximum brightness values.
+   • Displays brightness details for each monitor in a message box.
+
+4. Proper Monitor Indexing
+   • Ensures monitors are correctly counted using MonitorIndex++.
+
+5. Cleanup
+   • Calls DestroyPhysicalMonitors to free resources before exiting.
+
+Customization
+   • The message box timeout (5 seconds) can be adjusted.
+   • The script does not modify brightness; it only retrieves and displays values.
+-------------------------------------------------------------------------------
+
+
+BRIGHTNESS - MULTI-SCREEN - INCREMENTAL
+  * Adjusts monitor brightness with hotkeys.
+
+Allows users to adjust the brightness of all connected monitors dynamically using keyboard shortcuts. 
+It modifies the brightness levels in increments of ±5% and displays the updated brightness percentage for each monitor via a tooltip.
+
+KEY FUNCTIONS & FLOW
+1. Load DXVA2 Library
+   • Loads dxva2.dll using DllCall("LoadLibrary").
+   • Exits if the library fails to load.
+
+2. Retrieve Monitor Handles
+   • Uses EnumDisplayMonitors to detect and store monitor handles.
+   • Stores the handles globally in MonitorHandles.
+
+3. Adjust Brightness (AdjustBrightness(Step))
+   • Iterates through all monitors and retrieves their brightness settings.
+   • Adjusts brightness by the specified Step value.
+   • Ensures the new brightness remains within the valid range.
+   • Displays a tooltip with the updated brightness percentage for each monitor.
+   • Uses SetTimer to remove the tooltip after 2 seconds.
+
+4. Cleanup
+   • Calls DestroyPhysicalMonitors to release resources.
+
+5. Keyboard Shortcuts
+   • Ctrl + Alt + Up → Increases brightness by 5%.
+   • Ctrl + Alt + Down → Decreases brightness by 5%.
+
+Customization
+   • The step value (5%) can be adjusted.
+   • The tooltip duration (2 seconds) can be modified.
+   • Error handling can be expanded for better feedback.
+-------------------------------------------------------------------------------
+
+
+BRIGHTNESS - SINGLE SCREEN - INCREMENTAL
+  * Hotkey-based primary monitor brightness control.
+
+Provides hotkey-based brightness control for the primary monitor. 
+It retrieves the monitor's handle and brightness range once at startup, then allows users to adjust brightness using keyboard shortcuts. 
+The script also includes proper cleanup when exiting.
+
+KEY FUNCTIONS & FLOW
+1. Initialize Monitor (InitMonitor())
+   • Retrieves the handle of the primary monitor (hPhysical).
+   • Gets the minimum, current, and maximum brightness levels.
+   • Stores these values globally to avoid repeated retrievals.
+
+2. Adjust Brightness (AdjustBrightness(step))
+   • Fetches the current brightness each time the function runs.
+   • Adjusts brightness by step (±5%).
+   • Ensures brightness stays within min/max limits.
+   • Displays a tooltip with the new brightness level.
+
+3. Keyboard Shortcuts
+   • Ctrl + Alt + Up → Increases brightness by 5%.
+   • Ctrl + Alt + Down → Decreases brightness by 5%.
+
+4. Cleanup (ExitFunc())
+   • Ensures that monitor handles are released when the script exits.
+
+Efficiency Features
+   • Handles are retrieved once at startup, reducing redundant calls.
+   • Error handling ensures graceful failure with messages.
+   • Tooltips provide quick feedback on brightness changes.
+   • Automatic cleanup prevents resource leaks.
+-------------------------------------------------------------------------------
+
