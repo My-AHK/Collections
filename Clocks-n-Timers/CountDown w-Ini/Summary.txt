@@ -1,0 +1,44 @@
+
+A user-friendly, customizable countdown timer with persistent settings, sound alerts, and an intuitive GUI. 
+Below is a structured, detailed overview:
+
+Core Functionality
+   • Creates a countdown timer with customizable duration (hours, minutes, seconds) and optional sound alerts.
+   • INI-based persistence: Automatically saves/loads settings (duration, sound toggle, sound file path) from CountDown.ini.
+
+Key Features:
+1. Graphical User Interface (GUI)
+   • Time Entry: Dedicated fields for hours, minutes, and seconds.
+   • Sound Controls:
+      - Checkbox to enable/disable sound.
+      - Editable field for sound file path (e.g., .wav, .mp3).
+      - Buttons to browse for sound files and test playback.
+   • Start/Stop Button: Toggles the countdown; updates to "STOP" during active timers.
+
+Countdown Mechanics:
+   • Real-Time Updates: Window title displays remaining seconds (e.g., "300" for 5 minutes).
+   • Validation: Prevents starting if time is zero or invalid (non-numeric/negative).
+   • Completion Actions:
+      - Flashes the GUI/tray icon.
+      - Plays user-selected sound (if enabled).
+      - Automatically stops and resets the timer.
+
+Sound Playback:
+   • Uses AutoHotkey’s SoundPlay command for reliability.
+   • Test Function: Preview sounds before timer completion.
+
+Exit Handling:
+   • Saves current settings (duration, sound toggle, file path) to CountDown.ini on app closure.
+
+
+Technical Details:
+   • Dynamic Updates:
+      - Uses SetTimer for 1-second countdown intervals.
+      - Stores the GUI window ID (cd_Gui) to update titles dynamically.
+   • Lightweight: Minimal CPU/resource usage.
+   • Multi-Instance Support: Run multiple timers simultaneously via #SingleInstance Off.
+
+User Experience Highlights:
+   • Intuitive Design: Input fields auto-update total duration in seconds.
+   • Error Handling: Clear alerts for invalid inputs (e.g., "Invalid time" message).
+   • Customization: Tailor alerts with any sound file; persist preferences across sessions.
