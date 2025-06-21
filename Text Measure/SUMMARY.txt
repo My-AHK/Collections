@@ -1,0 +1,49 @@
+
+*  Font Sizing Tool for Selected Text Rendering
+
+PURPOSE:
+This script provides a utility to measure the rendered pixel dimensions (width and height) of a selected text string across multiple font sizes and typefaces. 
+It helps users understand how different fonts and sizes affect visual layout.
+
+KEY FEATURES:
+The tool supports dynamic font selection and iterates over a predefined list of font sizes. 
+The dimensions are measured using Windows API drawing calls and displayed in a MsgBox for reference.
+   • Measures width and height of selected text across font sizes 8–17.
+   • Supports multiple fonts from a curated list.
+   • Results are copied to the clipboard for external use.
+   • All operations are performed without modifying the original clipboard contents.
+
+LOGIC SUMMARY:
+When the hotkey Ctrl+T is triggered, the script copies the current selection, prompts the user to pick a font via a GUI, and then measures how that string would render in each font size using `DrawText`. 
+It uses `DllCall` and a temporary GUI to access and apply the correct font metrics.
+   • Retrieves selected text via clipboard capture.
+   • Prompts user with a dropdown GUI to select font face.
+   • Measures text using a dummy GUI control and GDI functions.
+       ⮞ Includes setting font, getting HDC, drawing to memory.
+   • Outputs size data into a structured message and places it on clipboard.
+
+LAYOUT:
+The script is composed of one hotkey handler, one font selection GUI, and a reusable `MeasureText` function that encapsulates all measurement logic. 
+Results are presented clearly in a MsgBox and copied to clipboard.
+   • Hotkey handler: `^t` (Ctrl+T)
+   • GUI: Dropdown list with Accept/Cancel buttons.
+   • Font sizes looped via array.
+   • Central function: `MeasureText()` with Windows API interaction.
+
+USER EXPERIENCE:
+Users can quickly measure how a given text block renders visually in different fonts and sizes without needing to use an external editor or design tool. 
+The GUI is small, intuitive, and styled in a minimal blue theme. 
+Measurement results are clear, structured, and immediately usable.
+   • Non-invasive: preserves clipboard state.
+   • Clear instructions and error handling for missing selections.
+   • Responsive GUI that disappears once a font is accepted or canceled.
+   • Copy-ready result format aids in documentation or layout planning.
+
+
+
+
+
+
+
+
+
