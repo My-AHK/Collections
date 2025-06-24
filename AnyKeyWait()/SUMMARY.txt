@@ -1,0 +1,49 @@
+
+*  Waits for user input with optional timeout.
+
+Purpose:  Waits for user input via keyboard and/or mouse 
+  within a specified timeout period.
+
+Main Function: AnyKeyWait(TimeoutMS, WaitForKey, WaitForMouse)
+   • Parameters:
+       ⮞ TimeoutMS (optional): Max wait time in milliseconds.
+           * If blank or 0, waits indefinitely.
+       ⮞ WaitForKey (true/false): Detect keyboard input.
+       ⮞ WaitForMouse (true/false): Detect mouse input.
+
+   • Returns:
+       ⮞ 1 - Input detected.
+       ⮞ 0 - Timeout reached with no input.
+
+Example Usage:
+   • AnyKeyWait()  ∙---------------------------∙ Waits forever for any input.
+   • AnyKeyWait(8000) ∙---------------------∙ Waits 8 sec for any input.
+   • AnyKeyWait(5000, true, false)  ∙------∙ Waits 5 sec for keyboard only.
+   • AnyKeyWait(3000, false, true)  ∙------∙ Waits 3 sec for mouse only.
+   • AnyKeyWait(7000, false, false) ∙------∙ Waits 7 sec but detects nothing (useless).
+
+Hotkey: Ctrl + T
+   • Shows tooltip: “Waiting for ‘Mouse’ activity...”
+   • Calls AnyKeyWait(5000, 0, 1)
+   • After detection or timeout, displays follow-up tooltip and plays a beep.
+
+Function Behavior:
+   • Adds a 300 ms buffer before checking.
+   • Monitors A_TimeIdleKeyboard / A_TimeIdleMouse for activity.
+   • Breaks loop on valid input or returns 0 if timeout is reached.
+   • Uses Sleep 50 between checks.
+
+Extras:
+   • Uses #InstallKeybdHook and #InstallMouseHook for reliability.
+   • RemoveTip label clears the tooltip after it’s shown.
+
+Notes:
+   • Ideal for scripts needing human input before continuing.
+   • Supports flexible combinations: keyboard-only, mouse-only, or both.
+
+
+
+
+
+
+
