@@ -1,0 +1,49 @@
+
+*  Displays detailed battery and power info
+
+
+
+Purpose:      Retrieves detailed system power and battery information using the Windows API `GetSystemPowerStatus`.
+
+Features:
+   • Determines if the system is connected to AC power (Online/Offline/Unknown).
+   • Reads battery status flag and provides human-readable interpretation (e.g., Charging, Critical).
+   • Displays battery charge as a percentage.
+   • Calculates and formats estimated time remaining and full charge time.
+
+Operation Flow:
+    1. Allocates a 12-byte memory buffer for power status data.
+    2. Calls the `GetSystemPowerStatus` API and checks for success.
+    3. Parses individual data fields using `GetInteger()` to interpret:
+           • AC line status
+           • Battery flag
+           • Battery life percentage
+           • Time remaining (in seconds)
+           • Full battery life (in seconds)
+    4. Uses conditional logic to convert raw values into meaningful descriptions.
+    5. Converts battery life durations into human-readable strings (e.g., "1 hour 23 minutes").
+    6. Displays a message box summarizing the current power and battery state.
+
+Supporting Functions:
+   • `GetInteger()` extracts multi-byte integer values from a binary buffer.
+   • `GetFormatedTime()` converts seconds into formatted time strings.
+
+Requirements:
+   • AutoHotkey v1.1 or later.
+   • Windows OS with support for the `GetSystemPowerStatus` API.
+
+OUTPUT EXAMPLE:
+    A message box might display:
+    ```
+    AC Status: Online
+    Battery state and capacity: Charging
+    Battery Life: 78%
+    Remaining Battery Life: 2 hours 15 minutes
+    Full Battery Life: 3 hours 5 minutes
+    ```
+
+This script is useful for quick insights into system power state, particularly helpful for battery-powered devices or diagnostics.
+
+
+
+
