@@ -1,0 +1,90 @@
+
+*  Dual-mode clipboard beep monitor
+
+This script is a clipboard monitoring utility designed to audibly notify the user of clipboard activity based on selectable conditions. It provides two core operating modes: “Change Detection” (beep only if the clipboard content is new) and “Every Copy” (beep on every copy regardless of content). A global `beepEnabled` toggle determines whether the beep is active at all, and both toggles—beep status and mode—are accessible directly from a custom system tray menu.
+
+The script begins with an optimized auto-execute section that suppresses unnecessary diagnostics, speeds up command execution, and customizes the tray icon. A `prevClipboard` variable tracks prior clipboard contents, and a timestamp (`scriptStartTime`) ensures the script doesn't react prematurely during initial launch. A short timer calls `ActivateClipboardMonitor`, which sets up an `OnClipboardChange` label.
+
+When clipboard content changes, the script checks whether the grace period has passed, then evaluates if a beep should be played depending on current mode and state. For “Change Detection,” it verifies that the new clipboard content differs from the previous one and is not empty. For “Every Copy,” it simply checks that the clipboard is not empty. If conditions are met, the script temporarily adjusts the master volume to a predefined `beepVolume`, plays a 500Hz tone for 300ms, then restores the original volume. The `prevClipboard` value is updated after each beep.
+
+The tray menu is dynamically constructed to reflect current settings. When toggling either mode or beep state, the corresponding tray label is renamed, its icon is updated, and a tooltip near the mouse provides immediate visual feedback. Tooltips are cleared after 2 seconds using a timer-driven `KillTip` label. The `UpdateTrayTip()` function keeps the tray icon's tooltip updated to show both active status (ACTIVE or MUTED) and mode (“Change Detection” or “Every Copy”).
+
+This script is highly responsive and efficient, with deliberate protections against false triggering and clear visual/audio feedback mechanisms for the user. It emphasizes configurability and minimalism while ensuring reliable clipboard monitoring.
+
+
+∙========⮞ KEY FEATURES OVERVIEW ⮜=======================∙
+▹  Clipboard monitoring with two responsive beep modes.
+▹  Toggleable beep activation via tray menu item.
+▹  Tray icons and text reflect real-time status changes.
+▹  Tooltip feedback after toggling mode or beep state.
+▹  Beep occurs at a set volume, temporarily overriding system volume.
+▹  Built-in grace period prevents accidental triggers at startup.
+
+∙========⮞ CORE COMPONENTS & INITIALIZATION ⮜============∙
+Auto-execute block:
+   • Script environment optimized using directives like `#NoEnv`, `SetBatchLines, -1`.
+   • Tray icon initialized using `ieframe.dll`, icon index 97.
+
+Initial variables:
+   • `prevClipboard` stores last known clipboard data.
+   • `scriptStartTime` prevents early triggering by checking script uptime.
+   • `beepEnabled` determines whether to play a beep on clipboard change.
+   • `beepMode` controls beep logic:
+       - "change" → only beep when content changes.
+       - "every"  → beep on every non-empty clipboard update.
+   • `beepVolume` sets temporary system volume for beep (default: 2).
+
+∙========⮞ TRAY MENU SYSTEM ⮜============================∙
+Custom tray menu replaces default options:
+   • **Mode Toggle**:
+       - Cycles between “Change Detection” and “Every Copy”.
+       - Updates icon: shell32.dll (261) or imageres.dll (242).
+   • **Beep Toggle**:
+       - Enables/disables clipboard beeping.
+       - Updates icon: wmploc.dll (67) or imageres.dll (168).
+   • Tooltips provide instant feedback when toggles are used.
+
+Function `UpdateTrayTip()`:
+   • Updates tray tooltip with beep status (`ACTIVE`/`MUTED`) and mode.
+
+∙========⮞ CLIPBOARD MONITORING HANDLER ⮜==============∙
+`ActivateClipboardMonitor` calls `OnClipboardChange:` at launch:
+   • Enforces a 1-second startup delay to suppress false triggers.
+   • If `beepEnabled` is true:
+       - In "change" mode: beep only if clipboard data has changed.
+       - In "every" mode: beep on every non-empty clipboard update.
+
+Beep procedure:
+   1. Store current master volume.
+   2. Set temporary volume to `beepVolume`.
+   3. Emit 500 Hz beep for 300 ms.
+   4. Restore original master volume.
+   5. Update `prevClipboard` to current clipboard content.
+
+∙========⮞ MODE AND BEEP TOGGLES ⮜======================∙
+`ToggleBeep`:
+   • Inverts `beepEnabled` flag.
+   • Renames and updates tray item and icon accordingly.
+   • Shows tooltip: "Clipboard beep is now ENABLED/MUTED" near mouse.
+   • Auto-hides after 2 seconds using `SetTimer, KillTip, -2000`.
+
+`ToggleMode`:
+   • Switches between "change" and "every" mode.
+   • Renames tray item and updates associated icon.
+   • Shows tooltip: "Now beeping on: Change Detection / Every Copy".
+
+`KillTip`:
+   • Clears any tooltip displayed during toggle feedback.
+
+
+
+
+
+
+
+
+
+
+
+
+
