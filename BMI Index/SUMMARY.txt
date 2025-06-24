@@ -1,0 +1,44 @@
+
+*  BMI calculator with metric/imperial toggle.
+
+
+Purpose:
+   • Offers a graphical interface for calculating BMI (Body Mass Index) using either Imperial or Metric units.
+   • Switches between unit systems dynamically, adjusting input fields accordingly.
+
+Key Features:
+   • Drop-down menu allows selection between "Imperial" (default) and "Metric" systems.
+   • For Imperial:
+       ⮞ Input: Height in feet & inches, weight in pounds.
+   • For Metric:
+       ⮞ Input: Height in centimeters, weight in kilograms.
+   • Upon clicking "Calculate", BMI is computed and categorized as:
+       ⮞ Underweight
+       ⮞ Normal
+       ⮞ Overweight
+       ⮞ Obese
+   • "Clear" button resets all input fields and the result.
+   • Auto-hides irrelevant fields when switching unit systems.
+
+Logic Summary:
+   • `UpdateUnits` label adjusts GUI to show relevant inputs for the selected system.
+   • `ButtonCalculate`:
+       ⮞ Converts inputs to meters/inches as needed.
+       ⮞ Calculates BMI using:
+           ⮚ Metric: `BMI = kg / (m²)`
+           ⮚ Imperial: `BMI = (lbs * 703) / (in²)`
+       ⮞ Determines weight status based on BMI thresholds.
+   • `ButtonClear` resets all entry and result fields.
+   • Closes gracefully via `GuiClose`.
+
+Layout:
+   • Top: Unit selector dropdown.
+   • Middle: Conditional input groups for height and weight.
+   • Bottom: BMI result box and control buttons.
+
+User Experience:
+   • Simple and clean design.
+   • Automatically adapts to selected measurement system.
+   • Read-only results ensure clarity and prevent editing errors.
+
+
