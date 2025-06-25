@@ -1,0 +1,42 @@
+
+* Draws colored box outlines using 4 GUIs.
+
+
+
+Creates visual rectangular outlines on the screen using 4 separate GUI windows (top, bottom, left, right) to form the box edges. It demonstrates a method for drawing colored boxes anywhere on the screen with configurable dimensions, border thickness, and offset alignment.
+
+KEY FEATURES:  
+
+Edge-based Boxes:  
+   • Boxes are composed of four always-on-top GUI elements (each a solid-colored line).
+
+Modular Design:
+   • Box_Init(N, C): Initializes GUI boxes for a given box number N using the specified color C (as a hex string).
+   • Box_Draw(N, X, Y, W, H, T := 1, O := "I"): Draws a rectangular box on screen.
+       ⮞ X, Y: Top-left coordinates.
+       ⮞ W, H: Width and height.
+       ⮞ T: Line thickness (default = 1).
+       ⮞ O: Offset style —  
+           ⮚ "O" (Outside) expands outward.  
+           ⮚ "C" (Centered) positions symmetrically.  
+           ⮚ "I" (Inside) shrinks inward (default).
+   • Box_Hide(N): Hides all four lines of the box.
+
+Demonstration Hotkey:  
+   • F1
+       ⮞ Initializes box #1 in red.
+       ⮞ Draws it at (1400, 300) with size 300×550 and thickness 3.
+       ⮞ Hides the box automatically after 5.5 seconds.
+
+Behavior Notes:
+   • Negative width or height flips the box position accordingly.
+   • GUI numbers are calculated dynamically to allow for multiple independent boxes.
+   • GUI windows are borderless, captionless, and use +AlwaysOnTop.
+
+Use Cases:  
+   • This technique can be used for:
+       ⮞ Visual overlays in screen automation.
+       ⮞ Highlighting regions dynamically.
+       ⮞ Debugging screen coordinates.
+
+
