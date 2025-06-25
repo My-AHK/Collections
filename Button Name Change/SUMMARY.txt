@@ -1,0 +1,53 @@
+
+
+*  Cycles button text and saves notes.
+
+Purpose:
+   • Provides a GUI with a single button and an editable text field.
+   • Each button press changes the button’s label and stores associated user input.
+
+Key Features:
+   • Button text cycles through a predefined list:
+       ⮞ "Button1"
+       ⮞ "Longer Button Name"
+       ⮞ "Button3"
+   • Editable text field saves input to `info.ini` using the current button’s label as the key.
+   • When the button label changes:
+       ⮞ The previous edit content is saved.
+       ⮞ The new button text is loaded.
+       ⮞ Saved content (if any) is restored to the edit field.
+
+Logic Summary:
+   • `bChange` label handles button press events.
+       ⮞ Increments the `current` index.
+       ⮞ If label exists, it:
+           ⮚ Retrieves current text from the edit field.
+           ⮚ Saves the value to an INI file.
+           ⮚ Destroys the old button.
+           ⮚ Recreates the button with new label at the same screen position.
+           ⮚ Loads any saved data for the new label and fills the edit field.
+           ⮚ Focuses and selects the edit box contents.
+       ⮞ If index exceeds available names, resets to start.
+   • Button is repositioned using `ControlGetPos` and adjusted with `SysGet` values.
+   • Edit control is automatically focused and contents selected for fast re-entry.
+
+Layout:
+   • Top: Instructional text.
+   • Middle: Editable text field.
+   • Bottom: Single button with dynamic label, recreated in place.
+
+User Experience:
+   • Simple, single-button interface that cycles between labeled modes.
+   • Stores and retrieves custom text values for each label.
+   • Button label and associated info feel logically connected.
+   • Persistent user input across sessions via INI storage.
+
+
+
+
+
+
+
+
+
+
