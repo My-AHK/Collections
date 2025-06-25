@@ -1,0 +1,84 @@
+
+*  File timestamp reverter - restores modified times.
+
+Purpose:
+   Restores modified timestamps of all files in the script's folder 
+   (excluding the script itself) to their previously saved values. 
+   Ensures file change dates are preserved during automation or testing.
+   • Triggered via Ctrl+T hotkey.
+   • Avoids altering its own file timestamp.
+   • Protects against unintended file modification history.
+
+Key Features:
+   This script performs silent, structured timestamp restoration using 
+   a persistent INI file as a source of truth.
+   • Uses `filetimes.ini` to record and retrieve timestamps.
+       ⮞ Automatically creates entries for new files.
+       ⮞ Updates entries when timestamps are reverted.
+   • Compares current file timestamps to saved records.
+       ⮞ Detects if a file was modified since last save.
+       ⮞ Only performs action if timestamps differ.
+   • Shows a tooltip with a list of all reverted files.
+       ⮞ Tooltip dynamically appears near mouse.
+           ⮚ Allows contextual visibility.
+           ⮚ Auto-hides after short duration.
+   • Plays confirmation beep upon activation.
+       ⮞ Beep helps confirm script successfully triggered.
+           ⮚ Prevents confusion if nothing changes visually.
+
+Logic Summary:
+   The hotkey routine loops through files in the working directory and 
+   conditionally restores timestamps based on INI data.
+   • When Ctrl+T is pressed:
+       ⮞ Plays a 200 ms beep at 1000 Hz.
+       ⮞ Initializes `filetimes.ini` path.
+   • File loop:
+       ⮞ Iterates over all files in script directory.
+           ⮚ Skips the script file itself.
+       ⮞ For each file:
+           ⮞ Attempts to read previous timestamp from INI.
+               ⮚ If not found:
+                   - Writes current timestamp to INI.
+               ⮚ If found but differs from current:
+                   - Restores timestamp using `FileSetTime`.
+                   - Updates INI to reflect reverted value.
+                   - Adds file name to report list.
+   • Tooltip display:
+       ⮞ Mouse position is retrieved.
+       ⮞ Tooltip is offset slightly from cursor.
+       ⮞ If any files were reverted:
+           ⮞ Shows list of affected files.
+           ⮞ Tooltip lasts 3000 ms.
+       ⮞ If no changes:
+           ⮞ Tooltip reports nothing needed.
+           ⮞ Tooltip lasts 1500 ms.
+
+Layout:
+   Code is structured procedurally with minimal branching and compact 
+   handling for clarity and ease of maintenance.
+   • One hotkey handler: `^t::`
+   • One cleanup label: `KillTip`
+   • All functionality is inline — no external dependencies.
+       ⮞ Uses built-in commands only (`Loop, Files`, `FileSetTime`, etc.)
+       ⮞ Logic flows top-to-bottom with simple conditionals.
+
+User Experience:
+   Designed for instant-use without dialogs or prompts. Gives passive 
+   feedback and completes its task automatically.
+   • Beep sound ensures action feedback.
+   • Tooltip gives real-time result.
+       ⮞ Appears near the cursor.
+       ⮞ Lists each affected file.
+       ⮞ Hides after delay — no user action needed.
+   • Non-disruptive — user workflow remains uninterrupted.
+   • Prevents script from ever modifying its own timestamp.
+
+
+
+
+
+
+
+
+
+
