@@ -1,0 +1,34 @@
+
+*  Displays startup notes; delete or keep.
+
+
+Overview:  This script serves as a bootup reminder system. 
+   • It displays previously saved messages each time the computer starts. 
+   • Notes can be acknowledged and deleted, or retained for future sessions.
+
+Features:
+   • Auto-creates a shortcut in the Windows Startup folder to run at login.
+   • Notes are stored as `.txt` files inside the `%AppData%\startbootnote` directory.
+   • Each saved note is displayed in a message box at startup:
+       ⮞ Pressing **OK** deletes the note file.
+       ⮞ Pressing **Cancel** leaves the file untouched for later display.
+   • Offers two hotkeys for runtime interaction:
+       ⮞ **Ctrl + R**: Opens a GUI window for creating a new multiline bootup note.
+       ⮞ **Ctrl + O**: Opens the notes folder for manual file access or management.
+
+Details:
+   • At first run, the script ensures a shortcut exists in the user's startup folder and that the target notes directory is created.
+       ⮞ It then loops through each `.txt` file in the directory, reading and displaying the contents via `MsgBox`.
+       ⮞ Depending on user interaction (OK or Cancel), each note file is either deleted or preserved.
+   • The Ctrl+R hotkey launches a styled GUI where users can enter a reminder. 
+       ⮞ If text is entered and confirmed, it's saved to the folder as a timestamped `.txt` file. 
+       ⮞ Ctrl+O opens the note directory in File Explorer for quick access.
+
+This provides a simple, persistent, user-controlled reminder system that surfaces messages only at startup and only until the user acknowledges them.
+
+
+
+
+
+
+
