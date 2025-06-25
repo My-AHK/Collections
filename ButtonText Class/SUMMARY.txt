@@ -1,0 +1,48 @@
+
+*  Colorized button captions via subclassing.
+
+Purpose:
+   This script enables GUI buttons to display captions in custom colors by subclassing their window handles and intercepting paint messages. It provides an easy-to-use interface to attach or detach this behavior, enhancing button visual appeal while preserving native themed drawing.
+
+   • Supports attaching and detaching colorized caption rendering.
+   • Maintains native button appearance without pale borders or background issues.
+   • Improves clarity by using distinct caption colors on themed buttons.
+
+Key Features:
+   The core functionality is encapsulated in the CCButton class which manages button subclassing and drawing. Colors can be specified as RGB values or common HTML color names. The subclass procedure handles WM_PAINT and WM_DESTROY messages to draw colored captions and clean up resources.
+
+   • Uses Windows theme and GDI APIs to draw button backgrounds and text.
+   • Supports multiple predefined HTML colors mapped to RGB.
+   • Restores original button styles on detach to prevent permanent changes.
+   • Example GUI demonstrates attaching color captions to various buttons.
+
+Logic Summary:
+   When Attach(HWND, Color) is called, the script converts color names to RGB if needed, opens the button’s theme data, and subclasses it to intercept paint messages. On WM_PAINT, it custom-draws the button caption in the chosen color while preserving theming. WM_DESTROY triggers detachment and resource cleanup.
+   • Converts HTML color names to RGB integer format.
+   • Opens theme data handle for the button control.
+   • Subclasses button window to handle paint and destroy messages.
+   • Detach removes subclass and closes theme data handles cleanly.
+
+Layout:
+   The example GUI creates four buttons with specific locations and fonts. Three buttons have colorized captions attached (green, blue, red-disabled), while one remains default. Text styles and background color highlight the color caption effect clearly.
+   • Buttons positioned with fixed coordinates for clarity.
+   • Different font sizes and styles demonstrate caption coloring.
+   • Disabled button shows system disabled color automatically.
+
+User Experience:
+   The script provides visually distinct button captions integrated with Windows theming, improving user interface clarity. A tradeoff is the loss of animation effects on Windows Vista and later. Usage requires explicit attach and detach calls per button but results in consistent, reliable colored captions.
+   • Colored captions redraw correctly on window updates.
+   • Disabled buttons show appropriate system color automatically.
+   • Simple API with Attach and Detach methods.
+   • Loss of animation is a minor compromise for improved caption colors.
+
+
+
+
+
+
+
+
+
+
+
