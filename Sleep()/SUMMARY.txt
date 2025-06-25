@@ -1,0 +1,57 @@
+
+*  *  Non-Blocking Sleep Timer with Label Callback.
+
+PURPOSE:
+   This script introduces a non-blocking sleep mechanism that delays execution for a specified amount of time, then resumes the flow by calling a named label.
+   Unlike the native `Sleep` command, this version does not halt the script's responsiveness, making it ideal for background timing tasks or GUI-based workflows.
+   • Allows flexible delays using time strings like `"2m 30s"` or `"1h 10m"`.
+       ⮞ Supports days, hours, minutes, and seconds.
+       ⮞ Accepts partial or combined units in any order.
+   • Runs a custom label after the countdown.
+       ⮞ Label name is passed as a string.
+       ⮞ Executes asynchronously using `SetTimer`.
+
+KEY FEATURES:
+   The system avoids blocking by using `SetTimer` to check if the desired wait time has elapsed.
+   Once the delay completes, it automatically jumps to the label specified in the function call.
+   • `SleepDuration(durationStr, resumeLabel)` is the primary function.
+       ⮞ Converts time string into milliseconds.
+       ⮞ Stores end time in `_SleepTimerExpires`.
+       ⮞ Periodically checks against `A_TickCount`.
+   • `_CheckSleepComplete` is called every 50 ms.
+       ⮞ When the current time exceeds the target, the timer stops.
+       ⮞ Calls the stored label via `Gosub`.
+   • `GetTotalMilliseconds()` parses user-friendly time formats.
+       ⮞ Uses RegEx to extract values for each unit (d/h/m/s).
+       ⮞ Converts each to milliseconds and adds them up.
+
+LOGIC SUMMARY:
+   When `SleepDuration()` is called, it calculates the target expiration time and activates a lightweight timer to check for expiration.
+   This allows other parts of the script (hotkeys, GUIs) to remain fully responsive during the wait period.
+   • The control flow resumes from the specified label once time is up.
+   • All time calculations are relative to `A_TickCount`.
+   • The label executed at the end can perform any user-defined task.
+
+LAYOUT:
+   The script includes global storage for the active label and timer expiration.
+   Hotkey examples demonstrate how to use the delay in practice, each binding a wait duration to the `ContinueTask` label.
+   • `^F1`, `^F2`, and `^F3` showcase different delay formats.
+   • Function and timer code are grouped near the end of the script.
+   • Inline comments provide usage guidance and format clarification.
+
+USER EXPERIENCE:
+   Users can integrate timed behavior into their scripts without freezing other processes.
+   It enables complex workflows that depend on timed triggers, reminders, or delayed actions.
+   • Easy-to-read duration syntax increases readability.
+   • Fully asynchronous, allowing responsive GUIs or scripts to operate in parallel.
+   • Can be reused for various timed automation tasks or reminders.
+
+
+
+
+
+
+
+
+
+
