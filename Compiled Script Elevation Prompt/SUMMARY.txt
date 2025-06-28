@@ -1,0 +1,48 @@
+
+*  Admin-elevating AHK bootstrapper with GUI logic
+
+
+PURPOSE:
+This script is designed to serve as a launcher or bootstrapper that ensures it is executed with administrative privileges and is compiled before continuing. It checks the context in which it runs (compiled vs uncompiled, admin vs non-admin) and either prompts for elevation or continues accordingly. It also demonstrates how to handle passed parameters and display them, primarily for debugging or controlled startup.
+
+KEY FEATURES:
+The script includes logic for admin elevation, parameter parsing, and user interaction through a simple GUI with shielded button indicators. This makes it ideal for scripts that must be compiled and run with elevated rights, without assuming those conditions from the start.
+   • Verifies the script is compiled before execution.
+   • Displays any passed parameters at startup.
+   • Prompts the user to choose whether to elevate via GUI buttons.
+   • Implements shield icon on the “Elevate” button using system messages.
+   • Re-launches the script with admin rights if selected.
+   • Offers basic GUI-driven user decision logic.
+
+LOGIC SUMMARY:
+On launch, the script immediately checks whether it is compiled using `A_IsCompiled`. If not, it exits with a message. It then loops through any passed parameters, displaying each in a temporary message box. Next, it checks admin status using `A_IsAdmin`. If the script is not elevated, it shows a GUI with two buttons—“Elevate” and “NoElevate”—each triggering specific routines. The “Elevate” button relaunches the script with admin rights via `ShellExecuteA`, passing along the original arguments. If the user chooses not to elevate, the script simply continues and presents a status message.
+
+   • `A_IsCompiled` determines whether script should proceed.
+   • `Loop, %0%` handles any command-line parameters.
+   • `A_IsAdmin` decides whether to prompt elevation GUI.
+       ⮞ If not admin, user is prompted to elevate or not.
+       ⮞ Elevate button applies Windows shield icon using `SendMessage`.
+       ⮞ Upon “Elevate,” script relaunches itself with admin rights.
+       ⮞ If “NoElevate” is chosen, continues to placeholder logic.
+   • `Process_Elevate()` builds argument list and performs elevation.
+   • `Button_SetShield()` adds UAC shield icon to button.
+
+LAYOUT:
+The layout is linear with clear control flow checkpoints and fallback behaviors. There is minimal GUI involved—just a pair of buttons shown only when elevation is needed. The main script logic is gated by preconditions (compiled and admin status), ensuring the core logic is executed only under the correct environment.
+
+   • GUI includes:
+       ⮞ Elevate button with UAC shield.
+       ⮞ NoElevate button for bypassing elevation.
+   • GUI layout: vertical, simple sizing (100x100 px per button).
+   • Message boxes are used for param display and status alerts.
+
+USER EXPERIENCE:
+From a user’s perspective, the experience is smooth and controlled. If launched improperly (e.g., uncompiled or not elevated), the script self-corrects through prompts and relaunches. The use of shield icon enhances clarity for elevation actions. It is also informative, showing parameter values when present, which aids in transparency and debugging.
+
+   • Clear message if script is not compiled.
+   • Displays input parameters briefly for confirmation.
+   • GUI decision screen is intuitive and minimal.
+   • Elevation process is seamless and passes arguments forward.
+   • Feedback is provided at all major decision points.
+
+
