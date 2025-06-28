@@ -1,0 +1,58 @@
+
+*  Countdown Until event with real-time display
+
+
+PURPOSE:  
+This script displays a real-time countdown to a user-defined target date and time using a clean, frameless GUI titled "Countdown Until." It provides an accurate and engaging visual reference for time remaining until a significant event or deadline.
+
+   • Intended for marking time until a specific future moment.
+   • User defines the target date and time in one place.
+   • Offers live feedback and a final alert when time expires.
+
+KEY FEATURES:  
+The script is designed to be lightweight, precise, and visually straightforward, offering both numeric and descriptive countdown formats.
+
+   • Fully configurable target date and time.
+   • Updates every 500 milliseconds for responsiveness.
+   • GUI remains always on top and has no system caption or title bar.
+   • Countdown shown in red with formatted time (HH:MM:SS and days).
+   • Target date shown in static blue text below countdown.
+   • Dynamic status text summarizes remaining time.
+   • Alert and message shown when countdown completes.
+   • Includes hotkeys: Esc to quit, F5 to refresh timer.
+
+LOGIC SUMMARY:  
+At its core, the script constructs a target datetime string and compares it with the current system time, calculating the difference in seconds to generate countdown values.
+
+   • Creates `TargetTime` in the format yyyyMMddHHmmss.
+   • Retrieves current time via `FormatTime`, then subtracts it.
+   • Calculates remaining:
+       ⮞ Days
+       ⮞ Hours
+       ⮞ Minutes
+       ⮞ Seconds
+   • Countdown string built with optional days and zero-padded digits.
+   • Display is updated using `GuiControl` for seamless refresh.
+   • If countdown reaches zero or below:
+       ⮞ A bold message is shown.
+       ⮞ System alert sound is played.
+       ⮞ Timer is halted to stop further updates.
+
+LAYOUT:  
+The graphical interface is compact and centered, with color-coded text elements and consistent layout spacing. Text is clearly segmented for readability.
+
+   • Window titled “Countdown Until” and sized to 300px wide.
+   • Countdown appears at the top in red, using Segoe UI font.
+   • Target time is shown in blue below the countdown.
+   • Remaining time summary appears at the bottom in red.
+   • All text is centered horizontally using fixed-width controls.
+
+USER EXPERIENCE:  
+When launched, the script instantly displays a placeholder, which is quickly replaced by the live countdown. Interaction is minimal by design, ensuring clarity and focus.
+
+   • Intuitive and minimal interface requires no input.
+   • Displays a dramatic message when time expires.
+   • Optional sound serves as an audible alert.
+   • Escape key closes the script immediately.
+   • F5 resets the countdown timer on demand.
+   • Closing the GUI window causes a full script reload for reliability.
