@@ -1,0 +1,97 @@
+
+*  Multi-unit file size viewer - copy, convert, compare.
+
+Purpose:
+   Provides a drag-and-drop and button-driven GUI for selecting a file 
+   and displaying its size in user-selected units: Bytes, KB, MB, GB, 
+   and TB. Intended for quick inspection, conversion, and copy-ready 
+   formatting of file sizes.
+   • Supports five different unit outputs.
+   • Outputs are visually aligned using monospaced font.
+   • Usable for development, documentation, or diagnostics.
+
+Key Features:
+   The script uses a GUI-based workflow to retrieve, calculate, and 
+   present a file’s size in selected formats, offering copy functionality 
+   and styled layout.
+   • GUI includes:
+       ⮞ Unit size checkboxes: Bytes, KB, MB, GB, TB.
+           ⮚ All can be toggled individually.
+           ⮚ User must select at least one to display size.
+       ⮞ File input via:
+           ⮞ Manual file picker (button).
+           ⮞ Edit field with path.
+           ⮞ Drag-and-drop support.
+       ⮞ Results area with monospaced alignment.
+       ⮞ Buttons:
+           ⮞ “Get File” — opens file selector.
+           ⮞ “View && Copy” — previews and copies result.
+           ⮞ “HOME” — reloads GUI/script.
+           ⮞ “EXIT” — terminates script.
+   • Error feedback:
+       ⮞ File not found message.
+       ⮞ File access error message.
+       ⮞ Warning when no unit size selected.
+   • Clipboard-ready format:
+       ⮞ Clean formatting with aligned labels and precision.
+       ⮞ Excludes GUI-specific headings when copied.
+
+Logic Summary:
+   User selects a file, chooses desired output units, and receives a 
+   live preview. Formatting is handled dynamically with internal 
+   precision control and label padding.
+   • File selection:
+       ⮞ Initiated by button or drag-drop event.
+       ⮞ Path stored in `File` variable.
+   • Unit list is internally constructed:
+       ⮞ Contains label, divisor, decimal count, and checkbox state.
+       ⮞ Longest label determines column alignment spacing.
+   • Size output:
+       ⮞ For each selected unit:
+           ⮞ Calculates file size using unit’s divisor.
+           ⮞ Formats number to specified decimal precision.
+           ⮞ Aligns label to right using space-padding.
+           ⮞ Appends size with label and line break.
+   • Display:
+       ⮞ Result injected into GUI control `ResultDisplay`.
+       ⮞ Refreshes with every interaction change.
+
+Layout:
+   The GUI layout is vertically stacked with emphasis on readability 
+   and interactivity.
+   • Top section:
+       ⮞ Instructional heading.
+   • Middle section:
+       ⮞ Checkboxes arranged in a row.
+       ⮞ File selection below.
+   • Output area:
+       ⮞ Large multi-line text block styled for alignment.
+   • Right side:
+       ⮞ Vertically aligned control buttons:
+           ⮞ “View && Copy”
+           ⮞ “HOME”
+           ⮞ “EXIT”
+   • Font usage:
+       ⮞ Times New Roman for header.
+       ⮞ Arial for body text/buttons.
+       ⮞ Consolas for output results.
+       ⮞ Calibri for vertical menu controls.
+
+User Experience:
+   The interface prioritizes simplicity and precision with minimal 
+   clutter and immediate feedback.
+   • Realtime updates on file or checkbox change.
+   • Copy-friendly output without GUI markup.
+   • Font and color styling provide visual structure.
+   • Supports keyboardless workflows via drag & drop.
+   • All critical actions are just one or two clicks away.
+
+
+
+
+
+
+
+
+
+
