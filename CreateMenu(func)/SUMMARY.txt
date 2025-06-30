@@ -1,0 +1,56 @@
+
+
+*  Dynamic TreeView-style menu builder.
+
+PURPOSE:
+This script dynamically generates multi-level AutoHotkey (AHK) menus from a plain-text menu definition. By parsing structured text with tab-indented hierarchy and optional icon parameters, it builds nested menus and attaches them either to the GUI, tray, or display on hotkeys. It is designed to simplify complex menu creation using a human-readable and compact definition format.
+
+KEY FEATURES:
+The script offers versatile menu generation with icon integration, support for nested submenus, GUI attachment, and customized menu actions via defined subroutines. Users can define menus on the fly without manually specifying each menu command.
+
+   • Parses multiline text input into hierarchical menus.
+   • Supports assigning icons via file paths and parameters.
+   • Handles nested menus using tabs for indentation.
+   • Subroutines are triggered based on selected menu items.
+   • Multiple examples (F1, F2, F3) demonstrate core use cases.
+   • GUI menu integration is included for attaching menus to windows.
+   • Supports separators (e.g., "---") and icon size customization.
+   • Icons support environment variables and AHK built-ins (e.g., `%A_AhkPath%`).
+
+LOGIC SUMMARY:
+The menu-building logic is centralized in the `CreateMenu()` function, which parses the user-defined string, detects indentation level for hierarchy, and collects menu item data. It then constructs each menu from the bottom up using the parsed structure.
+
+   • Each line in the input string is evaluated for indentation using tabs.
+   • The level determines the menu/submenu relationship.
+   • Menu items are stored in a hierarchical object by level.
+   • Separator detection is based on item name ("---").
+   • Icon parameters are split and assigned using `StrSplit`.
+   • Icons are applied only if file exists and is not a folder.
+   • Menu items trigger a user-defined label (subroutine) upon selection.
+
+LAYOUT:
+The script is modular and organized with example hotkeys, a single reusable function for menu generation, and clear labeling for each example. Examples are bound to `F1`, `F2`, and `F3`, each illustrating a unique use case. A separate hotkey (`MButton`) also invokes a basic menu.
+
+   • `F1` shows a simple menu without icons or separators.
+   • `F2` adds icons, separators, custom menu names, and custom labels.
+   • `F3` demonstrates attaching the generated menu to a GUI window.
+   • `CreateMenu()` is declared at the end of the script for reuse.
+   • Example subroutines (`MenuSub`, `TestSub`, `GuiMenuSub`) handle interactions.
+   • Script includes `GuiClose` label to reload script when GUI closes.
+
+USER EXPERIENCE:
+Users interact with the script through keyboard hotkeys, mouse button, or GUI-based menu interfaces. The design enables quick menu testing, flexible icon integration, and extensibility without rewriting the structure repeatedly.
+
+   • Pressing hotkeys instantly displays the respective menu.
+   • Submenu nesting visually follows indentation in source string.
+   • GUI-attached menus update text dynamically when an item is selected.
+   • Icons visually distinguish entries, improving readability.
+   • Design encourages reusability and customization through minimal edits.
+   • Text-based definitions provide a rapid prototyping interface.
+
+
+
+
+
+
+
