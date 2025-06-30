@@ -1,0 +1,49 @@
+
+*  Caesar Cipher GUI with live slider preview.
+
+
+PURPOSE:
+This script provides a user-friendly interface to encode or decode text using the Caesar Cipher. It simplifies experimentation with different shift values and allows for real-time visual feedback, making it both educational and practical for basic cryptographic use.
+
+KEY FEATURES:
+The script includes essential Caesar Cipher functionality wrapped in an interactive GUI, with persistent shift settings and clipboard integration.
+   • Supports both encoding and decoding through buttons.
+   • Displays real-time output as the user adjusts the shift slider.
+   • Remembers the last used shift value using an INI file.
+   • Copies results to the clipboard for quick access.
+   • Handles both uppercase and lowercase letters accurately.
+   • Leaves non-letter characters unmodified.
+
+LOGIC SUMMARY:
+The CaesarCipher function iterates through each character of the input text and applies a modular shift transformation to alphabetic characters. It uses ASCII value calculations to perform the rotation and preserves the case of each letter.
+   • For lowercase letters:
+       ⮞ Calculates new position with `Mod(asc - 97 + shift, 26)`.
+   • For uppercase letters:
+       ⮞ Uses similar logic with base `65` for 'A'.
+   • Negative shifts are handled gracefully by adjusting results back into the alphabetic range.
+   • All other characters are appended unchanged.
+
+LAYOUT:
+The graphical layout is designed for clarity and ease of use, with color-coded sections and labels.
+   • Two large edit boxes:
+       ⮞ Left: user input.
+       ⮞ Right: output preview.
+   • Slider control beneath input box for adjusting shift.
+   • Buttons for "Encode" and "Decode" to finalize and copy results.
+   • Dynamic status message area for clipboard feedback.
+   • Shift value is prominently displayed and updates live.
+
+USER EXPERIENCE:
+Users can enter a message and instantly preview the result of Caesar encoding or decoding as they adjust the shift. This interactivity makes the script engaging and easy to experiment with.
+   • Slider feedback is immediate, eliminating trial-and-error typing.
+   • Buttons provide clipboard-ready output with confirmation.
+   • Simple layout and helpful colors improve usability.
+   • Persistent settings encourage repeat use without reconfiguration.
+
+
+
+
+
+
+
+
