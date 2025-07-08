@@ -1,0 +1,50 @@
+
+* Safely closes all windows except active one.
+
+
+
+PURPOSE:
+This script provides a safe, controlled method to close all open windows except the currently active one. It includes both an actual closing mode and a dry run preview mode, allowing users to evaluate actions before executing them.
+
+   • Useful for quickly decluttering desktop environments.
+   • Provides protection for essential apps via a whitelist.
+   • Includes logging, sound cues, and reporting for transparency.
+
+KEY FEATURES:
+The script incorporates robust features focused on usability, safety, and transparency. It protects critical apps, tracks detailed results, and provides user control over behavior through hotkeys and GUI feedback.
+
+   • Protected app whitelist with GUI editor.
+   • Dry run preview mode (Ctrl+Shift+T) to simulate actions.
+   • Real close mode (Ctrl+T) to perform actual window closures.
+   • Detailed result report with categorized outcomes.
+   • Sound notifications for success, partial, or failure results.
+   • Automatic log rotation if file exceeds specified size.
+
+LOGIC SUMMARY:
+When executed, the script scans all open windows, groups them by their process names, and filters out protected apps and system windows. For each eligible window, it decides whether to minimize, close, or forcibly kill based on visibility and response. Dry run mode simulates these steps without making changes.
+
+   • Checks for a valid active window and skips if none is found.
+   • Filters out system and hidden UI elements from evaluation.
+   • Categorizes and logs each window as closed, minimized, protected, or failed.
+   • Forces closure only when graceful attempts fail.
+   • Logs all actions with timestamps and user/computer metadata.
+
+LAYOUT:
+The user interface is GUI-driven and adapts based on mode. It offers a progress bar, status updates, a post-operation report viewer, and interactive buttons for further actions such as copying results or editing the whitelist.
+
+   • GUI progress window during operation.
+   • GUI results viewer with report, buttons for copy/log/edit.
+   • Optional whitelist editor GUI with save/cancel/reset.
+   • Automatic clipboard copying of results for user convenience.
+
+USER EXPERIENCE:
+The script ensures a safe and intuitive user experience with confirmations, previews, and immediate feedback. Dry run support provides confidence before execution, while sound alerts and logs reinforce clarity on what occurred.
+
+   • Confirmation dialog before window operations.
+   • Clear and color-coded GUI messages during execution.
+   • Immediate sound feedback indicating the result.
+   • Reusable hotkeys and built-in help system (Ctrl+F1).
+   • Results auto-copied to clipboard and saved to file.
+
+
+
