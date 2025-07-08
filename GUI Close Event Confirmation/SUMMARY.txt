@@ -1,0 +1,64 @@
+
+*  GUI1 requires close confirmation, GUI2 does not
+
+
+PURPOSE:
+This script demonstrates how to intercept and customize the close behavior of a specific GUI window in AutoHotkey. 
+It presents two GUI windows, but only the first requires user confirmation before closing. 
+This is useful for creating interfaces where accidental closure could result in data loss or interrupted workflow.
+
+KEY FEATURES:
+The script leverages AutoHotkey’s `OnMessage` function to hook into the Windows system command for closing windows. 
+When the close command is sent to GUI 1, the script interrupts it with a confirmation dialog. 
+GUI 2, by contrast, closes normally without any prompts, highlighting the selective behavior.
+   • Displays two separate GUI windows
+   • GUI 1 asks for user confirmation when closed
+   • GUI 2 closes immediately without prompts
+   • Uses `WM_SYSCOMMAND` message hook
+   • Traps `SC_CLOSE` command for targeted control
+   • Prevents closure when user clicks "No"
+
+LOGIC SUMMARY:
+Upon execution, the script opens two GUI windows positioned vertically on the screen. 
+It sets up a message handler using `OnMessage` to catch system commands like Alt+F4 or clicking the close button (×). 
+When the message `WM_SYSCOMMAND` is received, the script checks whether the action is `SC_CLOSE` and whether GUI 1 is the target. 
+If so, a message box appears asking the user to confirm the close. 
+Selecting “No” halts the closure; otherwise, the GUI proceeds to close as normal.
+   • Defines `WM_SYSCOMMAND` = 0x112 (Windows system command ID)
+   • Hooks into that message with a custom function
+   • Inside the function, checks if the command is `SC_CLOSE` (0xF060)
+   • If targeting GUI 1, shows Yes/No MsgBox
+   • Returns `0` to cancel the close if "No" is selected
+   • GUI 2 is unaffected and uses default close behavior
+
+LAYOUT:
+The visual layout is simple, consisting of two windows of identical size but different vertical positions. 
+GUI 1 is shown near the top, while GUI 2 appears lower on the screen. 
+Both windows have unique titles, making it easy for users to differentiate between the one with confirmation logic and the one without.
+   • GUI 1:
+       ⮞ Title: "Requires confirmation to close"
+       ⮞ Position: y200
+       ⮞ Traps close attempts with confirmation
+   • GUI 2:
+       ⮞ Title: "Closes without a fuss"
+       ⮞ Position: y400
+       ⮞ Closes freely with no interception
+
+USER EXPERIENCE:
+Users can interact freely with either GUI, but closing GUI 1 prompts a confirmation to avoid unintentional closure. 
+GUI 2 closes instantly without any dialog. 
+This user-centric design protects critical interfaces while allowing others to behave normally. 
+The experience is seamless and requires no prior knowledge from the user.
+   • Ctrl+F4, Alt+F4, or clicking × on GUI 1 triggers confirmation
+   • Clicking “No” cancels the close and leaves GUI 1 open
+   • GUI 2 closes on first attempt, no prompts shown
+   • No interruptions when working with non-targeted windows
+
+
+
+
+
+
+
+
+
