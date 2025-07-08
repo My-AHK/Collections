@@ -1,0 +1,75 @@
+
+*  Unified - Clipboard History & Deleted Text Restore.
+
+PURPOSE:
+   This dual-script system improves clipboard control by providing two essential capabilities: persistent clipboard history and deleted text restoration. 
+   Users can quickly cycle through past clipboard entries, preview them, and paste previously copied content. 
+   Simultaneously, the second script captures text right before deletion, making it easy to recover lost input with minimal interruption.
+   • Clipboard History:
+       ⮞ Tracks the last 10 clipboard entries in memory.
+       ⮞ Allows users to view, navigate, and reuse previous clips.
+       ⮞ Provides visual feedback via GUI and tooltips.
+   • Deleted Text Restore:
+       ⮞ Captures selected text just before it's deleted.
+       ⮞ Stores a buffer of the 10 most recent deletions.
+       ⮞ Restores any entry through an indexed selection menu.
+
+KEY FEATURES:
+   Both scripts integrate seamlessly to support frequent text operations and guard against accidental data loss. 
+   Clipboard History offers hotkey-based navigation, GUI display, persistent storage, and full control over entries. 
+   Deleted Text Restore watches the Delete key and stores content prior to its removal. 
+   Together, they enhance the reliability and flexibility of clipboard and editing actions.
+   • Clipboard History:
+       ⮞ Supports #Up/#Down for cycling entries.
+       ⮞ GUI viewer (#Space) lists and previews clips.
+       ⮞ Entries can be cleared individually (#Delete) or entirely (#+Delete).
+       ⮞ Selected clips are pasted with #Enter.
+   • Deleted Text Restore:
+       ⮞ Hooks into the Delete key (custom $Delete).
+       ⮞ Restores entries via Ctrl+Delete menu.
+       ⮞ Uses a ring buffer to manage snippet order.
+
+LOGIC SUMMARY:
+   The 'Clipboard History' script maintains internal indices (LastClip, CurClip, NewClip) and a fixed-size array for saved clips and their previews. 
+   On clipboard change, content is stored with optional truncation and tooltip display. 
+   Deleted clips shift upward to preserve continuity. 
+   All clips are saved with delimiters to a binary file for persistence.
+    History:
+       ⮞ Clipboard changes monitored via OnClipboardChange.
+       ⮞ Collapse() reorders buffer after deletion.
+       ⮞ File I/O used to persist clipboard data across sessions.
+   'Deleted Text Restore' compares the clipboard before and after the Delete key is used. 
+   If a change is detected, the new selection is saved in the buffer. 
+   When restoring, the user selects from a dynamic list built from the current buffer contents, and the chosen item is pasted by briefly modifying the clipboard.
+    Restore:
+       ⮞ Compares clipboard before/after ^c triggered by $Delete.
+       ⮞ Stores changed text in a 10-slot ring buffer.
+       ⮞ Presents InputBox for recovery selection.
+
+LAYOUT:
+   The clipboard history interface consists of a tray icon menu, GUI with ListBox and preview field, and a full set of hotkeys. 
+   Deleted text recovery has no GUI, instead using hotkeys and an InputBox prompt. 
+   Both systems use indexed arrays and wrap-around logic to manage limited-size storage efficiently.
+   • GUI:
+       ⮞ ListBox shows short previews of clipboard entries.
+       ⮞ Read-only Edit control shows selected clip.
+   • Tray Menu:
+       ⮞ Open GUI, clear history, or set defaults.
+   • Hotkeys:
+       ⮞ Navigation (#Up/#Down), deletion, and paste (#Enter).
+       ⮞ Restore prompt (Ctrl+Delete).
+
+USER EXPERIENCE:
+   Users benefit from instant access to their clipboard history and reliable undo functionality for deleted text. 
+   Tooltips offer immediate feedback, and the GUI supports more visual users. 
+   Recovery of deleted items via a menu interface adds a safety net with minimal friction. 
+   Overall, the scripts support fast, fluid, and fault-tolerant editing behavior.
+   • Efficiency:
+       ⮞ No need to re-copy lost content.
+       ⮞ Reduces errors due to accidental deletion.
+   • Feedback:
+       ⮞ Tooltip and GUI preview assist real-time awareness.
+       ⮞ Hotkeys are intuitive and non-intrusive.
+   • Persistence:
+       ⮞ History file ensures availability between sessions.
+
