@@ -1,0 +1,120 @@
+
+*  Sort selected lines in editor via Ctrl+T GUI
+
+
+PURPOSE:
+This script provides a GUI-based utility for sorting selected multiline text within any text editor. 
+Triggered by pressing Ctrl+T, it captures the currently active window and facilitates various sorting modes based on the character position specified by the user, without altering the clipboard contents permanently.
+
+KEY FEATURES:
+The tool integrates hotkey activation, GUI-based input, clipboard preservation, and flexible sorting configurations. 
+It is ideal for processing blocks of text where line order matters, such as lists or structured data.
+   • Hotkey activation using Ctrl+T
+   • GUI interface with multiple sorting options
+   • Sorting by character position (1–999)
+   • Four sorting types: Normal, NormalDistinct, Reverse, ReverseDistinct
+   • Preserves and restores clipboard automatically
+   • Works within any text editor that supports copy/paste
+
+
+------THE FOUR SORTING TYPES:----------------------
+       ⮞ Normal 
+           ⮚ This is a standard ascending sort starting at a specific character position on each line. All lines are included, even if they are duplicates.
+           ⮚ Sort flags used: P<n>
+              - P<n> means sort by character position <n> (e.g., P3 = sort starting at 3rd character)
+           ⮚ Example: Sorting these lines with P3:
+              - 1. Zebra
+              - 2. Apple
+              - 3. Banana
+           ⮚ Looks at:
+              - Line 1: "bra"
+              - Line 2: "ple"
+              - Line 3: "nana"
+           ⮚ Result:
+              - 2. Apple
+              - 3. Banana
+              - 1. Zebra
+---------------------------------------------------------------
+       ⮞ NormalDistinct 
+           ⮚ Same as Normal, but removes duplicate lines during the sort. This is useful when you only want unique lines in your result.
+           ⮚ Sort flags used: P<n> U
+               - U = Unique- Removes duplicate lines (Still sorts ascending from the specified position)
+           ⮚ Example:
+              - Item: Apple
+              - Item: Banana
+              - Item: Apple
+           ⮚ Result:  Sorted by P7 (start from 'A')
+              - Item: Apple
+              - Item: Banana
+---------------------------------------------------------------
+       ⮞ Reverse 
+           ⮚ This is a descending sort, including duplicate lines. Sorting starts at the specified character position and reverses the order.
+           ⮚ Sort flags used: P<n> R
+              - R = Reverse- sorts descending (Keeps duplicates)
+           ⮚ Example:
+              - X-ray
+              - Delta
+              - Charlie
+           ⮚ Result:  Sorting from character 1 in reverse (because X > D > C)
+              - X-ray
+              - Delta
+              - Charlie
+---------------------------------------------------------------
+       ⮞ ReverseDistinct
+           ⮚ Performs a descending sort from the specified character position and removes duplicate lines.
+           ⮚ Sort flags used: P<n> R U
+              - R = Reverse
+              - U = Unique
+           ⮚ Example:
+              - Zebra
+              - Banana
+              - Apple
+              - Zebra
+           ⮚ Result:  Sorting from position 1
+              - Zebra
+              - Banana
+              - Apple
+---------------------------------------------------------------
+
+
+LOGIC SUMMARY:
+When activated, the script captures the active window, then displays a GUI allowing users to choose a sorting method and define the starting character position. 
+Upon selection, it reactivates the original window, copies the selected text, checks for multiple lines, sorts it according to user input, and pastes it back. 
+Clipboard contents are restored afterward to avoid data loss.
+   • Saves the active window ID on launch
+   • Opens a GUI prompting sort type and character position
+   • Reactivates the original window before processing
+   • Copies text via Ctrl+C and checks for valid multiline data
+   • Sorts using AHK's built-in `Sort` command with flags
+   • Pastes the sorted content and restores the clipboard
+
+LAYOUT:
+The layout is compact, focused on usability and minimal intrusion. 
+It uses an always-on-top GUI containing instructional text, four sorting buttons, and a numeric input field.
+   • GUI dimensions: W390 x H75 (centered)
+   • Instruction text appears at the top
+   • Sorting buttons aligned horizontally:
+       ⮞ Normal
+       ⮞ NormalDistinct
+       ⮞ Reverse
+       ⮞ ReverseDistinct
+   • Numeric input field (default = 1) for character position
+   • GUI destroys itself after action or cancel
+
+USER EXPERIENCE:
+The script is designed for ease-of-use, requiring no manual clipboard manipulation or setup. 
+Users simply select text in a compatible editor, press Ctrl+T, and choose their sorting preference. 
+Clear messaging ensures users understand requirements (multiline text must be selected), and fallback behaviors prevent crashes or unintended results.
+   • Non-destructive to clipboard
+   • Minimal input required: press Ctrl+T, click a button
+   • Informative MsgBox warnings if selection is invalid
+   • Automatically validates input and defaults to position 1 if needed
+   • GUI cancels or exits cleanly via 'Cancel' or close box
+
+
+
+
+
+
+
+
