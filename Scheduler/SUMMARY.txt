@@ -1,0 +1,46 @@
+
+*  *  Time-Based Task Scheduler with GUI Options
+
+PURPOSE:
+   This script provides a GUI for scheduling timed tasks based on a user-specified time in HHMM format, with optional seconds and day-of-month fields. 
+   It allows users to either call a label or display a message box at the specified time. 
+   The scheduling logic calculates delay from the current time and uses `SetTimer` to trigger the action.
+   • Allows user-defined scheduling via a GUI.
+       ⮞ Inputs include hour/minute, seconds, and day of month.
+       ⮞ Defaults to today’s date if day not specified.
+   • Supports calling functions or displaying messages.
+       ⮞ Label names trigger `SetTimer` calls.
+       ⮞ Messages are passed with a leading `*`.
+
+KEY FEATURES:
+   The GUI consists of input fields and options for time and mode of action. Internally, the script builds a full timestamp from user input, calculates the time difference from now, and sets a timer accordingly. Message-based timers are tracked with a unique index to allow multiple message triggers.
+   • Uses `Gui, Add` controls for clean layout of all inputs.
+   • Supports both labeled subroutines and ad hoc message boxes.
+   • Message triggers tracked using indexed global arrays.
+   • Time strings are zero-padded for consistent formatting.
+
+LOGIC SUMMARY:
+   User input is parsed and assembled into a full timestamp (YYYYMMDDHHMMSS). If the time has already passed, it adds one day. The time difference in seconds is calculated and used to set a countdown timer. If the input begins with a `*`, a message is stored and triggered at the designated time. Otherwise, a label is called by name.
+   • `TimeManagement()` handles scheduling logic.
+       ⮞ Assembles complete timestamp.
+       ⮞ Determines seconds until execution.
+       ⮞ Sets the timer with negative delay.
+   • `Time_MsgBox` checks current time against message queue.
+       ⮞ Displays stored messages when match occurs.
+
+LAYOUT:
+   The interface presents labeled input fields and radio buttons for the action mode. A single button finalizes scheduling without closing the GUI. The backend contains logic handlers and uses a global counter and arrays for message queue management.
+   • GUI includes:
+       ⮞ Input fields: time, seconds, day, label/message.
+       ⮞ Radio buttons for choosing mode (label or message).
+       ⮞ Schedule button executes the setup.
+   • No additional GUI windows open during operation.
+
+USER EXPERIENCE:
+   The user can easily schedule future actions with no scripting required. The interface is self-contained and intuitive, making it easy to assign message popups or label-based function triggers. Messages are queued and precise timing is handled in the background without interference.
+   • No need to manually write timers or calculate delay.
+   • Clean interface allows quick rescheduling or edits.
+   • Useful for reminders, alerts, and automation testing.
+   • Safe and persistent within a single session.
+
+
