@@ -1,0 +1,56 @@
+
+* Compare object sizes with fun unit scaling
+
+
+PURPOSE:
+This script is an interactive comparison tool that allows users to input a custom length or height and see how many of that unit would fit into a variety of real-world objects. 
+Designed with educational and entertainment purposes in mind, it bridges fun trivia and basic unit conversion. 
+It supports both metric and imperial systems and includes visual guides, descriptions, and ratio-based outputs for comparative scaling.
+
+KEY FEATURES:
+The script supports a diverse set of reference objects, including people, animals, candies, devices, and landmarks. 
+Users can enter measurements in either metric or imperial units, select an object from a list, and view detailed comparisons showing how many of their input units equal the dimensions of the selected object.
+   • Includes 30+ predefined real-world reference objects
+   • Supports both metric and imperial input
+   • Real-time update as measurements or units change
+   • Results formatted in a clean, column-aligned output
+   • Offers per-object details like width, height, thickness, etc.
+   • Hotkey support for help and about dialogs
+
+LOGIC SUMMARY:
+The script builds a GUI with a listbox for selecting a reference object and edit boxes for entering length in miles/km, feet/m, and inches/cm depending on the selected unit system. 
+A unified `dimensions` object stores each item’s measurements. 
+The user’s input is converted to centimeters, and ratios are calculated to determine how many of those units would equal each dimension of the chosen object. 
+The results are shown in a read-only multiline box with neatly aligned formatting.
+   • Input fields accept multi-tiered dimensional input (e.g., miles + feet + inches)
+   • Internally converts all input to centimeters
+   • Iterates through each property of the selected object
+   • Calculates a "how many of your input" ratio for each dimension
+   • Result text is formatted into aligned columns using a custom `columns()` function
+   • Outputs are updated dynamically on input or selection changes
+
+LAYOUT:
+The interface is split into logical sections: input on the right, object list on the left, and output below. 
+The top explains the user prompt, followed by radio buttons for unit selection, then numerical input fields. 
+The lower half of the GUI displays the live result text box.
+   • Left pane: Object selector list
+   • Right pane: Unit system radio buttons and 3 input fields (distance hierarchy)
+   • Bottom pane: Labeled result area with scrollable comparison results
+   • Pop-up windows: For Help, Unit Info, and visual guides
+   • Custom MsgBox utility used for formatted dialogs
+
+USER EXPERIENCE:
+Users can explore how tall or long something is in relatable terms, such as “how many iPhones tall is the Hoover Dam.” 
+The interface is immediate, colorful, and responsive. 
+Metric/Imperial switching is seamless, and tooltips guide usage. 
+The script includes help prompts, detailed notes, and is ideal for fun measurement comparisons, classroom use, or light educational tools.
+   • Easily navigate through object list with mouse or keys
+   • Intuitive layout encourages experimentation
+   • Dynamic results provide instant feedback
+   • Hotkeys (`F1`, `?`, `Esc`) improve usability
+   • Meant for fun, not scientific accuracy
+
+
+
+
+
