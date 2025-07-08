@@ -1,0 +1,62 @@
+
+*  Product Key Generator + Validator (Combined Summary)
+
+Overview:
+This pair of scripts demonstrates a basic **product key generation** and **validation** system using AutoHotkey. 
+The first script dynamically creates randomized product keys with specific character rules. 
+The second script provides a GUI for users to input and validate those keys using a regular expression.
+
+══════════════════════════════════════════════════════════════════════
+▶ SCRIPT 1 — Product Key Generator (Ctrl + F2)
+══════════════════════════════════════════════════════════════════════
+• **Hotkey:** Ctrl + F2 triggers the key generator.
+• **Key Format:** 
+   - Starts with one uppercase A–Z.
+   - Followed by a single character: T, U, V, X, Y, or Z.
+   - Next: a digit from 5–9.
+   - Then: either a lowercase letter b–g or a digit 3–6.
+   - Ends with either A–F (uppercase) or b–e (lowercase).
+   - Example key: `AV7dD`
+• **Output:**
+   - The generated key is:
+     - Copied to clipboard.
+     - Shown in a message box.
+• **Function Used:** `GenerateKey()` handles randomized character selection.
+
+══════════════════════════════════════════════════════════════════════
+▶ SCRIPT 2 — Product Key Validator (GUI)
+══════════════════════════════════════════════════════════════════════
+• **GUI Form:**
+   - Prompts user to enter a product key.
+   - "Check" button submits key for validation.
+   - Displays success or failure message in the GUI.
+• **Validation Logic:**
+   - Regex pattern: `^[A-Z][TUVXYZ][5-9](?:[b-g]|[3-6])(?:[A-F]|[b-e])$`
+   - Matches same format produced by `GenerateKey()`.
+   - Case-sensitive matching is enforced.
+• **Function Used:** `pk()` performs the regex match.
+
+══════════════════════════════════════════════════════════════════════
+▶ Intended Use / Workflow:
+   1. User presses Ctrl + F2 to generate a valid product key.
+   2. They copy and paste that key into the GUI.
+   3. The validator checks format compliance and notifies the user.
+
+Benefits:
+• Lightweight and fast.
+• Easy to integrate into installers or software demos.
+• Demonstrates controlled random generation and strict format validation.
+
+Limitations:
+• No database or licensing backend.
+• Keys are syntactically validated only, not linked to user data or activation logic.
+
+
+
+
+
+
+
+
+
+
