@@ -1,0 +1,66 @@
+
+*  MsgBox Coder — Interactive MsgBox Generator with Test and Clipboard Export.
+
+Purpose:
+   A highly customizable GUI utility that generates AutoHotkey `MsgBox` code with user-defined parameters. 
+   Users can preview, copy, and test the message box format instantly, including timeouts, icons, button configurations, and modality.
+
+Key Features:
+   • Full GUI for constructing MsgBox commands with real-time code generation.
+   • One-click testing and clipboard export of the generated command.
+   • Visual icon previews and tooltip explanations for UI elements.
+
+GUI Components:
+   • **Title & Message Input**:
+       ⮞ Custom text fields to define the title and message body.
+       ⮞ Handles newline and quote escaping automatically.
+   • **Button Configuration**:
+       ⮞ Radio options for standard MsgBox button sets:
+          OK, OK/Cancel, Yes/No, Retry/Cancel, etc.
+   • **Default Button Selection**:
+       ⮞ Choose which button is the default (1st, 2nd, or 3rd).
+   • **Timeout Control**:
+       ⮞ Optional timeout duration in seconds.
+       ⮞ Field becomes enabled only when checkbox is active.
+       ⮞ Validates numeric input before generating output.
+   • **Icon Selection**:
+       ⮞ Choose an icon (Error, Question, Warning, Info).
+       ⮞ Previews icons using system DLL (user32.dll or user.exe).
+   • **Modality Options**:
+       ⮞ Task modal, System modal, or Always on Top.
+   • **Action Buttons**:
+       ⮞ `Clipboard && Test`: Generates the MsgBox line, copies to clipboard,
+          and immediately displays the resulting MsgBox.
+       ⮞ `Help`: Opens AutoHotkey documentation for MsgBox.
+       ⮞ `Close && Exit`: Exits the script.
+
+Functionality Details:
+   • `EscapeForMsgBox(str)`:
+       ⮞ Escapes quotes and newlines for safe embedding in AHK script code.
+   • Tooltip Support:
+       ⮞ Hovering over buttons shows helpful usage hints.
+       ⮞ Tooltips dynamically created with `GuiTip()` using Windows API.
+   • Output Logic:
+       ⮞ Combines all selected flags using bitwise OR.
+       ⮞ Timeout is appended only if checkbox is active.
+       ⮞ Validated final code is placed in the clipboard.
+
+Design Notes:
+   • Sleek dark-themed interface: custom font, borderless GUI, and controlled width.
+   • Compact layout — fits in 333×455 GUI window.
+   • Automatically adjusts icon source based on Windows version.
+
+Ideal Use:
+   • Script developers seeking a reliable MsgBox formatter.
+   • Training, education, and prototyping of AHK dialog behaviors.
+   • Easily paste MsgBox templates into any AutoHotkey v1.1 script.
+
+
+
+
+
+
+
+
+
+
