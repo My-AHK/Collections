@@ -1,0 +1,58 @@
+
+*  Scheduled Webpage Launcher at Set Time.
+
+PURPOSE:
+   This script checks the system clock once per second and launches a predefined URL at a specific time of day. 
+   It is ideal for automating tasks that must occur at a fixed daily time, such as opening a reference site or triggering a web service without manual input.
+   • Launches a webpage at 5:15 AM by default.
+       ⮞ Uses 24-hour format to define target time.
+       ⮞ Can be modified to run any desired command.
+   • Ensures the action triggers only once per minute.
+       ⮞ Prevents repeated triggers during the same minute.
+       ⮞ Resets itself on the next minute for the next day.
+
+KEY FEATURES:
+   The script uses `SetTimer` to repeatedly check the time every 1000 milliseconds (1 second). 
+   When the system clock matches the configured hour and minute, it executes the specified action only once within that minute. 
+   A boolean flag ensures the action doesn't retrigger until the time condition resets.
+   • Target time is set using `TargetHour` and `TargetMin`.
+   • Action is a configurable string passed to `Run`.
+   • `hasRunThisMinute` avoids duplicate executions per minute.
+
+LOGIC SUMMARY:
+   The timer calls the `TimeCheck` label once per second.
+   If the current hour and minute match the target values, and the action hasn’t already run in that minute, the script executes the specified command. 
+   Once run, it sets a flag to prevent repeats. 
+   When the time no longer matches, the flag resets, preparing the script for the next day’s run.
+   • One-second timer ensures prompt activation.
+   • Simple flag prevents accidental repeats.
+   • No GUI or user interaction needed.
+
+LAYOUT:
+   The script contains only global variable declarations, a timer definition, and a single label (`TimeCheck:`).
+   It operates silently in the background with minimal overhead, using only standard AHK commands.
+   • Variables define schedule and action.
+   • Logic runs within a single label triggered by timer.
+   • No GUI, tray menu, or message boxes are used.
+
+USER EXPERIENCE:
+   Users can schedule an automatic launch of any application or URL with minimal setup. 
+   Once running, the script requires no interaction and consumes negligible system resources.
+   It provides a reliable method for time-based automation and can be easily repurposed by adjusting the target time or action.
+   • No input required once configured.
+   • Can be used to automate daily reference sites or reminders.
+   • Prevents multiple launches in the same time window.
+   • Easily customizable for different time-based triggers.
+
+
+
+
+
+
+
+
+
+
+
+
+
