@@ -1,0 +1,39 @@
+
+*  Clipboard to Printer — Quick Print Selected Text via Notepad.
+
+Purpose:
+   Instantly prints the current text selection by copying it to a temporary file, sending it to notepad’s print command, and cleaning up afterward.
+
+Activation:
+   • **Hotkey:** Ctrl + Alt + P (`^!p`)
+     ⮞ Copies the currently selected text.
+     ⮞ Saves it to a temporary file (`Clip2Print.txt`).
+     ⮞ Opens Notepad in print mode to send the file to the default printer.
+     ⮞ Cleans up the file after printing and restores the clipboard.
+
+Key Features:
+   • Displays a tooltip near the cursor: *“Printing selection... Please wait.”*
+   • Uses `BlockInput, On` to prevent interference during copy and print.
+   • Waits up to 2 seconds for clipboard content to become available.
+   • Emits an error message if clipboard copy fails.
+   • Preserves original clipboard content before and after operation.
+   • Delays ensure printer command is properly dispatched before cleanup.
+
+Use Case:
+   • Quickly print text from any application without navigating menus.
+   • Ideal for short notes, email snippets, or code blocks.
+   • Lightweight and disposable — avoids leaving temporary files behind.
+
+Technical Notes:
+   • File is stored temporarily in the script’s own directory.
+   • Uses `/P` switch in Notepad to silently print without opening a window.
+
+
+
+
+
+
+
+
+
+
