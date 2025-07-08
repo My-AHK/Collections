@@ -1,0 +1,63 @@
+
+*  *  Modular GUI Toolkit for Audio, Visual, and System Control.
+
+PURPOSE:
+   This script presents a multi-GUI control panel for managing sound levels, window transparency, and real-time system information. 
+   Designed as a utility launcher, it centralizes several miscellaneous tools into a visually consistent, always-available hub.
+   • Opens with a main menu offering three tool categories.
+       ⮞ Sound Settings: Adjust volume/mute for various audio channels.
+       ⮞ Window Settings: Set active window transparency.
+       ⮞ System Info: Display real-time hardware and OS data.
+   • GUIs use consistent styling and positioning for seamless user flow.
+       ⮞ Each tool opens in a new GUI without closing the main panel.
+       ⮞ Primary monitor work area is used for positioning.
+
+KEY FEATURES:
+   The main interface (GUI 1) offers users quick access to secondary windows tailored to specific tasks:
+   • **GUI 2 (Sound Settings)**:
+       ⮞ Controls include sliders, mute checkboxes, and read-only volume displays.
+       ⮞ Volume values are auto-loaded using `SoundGet` at startup.
+       ⮞ Updates propagate live via `SoundSet`, `SoundSetWaveVolume`, and UI bindings.
+   • **GUI 3 (Window Transparency)**:
+       ⮞ Allows setting transparency via a slider applied to the currently active window.
+       ⮞ Value updates in real-time with visual feedback in the adjacent edit box.
+   • **GUI 4 (System Info)**:
+       ⮞ Displays mouse info, screen resolution, current time/date, IP, OS type, and more.
+       ⮞ `Submit:` button refreshes all values, including dynamic system properties.
+       ⮞ Language codes are mapped to human-readable names using a dictionary.
+   • Custom layout and visual coherence using unified color and placement logic.
+   • GUI windows are destroyed when closed, not just hidden, freeing memory.
+
+LOGIC SUMMARY:
+   The script begins by setting performance flags for real-time priority and unrestricted execution. 
+   Each function is associated with a separate GUI instance (1 through 4) and a named label for event routing.
+   • GUI interactions (e.g., slider movements, checkbox toggles) immediately affect system state.
+   • Transparency changes are applied to the currently active window using `WinSet`.
+   • Audio changes directly alter hardware volume levels through native AHK audio commands.
+   • System Info GUI gathers real-time stats using `SysGet`, `A_` variables, and `MouseGetPos`.
+
+LAYOUT:
+   All GUI windows are manually positioned using pixel coordinates for tight visual control.
+   • GUI 1 is compact and vertically stacked with labeled buttons.
+   • GUI 2 is a larger grid layout optimized for multiple audio channels.
+   • GUI 3 is minimal, focused only on a single transparency slider.
+   • GUI 4 contains a vertical stack of labels and matching edit fields for system diagnostics.
+   • Common color scheme `ABCDEF` is applied across all GUIs for uniform aesthetics.
+
+USER EXPERIENCE:
+   The tool is aimed at power users or system administrators who benefit from rapid access to core settings.
+   The GUI-centric design requires no command-line interaction, ensuring ease of use.
+   • Launch once and access all tools via the centralized GUI.
+   • Intuitive slider/mute/label controls make interactions straightforward.
+   • Immediate feedback on all changes improves user confidence and usability.
+   • Can serve as a customizable base for broader admin or monitoring scripts.
+
+
+
+
+
+
+
+
+
+
