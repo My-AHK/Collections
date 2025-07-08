@@ -1,0 +1,98 @@
+
+*  MATHS toolkit - sum, prime, factors, and compare.
+
+Purpose:
+   The “MATHS” folder contains a cohesive set of four AutoHotkey GUI tools for performing core number operations: 
+   • summation and averages
+   • prime checking
+   • factor analysis
+   • and common factor comparison. 
+   These scripts assist in both basic arithmetic evaluation and deeper mathematical inspection.
+   • Designed for precision, speed, and visual clarity.
+   • Offers clipboard integration and drag-free interaction.
+   • Ideal for students, analysts, programmers, and technical users.
+
+Key Features:
+   Each script provides its own specialty while maintaining consistent 
+   usability, interface logic, and feedback systems.
+   • Script 1 – **Count, Sum, & Average**:
+       ⮞ Activated via Ctrl+Alt+T or tray menu.
+       ⮞ Copies selected text (numbers), extracts values, sums, and averages.
+           ⮚ Skips currency symbols and comma formatting.
+           ⮚ Automatically counts valid entries.
+       ⮞ Displays results in a timed MsgBox:
+           ⮚ Record count, formatted sum, and average.
+       ⮞ Clipboard is preserved and restored after operation.
+       ⮞ No GUI — works on selections from other windows.
+
+   • Script 2 – **LCM & GCF Calculator**:
+       ⮞ Simple GUI with two number fields.
+       ⮞ Calculates:
+           ⮞ Least Common Multiple (LCM).
+           ⮞ Greatest Common Factor (GCF).
+       ⮞ Results are copied to clipboard automatically.
+       ⮞ Uses internal math routines — no dependency on math libraries.
+
+   • Script 3 – **Prime Number Tester**:
+       ⮞ GUI input for single number analysis.
+       ⮞ Loops through all possible factors up to number ÷ 2.
+       ⮞ Shows real-time progress and allows Esc key to abort early.
+       ⮞ Displays result in popup GUI:
+           ⮞ Lists all factors or declares the number as prime.
+       ⮞ Clipboard copy supported via result GUI.
+
+   • Script 4 – **Multi-Number GCD & Shared Factors**:
+       ⮞ Accepts 2 or more comma/space-separated numbers.
+       ⮞ Automatically normalizes and cleans input.
+       ⮞ Finds all shared divisors:
+           ⮞ Loops up to the smallest value.
+           ⮞ Verifies full divisibility across all entries.
+       ⮞ Displays shared factor list and GCD in a styled result window.
+       ⮞ Result can be copied with one button.
+       ⮞ GUI includes Hide and Exit controls.
+       ⮞ Supports Ctrl+T hotkey to reopen GUI.
+
+Logic Summary:
+   While each script operates independently, they share consistent 
+   handling and feedback logic to offer intuitive interactions.
+   • Inputs are captured via GUI or clipboard.
+   • Math operations are calculated using native AHK functions and loops.
+   • User feedback is presented in MsgBoxes or result GUIs.
+   • Clipboard integration exists where appropriate.
+   • Result formatting ensures clarity and professional alignment.
+   • Some scripts allow aborting or re-triggering via hotkeys.
+
+Layout:
+   GUIs are compact, minimal, and purpose-focused.
+   • Common traits:
+       ⮞ `+AlwaysOnTop` for easy reference.
+       ⮞ Font styling for visual grouping.
+       ⮞ Button labels are straightforward (OK, Copy, Exit).
+       ⮞ Spacing and sizing tuned for single-window use.
+   • Script-specific differences:
+       ⮞ Prime/GCD scripts use dual-GUI windows for results.
+       ⮞ Sum/Average script is headless and hotkey-driven.
+       ⮞ Color themes differ but retain readability.
+
+User Experience:
+   The “MATHS” suite enables quick number-driven decisions without 
+   relying on external tools or calculators.
+   • Users can:
+       ⮞ Analyze selections from external windows (Script 1).
+       ⮞ Compare multiple values or test primehood (Scripts 3 & 4).
+       ⮞ Evaluate LCM/GCF pairs with clipboard-ready outputs (Script 2).
+   • Results are:
+       ⮞ Pasted-ready.
+       ⮞ Clearly formatted.
+       ⮞ Non-intrusive (time-limited or closable).
+   • Ideal for quick math without spreadsheet overhead.
+
+
+
+
+
+
+
+
+
+
