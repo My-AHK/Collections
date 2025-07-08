@@ -1,0 +1,56 @@
+
+* Clickable GUI hyperlinks with hover effects
+
+
+PURPOSE:
+This script creates a clickable, interactive GUI featuring multiple labeled web links, each opening a different website when clicked. 
+It simulates hyperlink behavior within a standard AutoHotkey GUI by detecting mouse movement and changing the cursor to a hand icon when hovering over specific controls. 
+It enhances the user interface by mimicking web-like interactivity inside a native script window.
+
+KEY FEATURES:
+The GUI displays four stacked URLs, each associated with a different website. 
+When the mouse cursor hovers over one of these links, the text becomes underlined and the cursor changes to a pointing hand - a familiar visual indicator of a clickable link. 
+Clicking any URL triggers a `Run` command to open the corresponding website.
+   • Displays four individual clickable URL links
+   • Hover effect: underlined text + hand cursor
+   • Each link opens a distinct website using `Run`
+   • Uses `OnMessage()` for precise mouse tracking
+   • Auto-detects which control is under the cursor
+   • Handles state cleanup when cursor leaves a link
+
+LOGIC SUMMARY:
+Upon launch, the GUI is built with labeled `Text` controls assigned to `gLabels`, each serving as a link. 
+The script stores the process ID and window handle to uniquely identify its own GUI. 
+Two Windows messages — `WM_MOUSEMOVE` and `WM_SETCURSOR` — are intercepted using `OnMessage()` to implement hover-based interactivity. 
+If the mouse moves over a control starting with "URL", the script underlines the text and sets the cursor to a hand pointer. 
+When the mouse leaves, it resets the cursor and font.
+   • Mouse movement triggers `HandleMessage()`
+   • Control name prefix “URL” identifies clickable links
+   • Font and cursor change dynamically on hover
+   • Prevents redundant updates by tracking last hovered control
+   • Message handling is isolated and efficient
+
+LAYOUT:
+The layout is simple and vertically stacked, starting with a header followed by a list of links. 
+Each link is a text control aligned below the previous, ensuring consistent spacing and visual grouping. 
+The use of margins keeps the interface readable and evenly spaced.
+   • Top: Static text header (“Multiple URLs in one GUI”)
+   • Below: Four individual blue-colored text items
+   • Padding and margin ensure clarity and clickability
+   • Entire window styled using `Gui, Margin` and spacing logic
+
+USER EXPERIENCE:
+Users interact with this GUI as they would on a webpage: hovering over links gives a familiar visual response, and clicking launches a browser to the associated site. 
+The experience is intuitive, responsive, and immediately recognizable. 
+The hover logic ensures links stand out and convey functionality, without relying on external libraries or GUI libraries.
+   • Seamless hover feedback with underline + hand cursor
+   • Click-based interaction feels like navigating a mini web portal
+   • Non-obtrusive and focused on function over form
+   • Uses native AHK constructs while enhancing interface quality
+   • Offers useful demonstration for creating web-like GUIs in AHK
+
+
+
+
+
+
