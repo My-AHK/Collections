@@ -1,0 +1,68 @@
+
+*  Mouse Acceleration Toggle — Control, View, and Restore Settings.
+
+Purpose:
+   This script allows users to view, enable, disable, or toggle Windows mouse acceleration directly via hotkeys.
+   It also preserves the original system settings and restores them upon exit for safety.
+   • Designed for gamers, power users, and testers.
+   • Useful for temporarily adjusting mouse behavior with one keypress.
+
+Key Features:
+   • On startup:
+       ⮞ Saves current mouse acceleration settings (acceleration flag, min/max thresholds).
+       ⮞ Registers an exit handler to restore them automatically.
+   • Hotkey Controls:
+       ⮞ `Ctrl + NumpadAdd` → Enable mouse acceleration.
+       ⮞ `Ctrl + NumpadSub` → Disable mouse acceleration.
+       ⮞ `Ctrl + NumpadEnter` → Toggle mouse acceleration on/off.
+   • Each action triggers a dialog displaying:
+       ⮞ Acceleration state (0 = Off, 1 = On).
+       ⮞ Minimum and maximum thresholds.
+       ⮞ Human-readable explanation of how thresholds affect behavior.
+
+Mouse Settings Explained:
+   • Acceleration: Boolean (0 or 1).
+   • Min Threshold:
+       ⮞ Speed below this = no acceleration.
+   • Max Threshold:
+       ⮞ Speed above this = max acceleration applied.
+   • Between min & max = gradual acceleration increase.
+
+System Integration:
+   • Uses `SystemParametersInfo` via `DllCall` to read and write values.
+   • Flags:
+       ⮞ `SPI_GETMOUSE` (3) — reads accel/min/max settings.
+       ⮞ `SPI_SETMOUSE` (4) — writes new settings.
+       ⮞ Optionally updates user profile (with `fWinIni = 1`).
+
+Data Flow:
+   • `SaveOriginalSettings()` called immediately on load.
+   • `RestoreOriginalSettings()` auto-runs on script exit.
+   • Values are stored in globals:
+       ⮞ `OriginalAccel`, `OriginalMin`, `OriginalMax`.
+
+Function Summary:
+   • `SPI_GETMOUSE(ByRef accel, ByRef min?, ByRef max?)`
+       ⮞ Outputs 3 system parameters.
+   • `SPI_SETMOUSE(accel, min?, max?, fWinIni := 0)`
+       ⮞ Writes new values (default fallback: 6 min, 10 max if accel=1).
+
+Design Notes:
+   • No GUI – minimalistic, fast, and hotkey-only.
+   • Defensive programming:
+       ⮞ Fallback defaults for thresholds if not explicitly provided.
+       ⮞ Profile-safe – changes revert when script exits.
+
+Ideal Use:
+   • Perfect for users wanting to temporarily disable acceleration for FPS gaming,
+     then restore it afterward — all without needing to open system settings.
+
+
+
+
+
+
+
+
+
+
