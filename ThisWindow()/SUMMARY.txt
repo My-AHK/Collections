@@ -1,0 +1,63 @@
+
+*  23+ window info popups + full report via ^T
+
+
+PURPOSE:
+This script provides a powerful set of window inspection tools accessible via the Ctrl+T hotkey. 
+Upon activation, it gathers and displays a wide range of information about the currently active window, such as dimensions, position, title, process details, and visual states like transparency or "always on top" status. 
+It’s useful for developers, script authors, or power users who need real-time insight into window properties.
+
+KEY FEATURES:
+The script showcases 23 individual examples of window property retrieval using a unified helper function. 
+It combines AutoHotkey’s built-in window commands with DLL calls for advanced attributes. 
+All displayed information is copied to the clipboard and shown in timed message boxes, with a final consolidated report combining all details.
+   • Accesses and displays 23 different window-related properties
+   • Uses `ThisWindow()` function to abstract WinGet calls
+   • Consolidated window info report at the end
+   • Timed message boxes display each property briefly
+   • Information also copied to clipboard for external use
+   • Includes transparency level and "always on top" status via DLL
+
+LOGIC SUMMARY:
+When Ctrl+T is pressed, the script emits a beep, then performs 23 successive checks on the currently active window using the custom `ThisWindow()` function. 
+Each check assigns a descriptive string to the clipboard and shows it in a message box. 
+After all examples, the script compiles a formatted report containing all attributes. 
+Advanced info like window transparency and "always on top" status are retrieved using DLL calls in the helper function `GetWindowTransparency()`.
+   • SoundBeep signals activation
+   • Each property is queried using a single reusable function
+   • Clipboard is updated with human-readable summaries
+   • MsgBox displays info for 3 seconds per example
+   • Final report includes multiple formatted sections:
+       ⮞ Geometry
+       ⮞ Status
+       ⮞ Metadata
+   • Transparency and Z-order are queried using Win32 APIs
+
+LAYOUT:
+The script is organized into clear sections: 23 labeled example blocks, followed by a consolidated data section and two reusable function definitions at the bottom. 
+Each example is self-contained and includes a clipboard update and brief on-screen display. 
+The final report groups values under labeled headers for clarity.
+   • 23 examples formatted consistently with section markers
+   • Final multi-line report uses visual separators and alignment
+   • Functions placed at the end for modular design
+   • Helper function maps string keys like “X” or “PID” to proper window queries
+
+USER EXPERIENCE:
+Users trigger the utility with Ctrl+T while any window is active. 
+Each piece of information is shown quickly and unobtrusively. 
+The final comprehensive window report remains on screen for 20 seconds, giving the user ample time to review or copy it. 
+Clipboard updates ensure that data can be reused immediately in other contexts (e.g., debugging, automation). 
+The design requires no setup or GUI interaction, making it fast and convenient.
+   • Zero setup required — just press Ctrl+T
+   • Each popup auto-dismisses after 3 seconds
+   • Final report stays visible for 20 seconds
+   • Report copied to clipboard for later use
+   • Works with any currently active window
+
+
+
+
+
+
+
+
