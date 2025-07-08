@@ -1,0 +1,38 @@
+
+*  TreeView demo script with all 6 AHK item options.
+
+
+PURPOSE:
+This script serves as an interactive demonstration of the various display and behavior options available for TreeView items in AutoHotkey v1.1. These include bold text, automatic expansion, selection, scrolling visibility, checkbox display, and child-node indicators. The script is intended to educate developers on how to apply and visualize these TreeView options effectively using different hotkeys for isolated examples.
+
+KEY FEATURES:
+The script highlights each TreeView option through specific hotkeys (F1–F10) that dynamically create GUIs showcasing the effects. It features icon support, nested node structures, and manual control over checkbox states using image overlays. Advanced TreeView creation is modularized through a dedicated function to parse and apply hierarchical structures from a formatted string.
+
+   • Demonstrates six TreeView options: Bold, Expand, Select, Vis, Check, HasChild  
+   • Uses `IL_Create()` and `TV_SetImageList()` to display icons  
+   • Assigns node behaviors using option strings in the third parameter of `TV_Add()`  
+   • Simulates checkbox state via icons, with tracking through associative arrays  
+   • Provides multiple demos (F1–F10) for both isolated and combined TreeView configurations  
+   • Includes right-click event detection with context-sensitive feedback  
+
+LOGIC SUMMARY:
+Each TreeView demo is activated by a function key (F1–F10), creating a new GUI with descriptive text and a TreeView control. The core logic parses a formatted multi-line string (`TvDefinition`) to determine the hierarchy and options for each node. A helper function `CreateTreeView_WithIcons()` constructs the TreeView structure by iterating over the definition, tracking depth via tab indentation and assigning appropriate icons and options. Some demos use image-based checkbox simulations with dynamic toggling through `TV_Modify()` and a dictionary to remember states.
+
+   • Parses `TvDefinition` line-by-line to detect indentation and options  
+   • Uses RegEx to split each line into label and modifiers  
+   • Assigns hierarchical placement using a level-indexed `IDs` map  
+   • Applies options such as Bold, Select, and HasChild conditionally  
+   • Manages icon appearance based on depth (e.g., folder vs file)  
+   • Scroll behavior (`Vis`) is applied post-node creation  
+   • Manual checkbox handling maps click events to icon toggling  
+
+LAYOUT:
+Each demonstration GUI is minimal and tailored for clarity, showing a TreeView control alongside a brief text description. TreeViews vary in height and width depending on the content being demonstrated. Icon image lists are dynamically created and attached to each TreeView using appropriate Shell32.dll indices. Some GUIs use `AltSubmit` to intercept user clicks for custom interaction logic.
+
+   • GUI layouts include TreeView and static text description  
+   • TreeView sizes differ slightly per demo for clarity  
+   • Icons applied via `shell32.dll` indexes, alternating between folder and file imagery  
+   • Some GUIs use `+0x2` style to enable TVS_CHECKBOXES  
+
+USER EXPERIENCE:
+Users can press keys F1 through F10 to launch TreeView demos that isolate and showcase individual options or combine multiple behaviors. Visual feedback such as bold text, auto-expanded folders, and scroll-to-item behavior helps users understand
