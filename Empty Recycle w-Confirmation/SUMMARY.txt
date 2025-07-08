@@ -1,0 +1,39 @@
+
+* Empty Recycle Bin via Ctrl+T with fallback
+
+
+PURPOSE:
+This script provides a convenient method to empty the Windows Recycle Bin using a keyboard shortcut. It incorporates both a COM-based approach and a fallback method to ensure reliable functionality even if the primary method fails.
+
+KEY FEATURES:
+The script integrates Windows Shell COM automation with traditional AHK commands to manage the Recycle Bin. It gives the user control and feedback during the operation, including error handling and confirmation dialogs.
+   • Keyboard shortcut Ctrl+T to initiate the emptying process.
+   • Primary attempt uses COM to silently empty the bin.
+   • Fallback uses AHK’s `FileRecycleEmpty` with confirmation if COM fails.
+   • Error message displayed if Recycle Bin access fails.
+
+LOGIC SUMMARY:
+The logic initiates with a beep and attempts to access the Recycle Bin via the Windows Shell COM object. If access is successful, it invokes the “empty” command through a shell verb. If this fails due to an exception, the user is prompted for confirmation before using `FileRecycleEmpty` as a backup. If the Recycle Bin itself is inaccessible, an error message is shown.
+   • Shell object created via `ComObjCreate("Shell.Application")`.
+   • Recycle Bin is accessed using `Namespace(10)`.
+   • Attempt is made to trigger the "empty" shell verb.
+   • On failure, a confirmation prompt is displayed.
+   • If confirmed, the contents are deleted using `FileRecycleEmpty`.
+
+LAYOUT:
+The script is concise and linear in structure, with clear separation between primary, fallback, and error-handling logic. Minimal GUI interaction is used, focusing on auditory and popup feedback to guide the user.
+   • Initialization includes persistent state and tray icon setup.
+   • Core logic triggered by Ctrl+T hotkey.
+   • Use of `try...catch` to distinguish primary and backup methods.
+   • Dialog boxes provide conditional user feedback and choices.
+
+USER EXPERIENCE:
+This script offers a seamless and user-friendly method to manage the Recycle Bin. The use of auditory confirmation, visual prompts, and robust fallback logic ensures a responsive and informative experience. It provides power-user functionality while still incorporating necessary safeguards.
+   • Immediate audio cue signals initiation.
+   • Silent operation preferred unless failure occurs.
+   • Backup method adds user confirmation for safety.
+   • Error alert shown when action cannot proceed.
+
+
+
+
