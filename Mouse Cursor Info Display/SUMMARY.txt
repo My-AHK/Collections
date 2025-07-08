@@ -1,0 +1,73 @@
+
+*  System HUD Tool - live info via tray toggles.
+
+Purpose:
+   This script provides a real-time on-screen heads-up display that shows various system-related information. 
+   Activated through system tray menu items, the user can selectively monitor specific metrics such as time, mouse coordinates, window info, color under cursor, clipboard, and more.
+   • Aimed at power users needing continuous status feedback.
+   • Great for debugging, automation context checks, or general utility.
+   • Menu-driven and modular — every element is toggleable.
+
+Key Features:
+   • System tray–based toggles for the following:
+       ⮞ Show Time
+       ⮞ Mouse Position
+       ⮞ Active Window
+       ⮞ Color Under Cursor
+       ⮞ Window Class
+       ⮞ Control Under Mouse
+       ⮞ Process Name
+       ⮞ Clipboard Text
+       ⮞ Screen Resolution
+       ⮞ Idle Time in Seconds
+   • Dynamic tooltip positioned just below the mouse.
+       ⮞ Updates every 50 ms when any item is enabled.
+       ⮞ Tooltip clears when all options are disabled.
+   • High process priority for smooth responsiveness.
+   • Non-standard tray menu with Reload, Exit, and a master 
+     “Disable ALL” item to clear all checks.
+   • Color info uses RGB via `PixelGetColor`.
+   • Uses DllCall for `GetLastInputInfo` to compute idle time.
+   • Clipboard preview limited to first 100 characters.
+
+Logic Summary:
+   • Tray menu toggles call unified `ToggleFeature()` handler:
+       ⮞ Flips state variable (e.g., `color_on`) between `"on"`/`"off"`.
+       ⮞ Checks/Unchecks tray item visually.
+       ⮞ Starts `SetTimer` for tooltip if not already running.
+   • Timer routine `update_tooltip` gathers all currently active values:
+       ⮞ Mouse coords and tooltip placement.
+       ⮞ Window title, class, process, and control.
+       ⮞ Color at cursor.
+       ⮞ Clipboard preview and screen resolution.
+       ⮞ Formatted system time.
+       ⮞ Idle time via tick difference.
+   • If no toggles are active (`AllOff()` returns true):
+       ⮞ Tooltip hides and timer is turned off.
+
+Layout:
+   • No GUI — interaction is fully via tray menu.
+   • Tooltip appears dynamically under mouse:
+       ⮞ +10 x-offset and -40 y-offset.
+       ⮞ Single compact block of multi-line info.
+   • Visual formatting:
+       ⮞ Fields include labels like "Class:", "Color:", "X", "Y".
+       ⮞ Each metric appears on its own line.
+
+User Experience:
+   Users can quickly toggle multiple system monitors from a unified tray icon.
+   • All components are opt-in — no clutter unless needed.
+   • Rapid feedback for developers, testers, and automation users.
+   • Allows stacking views (e.g., time + color + control).
+   • Useful as a diagnostics overlay when writing scripts or tracking events.
+   • Avoids any window footprint — minimal distraction.
+
+
+
+
+
+
+
+
+
+
