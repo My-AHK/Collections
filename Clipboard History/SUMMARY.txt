@@ -1,0 +1,42 @@
+
+* Clipboard manager with hotkey & GUI support.
+
+
+PURPOSE:
+This script implements a clipboard manager in AutoHotkey v1.1, designed to enhance clipboard functionality by allowing users to access a multi-item clipboard history, preview previous entries, and paste or delete them directly through hotkeys or a GUI interface.
+
+KEY FEATURES:
+Users can store up to 10 clipboard items with automatic monitoring and save/load functionality for persistence across sessions. A system tray icon provides right-click access to open the clipboard history or clear it entirely.
+
+   • Stores a history of up to 10 clipboard entries.
+   • System tray menu includes “Open Clipboard History” and “Clear Clipboard History”.
+   • Automatically saves and loads clipboard history from a file.
+   • Uses tooltips for immediate visual feedback.
+   • Supports GUI-based review and selection of entries.
+
+LOGIC SUMMARY:
+The script watches for clipboard changes and maintains a rotating buffer of saved entries. It keeps track of both full and abbreviated versions of clipboard content. Upon modification, it saves to a `.bin` file using a custom delimiter format and can reload this structure at launch.
+
+   • Clipboard change triggers a watch routine that updates history.
+   • Entries are collapsed upward when one is deleted.
+   • The tooltip provides temporary previews for changes or alerts.
+   • GUI selection updates the current entry to allow preview or pasting.
+
+LAYOUT:
+The code is modular with labeled sections for navigation, deletion, saving, previewing, GUI generation, and clipboard monitoring. GUI controls include a list box for selecting entries and an edit control for previewing clipped content. Hotkeys are provided for quick navigation, deletion, pasting, and launching the GUI.
+
+   • Hotkeys use the Windows key in combination with arrows, Delete, Space, and Enter.
+   • GUI dynamically populates from stored data using ListBox and Edit controls.
+   • Tray menu is customized with an icon and default behaviors.
+
+USER EXPERIENCE:
+Interaction is streamlined with hotkeys and contextual GUI feedback. Users can cycle through clips, view summaries, or restore items into the clipboard with minimal effort. The system is responsive and keeps clipboard history consistent between sessions without manual intervention.
+
+   • Win+Up/Down navigates through clips.
+   • Win+Delete removes a single item; Win+Shift+Delete clears all.
+   • Win+Enter pastes the selected entry with clipboard restoration.
+   • GUI displays both index and truncated preview of entries.
+
+
+
+
