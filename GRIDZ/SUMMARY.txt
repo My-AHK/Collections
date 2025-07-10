@@ -1,0 +1,49 @@
+
+*  Customizable GDI+ Grid & Crosshair Overlay Tool.
+
+
+PURPOSE:
+This script is designed to visually aid users by overlaying a customizable grid and center cross on the screen. It serves as a precision alignment tool, ideal for design, layout verification, or screen measurement tasks. The overlay is non-intrusive and can be easily toggled or modified through a minimalist GUI.
+
+KEY FEATURES:
+The tool offers adjustable grid spacing, line thickness, and color selection for both the grid and the center cross. Users can show/hide elements independently, clear the overlay, or restore the GUI via hotkeys. All visual rendering is handled through embedded GDI+ routines.
+
+   • Dynamic grid and center cross overlay  
+   • Adjustable spacing and thickness values  
+   • Independent toggling of grid and cross  
+   • Color selection from 23 preset options  
+   • Always-on-top, captionless draggable GUI  
+   • F1 hotkey to restore GUI if hidden  
+   • ESC key exits and performs cleanup  
+   • Self-contained GDI+ functions (no external dependency at runtime)
+
+LOGIC SUMMARY:
+Upon launch, the script initializes the GDI+ environment and builds a transparent GUI interface with inputs and options for grid customization. User settings are validated and passed into the drawing function, which overlays grid lines and/or a center cross using dynamically created pens. Updates overwrite the previous overlay, while the “Clear” option removes it entirely by drawing nothing.
+
+   • GDI+ is initialized and shut down cleanly  
+   • Color names are mapped to ARGB values  
+   • Overlay is drawn using `DrawOverlay()` with calculated line positions  
+   • The GUI captures input without hiding, allowing real-time adjustments
+
+LAYOUT:
+The GUI consists of dropdowns for color selection, input fields for line spacing and thickness, checkboxes for visibility toggles, and buttons to show, hide, or clear the overlay. The layout is compact, transparent, and styled with fonts specific to each control type for clarity. The interface appears near the top-right screen quadrant by default.
+
+   • Dropdowns: grid and center line color  
+   • Edit fields: spacing, grid thickness, crosshair thickness  
+   • Checkboxes: enable/disable grid and crosshair  
+   • Buttons: Show, Hide, Clear  
+   • Hotkey notice footer for restoring GUI  
+   • Fixed dimensions (475x175) and black background
+
+USER EXPERIENCE:
+Users interact with a clean, distraction-free interface that responds immediately to changes. Grid overlays do not interfere with desktop usage and can be dismissed or reloaded at any time. The entire application is single-instance and ESC-exitable, making it fast, focused, and practical for both casual and precision use.
+
+   • Intuitive input with instant visual feedback  
+   • Minimal screen clutter with optional hiding  
+   • Accessible hotkeys for rapid restore and exit  
+   • Settings retained during session for repeat use  
+   • Responsive overlay adapts to screen resolution
+
+
+
+.
