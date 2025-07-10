@@ -1,0 +1,54 @@
+
+*  GUI Tool to Build and Export Folder Trees
+
+
+PURPOSE:
+This script provides a graphical interface for users to visually construct a folder and file tree structure, then export it into a real folder hierarchy on disk. It is designed for simplified directory planning, organizing project templates, or setting up predefined folder structures without manually creating each one in File Explorer.
+
+KEY FEATURES:
+The tool offers an intuitive GUI that lets users add, rename, and remove folders or files in a TreeView control. A designated target folder path is chosen, and the built tree structure is then physically generated. Each item is tracked by type (file or folder), and icons distinguish between them visually.
+
+   • Visual folder/file tree creation in TreeView  
+   • Target path selection using folder dialog  
+   • Dynamic add, rename, and remove options  
+   • Unique name handling to prevent conflicts  
+   • Icons for folders and files via shell32.dll  
+   • Exports full tree into real folder/file structure  
+   • Start button builds all contents to disk  
+   • System tray menu with reload, exit, and version info  
+   • Custom button coloring using native Win32 brush calls
+
+LOGIC SUMMARY:
+The script uses AutoHotkey’s TreeView to manage a hierarchical list of nodes, each identified as a folder or file. When the user clicks “Start,” it recursively walks through the tree and writes the corresponding directories and empty files to the selected path. The structure is preserved exactly as built. Nodes prevent invalid nesting (e.g., no folders inside files) and enforce naming uniqueness with auto-incremented suffixes.
+
+   • Uses a NodeTypeMap to track folder vs. file  
+   • Prevents improper nesting through validation  
+   • Automatically appends numbers to duplicate names  
+   • `GetTreePaths()` recursively builds a full path list  
+   • `InferNodeType()` and `TV_GetImageIndex()` assist in node identification  
+   • `RemoveNodeAndChildren()` ensures full cleanup of nested items  
+   • Uses `FileCreateDir` and `FileAppend` to write output
+
+LAYOUT:
+The GUI is presented in a fixed 550x480 window using Segoe UI font, divided into clearly labeled sections. The top includes folder selection and target path controls, the center shows the editable TreeView, and the bottom contains five function buttons aligned for quick access. Button brushes provide color-coded feedback for actions like Add, Remove, Rename, and Start.
+
+   • Top row: Folder path selector and label  
+   • Center: TreeView for folder/file structure  
+   • Bottom: Buttons for +Add, -Remove, Rename, +Add File, and Start  
+   • Tray icon includes Reload, Version Info, and Exit options  
+   • Colored buttons via `WM_CTLCOLORBTN` and custom brushes  
+   • Auto-focus behavior ensures user remains oriented during changes
+
+USER EXPERIENCE:
+This utility delivers an efficient way to plan folder structures visually before committing changes to the filesystem. It is particularly useful for repetitive folder templates or batch creation tasks. Visual icons and intuitive input mechanisms reduce user error, and meaningful feedback ensures clarity when building or exporting the structure.
+
+   • Easy to understand and use for all skill levels  
+   • Prevents common mistakes with built-in validation  
+   • Colored buttons improve UI clarity and action recognition  
+   • Real-time updates with seamless input flow  
+   • ESC and tray options allow for safe exits or reloads  
+   • Clear alerts and confirmations reduce accidental missteps  
+   • Ideal for creating nested folder templates for projects or installations
+
+
+.
