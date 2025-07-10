@@ -1,0 +1,45 @@
+
+*  Auto-reloads edited AHK scripts automatically.
+
+
+PURPOSE:
+This script automatically monitors and reloads running AutoHotkey (.ahk) scripts when changes are detected in their files. It is designed to streamline the script development workflow by instantly applying modifications without manual restarts.
+
+   • Enables real-time script reloading during editing.
+   • Targets only scripts located within a specified folder.
+   • Includes self-monitoring and auto-reload behavior.
+
+KEY FEATURES:
+The script sets up a timer-based polling mechanism that checks for modifications in currently running AHK scripts from a designated directory. If a file's last-modified timestamp differs from the stored version, the script is terminated and relaunched automatically. It uses Windows Management Instrumentation (WMI) for accurate process and path identification.
+
+   • Polls every second (1000 ms) for file changes.
+   • Uses COM/WMI to list actively running `AutoHotkey.exe` processes.
+   • Filters scripts by folder path and `.ahk` extension.
+   • Performs strict timestamp comparison for reload triggers.
+   • Relaunches updated scripts and ensures current script restarts itself when changed.
+
+LOGIC SUMMARY:
+The core functionality is centered around a `SetTimer` call that repeatedly invokes the `PollScripts` routine. This routine compiles a list of all running scripts within the designated directory, compares their last-modified timestamps, and triggers a reload for any that have changed. The script also monitors its own source file and triggers a self-reload if modified.
+
+   • Uses an associative array (`lastModified`) to store previous timestamps.
+   • Calls `GetRunningScripts()` to retrieve valid script paths.
+   • Uses `FileGetTime()` for precise change detection.
+   • Separates self-reload logic for graceful continuity.
+
+LAYOUT:
+The code is logically separated into modular functions with clear headers, each fulfilling a distinct responsibility. Comments follow a consistent visual structure for easy scanning. The main hotkey (`Ctrl+T`) provides a brief audible and visual summary of the script's behavior.
+
+   • Centralized constants: directory path, extension, polling interval.
+   • `PollScripts` is the main heartbeat for all actions.
+   • Utility functions include: `GetRunningScripts`, `GetScriptName`, `IsScriptModified`, `ReloadScript`, and `FileGetTime`.
+   • Inline documentation explains logic with detail and precision.
+
+USER EXPERIENCE:
+The user benefits from uninterrupted script testing and editing, with automated reloading removing the need for manual intervention. A startup MsgBox under `Ctrl+T` gives a clear overview of the script’s intent and monitored directory. Script reloads are handled seamlessly, including closing the previous instance before relaunching to prevent duplicates or conflicts.
+
+   • User is alerted of script function via hotkey-triggered MsgBox.
+   • No manual reloading needed when script files are updated.
+   • Fail-safe reload messages are provided if errors occur.
+   • Users modifying this script directly will trigger an auto-restart.
+
+.
