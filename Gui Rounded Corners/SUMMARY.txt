@@ -1,0 +1,48 @@
+
+*  Shaped GUI "Hello World" on Ctrl+T hotkey
+
+
+✅ SummaryStyle1 Activated
+
+PURPOSE:
+This script creates a visually distinct, rounded-corner GUI window that displays a centered "Hello world!" message when the user presses Ctrl+T. The window appears without standard borders or a caption, showcasing custom styling and shape manipulation for aesthetic display.
+
+KEY FEATURES:
+It offers a minimal, borderless interface with centered text and uses region shaping to round the GUI corners. The script incorporates a sound notification, dynamic region clipping, and font customization to enhance user interaction.
+
+   • Triggered by Ctrl+T hotkey
+   • GUI appears with no caption or border
+   • Custom font, size, and color applied
+   • Displays centered “Hello world!” text
+   • Rounded corner shaping via `WinSet, Region`
+   • Uses `WinGetPos` to dynamically adapt to size
+
+LOGIC SUMMARY:
+When the hotkey Ctrl+T is pressed, the script plays a brief beep sound, sets up a hidden GUI with specific style attributes, then calculates its dimensions to apply a rounded corner region using `WinSet, Region`. After shaping, the GUI is revealed onscreen.
+
+   • GUI created with hidden initial state
+   • `WinGetPos` fetches current size for corner calculations
+   • `Min(W,H)//5` determines roundness level (R)
+       ⮞ Smaller values yield more oval or capsule shapes
+   • `WinSet, Region` applies rounded clipping using calculated R
+   • GUI is then shown with the region mask active
+
+LAYOUT:
+The interface layout includes a single text control inside a margin-defined GUI. The “Hello world!” message is horizontally and vertically centered using both control options and GUI settings, with consistent padding for clarity.
+
+   • GUI uses 15px margins for clean spacing
+   • Text control sized to 200×100 with centered alignment
+       ⮞ Style `+0x0200` ensures vertical centering
+   • Font settings: Calibri, size 17, weight 600, color 123456
+   • GUI background color is ABCDEF
+
+USER EXPERIENCE:
+The user sees a smooth, rounded message box with no title bar or window frame, giving the illusion of a floating text bubble. The color scheme and font choice provide a clean and modern appearance. The use of a quick beep enhances feedback when the window is triggered.
+
+   • Simple and intuitive hotkey activation (Ctrl+T)
+   • Rounded corners and borderless style enhance elegance
+   • Minimal visual elements reduce distraction
+   • Quick auditory cue provides activation feedback
+
+
+.
