@@ -1,0 +1,35 @@
+
+*  Compare text alignments with and without `n
+
+
+
+PURPOSE:
+This script demonstrates the alignment behavior of text elements in an AutoHotkey GUI depending on whether newline characters (`n) are included in the content. It provides a side-by-side comparison of how multiline versus single-line text blocks align when paired with different style options.
+
+KEY FEATURES:
+The script highlights two alignment scenarios: one with `n returns (multiline text) and one without (single-line text). These are displayed in two separate columns, allowing users to easily observe differences in visual rendering and positioning.
+   • Displays six text blocks: three with `n, three without.
+   • Uses specific alignment styles (0x000X and 0x060X).
+   • Incorporates AutoHotkey GUI layout techniques (e.g., `xp` reuse).
+   • Labels both sections clearly with a colored title for comparison.
+
+LOGIC SUMMARY:
+The script begins by destroying any existing GUI and enabling window resizing. Font and margin settings are applied globally, followed by the creation of two labeled sections. Each section adds three `Text` controls aligned at the top (left, center, right), utilizing bit flags for alignment. The use of `n returns affects the rendered appearance of the text vertically, while the style flags handle horizontal positioning.
+
+LAYOUT:
+The GUI is organized into two vertical columns. The left column shows text blocks that contain newline characters, and the right column displays equivalent blocks formatted as single-line entries. Each section is headed by a colored label (“With `n Returns” and “Without `n Returns”) to enhance clarity.
+   • Left column (x20): multiline text blocks using 0x0000–0x0002.
+   • Right column (x265): single-line blocks using 0x0600–0x0602.
+   • Margins and spacing are applied consistently between elements.
+   • AutoSize ensures the window adjusts to fit all content.
+
+USER EXPERIENCE:
+Users immediately see the visual impact of including newline characters in GUI text fields. This is useful for script authors comparing alignment flags and line-wrapping behaviors. The design is simple and informative, allowing practical experimentation or educational reference.
+   • Helps understand how text alignment works in AHK GUIs.
+   • Provides a quick visual cue for choosing the correct flag.
+   • Ideal for learning or debugging multiline vs. single-line display.
+   • Requires no user interaction — purely illustrative.
+
+
+
+
