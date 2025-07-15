@@ -1,0 +1,51 @@
+
+*  Draggable icons in borderless GUI window.
+
+
+
+PURPOSE:
+This script provides a graphical interface that displays draggable icons within a constrained borderless GUI. It allows the user to click and drag individual icons freely, but only within the window's visible boundaries. The design supports educational or interactive displays requiring repositionable visual elements.
+
+KEY FEATURES:
+The script includes a fixed-size GUI with no caption or standard window frame, instead using a thicker frame style for visual depth. Two draggable icon controls are implemented, using standard system icons. Mouse events are captured precisely, enabling smooth, bounded dragging with accurate coordinate translations.
+
+   • Two icons are added as draggable `Picture` controls.
+   • Icons can be freely moved within the GUI bounds.
+   • Dragging respects GUI borders and prevents overflow.
+   • Coordinates are translated between screen, window, and client spaces.
+   • DllCall-based helper functions handle low-level memory manipulations.
+
+LOGIC SUMMARY:
+The GUI initializes with specific dimensions and control elements, then waits for user input. When an icon is clicked, it triggers a control-specific drag handler. This handler continuously checks mouse state and position while calculating the new control location, clamping it within bounds and redrawing it. Custom `SetUInt` and `GetUInt` functions facilitate pointer-based coordinate translation using memory and WinAPI routines.
+
+   • Auto-execute block creates the GUI and shows it.
+   • Each icon has a dedicated label triggering `DragControl()`.
+   • `DragControl()` handles all aspects of interactive movement.
+       ⮞ Converts mouse position to client coordinates.
+       ⮞ Calculates offsets for correct positioning.
+       ⮞ Prevents dragging outside GUI borders.
+       ⮞ Uses `GuiControl MoveDraw` to update position in real-time.
+
+LAYOUT:
+The window is 250×250 pixels with a navy background. Two instructional `Text` elements guide the user visually. Icons are vertically stacked near the center and spaced to avoid overlap during movement. All elements are centered horizontally, emphasizing accessibility and clarity.
+
+   • GUI size: 250×250 pixels.
+   • Background: Navy (`000080`).
+   • Instructional text at y=75 and y=175.
+   • Two 32×32 icons placed at y=95 and y=135, x-centered.
+
+USER EXPERIENCE:
+The result is a responsive, fluid interaction with intuitive boundaries. Users can easily click and drag either icon within the safe GUI space without risking accidental movement outside the frame. The absence of window borders adds a modern, streamlined look while still supporting visual cues like background color and icon feedback.
+
+   • Draggable icons feel smooth and accurate.
+   • Visual boundaries are respected, preventing UI overflow.
+   • Feedback is immediate, with low flicker due to controlled redraws.
+   • Users are guided by on-screen instructions.
+
+
+.
+
+
+
+
+
