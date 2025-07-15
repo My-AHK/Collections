@@ -1,0 +1,43 @@
+
+*  Captionless GUI drag via Text control label.
+
+
+
+PURPOSE:
+This script creates a custom GUI window that can be dragged by clicking on a specific control — a `Text` control — instead of relying on the standard title bar. The purpose is to demonstrate a lightweight and practical method for draggable GUI elements in a captionless window.
+
+KEY FEATURES:
+The main functionality centers around making the GUI movable through the use of a control-specific `gLabel` rather than global hotkeys or title bar manipulation. It uses the `PostMessage` technique to simulate native dragging behavior.
+
+   • Dragging is initiated via the `Text` control using the `GuiMove` label.
+   • The GUI has no caption or standard border, maintaining a clean look.
+   • Uses a WM_NCLBUTTONDOWN message to initiate dragging.
+   • Custom styling includes background color and specific font settings.
+
+LOGIC SUMMARY:
+The script initializes a GUI with drag functionality tied to a `Text` control via the `GuiMove` label. When the user clicks within this control, the script triggers a `PostMessage` call to start the window drag, mimicking the default behavior of clicking a title bar.
+
+   • `Gui, Add, Text` includes `GuiMove` as its label, activating the drag subroutine on click.
+   • `PostMessage, 0xA1, 2` is sent to simulate a title bar left-button press.
+   • The label `uiMove:` is automatically called when the control is interacted with.
+
+LAYOUT:
+The interface displays a 300x250 pixel GUI with a centered text box positioned at x60 y80. This control provides user instructions and functions as the interactive drag area. The overall design is clean, using yellow text on a custom-colored background.
+
+   • GUI size: 300x250
+   • Background color: #123456
+   • Font: Verdana, size 12, yellow
+   • Drag area: bordered, centered `Text` control
+
+USER EXPERIENCE:
+Users can easily reposition the window by clicking anywhere inside the labeled `Text` area. The interface is intuitive, requires no extra hotkeys or instructions, and behaves like a native window drag despite lacking a title bar.
+
+   • No title bar is needed for movement.
+   • Feedback is immediate and consistent with expected drag behavior.
+   • Simplifies the GUI interaction model for minimalistic interfaces.
+
+
+.
+
+
+

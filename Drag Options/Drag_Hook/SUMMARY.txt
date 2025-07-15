@@ -1,0 +1,43 @@
+
+*  Global hook lets GUI drag from anywhere inside.
+
+
+PURPOSE:
+This script enables a GUI window in AutoHotkey v1.1 to be draggable from any point within its client area by hooking into the left mouse button down event. It is particularly useful for borderless or captionless GUIs where standard drag functionality is unavailable.
+
+KEY FEATURES:
+The script globally installs a handler for the `WM_LBUTTONDOWN` message, making it easy to apply to any GUI window. Once added, the user can drag the GUI by clicking and dragging anywhere inside it, even if it lacks a title bar or frame.
+
+   • Makes any GUI draggable by clicking anywhere inside.
+   • Does not require a visible window border or caption.
+   • Can be globally applied from the auto-execute section.
+   • Uses `PostMessage` to simulate dragging behavior.
+   • Cleanly integrates with any GUI using `OnMessage`.
+
+LOGIC SUMMARY:
+The functionality is achieved by intercepting the `0x0201` message (left mouse button down) with a custom handler. When this message is detected, the handler posts a `WM_NCLBUTTONDOWN` message with a `HTCAPTION` parameter, effectively tricking Windows into thinking the user clicked the title bar.
+
+   • `OnMessage(0x0201, "WM_LBUTTONDOWNdrag")` registers the hook.
+   • `WM_LBUTTONDOWNdrag()` sends a `0x00A1` (WM_NCLBUTTONDOWN) with `2` (HTCAPTION).
+   • The GUI is then moved by standard system behavior.
+
+LAYOUT:
+The example GUI is a simple rectangular window with no caption, a yellow Verdana font, and centered text prompting the user to drag. It demonstrates the full implementation by placing the `OnMessage` call after `Gui, Show`.
+
+   • Window: 300x200 pixels, with no borders.
+   • Font: Verdana, size 12, color yellow.
+   • Background color: Hex 123456.
+   • Content: Multi-line text instructing how to drag.
+
+USER EXPERIENCE:
+Once the script is running, users can click and drag the GUI from anywhere inside it. This makes for a more intuitive and fluid interface, especially in minimalistic or frameless designs.
+
+   • Eliminates the need for title bars or drag regions.
+   • Responsive drag behavior using system-native motion.
+   • No noticeable delay or flicker during movement.
+
+
+
+.
+
+

@@ -1,0 +1,48 @@
+
+*  Drag GUI without activation... Ctrl+Click enabled.
+
+
+PURPOSE:
+This script provides a method to drag a GUI window without activating it, simulating non-intrusive interaction. It is designed to allow repositioning of an always-on-top GUI window through keyboard and mouse combinations, preserving the inactive state unless explicitly activated.
+
+KEY FEATURES:
+It includes logic for dragging via Ctrl + Left-Click while the mouse is over the inactive window, and allows double-click or right-click to activate the GUI. This prevents accidental focus changes and supports seamless control in overlay scenarios.
+
+   • Non-activating drag via Ctrl + Left-Click.
+   • Window can be explicitly activated via double-click or right-click.
+   • GUI is marked as always-on-top and non-activating on initial show.
+   • Custom warning text displayed in styled font/colors.
+   • Functional helper to determine mouse-over status on GUI.
+   • Optional activation of the GUI with deliberate user actions.
+
+LOGIC SUMMARY:
+The script tracks the mouse cursor over the target GUI and intercepts the left mouse button only when specific conditions are met. Dragging occurs when Ctrl is held and LButton is pressed; if double-click is detected, the GUI becomes active. It leverages AutoHotkey’s conditional hotkeys and state-check functions.
+
+   • Uses `#If` to restrict hotkey scope to when the mouse is over the GUI.
+   • Checks for Ctrl state before invoking drag behavior.
+   • Drag function calculates offset and moves window smoothly with mouse.
+   • Titlebar is non-functional due to `+LastFound` and `NA` usage in `Gui, Show`.
+
+LAYOUT:
+The GUI is visually styled with color-coded text to indicate its inactive status and guide user interaction. It spans 300×250 pixels and features multiple instructional text fields with vertical spacing.
+
+   • Large yellow text announces inactive titlebar.
+   • Contrasting red “NOT” emphasizes inactive state.
+   • Instructions clarify control scheme and caveats.
+   • Font styling includes italics, color variation, and centering.
+
+USER EXPERIENCE:
+Users are given a clear visual indicator that the window is not active, with direct guidance on how to manipulate it. Interaction is intuitive: Ctrl + drag for movement, double/right-click for activation. The inactive drag behavior supports scenarios like overlay utilities or widgets.
+
+   • Maintains inactive focus to avoid interrupting foreground apps.
+   • Simple interaction model based on standard mouse and keyboard usage.
+   • Smooth visual feedback via stable window movement.
+   • Clear communication of limitations (e.g., titlebar buttons disabled).
+
+
+
+.
+
+
+
+
