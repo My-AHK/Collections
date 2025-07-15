@@ -1,0 +1,36 @@
+
+*  Shadowed text overlay using offset GUI labels.
+
+
+PURPOSE:
+This script displays stylized text using two overlapping text controls to create a "shadow text" effect within an always-on-top GUI. It is designed to present a bold, centered label on screen with a visual drop shadow illusion using color layering.
+
+KEY FEATURES:
+The script uses AutoHotkey’s GUI functionality to simulate a shadowed text appearance without relying on graphics libraries. It accomplishes this by layering two nearly identical text elements with a slight offset in position and color contrast.
+   • Shows a single line of text ("ShadowDimension") on screen.
+   • Displays a dark shadow (black text) behind bright front text (white).
+   • GUI is borderless (`-Caption`) and always on top.
+   • Text is centered and bold using Verdana font at size 18.
+
+LOGIC SUMMARY:
+The script sets up a GUI and adds two text labels to achieve the layered shadow effect. The shadow text is placed slightly offset (x14 y14) from the primary text (x10 y10), and both are centered. By drawing the darker label first, and then overlaying the white label, the result simulates depth and dimension.
+   • The `Gui, +AlwaysOnTop -Caption +Owner` makes the GUI non-intrusive and topmost.
+   • Font and color contrast are used to separate the foreground from the shadow.
+   • The GUI is displayed lower on the screen using `Gui, Show, Y+555`.
+
+LAYOUT:
+The GUI’s design is minimal, focusing only on positioning and visual layering. The layout relies on precise `x` and `y` values to align the text for a convincing shadow effect.
+   • Margin of 10 pixels is applied around the GUI.
+   • Shadow text (black) is offset diagonally from white text.
+   • No other GUI elements are used—only the two `Text` controls.
+
+USER EXPERIENCE:
+Users will see a centered bold label reading “ShadowDimension” that appears to hover slightly above its black shadow. This gives a visually appealing result suitable for overlays, notifications, or title displays.
+   • Sharp font contrast enhances readability.
+   • The always-on-top setting ensures visibility over other windows.
+   • Simple styling avoids distractions while achieving a professional effect.
+
+.
+
+
+
