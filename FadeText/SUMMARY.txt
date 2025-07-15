@@ -1,0 +1,54 @@
+
+*  Fading text overlays with full styling control.
+
+
+
+PURPOSE:  
+This script demonstrates a customizable, reusable fading text notification system built using AutoHotkey v1.1. The primary goal is to allow developers to overlay messages on screen with fade effects, custom dimensions, styling, and precise positioning, suitable for alerts, tooltips, or visual feedback within scripts.
+
+   • Displays text messages with adjustable transparency and fade timing.
+   • Supports fixed or auto-sizing, multi-line scaling, and custom colors/fonts.
+   • Useful for passive display of information without requiring user interaction.
+
+KEY FEATURES:  
+The script is structured with a controller script and a class module (`FadeText.ahk`). Together, they deliver a full-featured message overlay system.
+
+   • Adjustable transparency (`Trans`) and fade-out speed (`Speed`)
+   • Full control of text style: font, size, color, and border visibility
+   • Positioning using pixel coordinates (X/Y) and sizing (Width/Height)
+   • Auto-scaling of text when size limits are defined and `FontSize` is 0
+   • Background color customization and borderless window mode
+   • Compatible with screen edge limits—text won't overflow visible space
+   • Multi-line support with dynamic row wrapping
+   • Supports fixed or dynamic screen placement for contextual feedback
+
+LOGIC SUMMARY:  
+The system relies on `FadeText()`, a function that calculates pixel dimensions using the internal helper `StrPixel()`, which temporarily renders text invisibly to measure width and height. The function evaluates how many rows are needed based on word wrapping, adjusts font size if `FontSize := 0`, and configures a `Progress` GUI overlay with optional border.
+
+   • Fades are managed with a `SetTimer` routine, reducing transparency per tick.
+   • If both `Width` and `Height` are defined with `FontSize := 0`, the font scales to fit.
+   • Window position is corrected if requested coordinates would move it off-screen.
+   • GUI dimensions and visual properties are combined into a string and passed to `Progress`.
+
+LAYOUT:  
+The main script uses hotkey `Ctrl + T` to sequentially display eight different styled messages on-screen, demonstrating various combinations of size, positioning, colors, and font controls.
+
+   • Messages appear centered by default unless given explicit X/Y values.
+   • Demonstrates fade durations, from fast to persistent
+   • Each message is followed by a sleep period to ensure display completion
+   • Final `MsgBox` thanks the user before ending the script
+
+USER EXPERIENCE:  
+End-users experience clean, readable text overlays that appear and fade without interaction. Developers gain flexibility in how notifications are styled and positioned, making the system suitable for a wide range of UX scenarios from lightweight popups to more detailed, styled callouts.
+
+   • No interaction required; messages display and fade automatically
+   • Appearance timing is consistent and smooth
+   • Automatically scales to fit text when using auto-size
+   • Supports high readability by customizing contrast and font
+   • Easily extended or reused in other scripts via `#Include FadeText.ahk`
+
+
+
+
+
+
