@@ -1,0 +1,45 @@
+
+*  Borderless GUI with draggable picture topbar.
+
+
+PURPOSE:
+This script creates a draggable AutoHotkey GUI without a standard window frame, designed primarily for displaying static content while maintaining a clean, modern appearance. The user is instructed to drag the GUI by interacting with a custom "topbar" graphic.
+
+KEY FEATURES:
+The GUI is styled with custom attributes and a simulated topbar for dragging. It avoids using the traditional window title bar, opting instead for a picture-based control as a draggable region.
+
+   • Frameless GUI with `-Caption` and custom border.
+   • Custom-drawn topbar that doubles as a drag handle.
+   • Static instructional text centered in the window.
+   • Exit-on-Escape functionality built in.
+   • Use of `PostMessage` to simulate window dragging.
+
+LOGIC SUMMARY:
+The script initializes a GUI window with set dimensions, applies visual customizations, and adds two controls: a topbar for dragging and centered text for visual guidance. Dragging is handled via `PostMessage` triggered by clicking the Picture control. The escape key exits the application.
+
+   • The `Picture` control has a label (`GuiMove`) tied to it to allow dragging.
+   • The label sends a `0xA1` Windows message to simulate title bar interaction.
+   • The `Text` control is purely informational and uninteractive.
+   • The script uses the `GuiEscape` label to exit the app when Escape is pressed.
+
+LAYOUT:
+The GUI layout is vertically oriented with a faux title bar at the top, followed by a block of text centered in the middle. The color scheme is a bold combination of blue and aqua, with enlarged font for visibility.
+
+   • Width: 300 pixels  
+   • Height: 250 pixels  
+   • Topbar image: 300x20 pixels at y-position 10  
+   • Centered text block: positioned at y-position 100  
+
+USER EXPERIENCE:
+The user interacts with a clean, borderless interface that mimics standard window behavior in a stylized way. Dragging is intuitive via the topbar graphic, and users can close the GUI easily using the Escape key. The static text guides the user without requiring any further input.
+
+   • Intuitive drag zone using the picture header.
+   • Keyboard-friendly exit mechanism.
+   • Visually minimal and modern look.
+   • Designed for quick display or popup-like use.
+
+
+.
+
+
+
