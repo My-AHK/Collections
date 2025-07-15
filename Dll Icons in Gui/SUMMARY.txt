@@ -1,0 +1,41 @@
+
+*  Always-on-top 3×3 system icon display panel.
+
+
+PURPOSE:
+This script creates a compact, icon-based GUI display that showcases a vertical stack of system icons for visual reference or aesthetic use. It is intended to act as an always-on-top icon panel without borders or window decorations.
+
+KEY FEATURES:
+The GUI uses multiple system icon resources arranged in a neat 3-column format. These icons are drawn from different system DLLs and rendered using the `Picture` control with precise positioning. The GUI has no window caption or border and stays on top of all other windows.
+
+   • Displays 9 system icons in a grid format.
+   • Sources icons from `shell32.dll`, `wmploc.dll`, and `imageres.dll`.
+   • Window is frameless and always remains above others.
+   • Uses fixed icon dimensions and spacing for alignment.
+
+LOGIC SUMMARY:
+The logic is straightforward, consisting mainly of GUI element definitions and layout placement. Each line adds a `Picture` control with a specified icon from a system DLL, using relative positioning to align them neatly in a 3-column pattern.
+
+   • Three rows of icons with three icons per row.
+   • Positioning uses `x15` to start each new row and `x+10` to offset columns.
+   • Each row’s vertical spacing is managed using `y+10`.
+
+LAYOUT:
+The layout is a 3×3 matrix of icons within a 115px wide by 300px tall window. The window background is deep blue, and each icon is 21×21 pixels. The use of `x+` and `y+` ensures a consistent staggered arrangement with precise spacing.
+
+   • Each row starts at a fixed horizontal margin.
+   • Icons are spaced equally both horizontally and vertically.
+   • GUI size is calculated to contain all icons with padding.
+
+USER EXPERIENCE:
+The result is a minimalist icon board that can be used as a reference, decoration, or launcher base. Its always-on-top and borderless nature ensures it doesn’t interfere with workflow while remaining visible and accessible. The close action gracefully exits the application.
+
+   • Appears as a clean, unobtrusive floating icon panel.
+   • May be extended into a toolbar or icon launcher in future builds.
+   • Fast-loading and highly responsive due to its simplicity.
+
+
+
+
+
+
