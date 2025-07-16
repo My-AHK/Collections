@@ -1,0 +1,50 @@
+
+*  Interactive Ctrl-Hold Pop-Up Help with Tabs Switching
+
+
+✅ SummaryStyle1 Activated
+
+PURPOSE:
+This script provides an interactive, categorized help menu that appears only while the Ctrl key is held. It allows users to instantly view script instructions, feature lists, and troubleshooting tips without interrupting their workflow. The menu disappears once the Ctrl key is released, ensuring minimal intrusion.
+
+   • Ideal for background-running scripts needing on-demand assistance.
+   • Prevents accidental closure by ignoring standard exit keys.
+   • Aims to centralize help content for fast, keyboard-driven access.
+
+KEY FEATURES:
+The system is built to be responsive, lightweight, and intuitive for quick referencing of help documentation via a categorized overlay.
+
+   • Ctrl-hold to activate help GUI.
+   • Keyboard-based navigation (1–4 or Numpad1–4).
+   • Four content categories: General, Shortcuts, Features, Troubleshooting.
+   • Instant appearance and disappearance with key state.
+   • Beep test feature for interaction confirmation.
+   • Always-on-top, non-activating, centered GUI window.
+   • Built-in tab highlighting and content switching.
+
+LOGIC SUMMARY:
+Upon detecting the Ctrl key being held, the GUI is shown and enters a monitoring loop. While Ctrl is held, the user can switch between help categories using number or Numpad keys. Releasing Ctrl immediately hides the menu and halts all input monitoring.
+
+   • Help content is stored in categorized objects.
+   • Category switching updates tab visuals and content.
+   • Loop checks key state every 50 ms for responsiveness.
+   • GUI stays responsive without stealing focus from active window.
+
+LAYOUT:
+The interface is visually segmented and consistently themed with a dark background and vibrant fonts for legibility. Content is clearly structured in tabs and dynamically updates based on user input.
+
+   • Title bar: Script name centered at top.
+   • Instruction bar: Usage instructions beneath title.
+   • Tab row: Four category tabs with visual highlight for active.
+   • Main pane: Displays category content with scroll.
+   • Footer: Status bar with contextual instructions.
+
+USER EXPERIENCE:
+This menu system is designed for seamless, non-disruptive interaction. It offers a fluid way for users to obtain contextual help with minimal cognitive load and zero GUI interaction requirements beyond the keyboard.
+
+   • No clicking required — fully keyboard driven.
+   • Instantly dismisses upon key release.
+   • Fast, context-aware responses via category tabs.
+   • Ensures consistent availability without visible footprint.
+   • Beginner-friendly format supports clear navigation.
+
