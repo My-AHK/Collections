@@ -1,0 +1,43 @@
+
+*  Animated bottom-corner GUI expansion popup.
+
+
+PURPOSE:
+This script creates a visually dynamic, captionless AutoHotkey GUI that expands smoothly from the bottom-right corner of the screen. It is likely intended for use as a visually engaging notification or status alert.
+
+KEY FEATURES:
+The script's standout feature is its animated growth effect, achieved by incrementally increasing the GUI's size in a loop. This visual behavior simulates the GUI expanding upward and leftward from the corner. The script also ensures the window is always on top and does not include borders or standard window captions, giving it a clean, embedded feel.
+
+   • AlwaysOnTop window without borders or caption
+   • Smooth animation simulating GUI growth
+   • Position locked to the bottom-right of the screen
+   • Text label with styled font and color
+   • Flicker-reducing double-buffering using extended styles
+
+LOGIC SUMMARY:
+The script begins by initializing a GUI with specific visual styles and dimensions. It adds a centered text control, initially displays a tiny window, and then uses a loop to incrementally resize the GUI. Each loop cycle increases the width and height slightly and updates the window size in real time. The `GuiSize` label maintains the GUI’s anchored position at the bottom-right corner of the screen as it expands.
+
+   • Initializes GUI with specific font, colors, and styles
+   • Adds a `Text` control to display a message
+   • Shows a minimal starting window size
+   • Uses a loop to grow the GUI's dimensions smoothly
+   • Continuously repositions the GUI during resizing
+   • Handles `GuiClose` to exit cleanly
+
+LAYOUT:
+The GUI contains a single text element centered in the window. The font is set to size 12, bold (weight 500), and blue on a green background. The overall layout remains minimalistic with no border or title bar, providing a lightweight, focused display.
+
+   • One centered `Text` control
+   • Font: size 12, weight 500, color blue
+   • Background color: green
+   • GUI starts at w1 h3 and grows dynamically
+
+USER EXPERIENCE:
+The visual effect is smooth and fast, thanks to short sleep intervals and flicker-reducing double buffering. The user sees the GUI appear in the corner of the screen and grow steadily in size, offering an engaging way to display transient information. The lack of borders and caption gives it a non-intrusive, modern feel, suitable for use in overlays, heads-up displays, or custom popups.
+
+   • Seamless animation enhances visual polish
+   • GUI appears as a sleek, borderless overlay
+   • Anchoring avoids visual drift during resize
+   • Minimal user interaction needed—automatic exit via close
+
+.
