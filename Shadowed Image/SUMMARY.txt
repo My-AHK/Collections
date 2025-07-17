@@ -1,0 +1,43 @@
+
+*  Overlay GUI with layered star images (Ctrl+T)
+
+
+PURPOSE:
+This script is designed to display a visual overlay using a pair of transparent PNG images when the user presses Ctrl + T. It functions as a layered GUI effect, intended to provide a visual enhancement (such as a "starry" visual cue) without interfering with normal desktop operations.
+
+KEY FEATURES:
+It combines two images using offset positioning to create a glowing or shadowed visual effect. The script relies on transparency and layering to produce a seamless, borderless, and topmost overlay, triggered by a hotkey.
+
+   • Ctrl + T hotkey activates the visual display.
+   • Two PNG images are shown: a foreground and a background.
+   • Uses `TransColor` to remove the background color (010101).
+   • Overlay is always on top and has no caption or window borders.
+   • GUI is removed when the user presses Escape or closes the window.
+
+LOGIC SUMMARY:
+Upon activation via Ctrl + T, the script beeps and displays a GUI overlay with two stacked transparent images. The GUI is styled for invisibility apart from the images, using a solid background color that’s later made transparent. The images are slightly offset to create a soft glow or highlight effect.
+
+   • `Gui, Destroy` ensures previous instances are removed.
+   • Background is set to a solid color (010101) to define transparency.
+   • `Gui +LastFound` and `WinSet, TransColor` establish transparency rules.
+   • Images are layered: one acts as a shadow behind the main image.
+   • The GUI is displayed 155 pixels from the top of the screen.
+
+LAYOUT:
+The layout comprises two images positioned with slight offset values to simulate depth or lighting. The back image (StarNight.png) is placed at x15 y15, and the front image (StarLight.png) is slightly higher and to the left at x10 y10. The GUI itself has no frame, no caption, and is set to be topmost with full transparency outside the images.
+
+   • GUI background: 010101 (transparent).
+   • Image layering:
+      ⮞ Image 1 (shadow): 15px offset
+      ⮞ Image 2 (main): 10px offset
+   • Vertical screen placement: 155px from top.
+
+USER EXPERIENCE:
+The user sees a polished overlay effect that appears on-screen with a beep upon pressing Ctrl + T. The GUI remains visible until manually dismissed with Escape or by closing the window. Its design ensures minimal disruption to the user’s workflow, acting as a subtle visual accent or notification system.
+
+   • Quick activation via hotkey with auditory feedback.
+   • Minimalist aesthetic using transparency and layering.
+   • No mouse interaction needed — simple toggle and close behavior.
+   • Can be adapted for various image-based overlays or alerts.
+
+.
