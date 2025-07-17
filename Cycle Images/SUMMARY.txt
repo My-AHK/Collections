@@ -1,0 +1,42 @@
+
+*  Image viewer overlay with arrow key control.
+
+
+
+PURPOSE:
+This script provides an image viewer overlay that displays and cycles through images from the script's folder. It allows the user to invoke the GUI with Ctrl+T and navigate images using the left and right arrow keys when the overlay is active.
+
+KEY FEATURES:
+It automatically scans for PNG, JPG, and GIF files in the script's folder and presents them in a centered, semi-transparent GUI. The interface stays always on top and supports keyboard navigation for browsing through the image set.
+   • Trigger GUI with Ctrl+T hotkey.
+   • Loads .png, .jpg, and .gif from the current directory.
+   • Supports left/right key cycling through images.
+   • Semi-transparent and always-on-top GUI.
+   • Image displayed centered and scaled to 400×400.
+   • Tooltip shows the current image path.
+   • Auto-hides the tooltip after 1.5 seconds.
+
+LOGIC SUMMARY:
+When the hotkey is pressed, it checks whether the GUI was already created. If not, it initializes GUI size/position variables and populates an image list. Upon showing the GUI, it calls `LoadImage()` with the current index. Navigation is handled with arrow keys, updating the index and reloading the corresponding image.
+   • GUI creation only occurs once.
+   • `imageList` is populated via file loops.
+   • `LoadImage(num)` displays the selected image.
+   • Tooltip reflects the image path for user reference.
+   • If image path is invalid, the script shows a message and closes the GUI.
+
+LAYOUT:
+The GUI uses a solid teal background with transparency applied to blend seamlessly over desktop content. The image is displayed within a `Picture` control, scaled to 400×400 pixels, and centered based on the GUI dimensions.
+   • GUI dimensions: 450×450 at position (1400, 500).
+   • Image centered via calculated offset.
+   • Transparent background achieved with `WinSet, TransColor`.
+
+USER EXPERIENCE:
+The script offers a lightweight, keyboard-friendly image browser with an unobtrusive overlay interface. Tooltips provide immediate feedback about the file shown, and the transparent GUI ensures minimal disruption to the user’s workspace.
+   • Quick access via hotkey.
+   • Visual feedback through tooltips.
+   • Smooth browsing using arrow keys.
+   • Auto-centering ensures visual consistency.
+   • Closes on image load failure, preventing dangling windows.
+
+
+.
