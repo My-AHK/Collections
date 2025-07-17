@@ -1,0 +1,41 @@
+
+*  Control key shows help text in floating overlay.
+
+
+PURPOSE:
+This script displays a floating help overlay when the Control key is held down. It allows users to view reference text or helper content without interrupting their workflow. A simple button has been added, demonstrating extensibility for future interactive features.
+
+KEY FEATURES:
+The script displays a custom-styled, always-on-top GUI that activates while Control is held. The GUI includes text and a button, offering space for static help and potential interaction.
+
+• Displays styled help text in a temporary floating window.
+• GUI remains visible only while Control is actively pressed.
+• Window stays non-intrusive—no title bar, no focus-stealing.
+• Includes a simple PRESS button for demonstration or sound feedback.
+• Custom font, color, and GUI dimensions for clarity.
+
+LOGIC SUMMARY:
+At launch, the script builds the GUI with text and a button. It listens for the Control key via a hotkey binding and uses a loop to wait for its release. Upon release, the GUI hides itself.
+
+• Gui, Show, NoActivate prevents active window interference.
+• A Loop using GetKeyState keeps the overlay visible only during Control hold.
+• Button press (ButtonPRESS:) plays a confirmation beep.
+
+LAYOUT:
+The GUI is built using a simple yet structured layout. The main message appears at the top with a follow-up line. A button labeled “PRESS” is placed alongside for potential expansion or interactivity.
+
+• Text controls for multiline help content.
+• Button added using precise positioning (x+5 yp-3).
+• Background set to color 123456, text color to ABCDEF.
+• Mixed font settings: Arial for main text, Segoe UI for button.
+• Size: 300×400 window area, always-on-top, border-only, no caption.
+
+USER EXPERIENCE:
+While holding Control, users get a temporary floating window containing useful text and a button. It is ideal for reminders, shortcut references, or embedded help content. The design minimizes visual intrusion and maximizes accessibility.
+
+• Lightweight overlay appears instantly on key press.
+• No clicks or toggles—just hold and release to view and dismiss.
+• Sound feedback confirms button press.
+• Styled for visibility but intentionally minimalistic.
+
+.
