@@ -1,0 +1,37 @@
+ 
+*  Icon GUI Buttons with Long-Click Detection.
+
+PURPOSE:  
+These scripts provide an interactive, icon-based GUI element resembling a button, which allows the user to trigger different subroutines depending on the type of mouse click. Script 1 simply performs a flash animation and alert message, while Script 2 builds upon that by distinguishing between short and long clicks to execute different behaviors.
+
+KEY FEATURES:  
+Both scripts create a small, borderless GUI overlay with clickable icon functionality, ideal for use as a compact UI element that doesn’t interrupt the desktop or other windows. The second script introduces enhanced interactivity via click-duration detection.  
+   • Uses Windows system icon (from `actioncentercpl.dll`) as a visual cue.  
+   • Fully transparent, captionless GUI window that stays always on top.  
+   • Click triggers either a message box or a toggle effect depending on the script version.  
+   • Script 2 interprets long-clicks differently than short-clicks.  
+   • Both include proper escape and close logic via `GuiEscape` and `GuiClose`.
+
+LOGIC SUMMARY:  
+In both scripts, the GUI contains two overlapping `Picture` controls: one shows initially (`State1`) and one hidden (`State0`). A click event temporarily hides then re-shows the alternate icon as visual feedback. Script 1 always triggers the same routine, while Script 2 checks the duration the mouse is held down and branches accordingly.  
+   • `GuiControl, Hide`/`Show` toggles icon visibility to simulate interaction.  
+   • Script 1's `SubRoutine1` executes a basic alert with beep and message.  
+   • Script 2 adds logic to measure click duration using `A_TickCount`.  
+   • If click > 200ms, a "long click" is registered and `SubRoutine1` is triggered.  
+       ⮞ Otherwise, `SubRoutine0` is triggered for normal (short) clicks.
+
+LAYOUT:  
+The GUI layout is a minimalist black box measuring 44x44 pixels, positioned at screen coordinates (1650, 400). The interface contains two overlapping icons positioned identically to toggle visuals on interaction.  
+   • `x3 y3 w32 h32` position ensures the icon is slightly inset from the GUI border.  
+   • Icon switching simulates a button press without visual flicker.  
+   • The GUI has no caption, border, or resize options, enhancing its "tool overlay" style.
+
+USER EXPERIENCE:  
+The scripts offer a subtle yet responsive interface element ideal for power users or developers looking to bind commands to on-screen icons. Script 2 introduces more advanced interaction, making it feel more dynamic.  
+   • Immediate feedback via icon flashing upon click.  
+   • Sound and/or message box confirms user action.  
+   • Clean exit using standard GUI close or escape keys.  
+   • Useful for launching tools, toggling flags, or testing interaction timing.  
+       ⮞ Script 2 can evolve into a full gesture-based command system.
+
+.

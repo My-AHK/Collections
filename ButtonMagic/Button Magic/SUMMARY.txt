@@ -1,0 +1,35 @@
+
+*  Dual-state icon GUI simulating button click.
+
+
+PURPOSE:
+This script creates a minimalistic GUI window that simulates a button with a dual-state icon effect, responding visually when clicked. It demonstrates basic interactive behavior using overlapping picture controls and a timed response.
+
+KEY FEATURES:
+It provides a simplified pseudo-button using GUI picture controls and responds to clicks with both a visual toggle and a temporary message box.
+   • Displays two overlapping icon images to simulate button press effect.
+   • Handles click interaction through a shared label (`gSubRoutine1`).
+   • Uses a short sleep to visually toggle between icons.
+   • Shows a 3-second MsgBox as placeholder behavior after the toggle.
+   • Clean GUI setup without window caption or taskbar button.
+
+LOGIC SUMMARY:
+The GUI is set up with two overlapping icons, where one is visible and the other hidden. When the image is clicked, the script hides the top icon temporarily to give a "pressed" effect, then restores it after a short pause and shows a message box.
+   • `State1` and `State0` represent the "up" and "pressed" button states.
+   • `GuiControl, Hide` and `GuiControl, Show` toggle the icons.
+   • `Sleep` provides a momentary visual cue before continuing.
+   • The message box simulates a response to the button press.
+
+LAYOUT:
+The layout is compact, fitting a 34×34 pixel icon-based button inside a captionless GUI window. Margins ensure slight padding around the control.
+   • GUI margin set to 12px on all sides.
+   • Icons are aligned to the top-left corner at x13, y13.
+   • `State1` icon is slightly larger and serves as the topmost control.
+
+USER EXPERIENCE:
+The user sees a small floating button-like icon that responds with a visible "press" effect followed by a temporary message, offering simple visual feedback. It mimics real button behavior without using standard button controls.
+   • Visual feedback is immediate upon clicking.
+   • Minimal window design keeps the interface unobtrusive.
+   • Built-in exit support via Esc key or window close.
+
+.

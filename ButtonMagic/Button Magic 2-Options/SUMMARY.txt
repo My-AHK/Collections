@@ -1,0 +1,38 @@
+
+*  Detects long vs short click on custom icon GUI.
+
+
+PURPOSE:
+This script creates a minimal GUI that detects the duration of a mouse click on an icon and triggers different subroutines based on whether the click is long or short. It is intended for use cases where simple gesture-based control is needed without full buttons or menus.
+
+KEY FEATURES:
+The script features a dual-layer icon interface with click detection logic, differentiating between a standard click and a long press (holding the left mouse button for more than 500ms). Based on the click type, it either runs a toggle-like action or triggers a special function. 
+
+   • Overlay of two picture elements to simulate button press states.
+   • Long click detection using `A_TickCount` and `GetKeyState`.
+   • Two independent subroutines for long and normal clicks.
+   • Minimal GUI using `+ToolWindow` for clean, frameless appearance.
+
+LOGIC SUMMARY:
+Upon displaying the GUI, the user sees a 32x32 icon which, when clicked, evaluates the time the mouse button is held. A long press (over 500ms) is interpreted as a command to execute a special subroutine, while a shorter click runs a default toggle routine. The script hides and shows one of the two icons to give visual feedback for the click.
+
+   • `State1` is the base visible icon; `State0` is shown briefly on press.
+   • The loop tracks the duration while the left mouse button is held.
+   • `LongClick` is set if held >500ms, triggering `SubRoutine1`.
+   • Otherwise, `SubRoutine0` is run for normal clicks.
+
+LAYOUT:
+The GUI contains two stacked icons at the same coordinates to simulate a press state visually. It is compact, with 12px margins and dimensions auto-sized to the image size. The icon used is pulled from `A_AhkPath`, the AutoHotkey executable itself.
+
+   • Positioned at screen coordinates (750,400).
+   • Uses `+AlwaysOnTop` and `+ToolWindow` styles for accessibility.
+   • Border is applied only to the “pressed” state icon for clarity.
+
+USER EXPERIENCE:
+The user is presented with a clean, frameless interface that behaves like a soft button. Clicking briefly results in a default behavior message, while holding the click displays a different message suggesting a more advanced action. The visual press effect enhances responsiveness.
+
+   • Quick user feedback through message boxes.
+   • No keyboard input required.
+   • Visual toggle makes interaction intuitive.
+
+.
