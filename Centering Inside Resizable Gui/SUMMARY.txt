@@ -1,0 +1,39 @@
+
+*  Centered text in GUI reacts to window resizing.
+
+
+PURPOSE:
+This script creates a resizable, always-on-top GUI window in AutoHotkey v1.1 that dynamically centers a text control whenever the window is resized. Its purpose is to demonstrate control repositioning behavior in response to window dimension changes.
+
+KEY FEATURES:
+The script emphasizes adaptive layout through control alignment logic using low-level Windows API calls. It maintains clarity and simplicity while showcasing control-centric GUI manipulation.
+   • GUI is always-on-top, resizable, and excludes DPI scaling.
+   • Text control labeled `MyText` is used as the centered element.
+   • Uses `GuiSize` label to detect window size changes.
+   • Employs `GetClientRect` and `ClientToScreen` via DllCall to get accurate client area dimensions.
+   • Automatically calculates new X/Y positions to center the control horizontally and vertically.
+
+LOGIC SUMMARY:
+On window resize, the script determines the dimensions of both the GUI client area and the control, then repositions the text control to remain centered. The use of `DllCall` ensures pixel-accurate adjustments across varying display configurations.
+   • `GuiControlGet` retrieves current dimensions of the text control.
+   • `VarSetCapacity` prepares a 16-byte RECT structure for API input.
+   • First `DllCall` gets the GUI's internal client area rectangle.
+   • Second `DllCall` converts client-relative coordinates to screen coordinates.
+   • X and Y offsets are calculated by subtracting the control's width and height from the client dimensions, then dividing the result to center it.
+   • `GuiControl, Move` repositions the control to the new coordinates.
+
+LAYOUT:
+The GUI design is minimal and centered around a single text control. There is no titlebar customization or added widgets beyond the static text, allowing full visual emphasis on the centering behavior.
+   • Black background for high contrast.
+   • Blue, medium-sized (size 16), bold-weight text for readability.
+   • Uniform 10-pixel margin ensures consistent spacing from edges.
+
+USER EXPERIENCE:
+From the user's perspective, the interface is clean and reacts smoothly to resizing. The repositioning of the text element appears instantaneous and intuitive, preserving layout aesthetics across window sizes.
+   • Seamless resizing behavior with live feedback.
+   • Text always remains centered, improving usability on varying resolutions.
+   • No flicker or redraw artifacts due to optimized control movement.
+   • Useful for building adaptive UIs or testing control positioning logic.
+
+
+.
