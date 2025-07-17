@@ -1,0 +1,36 @@
+
+*  Persistent-position always-on-top GUI window.
+
+
+PURPOSE:
+This script creates a compact, always-on-top GUI window and displays it at a saved screen position or centered by default. It allows persistent placement by reading from an external `.ini` file to restore the window's last known position when launched.
+
+KEY FEATURES:
+The main feature is position persistence via an `.ini` file, which stores the GUI's previous location on screen. This approach provides a consistent user experience without requiring the user to reposition the window every time it opens.
+   • Restores window position using `IniRead`.
+   • Uses `+Hwnd` to retrieve the window ID for possible future manipulation.
+   • Window stays on top and uses a minimal tool window style.
+   • Colored background for quick visibility (`8000FF`).
+   • Window size and location are explicitly defined upon showing.
+
+LOGIC SUMMARY:
+Upon activation with `Ctrl+T`, the script first reads the last saved position from a config file. If no prior data exists, the window is centered. It then creates the GUI with specific attributes and displays it at the determined location.
+   • `IniRead` pulls the position string from "ClosePosition.ini".
+   • `+Hwndgui_id` stores the GUI’s window handle.
+   • GUI options `+AlwaysOnTop` and `+ToolWindow` define its behavior and style.
+   • The `Show` command applies the saved or default positioning.
+
+LAYOUT:
+The GUI is a small, plain box sized at 250x100 pixels, displayed either at a user-defined position or the center of the screen. Its design is deliberately minimal for lightweight use.
+   • Fixed dimensions: width 250, height 100.
+   • Solid background color: bright purple (`8000FF`).
+   • No additional controls or elements.
+
+USER EXPERIENCE:
+The script simplifies repeated use by maintaining window position between sessions, reducing user effort. Its always-on-top feature ensures visibility, while the minimal layout keeps distractions low.
+   • Automatically remembers where the user last placed the window.
+   • No need for title bar interaction thanks to auto-positioning.
+   • Visual contrast ensures the window is easily noticed.
+
+
+.
