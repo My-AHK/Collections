@@ -1,0 +1,34 @@
+
+*  Resizable always-on-top GUI with tiled BMP background.
+
+
+PURPOSE:  
+This script creates a resizable GUI window that stays always on top and displays two overlapping transparent images. It customizes the dialog box background by applying a tiled bitmap pattern to give the GUI a unique visual style.
+
+KEY FEATURES:  
+The GUI window supports resizing and includes the standard maximize button.  
+It remains always on top of other windows for persistent visibility.  
+Two picture controls display PNG images with transparent backgrounds, layered closely together.  
+A custom message handler intercepts the WM_CTLCOLORDLG message to paint the dialog’s background using a tiled bitmap brush loaded from an external BMP file.
+
+LOGIC SUMMARY:  
+The script sets GUI margins and font, then adds two transparent pictures positioned near the top-left corner.  
+It registers a handler for the Windows message WM_CTLCOLORDLG (0x136), which is sent before the dialog is drawn.  
+This handler creates a pattern brush from "B-ground.bmp" on the first call and caches it for reuse.  
+Returning the brush handle instructs Windows to use the bitmap pattern as the dialog background.  
+The GUI is displayed with a specific title, then the script sleeps briefly before awaiting user input.  
+Closing the GUI or pressing Escape cleanly exits the application.
+
+LAYOUT:  
+The GUI has 15-pixel margins and uses a bold Arial Black font at size 12 (though no text controls are added).  
+Two picture controls are added with precise coordinates to overlay two PNG images with transparent backgrounds.  
+The background uses a tiled bitmap pattern loaded from a BMP file in the script directory.  
+The window is resizable and always on top.
+
+USER EXPERIENCE:  
+Users see a small, visually distinct window with a tiled background pattern and two layered transparent images near the top-left.  
+The window can be resized and remains visible over other windows.  
+Exiting the window or pressing Escape closes the script immediately without errors or delays.
+
+.
+
