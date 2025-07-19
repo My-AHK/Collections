@@ -1,0 +1,36 @@
+
+*  Ten Advanced Toggle Hotkey Types in AHK.
+
+
+PURPOSE:
+This script presents ten distinct toggle mechanisms in AutoHotkey (AHK), each triggered by a different Numpad hotkey. The toggles demonstrate a range of behaviors—from simple binary switches to multi-step cycles—providing developers with modular examples for controlling program logic, sound, timers, loops, and UI feedback.
+
+KEY FEATURES:
+Each toggle type showcases a unique approach, often using conditionals, expressions, or timers. The toggles are numbered for clarity and easy referencing, and they use consistent syntax and structure to aid learning and implementation.
+   • Ten unique toggle behaviors bound to Ctrl+Numpad1–0.
+   • Various feedback methods: MsgBox, SoundBeep, ToolTip.
+   • Includes ternary logic, random values, step cycling, and static-state functions.
+   • Toggle states persist where necessary using variables or static values.
+
+LOGIC SUMMARY:
+The script initializes required variables and binds each hotkey to a block that toggles a state. Conditional statements and expressions are used to determine the flow of each toggle. While loops, SetTimer, and modular functions add dynamic behavior depending on the type.
+   • Basic binary toggles flip between 0 and 1.
+   • Sound, tooltip, or message feedback is triggered based on state.
+   • Step toggles cycle through multiple states using modulus math.
+   • Static toggles encapsulate reusable state across calls.
+
+LAYOUT:
+The script is cleanly organized with section dividers and inline comments identifying each toggle type. Each block is self-contained and named accordingly, allowing developers to test or remove types independently.
+   • Toggle blocks are ordered by increasing complexity (Type 1 to 10).
+   • Auto-execute setup for shared variables like `step`.
+   • Visual dividers separate sections for readability.
+   • Hotkey syntax uses consistent structure for all types.
+
+USER EXPERIENCE:
+This script provides developers with immediate visual and audible feedback for each toggle action. All toggles are easily testable using Ctrl + Numpad keys, allowing users to quickly observe and understand the mechanics behind each style.
+   • MsgBox displays make results visually clear.
+   • SoundBeep cues reinforce toggle states audibly.
+   • ToolTip messages offer temporary, screen-based feedback.
+   • Functional toggles promote reusability in larger projects.
+
+.
