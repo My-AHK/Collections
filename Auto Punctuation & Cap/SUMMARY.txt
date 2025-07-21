@@ -1,0 +1,43 @@
+
+*  Auto-cap after punctuation with fix hotkey.
+
+
+PURPOSE:
+This script provides automatic capitalization features in writing workflows by using hotstrings and a manual hotkey-triggered function. It is designed to convert the first letter after sentence-ending punctuation into uppercase automatically and also includes a utility to manually capitalize any word near the cursor.
+
+KEY FEATURES:
+It automates capitalization after periods, exclamation points, question marks, and newlines. Additionally, it includes a hotkey (Ctrl+CapsLock) to instantly capitalize the previous word using clipboard operations.
+
+   • Auto-capitalizes first letters after `.`, `!`, `?`, and newlines.
+   • Special hotstring to convert lowercase “i” into uppercase “I”.
+   • Manual override hotkey (`Ctrl+CapsLock`) for capitalization.
+   • Clipboard-safe: preserves and restores clipboard content after usage.
+
+LOGIC SUMMARY:
+The script utilizes four loops that register 26 hotstrings each, mapping lowercase letters to their uppercase equivalents following specific punctuation marks or newline characters. A separate hotstring ensures standalone lowercase "i" becomes uppercase. The `^CapsLock` hotkey manually selects the previous word, copies it, transforms it to Title Case (first letter uppercase), and replaces the original.
+
+   • Loop 1: Triggers after `. ` + letter.
+   • Loop 2: Triggers after `! ` + letter.
+   • Loop 3: Triggers after `? ` + letter.
+   • Loop 4: Triggers after newline + letter.
+       ⮞ Each loop registers 26 hotstrings (a–z).
+   • Manual hotkey uses `SendInput` to select/copy/replace words.
+   • Clipboard contents are preserved via `ClipboardAll`.
+
+LAYOUT:
+The script starts with a labeled section named `AutoCap`, followed by four loops that declare hotstrings. Afterward, two sections handle individual hotstrings and the hotkey logic. Comments inline with commands clarify intent. It ends with a clean `Return`.
+
+   • Label section: `AutoCap` for bulk hotstring creation.
+   • Single hotstring for `:C:i::I` placed separately.
+   • `^CapsLock` hotkey function includes full clipboard handling.
+   • Code blocks are compact and logically grouped.
+
+USER EXPERIENCE:
+This tool improves typing efficiency by eliminating the need to manually capitalize after common punctuation. It provides seamless background automation without disrupting typing flow. For exceptions or past text, users can instantly fix capitalization using a hotkey.
+
+   • Requires no user interaction after activation.
+   • Enhances writing flow in any application.
+   • Minimal lag due to efficient use of `SendInput` and `ClipboardAll`.
+   • Clear error handling if no text is selected.
+
+.
