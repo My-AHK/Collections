@@ -1,0 +1,41 @@
+
+*  Tap RCtrl alone to trigger context menu key.
+
+
+PURPOSE:
+This script replaces the right Control key (RCtrl) with the AppsKey (context menu key) when RCtrl is tapped alone. It preserves RCtrl's default behavior when used in combination with other keys, enabling both standard shortcuts and standalone custom functionality.
+
+KEY FEATURES:
+The script uses low-level message hooks to detect when RCtrl is pressed and released without other key interactions. If confirmed, it simulates an {AppsKey} press. This effectively transforms a rarely-used modifier key into a practical shortcut trigger.
+
+   • Converts RCtrl tap to AppsKey.
+   • Retains RCtrl for modifier-based shortcuts.
+   • Uses `OnMessage()` to monitor key activity.
+   • Responds to WM_KEYDOWN and WM_KEYUP messages.
+   • Ensures precise detection without affecting system shortcuts.
+
+LOGIC SUMMARY:
+Upon any RCtrl press, a flag (`RCtrlAlone`) is set to true. If RCtrl is released without any other key press interrupting, the script sends the AppsKey. If another key is pressed while RCtrl is down, the flag is cleared to maintain normal control behavior.
+
+   • Pressing ~RCtrl sets `RCtrlAlone := true`.
+   • Pressing any key besides RCtrl while `RCtrlAlone = true` cancels the flag.
+   • If RCtrl is released while `RCtrlAlone` is still true, {AppsKey} is sent.
+   • The key hook ensures accurate state tracking via message monitoring.
+
+LAYOUT:
+The script is minimalistic, organized by function, and uses labeled message handlers. Each hotkey or message is clearly separated and includes concise inline comments for maintainability.
+
+   • Initialization section sets script behavior and flags.
+   • Hotkeys for ~RCtrl and ~RCtrl Up are placed near the top.
+   • Message handlers (`WM_KEYDOWN`, `WM_KEYUP`) are clearly defined below.
+   • Inline comments help identify key codes and hook behavior.
+
+USER EXPERIENCE:
+This script provides a seamless way to access context menus without needing a dedicated key or using the mouse. Users retain full access to modifier shortcuts while gaining a new way to trigger the AppsKey. It is ideal for keyboard-focused users who wish to optimize input ergonomics.
+
+   • Provides fast keyboard-only context menu access.
+   • Ensures no disruption to default RCtrl + key combinations.
+   • Offers a simple and intuitive behavior with no visible GUI.
+   • Requires minimal system resources and runs silently in the background.
+
+.
