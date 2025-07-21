@@ -1,0 +1,35 @@
+
+*  Smart synonym menu triggered by typed words.
+
+
+PURPOSE:
+This script enhances typing productivity by providing automatic synonym suggestions for predefined keywords. When a user types one of these keywords followed by a specific character (typically a space), a synonym list is triggered via a function called `WordMenu`, allowing for quick word replacement or selection.
+
+KEY FEATURES:
+The script is tailored to expand a large variety of commonly used words into a rich synonym pool. Each word is registered as a hotstring that conditionally triggers a menu when typed with a specific ending character.
+   • Provides dozens of synonym sets for words like “bad”, “good”, “happy”, etc.
+   • Detects the last typed character to ensure context-appropriate expansion.
+   • Calls a unified function (`WordMenu`) to handle display/selection of synonyms.
+   • Works seamlessly in real-time while typing, especially useful for writing or editing.
+
+LOGIC SUMMARY:
+The logic begins by initializing the environment and setting up a control variable for the last typed character. For each hotstring definition (e.g., `:B0:happy::`), the script checks whether the last character typed matches the designated trigger (usually a space). If true, it calls `WordMenu`, passing in a word count estimate and a synonym string. The synonym string is then likely used within the `WordMenu` function to present a selection menu to the user.
+   • Uses `A_EndChar` and a `LastChar` comparison to confirm activation context.
+   • Uses AutoHotkey’s `:B0:` syntax for raw hotstring matching without auto backspacing.
+   • Stores word groups in comma-separated format passed as arguments.
+   • Each block ends with `Return` to isolate execution.
+
+LAYOUT:
+The script uses a consistent, structured format. Hotstrings are grouped alphabetically for readability and maintenance. Each block follows a pattern: if-condition, call to `WordMenu`, and `Return`.
+   • No GUI is used — interaction is purely keyboard-based.
+   • Clean indentation and labeling improve navigability.
+   • Hotstrings are declared globally and parsed inline.
+
+USER EXPERIENCE:
+The user benefits from quick synonym access while typing, improving vocabulary variation and editing efficiency without switching windows or applications. The flow is smooth due to natural trigger conditions, and no intrusive GUI elements distract from the typing experience.
+   • Effortless to trigger with natural keystrokes.
+   • Enables on-the-fly word refinement in any text field.
+   • Allows writers, editors, and students to vary expression quickly.
+   • Scales well with extensive vocabulary sets already embedded.
+
+.
