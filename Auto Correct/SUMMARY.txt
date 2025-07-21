@@ -1,0 +1,44 @@
+
+*  AutoCorrect script with hotstrings and accents.
+
+
+PURPOSE:
+This script is designed to automatically correct common typing errors in real-time, especially those related to capitalization, misspellings, and diacritic usage in English text. It includes built-in mechanisms for live hotstring correction and allows users to add new corrections on the fly via a shortcut key.
+
+KEY FEATURES:
+The script provides comprehensive autocorrection support and customization:
+   • Autocorrects two consecutive capital letters, such as “CAlifornia” to “California”.
+   • Allows user-defined hotstring additions with Win+H, updating the script live.
+   • Prevents overcorrection by disabling specific corrections for select words.
+   • Includes corrections for word beginnings, middles, and endings.
+   • Contains an extensive list of accented words (diacritics) commonly used in English.
+   • Corrects frequent misspellings, typographic errors, and word misuse.
+
+LOGIC SUMMARY:
+When active, the script continuously monitors key input and evaluates recent hotkeys and their timing to determine whether correction should be triggered. For instance, two fast uppercase letters invoke logic to lowercase the second. The Win+H routine copies selected text, sanitizes it for scripting, and prompts the user to confirm the new hotstring, which is appended directly into the script and triggers a reload.
+
+   • Uses clipboard-based selection to maximize application compatibility.
+   • Employs `StringReplace` logic to escape problematic characters in hotstrings.
+   • Uses `InputBox` and a caret positioning timer to optimize user entry.
+   • Employs `#Hotstring` directives to control autocorrection behavior for sections.
+
+LAYOUT:
+The script is modularly organized by correction type, improving readability and maintenance.
+   • Disabled autocorrect section for double capitals is grouped at the top.
+   • Win+H addition functionality follows, marked by visual dividers.
+   • Corrections are grouped into clearly labeled sections:
+       ⮞ Word Beginnings
+       ⮞ Word Middles
+       ⮞ Word Endings
+       ⮞ Accented English Words
+       ⮞ Common Misspellings
+
+USER EXPERIENCE:
+End-users benefit from seamless, silent autocorrections during typing, and they can add new corrections effortlessly with a single keystroke combination. The interface is minimally intrusive and restores clipboard contents after usage to avoid disruptions.
+
+   • Default behavior avoids interfering with technical typing (e.g., code or constants).
+   • Hotstring additions are confirmed with user input and preserved across sessions.
+   • Bad hotstring entries are optionally flagged with a helpful MsgBox prompt.
+   • Enhanced support for accented characters benefits professional and academic writing.
+
+.
