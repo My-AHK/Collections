@@ -1,0 +1,31 @@
+
+*  Live tooltip with window info + hotkey copy.
+
+
+PURPOSE:
+This script provides a real-time diagnostic overlay displaying detailed information about the active window under the mouse cursor. It includes class name, control, and active control focus, and allows users to copy this data easily for debugging or automation purposes.
+
+KEY FEATURES:
+It displays cursor-targeted window information via tooltip and provides toggle and copy-to-clipboard functionality with specific hotkeys. This tool is ideal for identifying window elements and control structures quickly during script development.
+   • Real-time tooltip with window ID, title, class, control, and focused control.
+   • CTRL+ALT+T to toggle tooltip monitoring.
+   • CTRL+F12 to copy current data to the clipboard with audible feedback.
+   • Efficient background polling via `SetTimer` every 500ms.
+
+LOGIC SUMMARY:
+The script uses `MouseGetPos`, `WinGetTitle`, `WinGetClass`, and `ControlGetFocus` to gather relevant data about the window under the cursor. When active, it continuously updates the tooltip every 500 milliseconds. Pressing CTRL+F12 copies this information to the clipboard. CTRL+ALT+T allows enabling/disabling the monitoring loop and hides the tooltip when disabled.
+   • A boolean `Toggle` flag controls the active state of the monitoring loop.
+   • Data is concatenated and formatted for both display and clipboard use.
+   • Tooltip is suppressed when monitoring is disabled.
+
+LAYOUT:
+The script initializes its environment with persistent settings and optimized performance directives. The tooltip content is dynamically updated inside a timer routine, and user controls are mapped to specific hotkey labels.
+   • Uses `#Persistent`, `SetBatchLines -1`, `SetTitleMatchMode 2` for speed and reliability.
+   • Timer is conditionally controlled by `Toggle`.
+   • Two hotkeys are defined at the bottom of the script for interaction.
+
+USER EXPERIENCE:
+The user sees an on-screen tooltip showing detailed window information without needing to click anything. The ability to toggle visibility prevents clutter, and the clipboard copy function allows easy export for use in other tools or scripts.
+   • Tooltip provides live feedback aligned with the mouse position.
+   • Hotkey toggles reduce distractions when not in use.
+   • Sound cue confirms clipboard action.
