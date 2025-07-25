@@ -1,0 +1,31 @@
+
+*  Resizes and moves App using DllCall.
+
+
+PURPOSE:
+As some frameless or layered windows can only be moved via low-level API, this DllCall method bypasses WinMove and talks directly to Windows API.
+This script provides a quick method to reposition and resize the Notepad window using a hotkey. 
+It targets the Notepad application specifically and allows users to instantly apply a fixed layout with a single keyboard command.
+
+KEY FEATURES:
+This script is built around a hotkey (Ctrl + T) and uses a direct DLL call to modify a window's position and dimensions with precision (Notepad as example).
+   • Targets Notepad via `ahk_exe Notepad.exe`.
+   • Sets window position (X: 700, Y: 100).
+   • Sets window size (Width: 750, Height: 900).
+   • Uses `DllCall("SetWindowPos")` for efficient manipulation.
+   • Applies multiple flags to control behavior:
+       ⮞ SWP_NOZORDER: Retains the current Z-order.
+       ⮞ SWP_NOSENDCHANGING: Prevents WM_WINDOWPOSCHANGING messages.
+       ⮞ SWP_FRAMECHANGED: Forces redraw of window frame for immediate effect.
+
+LOGIC SUMMARY:
+When the user presses Ctrl + T, the script retrieves the window handle (HWND) of an active Notepad instance. It then passes this handle into a `DllCall` that changes the window’s size and screen coordinates. Several flags are applied to avoid unwanted side-effects such as altering window order or triggering redundant system notifications.
+
+LAYOUT:
+The script is organized in a compact and readable block format with clearly commented coordinate and dimension values. The hotkey is defined at the top, followed by the handle retrieval, and finally the `DllCall`. Comment indicators (`;;∙------∙`) highlight purpose and structure.
+
+USER EXPERIENCE:
+The user experiences an instant and consistent transformation of the Notepad window whenever Ctrl + T is pressed. There is no visual flicker, delay, or system prompt, and no impact on the window’s layering order. This creates a smooth and predictable experience ideal for workflows needing repeatable positioning.
+
+
+.
