@@ -1,0 +1,48 @@
+
+*  Bi-directional Clipboard Morse Translator
+
+
+PURPOSE:
+These two AutoHotkey scripts facilitate seamless bidirectional conversion between Morse code and standard alphanumeric text. The first script translates Morse code into readable characters, while the second performs the reverse operation, converting typed or selected text into Morse and audibly "beeping" it out for audio feedback.
+
+KEY FEATURES:
+Both scripts are tightly integrated with the clipboard and hotkey system, allowing quick conversions via `Ctrl+M` for Morse-to-text and `Ctrl+T` for text-to-Morse. Each script includes a full alphanumeric and punctuation mapping table, ensuring accurate encoding/decoding. Robust error handling warns users when input is invalid or unsupported.
+
+   • Hotkey-based activation (`Ctrl+M`, `Ctrl+T`)
+   • Complete Morse mapping for letters, numbers, punctuation
+   • Clipboard integration for seamless copy/paste workflows
+   • Visual and audible feedback through ToolTip, MsgBox, and SoundBeep
+   • Input sanitation (e.g., removing newlines, collapsing spaces)
+   • Graceful fallback for unrecognized characters or empty input
+
+LOGIC SUMMARY:
+The Morse-to-text script first reads clipboard content, standardizes spacing and separators, then parses each Morse code group using a dictionary lookup, assembling the final translated string. If a Morse code chunk is unknown, a `[?]` is inserted to alert the user.
+
+The text-to-Morse script captures selected text, sanitizes it, uppercases characters, validates for unsupported symbols, then translates each character into Morse. Each Morse character is audibly played using beeps (dot and dash durations), with appropriate spacing between letters, words, and sentences.
+
+   • Word separators are normalized using either `/` or double spaces
+   • Dictionary lookups are performed linearly for each word or letter
+   • Unknown Morse tokens result in `[?]` fallback indicators
+   • Sound beeps use consistent frequency and time spacing
+   • Invalid input produces warning popups with details
+
+LAYOUT:
+Both scripts use clearly defined sections and logical flow, starting with environment setup and clipboard preparation. The mapping tables for Morse and alphanumeric characters are compactly defined using associative arrays. The parsing, validation, and transformation logic is encapsulated inside hotkey blocks (`^m`, `^t`), with MsgBox outputs serving as the final interaction point.
+
+   • Environment setup: #SingleInstance, SendMode, TitleMatchMode
+   • Clipboard cleared before usage
+   • Compact and readable object-based dictionaries
+   • Clear message prompts for user actions or errors
+   • Consistent sleep and delay values for timing
+
+USER EXPERIENCE:
+The scripts are user-friendly and require no additional UI, relying solely on clipboard content and keyboard shortcuts. Errors like empty input or unsupported characters are communicated via clear dialogs. For Morse playback, ToolTips inform the user of the currently playing character, while SoundBeep gives immediate auditory feedback. The result is an accessible, keyboard-centric interface for Morse translation.
+
+   • Immediate feedback via ToolTip and MsgBox
+   • Non-blocking sound playback mimics actual Morse transmission
+   • Copy-based workflow supports any text source (e.g., websites, Notepad)
+   • Fallbacks prevent crashes or confusion on malformed input
+   • No installation or third-party tools required
+
+
+.
