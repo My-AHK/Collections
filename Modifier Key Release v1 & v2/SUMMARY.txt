@@ -1,0 +1,44 @@
+
+*  Clean Win+V paste with beep & plain text.
+
+
+PURPOSE:
+These two scripts enhance the paste functionality using the Win+V hotkey in AutoHotkey v1.1 and v2 respectively. Their shared objective is to create a consistent paste behavior that includes clipboard cleanup and audible feedback, while ensuring modifier key handling is deliberate and race conditions are minimized.
+
+KEY FEATURES:
+The scripts provide a refined paste shortcut that adds value beyond the default Ctrl+V. They enforce user key release before action, confirm execution with a beep, and ensure pasted content is stripped of formatting by reassigning the clipboard to itself.
+
+   • Compatible with both AHK v1.1 and v2, matching function across versions.
+   • Uses `KeyWait` to guarantee clean release of Win key before paste.
+   • Executes `SoundBeep` as audible confirmation of trigger.
+   • Sanitizes clipboard content to remove formatting artifacts.
+   • Sends Ctrl+V to paste clean text reliably.
+   • Introduces `Sleep` to avoid timing issues or key overlap.
+
+LOGIC SUMMARY:
+When the user presses Win+V, the script pauses until the Win key is released. Then it beeps for feedback, briefly pauses to ensure stability, purifies the clipboard by reassigning its value to itself, and finally pastes the content using Ctrl+V.
+
+   • Key release enforcement prevents accidental paste loops.
+   • Beep allows users to audibly confirm activation.
+   • Reassigning the clipboard is a known method to convert rich text to plain text.
+   • Sleep ensures Send command isn't prematurely fired before cleanup.
+   • Final Send simulates a standard paste using Ctrl+V keystroke.
+
+LAYOUT:
+Both scripts follow a minimal and symmetrical layout with clearly marked structure and identical logic in their respective AutoHotkey versions. Script 1 uses AHK v1.1 syntax and control flow, while Script 2 is restructured for AHK v2 compliance using function calls and scoped blocks.
+
+   • Each script uses a hotkey directive (`#v::`) to assign functionality.
+   • Internals are consistently sequenced: `KeyWait`, `SoundBeep`, `Sleep`, clipboard reassignment, and `Send`.
+   • Code is enclosed between visually distinct comment blocks for clarity.
+   • Script 2 wraps the body in a function-style block per AHK v2 requirements.
+
+USER EXPERIENCE:
+The user experiences a seamless paste operation that avoids formatted clipboard issues and unintentional pastes. Feedback and delay mechanisms improve control and user awareness, especially during repetitive workflows or automated tasks.
+
+   • Clean-text paste ensures consistent results in plain text fields.
+   • Beep provides confidence that the paste command was registered.
+   • Brief delay prevents pasting before clipboard is cleaned.
+   • Modifier-aware execution minimizes unintended triggers.
+   • Identical user-facing behavior across both script versions.
+
+.
