@@ -1,0 +1,35 @@
+
+*  Identify & move layered app sub-windows.
+
+
+PURPOSE:
+This script, titled "WinMove for Multi-Layered Windows," is designed to assist users in identifying and moving specific sub-windows within applications that use multiple layered or embedded windows, such as WeChat. It provides a toolset to detect and reposition individual window handles (HWNDs) using both AutoHotkey's native and low-level API approaches.
+
+KEY FEATURES:
+The script offers a structured method to enumerate and interact with multiple visible windows associated with a single application process. This enables users to determine the correct HWND and apply precise repositioning operations.
+   • Enumerates all visible windows belonging to a target executable.
+   • Displays class, title, position, and size for each window via MsgBox.
+   • Uses `SetWindowPos` via `DllCall` to reposition a chosen HWND.
+   • Allows replacement of a placeholder HWND with a real one after inspection.
+
+LOGIC SUMMARY:
+Pressing F1 initiates a loop that collects all window handles matching the target executable and retrieves their corresponding titles, classes, and position/dimension data. Each result is displayed individually to help identify the correct target window. Once identified, pressing F2 moves the specified HWND to a defined location and size using low-level WinAPI calls.
+   • F1 gathers and displays metadata from `ahk_exe Weixin.exe`.
+   • Each MsgBox shows HWND index, title, class, position, and size.
+   • F2 assigns a hardcoded HWND (to be replaced by user) for repositioning.
+   • `DllCall("SetWindowPos")` executes the precise move without window reordering or messaging.
+
+LAYOUT:
+The script is divided into two clear functional blocks triggered by hotkeys: F1 for inspection and F2 for repositioning. Each block is documented with structured comments and spacing for clarity.
+   • F1 block handles enumeration and info display.
+   • F2 block performs a manual window move via API.
+   • Inline comments clearly denote user-editable sections and flags used.
+
+USER EXPERIENCE:
+The script provides immediate visual feedback and isolates window inspection from action, ensuring that users can confidently identify which HWND they want to move before taking any action. This reduces the risk of misidentification and allows trial-and-error for complex layered apps.
+   • Non-destructive inspection via MsgBoxes.
+   • Manual control prevents accidental repositioning.
+   • Commented code encourages safe customization.
+   • Effective for layered or Qt-based apps like WeChat.
+
+.
