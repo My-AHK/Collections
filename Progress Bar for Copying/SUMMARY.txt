@@ -1,0 +1,41 @@
+
+*  Auto-copy with progress bar and log output.
+
+
+PURPOSE:  
+This script automates the process of copying files from a specified source directory to a destination folder, optionally including subfolders. It visually tracks progress, maintains a detailed log of successes and failures, and limits copy volume during testing for controlled execution.
+
+KEY FEATURES:  
+The script offers configurable paths, recursive folder copying, dynamic progress bar sizing, and time-stamped log entries. It includes safeguards for malformed paths and user feedback via sound and message dialogs.  
+   • Customizable source and destination directories  
+   • Recursive and non-recursive file copy support  
+   • Log file generation with time-stamped entries  
+   • Dynamic progress bar dimensions based on longest strings  
+   • Optional test limit (default set to 10 files)  
+   • Sound alert hotkey (`Ctrl + T`)  
+
+LOGIC SUMMARY:  
+Upon execution, the script prepares folder paths and determines the mode (recursive or not). It counts the total files and identifies the longest filename to calculate the optimal width for the progress bar. Each file is copied with logging feedback, and the destination structure is recreated as needed. Errors are noted in the log, and a progress bar provides visual updates.  
+   • Paths are normalized to include trailing backslashes  
+   • Files are counted and longest filename is tracked  
+   • Appropriate width is selected from filename, source, or destination  
+   • Each file’s relative path is calculated for logging and folder creation  
+   • A final completion timestamp is appended to the log  
+
+LAYOUT:  
+The script is clearly organized into functional sections, including hotkey binding, path setup, configuration flags, logging, core logic, and utility functions. Inline comments maintain readability and assist in understanding flow and intent.  
+   • Top-level hotkey listener initiates operation  
+   • Path setup and validation blocks are repeated for clarity  
+   • Progress bar setup and update blocks appear before and within the copy loop  
+   • Copy logic is bundled with real-time feedback and error checks  
+   • A helper function formats timestamps for logging consistency  
+
+USER EXPERIENCE:  
+Users experience immediate feedback with a beep and see real-time progress of the file copy process. Errors are not silently ignored but logged with clarity, while the ability to test with a file-limit avoids accidental bulk transfers during debugging. The log output enables easy post-run verification.  
+   • Progress is shown visually with filename updates  
+   • Copy failures are clearly marked in the log  
+   • Testing mode prevents accidental large-scale transfers  
+   • Timestamped logs offer transparency and traceability  
+   • Script halts gracefully if paths are invalid or progress fails to compute  
+
+.
