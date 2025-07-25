@@ -1,0 +1,30 @@
+
+*  Open All/Current User startup folders.
+
+
+PURPOSE:  
+This script provides hotkeys to quickly access Windows startup folders for both the current user and all users. These folders are commonly used to manage programs that run automatically when Windows starts.
+
+KEY FEATURES:  
+It assigns function keys to open two specific startup folders in File Explorer. This helps users easily add or remove startup program shortcuts without navigating manually through deep directory paths.  
+   • F1 opens the system-wide (all users) startup folder.  
+   • F2 opens the startup folder for the currently logged-in user.  
+   • Each folder is launched using `explorer.exe` for convenience.  
+   • Uses built-in AHK variables for robust path targeting.  
+
+LOGIC SUMMARY:  
+Each hotkey triggers the `Run` command with a path pointing to the appropriate startup folder. The system-wide folder uses `%A_AppDataCommon%`, while the user-specific folder uses `%A_AppData%`. The folders open in Windows Explorer.
+
+LAYOUT:  
+The script uses clear labeling and section dividers for readability. Each hotkey section includes visual comment markers and paths for reference.  
+   • Starts with F1 key definition, then F2.  
+   • Each section includes a double comment line for folder path documentation.  
+   • Ends with a final Return after each block to ensure correct hotkey behavior.  
+
+USER EXPERIENCE:  
+Users can access critical startup folders instantly using F1 and F2, avoiding deep navigation through the filesystem. This streamlines startup management tasks, especially for power users or administrators.  
+   • Hotkeys provide immediate visual feedback by launching Explorer.  
+   • Logical structure and comments enhance script maintainability.  
+   • Ideal for use during Windows configuration or cleanup sessions.
+
+.
