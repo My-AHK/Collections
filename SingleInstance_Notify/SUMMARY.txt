@@ -1,0 +1,35 @@
+
+*  Single-Instance control via message broadcast.
+
+
+PURPOSE:
+This script prevents multiple instances of itself from running by implementing an inter-process communication system using custom window messages. 
+It ensures that only the first (primary) instance continues, while subsequent ones self-terminate after detecting the primary.
+
+KEY FEATURES:
+The script uses Windows messaging to broadcast intent, detect active instances, and respond accordingly. It also manages tray icon visibility and process identification, making it ideal for single-instance enforcement in complex multi-launch environments.
+   • Broadcasts custom messages to signal new or existing script launches.
+   • Uses `DllCall` to fetch current process ID and register custom window messages.
+   • On detection of an already-running instance, it exits silently after displaying a confirmation message.
+   • Ensures the tray icon is only shown for the surviving instance.
+
+LOGIC SUMMARY:
+The script begins by registering two unique messages: one for new script launches and another for running instance detection. It broadcasts a message with its PID to all windows, expecting any existing script to reply. If a reply is detected, it exits. Otherwise, it proceeds to full execution and listens for future launch attempts.
+   • Registers `StahkyLaunch` and `StahkyAlreadyRunning` as unique messages.
+   • Posts its PID using `PostMessage` to HWND_BROADCAST (0xFFFF).
+   • Adds message listeners via `OnMessage`.
+   • If another instance launches later, this one replies to notify it to quit.
+
+LAYOUT:
+The script is organized into three main sections: initial setup, main execution, and message handlers. This modular structure improves readability and simplifies debugging.
+   • Initialization sets flags, suppresses the tray icon, and pre-registers messages.
+   • The main body shows a MsgBox for debug, broadcasts presence, and enables the tray icon.
+   • The handler functions determine when to terminate or notify others based on PID comparisons.
+
+USER EXPERIENCE:
+The user sees a popup with their script’s PID on initial launch. If a second instance is attempted, it will also show its PID before quitting. The tray icon only appears for the active (first) instance, creating a clear and controlled environment for script monitoring.
+   • MsgBox confirms PID of active instance at launch.
+   • Tray icon is hidden until confirmed as the primary instance.
+   • Secondary launches display a self-termination notice and do not interfere.
+
+.
