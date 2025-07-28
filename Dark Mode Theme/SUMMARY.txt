@@ -1,0 +1,54 @@
+
+*  Dark-themed dialog + toast GUI replacements.
+
+
+PURPOSE:
+This script provides a complete system for displaying customizable, dark-themed user interface dialogs in AutoHotkey v1.1. It replaces default message boxes, input boxes, and notification toasts with visually cohesive alternatives designed for modern aesthetics and clarity in low-light environments.
+
+   • Includes custom replacements for MsgBox, InputBox, and Toasts.
+   • Focuses on creating a consistent, modern dark UI across all interactions.
+   • Designed for use in scripts needing user feedback, alerts, or form-style input.
+
+KEY FEATURES:
+The script introduces several independently usable components that all conform to a shared dark visual style. Each feature is wrapped in a callable function and integrates seamlessly via hotkeys or embedded script calls.
+
+   • `DarkMsgBox()` – Custom message box with button parsing and dark theme.
+   • `DarkMsgBoxEx()` – Enhanced message box with multi-button support and optional icons.
+   • `DarkInputBox()` – Input field with optional password mode and default text.
+   • `DToast()` – Stackable, animated toast notifications with icon and title options.
+   • Replacement aliases: `DMsgBox()` and `DInputBox()` for simpler usage syntax.
+   • GUI elements use consistent dark colors (e.g., `0x2D2D30`) and white text.
+   • Window animations include fade-in/fade-out effects for better UX.
+
+LOGIC SUMMARY:
+At its core, the script defines GUI-based functions that simulate dialog-style windows while managing user interaction and return values. Button handlers are attached to dynamically generated controls, which collect or return user selections before closing and cleaning up.
+
+   • `DarkMsgBox()` parses numeric options (e.g., `4` = Yes/No) into button labels.
+       ⮞ Displays text and buttons centered inside a themed GUI.
+   • `DarkMsgBoxEx()` offers string-defined buttons and optional image/icon display.
+       ⮞ Adjusts layout based on presence of an icon.
+   • `DarkInputBox()` adds text prompts and input fields, with Cancel detection.
+   • `DToast()` queues toast messages, handles overlap, and animates each popup.
+       ⮞ Prevents toast collisions by adjusting Y-position.
+       ⮞ Click-to-dismiss is enabled via invisible overlay control.
+   • Global variables are used for result collection and click tracking.
+
+LAYOUT:
+The layout of each GUI is manually calculated and arranged to maintain a clean, minimalist style. Buttons are centered horizontally, with adequate spacing, and toast notifications are stacked from the bottom-right corner of the screen upward.
+
+   • All GUIs avoid standard window elements (no caption, no resize).
+   • Font and color settings are applied consistently across components.
+   • Calculated padding ensures legibility and uniform sizing.
+       ⮞ Button widths and spacing are fixed for visual alignment.
+       ⮞ Toast GUI names are unique (e.g., `Toast_` + tick count) to avoid conflict.
+
+USER EXPERIENCE:
+From a user's perspective, the system replaces bland default dialogs with sleek, responsive, and non-intrusive UI elements. The experience is modernized through thoughtful layout, clear text, and smooth animations that feel native to today's design standards.
+
+   • Dark color scheme reduces eye strain and matches popular themes.
+   • Toasts include icons and progress bars to convey context visually.
+   • Inputs and choices are easy to interact with, with Cancel support built-in.
+   • Animations (fade-in/out) provide feedback and flow without being disruptive.
+   • Mouse-click dismissal for toasts adds intuitive control.
+
+.
