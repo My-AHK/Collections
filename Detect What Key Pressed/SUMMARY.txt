@@ -1,0 +1,38 @@
+
+*  Tooltip shows pressed keys with case info.
+
+
+PURPOSE:
+This script tracks keyboard input in real-time, displaying a tooltip showing which key was pressed. It visually distinguishes between lower-case and upper-case letters while also recognizing numbers, function keys, punctuation, and common system keys. It’s useful for diagnostic purposes, key mapping, or educational demonstrations.
+
+KEY FEATURES:
+It dynamically registers hotkeys for a wide variety of keyboard inputs and reacts immediately to each press. Case handling is carefully evaluated, especially for letter keys where Shift and CapsLock states affect output.
+   • Detects and handles a–z, A–Z, 0–9, F1–F12.
+   • Supports punctuation and symbol keys with Shift.
+   • Recognizes common control/navigation keys like Tab, Arrow Keys, etc.
+   • Differentiates between upper and lower-case inputs using Shift and CapsLock.
+   • Displays a tooltip showing the key name and case (when applicable).
+   • Tooltip auto-dismisses after 1.5 seconds.
+
+LOGIC SUMMARY:
+The script uses loops to bind hotkeys for nearly all key types. A unified `KeyPressed` label determines if the input is a letter and evaluates case using regular expressions and key state queries. Non-letter keys are passed through as-is. Output is managed via `ToolTip`, and a timer removes it after a brief display period.
+   • Uses `Hotkey, ~%key%, KeyPressed` to register inputs.
+   • Shifted punctuation is explicitly included.
+   • Letter case logic uses regex to parse hotkey patterns.
+       ⮞ If Shift is active or CapsLock is on, letter is converted to upper-case.
+   • Tooltip logic includes or excludes case info depending on context.
+
+LAYOUT:
+The script is organized into distinct sections, starting with key category definitions (letters, numbers, function keys, common keys, punctuation), followed by hotkey assignment loops. The `KeyPressed` label then contains the tooltip logic, and a `KillTip` label cleans up afterward.
+   • Hotkey registration is grouped logically by key type.
+   • Arrays are used for non-alphabetic key groups.
+   • Label structure clearly separates response and cleanup.
+
+USER EXPERIENCE:
+Users receive immediate on-screen feedback for any key they press. The tooltip is concise and context-aware, showing case only when relevant. This helps users confirm which key was triggered and whether modifier states like Shift or CapsLock influenced the input.
+   • Visual tooltips appear near the cursor.
+   • Case-sensitive feedback helps with debugging and testing.
+   • No persistent GUI — only temporary tooltips.
+   • Feedback disappears automatically, requiring no user dismissal.
+
+.
