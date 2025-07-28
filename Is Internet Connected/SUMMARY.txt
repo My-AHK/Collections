@@ -1,0 +1,50 @@
+
+*  Check internet with Hotkey & GUI feedback.
+
+
+PURPOSE:
+This script provides a quick and visually informative method to check internet connectivity using a keyboard shortcut. When activated, it displays a color-coded GUI message with optional sound feedback, depending on the connectivity status.
+
+   • Helps determine whether the system is online or offline.
+   • Offers visual and auditory indicators for user clarity.
+   • Built for rapid activation via Ctrl + T.
+
+KEY FEATURES:
+The script includes a hotkey trigger, connectivity test via multiple endpoints, a GUI display system, and fallback handling for failures. These features ensure reliability and clear feedback to the user.
+
+   • Ctrl + T triggers the connectivity check.
+   • Multi-endpoint HTTP checking increases reliability.
+   • Displays status message in a compact GUI.
+   • Uses colors (Lime for connected, Red for not).
+   • Plays optional beep tones when connection status is checked.
+   • Automatically dismisses GUI after 3 seconds.
+
+LOGIC SUMMARY:
+When the hotkey (Ctrl + T) is pressed, the script runs a series of HTTP requests to trusted endpoints to determine if internet access is available. If a response indicates success, it confirms connectivity; otherwise, it tries fallback sites. The outcome is displayed through a temporary GUI and optional beep.
+
+   • Primary endpoint: Microsoft NCSI text check.
+   • Secondary endpoint: Google’s generate_204.
+   • Final fallback: HTTPBin status check.
+       ⮞ Ensures multiple layers of validation.
+   • GUI logic triggered only after a result is confirmed.
+   • GUI auto-clears via a timed label (`CloseInternetGUI`).
+
+LAYOUT:
+The layout consists of one hotkey label and three function blocks. GUI elements are contained in a dedicated function (`ShowInternetStatus`) and styled with clear fonts and colors. The main logic is encapsulated within `IsInternetConnected()` for clarity and modularity.
+
+   • `^t::` hotkey is the entry point.
+   • `ShowInternetStatus()` builds and presents the feedback window.
+   • `IsInternetConnected()` handles all connectivity logic.
+   • `CloseInternetGUI:` is a timed label to destroy the window.
+
+USER EXPERIENCE:
+Users experience immediate feedback in both visual and auditory forms. The script is designed to be lightweight, fast, and informative, with a minimal GUI that appears centered and auto-hides without interaction. Colors and sounds reinforce clarity of outcome.
+
+   • Simple hotkey operation: just press Ctrl + T.
+   • No extra steps needed — result appears instantly.
+   • Automatic GUI dismissal ensures no user cleanup is needed.
+   • Beep tones subtly notify users who aren’t visually focused.
+   • The fallback logic ensures functionality even when main servers are unreachable.
+
+
+.
