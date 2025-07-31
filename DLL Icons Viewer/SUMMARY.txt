@@ -1,0 +1,43 @@
+
+*  GUI tool to browse and copy DLL icon paths.
+
+✅ SummaryStyle1 Activated
+
+PURPOSE:
+This script provides a GUI-based viewer for browsing and copying system icon resources from various DLL files found in the Windows `System32` directory. It allows users to select a DLL from a list of common system libraries, view all contained icons in both large and small formats, and copy the file path and icon index to the clipboard with a double-click.
+
+KEY FEATURES:
+The application offers dual ListView panels displaying large and small icon previews, dynamically sourced from the selected DLL file. Users can switch between DLLs via a set of grouped radio buttons. Additional GUI features include a reload mechanism, draggable window icon, path display with clipboard integration, and enhanced visuals with custom fonts and colors.
+   
+   • Supports over 40 DLL files commonly used for storing Windows icons.
+   • Dual icon displays: large (left) and small (right) using ImageLists.
+   • Copy icon file path and index by double-clicking any icon.
+   • GUI styled with custom colors, fonts, and tooltips.
+   • Radio buttons dynamically set the target DLL and refresh icon views.
+   • Includes mouse wheel support for scrolling both icon lists simultaneously.
+
+LOGIC SUMMARY:
+Upon startup, the script initializes global variables, defines GUI appearance, and generates radio buttons for each supported DLL. Selecting a radio triggers a reload of the GUI and repopulates the icon lists using `IL_Create` and `IL_Add` functions. Double-clicking an icon copies its fully qualified system path and index to the clipboard. Tooltip support and a custom `GuiTip()` function enhance interactivity.
+
+   • `RadioClick` logic determines which DLL file is selected via ternary assignments.
+   • The icon list is rebuilt each time the DLL is changed.
+   • `ListClick` handles double-click events to trigger clipboard copy.
+   • Mouse wheel events are hooked to both ListView controls for synchronized scrolling.
+   • `GuiTip` creates native Win32 tooltips for text and picture controls.
+
+LAYOUT:
+The GUI is horizontally divided into three vertical regions: a radio button column (left), large icon ListView (center-left), and small icon ListView (center-right). Below the ListViews are buttons for Reload and Exit, a text field displaying the currently loaded file path, and an explanatory note. The overall window size is fixed at 630x630 and positioned near the top-right of the screen.
+
+   • Radio buttons arranged in two columns spanning the left side.
+   • Big and Small icon ListViews each occupy ~135px width.
+   • Action buttons and path display appear along the bottom.
+
+USER EXPERIENCE:
+Users are greeted with a clean, themed interface that makes browsing system icons intuitive. By selecting a DLL file, the GUI updates to show all icons it contains, reducing the need for external icon browsing tools. Tooltips and labels help guide the user, while the clipboard integration and reload feature make the tool efficient and reusable in development or customization contexts.
+
+   • Fast switching between DLL icon sets with immediate preview.
+   • Easy copying of path+index with clear visual confirmation.
+   • Tooltips provide unobtrusive assistance for actions like reload and drag.
+   • Synchronized scroll wheel control improves accessibility and usability.
+
+.
