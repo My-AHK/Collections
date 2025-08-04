@@ -1,0 +1,33 @@
+
+*  Scans System32 DLLs for embedded icons.
+
+
+PURPOSE:
+This script scans the System32 directory for DLL files and identifies those that contain embedded icon resources. The results are compiled into a formatted text report, listing each DLL with its respective icon count and summarizing key statistics at the end.
+
+KEY FEATURES:
+It performs a comprehensive two-pass scan to first determine formatting alignment and then extract icon counts. Results are alphabetized and stored in a structured text file with a timestamp and privilege-level note.
+   • Identifies DLLs that contain icons using safe enumeration methods.
+   • Displays progress visually during scanning.
+   • Automatically opens the report upon completion.
+   • Ensures output is aligned and formatted with consistent column widths.
+
+LOGIC SUMMARY:
+The script first calculates the longest filename for alignment purposes. It then loops through all `.dll` files in `System32`, loading each safely to count icons using system resource enumeration. Only DLLs containing icons are included in the final list.
+   • Counts icons using both RT_GROUP_ICON and RT_ICON types for accuracy.
+   • Uses two custom callback functions to safely tally resources.
+   • Appends file-specific data and a summary block to the output file.
+
+LAYOUT:
+The output file begins with a header block noting generation time, user privilege, and column headers. DLL filenames are followed by padded spacing and their respective icon count, aligned for readability.
+   • Header includes timestamp and user type.
+   • Each line shows: filename (padded) + icon count.
+   • A final summary line reports total DLLs scanned and icons found.
+
+USER EXPERIENCE:
+Users initiate the scan by pressing `F1`, triggering an automatic progress bar and background processing. Once completed, a neatly formatted text file is opened for review.
+   • No input is required after launch.
+   • Text output is immediately readable and informative.
+   • Report structure is consistent and ready for archival or review.
+
+.
