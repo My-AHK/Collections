@@ -1,0 +1,41 @@
+
+*  Icon selector GUI for individual .dll/.exe/.ico files.
+
+
+PURPOSE:  
+This script serves as a lightweight graphical icon viewer and selector for `.dll`, `.exe`, and `.ico` files. When triggered, it fetches a file from Windows Explorer or clipboard, displays all embedded icons in a GUI, and allows the user to copy icon reference information to the clipboard.
+
+KEY FEATURES:  
+It enables the user to visually inspect and choose icons embedded in files using an intuitive GUI interface. It supports file selection via both Explorer and clipboard and includes menu options for file opening, reloading, and exiting.  
+   • Accepts .dll, .exe, and .ico file types  
+   • Automatically fetches selected file path or clipboard content  
+   • Displays icons with indexed numbers in a ListView  
+   • Copies file path and selected icon index to clipboard  
+   • GUI includes reload and exit controls  
+   • File menu offers quick access to core functions  
+
+LOGIC SUMMARY:  
+The main hotkey (F1) initiates the process by retrieving the currently selected file, validating its type and existence, then launching a GUI window. Icons are loaded into an ImageList and displayed in a ListView. Clicking on an icon updates a display field and copies the file/icon info to the clipboard. Additional features like file opening and menu-driven actions extend usability.  
+   • Uses Shell.Application to detect selected Explorer items  
+   • Falls back to clipboard scraping if selection fails  
+   • Dynamically creates an image list and populates icons  
+   • ListView click handler captures icon index  
+   • Global variables store GUI state and icon info  
+
+LAYOUT:  
+The GUI appears at a fixed screen location with a vertical layout optimized for quick browsing. It includes a title header, icon ListView, file information text fields, and footer buttons for control.  
+   • Color-themed background and font styling  
+   • Positioned at screen coordinates X:1500, Y:250  
+   • Uses `ListView` for icon navigation and selection  
+   • Separate fields for file path and selected icon index  
+   • “File ▼” menu triggers an AHK menu popup near GUI  
+
+USER EXPERIENCE:  
+Designed for simplicity and direct interaction, the script delivers a responsive and compact utility. It visually organizes icons and gives immediate feedback on user actions while minimizing user effort to select and extract icon information.  
+   • User can use Explorer or clipboard for input  
+   • Clear feedback for file type errors and missing files  
+   • Selected icon is visually highlighted and indexed  
+   • Clipboard integration enables fast asset referencing  
+   • Consistent GUI reload behavior ensures stability  
+
+.
