@@ -1,0 +1,42 @@
+
+*  Time-based multi-action executor with logging.
+
+
+✅ SummaryStyle1 Activated
+
+PURPOSE:
+This script automates the execution of user-defined actions at specified times, with optional weekday restrictions and built-in error handling. It is designed to ensure each action is executed only once per day, while maintaining a persistent execution log and daily reset mechanism.
+
+KEY FEATURES:
+The script offers flexible time-based triggers with support for delays, sound alerts, script reloading, application termination, and running programs or URLs. It ensures reliability through configuration validation, flag tracking, and backup systems for stored execution data.
+   • Executes actions based on specific times and optional weekday filters.
+   • Supports multiple action types: SoundBeep, Delay, Reload, ExitApp, Run commands/URLs.
+   • Maintains execution flags to prevent duplicate triggers.
+   • Daily automatic reset of execution flags at midnight.
+   • Robust logging with timestamps and error reporting.
+   • Configuration validation at startup with warnings for detected issues.
+
+LOGIC SUMMARY:
+The script uses two timers: one checking every second for scheduled actions, and another checking every minute for the daily reset. When the current time matches a scheduled trigger, it verifies if the action was already executed that day. If not, it runs the actions in order, applying weekday restrictions when specified. Execution flags are saved to a file, ensuring continuity across script restarts. A midnight routine clears the flags, preparing for a new day.
+   • Check_Time timer: Matches current time to TargetActions and executes actions.
+   • Midnight_Reset timer: Clears execution flags once per new date.
+   • Perform_Action function: Executes commands, applies delays, and logs outcomes.
+   • Load_Flags/Save_Flags: Handles persistent storage of executed times.
+   • Validate_Configuration: Ensures time and action formats are correct before running.
+
+LAYOUT:
+The script is divided into well-structured sections with dedicated purposes, making it easy to configure and maintain. Key constants and mappings (such as weekday names) are defined early. TargetActions holds time/action mappings in a single, easy-to-edit object. Supporting functions for validation, logging, and file operations are placed below the main loop to keep the flow logical and organized.
+   • Environment setup and timers are initialized at the top.
+   • Configuration area clearly defines trigger times and actions.
+   • Helper functions are grouped by purpose for maintainability.
+   • Logging and file handling functions are centralized for consistency.
+
+USER EXPERIENCE:
+Users can easily customize execution schedules by editing the TargetActions array, with optional weekday restrictions for specific actions. The script logs all activity, providing transparency and aiding troubleshooting. Its self-validating configuration helps prevent runtime errors by alerting users to mistakes before execution. A manual trigger hotkey (Ctrl+Alt+T) allows testing without waiting for the scheduled time.
+   • Simple modification of TargetActions to add or change triggers.
+   • Log file provides detailed history of actions and errors.
+   • Manual trigger for quick testing without altering schedules.
+   • Automatic daily reset ensures clean operation every day.
+
+
+.
