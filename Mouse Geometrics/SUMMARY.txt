@@ -1,0 +1,82 @@
+
+*  Geometric mouse movement: 4 shapes, multi-monitor.
+
+
+PURPOSE:
+This collection of five AutoHotkey v1.1 scripts provides automated mouse cursor movement in distinct geometric patterns: circle, triangle, rectangle, hexagon, and octagon. 
+Each script moves the cursor smoothly along the perimeter of its respective shape, centered on whichever monitor contains the mouse when activated. 
+The scripts are designed for testing applications, creating demonstrations, visual effects, or entertainment purposes where predictable, geometric mouse movement is desired across various polygon complexities.
+
+KEY FEATURES:
+All scripts share a unified control scheme and feature set for consistency and ease of use. 
+The primary hotkey Ctrl+T starts and stops movement, while Ctrl+R toggles between clockwise and counter-clockwise directions. 
+Each script automatically detects the current monitor in multi-monitor setups and centers the geometric pattern accordingly, ensuring proper positioning regardless of display configuration.
+
+  • Universal hotkeys across all five scripts
+      ⮞ Ctrl+T: Start/stop movement toggle
+      ⮞ Ctrl+R: Direction reversal (clockwise/counter-clockwise)
+      ⮞ ESC: Complete script termination
+  • Multi-monitor compatibility with automatic detection
+  • Real-time tooltips showing current status and direction
+  • Configurable size and speed parameters for each shape
+  • Smooth movement with 10ms update intervals
+
+LOGIC SUMMARY:
+Each script follows a similar architectural pattern using AutoHotkey's timer system and coordinate interpolation. 
+The scripts first detect which monitor contains the current mouse position using Windows API calls, then calculate the geometric vertices relative to that monitor's center. 
+Movement is achieved through linear interpolation between consecutive vertices, with progress tracking and side transitions managed by a state machine approach.
+
+  • Monitor detection using SysGet commands and boundary checking
+  • Vertex calculation using trigonometric functions for regular polygons
+  • Linear interpolation for smooth movement between vertices
+  • Progress tracking with automatic side advancement
+  • Coordinate mode enforcement for absolute screen positioning
+  • Timer-based animation loop with consistent frame rates
+
+LAYOUT:
+The circle script uses continuous trigonometric calculation with incrementing angles, while the polygon scripts (triangle, rectangle, hexagon, octagon) use discrete vertex-to-vertex movement with progress interpolation. 
+The rectangle script uniquely handles variable side lengths by adjusting progress increments based on whether movement is along width or height dimensions.
+
+  • Circle: Continuous angular movement using sine/cosine functions
+      ⮞ Single angle variable incrementing by configurable speed
+      ⮞ Real-time coordinate calculation for smooth circular motion
+  
+• Triangle: Three vertices forming equilateral triangle
+      ⮞ Top vertex pointing upward with 120-degree spacing
+      ⮞ Linear interpolation between consecutive vertices
+  
+• Rectangle (& square): Four corners with variable width and height
+      ⮞ Dynamic progress adjustment for horizontal vs vertical sides
+      ⮞ Maintains consistent visual speed around perimeter
+ 
+ • Hexagon: Six vertices with 60-degree angular spacing
+      ⮞ Regular polygon with equal side lengths
+      ⮞ Starting from top vertex, moving around perimeter
+ 
+ • Octagon: Eight vertices with 45-degree angular spacing
+      ⮞ Creates near-circular movement with distinct eight-sided pattern
+      ⮞ Provides transition between geometric and smooth circular motion
+
+USER EXPERIENCE:
+Users can activate any script and immediately begin geometric mouse movement by pressing Ctrl+T. 
+The cursor will jump to the starting position of the shape and begin smooth movement around the perimeter. 
+Direction can be reversed at any time using Ctrl+R, and tooltips provide clear feedback about current status and available controls. 
+The scripts handle multi-monitor environments seamlessly, always centering shapes on the monitor containing the mouse cursor when movement begins.
+
+  • Instant activation with visual feedback through tooltips
+  • Smooth, predictable movement patterns for each geometric shape
+  • Flexible direction control with real-time switching capability
+  • Automatic monitor detection eliminates positioning issues
+  • Consistent behavior across different window focus states
+  • Easy customization through clearly labeled configuration variables
+      ⮞ Size parameters (radius, width, height) for shape dimensions
+      ⮞ Speed settings for movement velocity control
+      ⮞ Timer intervals for animation smoothness adjustment
+  • Shape variety ranging from simple (triangle) to complex (octagon)
+      ⮞ Three-sided triangle for sharp, angular movement
+      ⮞ Four-sided rectangle for structured, orthogonal patterns
+      ⮞ Six-sided hexagon for balanced geometric motion
+      ⮞ Eight-sided octagon for near-circular but distinctly polygonal paths
+      ⮞ Perfect circle for continuous, smooth curved movement
+
+.
