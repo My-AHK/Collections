@@ -1,0 +1,62 @@
+
+*  Simulates random keys, modifiers, and mouse nudges.
+
+
+PURPOSE:
+This script is designed to simulate random keyboard activity, occasional modifier key presses, and intermittent mouse "nudges" to prevent system idleness or emulate natural user interaction. 
+The simulation runs in the background, optionally showing real-time ToolTips of each simulated action and logging events to an INI file for activity tracking. 
+The toggleable nature of the script allows users to activate or deactivate all features with a single hotkey, ensuring flexible control.
+   • Prevents system idle state by simulating human-like input.
+   • Useful for testing, demonstration, or preventing screen lock.
+   • Tracks activity through optional logging.
+
+KEY FEATURES:
+The script includes multiple coordinated systems for simulating activity while allowing detailed control over visibility, randomness, and persistence of logs. 
+Each subsystem, random key pressing, idle nudging, and modifier key usage, can run independently but is toggled simultaneously for simplicity.
+   • Random key press simulation with realistic timing intervals.
+   • Occasional modifier key presses for varied activity.
+   • Idle nudge mouse movement to mimic human presence.
+   • Optional ToolTips displaying ongoing simulated actions.
+   • Configurable log file for recording all actions.
+   • Hotkey toggle (Ctrl+T) for instant activation/deactivation.
+   • Adjustable key, modifier, and nudge delay ranges.
+   • Automatic cleanup of timers and logs upon exit.
+
+LOGIC SUMMARY:
+The core logic uses timers that trigger specific functions at random intervals, making activity patterns appear natural. 
+Each system has a low and high delay range from which a random interval is selected. 
+The random key press function decides between normal keys and shifted punctuation, while the modifier function randomly selects from available modifier keys. 
+The idle nudge moves the mouse slightly after a random pause. 
+All actions can be logged with timestamps, and ToolTips are optionally displayed based on settings. 
+The hotkey not only toggles all systems but also plays a sound and updates the status display.
+   • On hotkey press, toggle booleans for each system and set/clear timers accordingly.
+   • Key press routine randomly chooses between normal or shifted keys.
+       ⮞ Sends Shift down/up as needed for punctuation.
+   • Modifier routine picks one modifier at random and simulates a quick press.
+   • Idle nudge waits a random time before moving the mouse cursor slightly.
+   • Logging functions store counts and timestamps in an INI file.
+   • Cleanup function stops timers and deletes logs (if not preserved).
+
+LAYOUT:
+The script is structured with clear separation between initialization, hotkey handling, core simulation functions, supporting functions, and cleanup. 
+Settings for offsets, key definitions, and timing are centralized at the start for easy customization. 
+ToolTip offset variables define where visual feedback appears relative to the cursor, and activity logging settings control file creation and deletion behavior.
+   • Initialization: Environment settings, GUI creation, and variable declarations.
+   • Hotkey Handler: Central toggle for enabling/disabling all features.
+   • Core Functions: Timed routines for keys, modifiers, and mouse nudges.
+   • Support Functions: Random selection logic, logging, ToolTip handling.
+   • Cleanup: Ensures no residual timers or files remain after exit.
+
+USER EXPERIENCE:
+From a user’s perspective, this script provides a seamless background simulation that can be entirely invisible if ToolTips are disabled. 
+The hotkey offers quick control, and the beep feedback confirms changes without requiring visual confirmation. 
+For those who prefer tracking, logs provide detailed timestamps and counts of every action taken. 
+The randomization in timing and action type ensures that simulated activity mimics natural human interaction, reducing the predictability often associated with automation.
+   • Simple one-hotkey control for all features.
+   • Optional real-time ToolTips for transparency.
+   • Audible toggle confirmation via different-pitch beeps.
+   • Adjustable parameters for personalization.
+   • Logs available for auditing or performance review.
+
+
+.
