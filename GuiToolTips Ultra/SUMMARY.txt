@@ -1,0 +1,57 @@
+
+*  Dynamic tooltip management for AutoHotkey GUIs.
+
+PURPOSE:
+This script demonstrates the creation, modification, and removal of tooltips in AutoHotkey GUIs. 
+It provides multiple GUI examples showing basic tooltips, dynamic updates after a countdown, and complete removal, while centralizing tooltip management through a reusable function.
+
+KEY FEATURES:
+The script enables interactive tooltip handling for buttons and radio controls across four distinct GUI examples. 
+Users can add static tooltips, modify them dynamically after a timer, and remove them either individually or collectively. 
+A single function, AddToolTip, handles all tooltip operations, ensuring consistency and code reusability.
+   • Four GUI examples triggered by F1–F4 keys.
+   • Basic tooltip assignment for buttons and radio controls.
+   • Countdown-based modification of tooltips.
+   • Removal of all tooltips via a dedicated button.
+   • Centralized AddToolTip function for creation, modification, and deletion.
+   • Automatic handling of multi-line tooltips and Unicode support.
+   • Optional always-on-top GUI positioning.
+
+LOGIC SUMMARY:
+The script initializes GUIs with various controls, assigns tooltips using AddToolTip, and optionally modifies or removes them based on timers or user actions. 
+Each GUI demonstrates a distinct tooltip behavior. 
+The AddToolTip function internally manages tooltip window handles, parent GUI references, and uses DllCalls to interact with the Windows tooltip API. 
+Timers handle dynamic updates, and logic ensures that tooltips are removed from controls cleanly.
+   • GUI creation: Buttons and radios added with assigned tooltips.
+   • Timer functions decrement countdowns and trigger tooltip updates.
+   • AddToolTip manages tooltip creation, text updates, and destruction.
+   • Removal logic loops through child controls for complete cleanup.
+   • Tooltip handles and GUI references are cached to prevent duplicate creations.
+   • Supports both Unicode and ANSI text modes.
+   • Multi-level conditional logic ensures proper tooltip lifecycle.
+
+LAYOUT:
+The GUIs are compact, vertical arrangements of controls with clear labels. 
+Each example fits within a 300-pixel-wide window and contains a combination of text, buttons, and radio options. 
+Tooltips appear when hovering over the respective control. 
+The countdown example features a dynamic text label above the button to indicate remaining seconds until modification.
+   • F1 GUI: Basic static tooltips.
+   • F2 GUI: Tooltip modified after countdown with live label update.
+   • F3 GUI: Includes a "Remove All" button for clearing tooltips.
+   • F4 GUI: Combines adding, modifying, and removing tooltips sequentially with timers.
+   • Controls maintain consistent width (180px) for alignment.
+   • Text labels provide user guidance and countdown feedback.
+
+USER EXPERIENCE:
+The script provides an intuitive interactive experience with clear visual feedback. 
+Users hover over buttons or radio controls to see tooltips, click controls to trigger message boxes, and observe automatic updates or removals in real-time. 
+Countdown labels and dynamic messages enhance usability by informing users of changes. 
+The always-on-top feature ensures that GUIs remain visible during interactions.
+   • Hovering reveals contextual tooltips for each control.
+   • Message boxes confirm button or radio selection actions.
+   • Countdown labels provide dynamic feedback on tooltip modifications.
+   • Timed updates and auto-removal make interactions predictable.
+   • Multi-line tooltips enhance readability for longer descriptions.
+   • Consistent visual layout and spacing improve usability.
+
+.
