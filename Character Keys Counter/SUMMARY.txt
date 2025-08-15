@@ -1,0 +1,45 @@
+
+*  Interactive key counter with live stats.
+
+PURPOSE:
+This script provides a graphical key counter that tracks the number of keystrokes pressed and records statistics for each individual key. It is intended to help users monitor typing activity, observe key usage frequency, and receive an audible alert when a predefined sample size is reached.
+
+KEY FEATURES:
+The script features a persistent, always-on-top GUI with interactive elements to manage key counting and statistics. Users can select the desired sample size, view a running counter, see detailed key statistics in real-time, and reset or exit the application conveniently. An audio alert notifies the user when the count reaches the selected sample size.
+
+• Persistent global keystroke monitoring using WM_KEYDOWN messages.
+• Customizable sample size via dropdown selection (50, 100, 200 keys).
+• Real-time display of total key count and per-key frequency.
+• Read-only log box updating with each keypress.
+• Reset button clears counters and statistics.
+• Exit button terminates the application.
+• Audible alert triggered when sample size is reached.
+
+LOGIC SUMMARY:
+The script initializes a GUI and sets up global variables to track the key count and individual key statistics. It intercepts all WM_KEYDOWN messages to increment counters and update statistics. Each keypress updates both the numeric counter and the textual key log. The GUI dynamically reflects these changes, ensuring the user has live feedback on typing activity. Sound is played automatically once the total count reaches the user-defined sample size.
+
+• `vKeyCounter` tracks total keystrokes.
+• `keyStats` object stores per-key frequency counts.
+• `WM_KEYDOWN` handler converts virtual key codes to human-readable names and updates counts.
+• `UpdateKeyLog()` function compiles key statistics into a formatted string for display.
+• GUI updates occur immediately after each keypress or when sample size changes.
+• Reset function reinitializes counters and clears the key log.
+
+LAYOUT:
+The GUI is compact and user-friendly, arranged vertically with clearly labeled interactive elements. The dropdown menu for sample size appears at the top, followed by the total key counter, a multiline read-only log box showing key statistics, and control buttons for Reset and Exit at the bottom.
+
+• Dropdown list for sample size selection.
+• Numeric counter text showing current progress versus sample size.
+• Read-only Edit box displaying per-key statistics.
+• Reset and Exit buttons for easy control.
+• AutoSize ensures GUI dimensions adapt to content.
+
+USER EXPERIENCE:
+Users benefit from real-time visual feedback and simple control over the counting session. The always-on-top GUI allows constant monitoring without interfering with other tasks. Audible alerts provide non-visual notification of reaching the sample size. The interface is intuitive, with immediate responsiveness to both key events and GUI actions, allowing seamless tracking and management of keystroke statistics.
+
+• Simple, clean, and non-intrusive interface.
+• Immediate updates for both counters and key logs.
+• Optional auditory cue enhances awareness of milestone completion.
+• Reset and Exit buttons allow easy session management.
+
+.
