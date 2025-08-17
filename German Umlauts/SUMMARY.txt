@@ -1,0 +1,38 @@
+
+*  Quick umlaut typing via ALT double-tap mode.
+
+PURPOSE:
+This script enables users to easily type German umlaut characters by temporarily entering a special "Umlaut Mode" through a double-tap of the ALT key. It simplifies the input of characters like ä, ö, ü, ß, and their capitalized forms without switching keyboard layouts. The script is designed for efficiency and minimizes disruption to regular typing.
+
+KEY FEATURES:
+The script activates a temporary mode for typing umlauts, which automatically disables itself after use or after a timeout period. It offers user guidance through tooltips and sound cues, and provides a built-in help system for reference.
+   • Double-tap ALT to enable Umlaut Mode.
+   • Active keys: a, o, u, s → umlauts; Shift variants produce uppercase umlauts.
+   • ESC exits Umlaut Mode without sending a character.
+   • Mode auto-cancels after 5 seconds or after a character is sent.
+   • Ctrl+Alt+H shows help instructions in a message box.
+   • Ctrl+Alt+Q allows for a clean exit of the script.
+
+LOGIC SUMMARY:
+The script relies on tracking ALT key presses within a short interval to detect a double-tap. If triggered, it enables hotkeys for umlaut characters, provides a tooltip notification, and plays a system sound. Sending an umlaut or pressing ESC deactivates Umlaut Mode. Background timers ensure that single taps reset correctly and that Umlaut Mode cancels automatically if unused.
+   • A counter increments with each ALT press and is reduced by a timer.
+   • A value of 2 within 500ms activates Umlaut Mode.
+   • Another timer enforces auto-cancel at 5 seconds.
+   • Umlaut hotkeys send specific characters and immediately exit the mode.
+   • Helper functions cleanly disable all active hotkeys and tooltips.
+
+LAYOUT:
+The script is structured with clear labels, timers, and functions to ensure modular handling of each feature. Initialization disables umlaut hotkeys by default, which are enabled only in Umlaut Mode. Dedicated subroutines handle tooltips, cancellation, and cleanup to maintain stability.
+   • ALT hotkeys track taps and trigger activation.
+   • Separate labels exist for each umlaut and uppercase version.
+   • Utility functions (DisableUmlautMode) reset state, timers, and hotkeys.
+   • A help dialog outlines all usage instructions.
+
+USER EXPERIENCE:
+The script is designed to be intuitive, requiring only a double-tap of ALT to activate. Clear visual and audio feedback indicates when Umlaut Mode is active, reducing guesswork. Automatic cancellation prevents accidental keystrokes from producing umlauts after delays. The inclusion of ESC as a manual cancel key and Ctrl+Alt+H as a help shortcut ensures smooth usability for both beginners and advanced users.
+   • Fast entry and exit of Umlaut Mode with minimal keystrokes.
+   • Immediate character input with a single press.
+   • Built-in safeguards against accidental umlaut typing.
+   • Lightweight and unobtrusive integration into daily typing.
+
+.
