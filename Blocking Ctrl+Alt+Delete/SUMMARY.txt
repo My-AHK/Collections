@@ -1,0 +1,80 @@
+
+*  Hotkey control & safeguard for Task Manager access
+
+PURPOSE:  
+The purpose of these scripts is to control access to Task Manager on Windows systems. 
+The primary script provides hotkeys that allow an administrator to disable or enable Task Manager dynamically by modifying specific registry entries. 
+The companion script acts as a safety measure by ensuring that if the main script is not running, the registry is automatically reverted to prevent Task Manager from remaining permanently blocked. 
+Together, they create a controlled and reversible method of restricting Task Manager access.
+
+❗❗ EDITS REGISTRY - USE WITH CAUTION ❗❗
+
+KEY FEATURES:  
+The main script is designed for administrators who need to temporarily prevent or restore Task Manager access through registry edits. 
+The companion script ensures system stability by preventing a permanent lockout if the main script is closed or terminated unexpectedly.  
+   • Auto-elevates itself to administrator level if not already running with elevated privileges.  
+   • Provides hotkeys for enabling (Win+1) and disabling (Win+2) Task Manager.  
+   • Uses the Windows “Image File Execution Options” registry path to redirect or block Task Manager.  
+   • Tracks script ownership of registry edits to ensure responsible cleanup.  
+   • Registers handlers for both script termination and system shutdown/reboot, ensuring registry cleanup.  
+   • Companion script monitors the primary script’s process and automatically reverts changes if the main script is missing.  
+   • Companion script runs in the background and can be set to autostart with Windows for fail-safe protection.  
+
+LOGIC SUMMARY:  
+The main script executes by checking administrator status and self-elevating if needed. 
+It registers handlers to intercept both script exit and system shutdown so that registry edits are reversed if the script is responsible for them. 
+Hotkeys are used to either disable Task Manager by writing a “Debugger” entry under the `Image File Execution Options` registry path or to re-enable Task Manager by removing those entries.  
+
+**Image File Execution Options (IFEO)**  (https://learn.microsoft.com/en-us/previous-versions/windows/desktop/xperf/image-file-execution-options)
+IFEO is a Windows feature that allows developers and administrators to intercept how executables are launched by the system. 
+By setting a “Debugger” value under the IFEO registry path for a program (e.g., `taskmgr.exe`), Windows will not launch the program normally but instead attempt to run the debugger command defined in the value. 
+In this script, a harmless string (“Hotkey Disabled”) is written as the debugger, effectively blocking Task Manager from running. 
+Removing this entry restores Task Manager functionality.  
+   • Main script logic:  
+       ⮞ Auto-elevate to admin for registry access.  
+       ⮞ Provide hotkeys for enable/disable control.  
+       ⮞ Use IFEO “Debugger” entries to block Task Manager.  
+       ⮞ Track ownership of registry changes to ensure responsible cleanup.  
+       ⮞ Handle shutdown/reboot with registry rollback.  
+   • Companion script logic:  
+       ⮞ Run on startup or in parallel with the main script.  
+       ⮞ Periodically check if the main script is active.  
+       ⮞ If missing, restore Task Manager access and then exit.  
+
+LAYOUT:  
+The main script follows a structured layout with sections for setup, hotkey definitions, registry modification routines, and shutdown/exit handlers. 
+Registry manipulation is contained within labeled subroutines (`Enable`, `Disable`, `ExitSub`) for clarity. 
+The companion script is intentionally minimal, containing a single infinite loop with periodic checks and restoration logic if required. 
+This modular approach keeps the main script interactive while leaving the companion script as a passive safeguard.  
+   • Main script structure:  
+       ⮞ Initialization: Admin check and auto-elevation.  
+       ⮞ Hotkeys: Win+1 to enable, Win+2 to disable Task Manager.  
+       ⮞ Subroutines: Registry writing/deleting with error handling.  
+       ⮞ Exit handling: Cleanup of registry values upon exit or shutdown.  
+   • Companion script structure:  
+       ⮞ Loop with process monitoring.  
+       ⮞ Conditional cleanup if main script not running.  
+       ⮞ Sleep interval for efficient resource usage.  
+
+USER EXPERIENCE:  
+The user experience is focused on simplicity, reliability, and safety. 
+The primary script provides instant control of Task Manager access via straightforward hotkeys. 
+Administrative elevation is automated, eliminating manual restarts with elevated rights. 
+Users are protected from accidental or permanent loss of Task Manager since the script self-cleans registry entries on shutdown or script exit. 
+The companion script adds an additional safeguard, ensuring Task Manager is restored even if the main script is forcibly closed. 
+For administrators or IT staff, this provides peace of mind and a controlled environment without complex configuration.  
+   • Hotkeys allow quick toggling without navigating registry or policy editors.  
+   • Automatic admin elevation reduces friction for the user.  
+   • Error handling notifies the user if registry edits fail.  
+   • Registry ownership tracking ensures only the script’s changes are removed.  
+   • Companion script creates a fail-safe system for stability.  
+   • Startup integration makes long-term management seamless.
+
+POTENTIAL ISSUES:
+  • Antivirus Detection: IFEO edits may be flagged as malicious.
+  • Modern Windows Versions: Newer protections can block registry changes.
+  • Alternative Task Managers: Windows Task Manager is completely blocked, but other tools remain usable.
+  • System Recovery: If both scripts are killed, power failure, could leave Task Manager disabled until fixed manually. Simply run the companion script or put in your startup folder.
+
+
+.
