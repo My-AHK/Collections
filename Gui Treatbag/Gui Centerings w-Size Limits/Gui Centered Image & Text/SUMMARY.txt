@@ -1,0 +1,46 @@
+
+*  Resizable, draggable GUI with centered image/text
+
+
+PURPOSE:
+This AutoHotkey script creates a resizable, draggable GUI window that displays an image and a text label, centered dynamically based on either specified coordinates or the currently active monitor. It is designed to provide a visually organized overlay that remains on top of other windows and adapts its layout during resizing.
+
+KEY FEATURES:
+The script provides persistent GUI functionality with flexible positioning, customizable appearance, and automatic centering logic. Users can trigger the GUI display with Ctrl + F1, and the window supports dynamic resizing and dragging.
+
+   • GUI can be customized with background color, font type, font size, and font color.
+   • The displayed image can be loaded from the script folder or a full path specified by the user.
+   • Window position automatically centers relative to the active monitor or uses user-defined coordinates.
+   • Minimum and maximum dimensions prevent unintended scaling beyond practical limits.
+   • Window remains always on top and does not appear in the taskbar, reducing distractions.
+   • Supports live repositioning of image and text during resizing to maintain centered alignment.
+   • Dragging functionality allows moving the window by clicking anywhere within the GUI.
+   • Resizable borders are custom-defined, providing intuitive resizing from edges and corners.
+
+LOGIC SUMMARY:
+The script begins by setting essential AutoHotkey configurations and defining GUI appearance and dimensions. When triggered, it calculates the correct screen coordinates for the GUI placement and shows the window. Event handlers intercept mouse actions and resizing messages to facilitate custom drag and resize behavior.
+
+   • Ctrl + F1 hotkey initializes the GUI display sequence.
+   • The script checks if custom coordinates are provided; if not, it calculates centering based on the active monitor.
+   • GUI controls include a Picture element for the image and a Text element for the label.
+   • Resizing and dragging are handled by intercepting WM_NCHITTEST, WM_NCCALCSIZE, and mouse messages.
+   • During resizing, the script recalculates positions of the image and text to keep them visually centered.
+
+LAYOUT:
+The GUI layout is simple yet flexible, emphasizing a central image with descriptive text below it. Both elements dynamically reposition as the window size changes, ensuring consistent visual balance.
+
+   • Image is centered horizontally and positioned with a vertical offset to leave space for the text.
+   • Text is centered below the image with a fixed spacing to maintain clarity.
+   • GUI width and height can be manually adjusted but respect defined minimum and maximum limits.
+   • Optional custom coordinates allow precise positioning on any screen.
+
+USER EXPERIENCE:
+The user experiences a responsive and visually coherent overlay window that is easy to interact with. Its always-on-top behavior and smooth resizing and dragging make it suitable for notifications, banners, or visual guides.
+
+   • Activates with Ctrl + F1, providing quick access.
+   • Can be resized from any edge or corner without disrupting content alignment.
+   • Smooth dragging and redraw functionality reduce visual glitches.
+   • Image and text remain centered regardless of window changes, ensuring readability and aesthetic consistency.
+   • Tool window style keeps the GUI subtle while remaining visible over other applications.
+
+.

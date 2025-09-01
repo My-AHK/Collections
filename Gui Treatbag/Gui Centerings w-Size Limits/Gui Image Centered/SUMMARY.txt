@@ -1,0 +1,38 @@
+
+*  Borderless GUI with resizable, centered image
+
+
+PURPOSE:
+This script creates a customizable AutoHotkey GUI window that displays an image and allows for advanced resizing and dragging without traditional window borders. The goal is to provide a clean, always-on-top interface with precise control over resizing edges and corners.
+
+KEY FEATURES:
+The script equips the GUI with custom behaviors for resizing, centering, and dragging. It achieves this by intercepting Windows messages and replacing standard window borders with programmatically defined hit zones.
+   • Always-on-top GUI window with custom background color.  
+   • Resizable GUI with defined minimum and maximum constraints.  
+   • Dynamic centering of the displayed image during window resize.  
+   • Custom border sizing using WM_NCHITTEST for precise resize hit zones.  
+   • Borderless appearance with hidden system borders via WM_NCCALCSIZE.  
+   • Click-and-drag movement of the entire window.  
+   • Activation by hotkey (Ctrl+F1) for quick display.  
+
+LOGIC SUMMARY:
+The script intercepts key Windows messages to redefine GUI behavior. WM_NCCALCSIZE removes the default sizing borders, while WM_NCHITTEST re-creates resizing zones at each edge and corner of the window. During resizing events, the script calculates the new dimensions and repositions the image to remain centered. A separate routine handles left mouse dragging by sending system messages, effectively making the borderless GUI movable.
+   • WM_NCCALCSIZE returns zero to disable default borders.  
+   • WM_NCHITTEST manually defines resizing areas (edges and corners).  
+   • Resizing triggers recalculation of image positioning.  
+   • PostMessage simulates drag behavior when the left mouse button is pressed.  
+
+LAYOUT:
+The layout revolves around a central image displayed within a clean borderless GUI. Parameters for color, position, size, and image path are easily configurable at the top of the script. The GUI is initialized with defined width, height, and constraints, then enhanced with resizing logic that ensures the image remains visually centered regardless of adjustments.
+   • Configurable GUI color, coordinates, width, and height.  
+   • Central image element with variable reference for repositioning.  
+   • Auto-centered image alignment logic during window resizing.  
+   • Resizable edges and corners without visible system frames.  
+
+USER EXPERIENCE:
+From a user perspective, the GUI is simple, responsive, and visually uncluttered. The absence of standard borders creates a streamlined display focused on the image itself. Users can drag the window smoothly and resize it from any corner or edge with precise hit detection. The script offers flexibility for personal customization, making it suitable for lightweight overlays, image viewers, or custom widgets.
+   • Smooth drag-and-drop window movement.  
+   • Intuitive resizing with consistent centering of content.  
+   • Minimalist design without unnecessary UI clutter.  
+   • Easily modified parameters for personalized setup.  
+   • Hotkey activation ensures quick access without menu navigation.  

@@ -1,0 +1,14 @@
+
+══════════════════════════
+   AutoHotkey Gui Scripts
+ QUICK REFERENCE SHEET
+══════════════════════════
+
+1. Image + Text Overlay: 
+    Resizable, draggable, always-on-top GUI showing image + text; auto-centers on active monitor or custom coords; Ctrl+F1 hotkey; drag/resize handled via WM_NCHITTEST/WM_NCCALCSIZE; image & text reposition dynamically on resize; customizable fonts, colors, min/max size.
+
+2. Borderless Text GUI: 
+    Always-on-top, resizable, borderless GUI displaying centered text; custom font, color, background; Ctrl+F1 hotkey; WM_NCCALCSIZE removes borders, WM_NCHITTEST defines resize zones; text remains centered on resize; smooth drag via mouse messages; minimal & clean layout.
+
+3. Borderless Image GUI: 
+    Always-on-top, borderless, resizable GUI showing central image; dynamic centering during resize; min/max constraints; Ctrl+F1 hotkey; WM_NCCALCSIZE removes borders, WM_NCHITTEST defines precise resize hit zones; drag-and-drop movement enabled; minimalist, configurable appearance.

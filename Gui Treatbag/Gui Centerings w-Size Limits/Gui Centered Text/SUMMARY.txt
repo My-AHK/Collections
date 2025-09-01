@@ -1,0 +1,42 @@
+
+*  Borderless resizable GUI with centered text
+
+
+PURPOSE:
+This script builds a borderless AutoHotkey GUI window designed to display centered text instead of an image. It allows resizing from any edge or corner while keeping the text label dynamically centered within the window. The GUI is always on top, visually clean, and movable by dragging.
+
+KEY FEATURES:
+The script equips the GUI with enhanced interactivity by customizing how borders and resizing work. It replaces system borders with programmatically defined zones and ensures that text remains centered regardless of window dimensions.
+   • Always-on-top GUI with custom background color.  
+   • Resizable window with minimum and maximum constraints.  
+   • Custom font selection, size, color, and style for displayed text.  
+   • Dynamic repositioning of the text to remain centered during resizing.  
+   • Borderless appearance with hidden system frames using WM_NCCALCSIZE.  
+   • Custom resizing edges and corners via WM_NCHITTEST.  
+   • Drag-and-drop movement through simulated system messages.  
+   • Hotkey (Ctrl+F1) activation for quick use.  
+
+LOGIC SUMMARY:
+The script intercepts Windows messages to redefine border behavior. WM_NCCALCSIZE removes the default system borders, while WM_NCHITTEST redefines hit detection to create custom resizable edges and corners. When the GUI is resized, calculations determine the new window size and reposition the text label to remain perfectly centered. Dragging functionality is implemented by posting a system message when the left mouse button is pressed inside the GUI.
+   • WM_NCCALCSIZE disables default borders for a cleaner look.  
+   • WM_NCHITTEST manually defines active resizing zones.  
+   • The GuiSize label recalculates new positions for the text.  
+   • WM_LBUTTONDOWNdrag enables smooth window dragging.  
+
+LAYOUT:
+The GUI layout is focused on text presentation rather than image display. It uses a configurable font, size, and color, while keeping the centered text as the main content of the window. Adjustable parameters such as position, size, and color allow easy customization to suit different needs.
+   • Central text label aligned to the middle of the window.  
+   • Adjustable GUI background, font family, size, and color.  
+   • Resizable frame with defined constraints (minimum and maximum).  
+   • Borderless design for a streamlined appearance.  
+
+USER EXPERIENCE:
+From the user’s perspective, the GUI provides a minimal and functional interface for displaying text. The lack of system borders results in a modern look, while resizing and dragging remain intuitive and fluid. Text remains consistently centered during window adjustments, making the experience clean and predictable.
+   • Simple, clutter-free window presentation.  
+   • Text remains centered during resizes, maintaining readability.  
+   • Smooth dragging with intuitive click-and-drag movement.  
+   • Quick activation via hotkey without navigating menus.  
+   • Flexible customization options for fonts and styles.  
+
+
+.
