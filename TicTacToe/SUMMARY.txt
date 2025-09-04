@@ -1,0 +1,38 @@
+
+*  Graphical Tic Tac Toe with GDI+ and AHK GUI
+
+
+PURPOSE:  
+This AutoHotkey script creates a fully playable two-player Tic Tac Toe game with a custom GUI built using GDI+. It visually renders the grid, dynamically draws "X" and "O" markers, tracks player turns, and determines game outcomes including wins and ties. The script provides an interactive, graphical version of the game rather than relying on simple text-based output.  
+
+KEY FEATURES:  
+The script initializes GDI+ for graphical rendering and uses AutoHotkey’s GUI system to create a dedicated game window. Mouse clicks are tracked to place player pieces on the board, while win conditions are automatically checked. A visual refresh mechanism ensures smooth updates to the grid and markers.  
+   • Interactive two-player Tic Tac Toe game.  
+   • Graphical rendering via GDI+ with smoothing enabled.  
+   • Mouse click detection to select board cells.  
+   • Automated win and tie detection with message prompts.  
+   • GUI supports resizing but preserves core functionality.  
+
+LOGIC SUMMARY:  
+The program initializes global variables representing the game state, including three arrays for the rows, player tracking, and win detection. When the hotkey is pressed, a new game window is created with a bitmap backing. Clicking a cell alternates turns between "X" and "O," updates the board array, redraws the interface, and checks for a winner. If a win or tie occurs, the script prevents further moves and displays the result.  
+   • Initialization ensures empty boards, alternating player turns, and graphics setup.  
+   • Redraw routine clears the board, draws grid lines, and renders all "X" or "O" markers.  
+   • Win detection logic checks rows, columns, diagonals, and tie conditions.  
+   • Event handling covers clicks, resizing, and closing the game.  
+
+LAYOUT:  
+The interface is built as a resizable window with a fixed gray background and a central 3x3 grid. Grid lines are drawn in white, while "X" markers appear in blue and "O" markers in red. Pieces are positioned proportionally within each grid cell, ensuring consistent visual alignment even if the window is resized.  
+   • Gray background provides visual contrast for grid lines.  
+   • White grid lines divide the board into nine equal sections.  
+   • "X" drawn as two diagonal blue lines within a cell.  
+   • "O" drawn as a red ellipse fitting the cell with margins.  
+
+USER EXPERIENCE:  
+Players interact by clicking cells on the board to place their symbol, with turns alternating automatically. The game responds instantly with redrawing and checks for game completion after each move. When a win or tie occurs, a message box informs the players, and the game ends until restarted. The simple design ensures clarity and accessibility, while the graphical enhancements make the game visually engaging.  
+   • Easy-to-understand interface with minimal distractions.  
+   • Immediate visual and auditory feedback with each turn.  
+   • Clear distinction of player pieces through color coding.  
+   • End-of-game notifications create a complete gameplay loop.  
+
+
+.
