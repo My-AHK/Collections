@@ -1,0 +1,38 @@
+
+*  Timed task trigger with optional automation
+
+
+PURPOSE:  
+This AutoHotkey script is designed to trigger automated actions or signals at specific repeating minute intervals. It provides a reliable way to perform tasks on a timed basis, with both an initial startup delay and recurring checks every second. The script’s structure also allows for optional in-game movement automation, though this portion is commented out.
+
+KEY FEATURES:  
+The script focuses on time-based execution, task signaling, and structured control of behavior through timers. It emphasizes flexibility by allowing expansion for more complex tasks.  
+   • Executes tasks when the system clock reaches minute values ending in 2, 12, 22, 32, 42, or 52.  
+   • Provides audio feedback via beeps before and after the task.  
+   • Includes optional (commented out) mouse and keyboard automation for movement-based activities.  
+   • Uses a safety exit hotkey (Escape key) to stop timers and close the script immediately.  
+   • Maintains efficient performance through optimized delays and input handling.  
+
+LOGIC SUMMARY:  
+The script begins with a short delay before activating the main loop, ensuring the system is ready before monitoring time. A timer runs every second to check the current minute value. When a match is found, the task is executed, marked with start and end beeps, and then monitored until the minute changes. After the transition, the timer resumes its cycle to watch for the next trigger point.  
+   • Initial startup delay of 3 seconds.  
+   • Recurring `CheckTime` subroutine verifies the current minute.  
+   • Task triggers only on designated minute intervals.  
+   • Execution temporarily disables the timer to prevent duplicate triggers.  
+   • Loop ensures the task runs until the minute changes.  
+
+LAYOUT:  
+The script is structured with clear setup directives at the top, a single main routine (`CheckTime`), and cleanly defined exit logic. Comments provide guidance on optional actions and usage.  
+   • Setup section includes directives for performance optimization and coordinate mode.  
+   • Core logic resides in `CheckTime`, handling both time checks and task execution.  
+   • Commented-out block offers optional mouse/keyboard automation.  
+   • Hotkey section at the end provides manual termination control.  
+
+USER EXPERIENCE:  
+From the user’s perspective, the script provides predictable timed triggers with audible confirmation, ensuring tasks are noticeable when executed. The optional automation block can be customized for games or repetitive tasks, allowing flexibility depending on user needs. Termination is simple and accessible, making it safe to run persistently in the background.  
+   • Provides clear audible signals before and after tasks.  
+   • Flexible task section can be expanded for automation purposes.  
+   • Runs silently in the background until triggered.  
+   • Escape key ensures quick and safe shutdown.  
+
+.
