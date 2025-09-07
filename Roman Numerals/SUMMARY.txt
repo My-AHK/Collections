@@ -1,0 +1,36 @@
+
+*  Roman numeral converter with extended support.
+
+
+PURPOSE:  
+This AutoHotkey script provides comprehensive functions for converting between decimal numbers and Roman numerals, including support for extended Roman numeral notation using brackets to represent large values. It demonstrates both basic and advanced usage examples while handling invalid inputs, negative numbers, and custom user input. The script is designed as both a reference tool and a practical converter for everyday or specialized use cases.
+
+KEY FEATURES:  
+The script implements robust conversion functions with flexible options, practical hotkey triggers, and validation.  
+   • Conversion from decimal to Roman numerals (standard and extended).  
+   • Conversion from Roman numerals to decimal with strict validation.  
+   • Extended notation for values above 3,999 using bracket symbols.  
+   • Optional support for negative numbers with prefixed minus sign.  
+   • Error handling for invalid sequences, characters, or data types.  
+   • Practical hotkeys for testing, user input conversion, and batch processing.  
+   • Integration with clipboard for immediate result usage.  
+
+LOGIC SUMMARY:  
+The script relies on two core functions—`Dec2Roman()` and `Roman2Dec()`—that implement systematic mapping between numbers and Roman numeral representations. Extended notation is introduced through bracketed values like `[M]` (1,000,000).  
+   • `Dec2Roman()` validates input as an integer, handles negatives if allowed, and assembles Roman numeral strings by subtractive construction using ordered symbol-value pairs.  
+   • `Roman2Dec()` parses Roman numeral strings, validates symbols with regex, enforces repetition and subtraction rules, and sums values with support for negatives.  
+   • A `ConvertRomanNumber()` wrapper attempts conversion in both directions, ensuring flexibility when processing user input.  
+   • Validation includes rejecting improper sequences (e.g., "IIV"), repetitions beyond allowed limits, or invalid characters.  
+
+LAYOUT:  
+The script is organized into labeled hotkey sections that showcase usage examples and functionality.  
+   • Basic examples demonstrate standard conversion (Ctrl+F1, Ctrl+F2).  
+   • Advanced cases cover extended notation, negatives, and error handling (Ctrl+F3–F5).  
+   • Variable and user input handling are shown through practical examples (Ctrl+F6–F7).  
+   • Batch conversion illustrates processing a list of values at once (Ctrl+F8).  
+   • Core functions are placed at the bottom, clearly separated from demonstration hotkeys.  
+
+USER EXPERIENCE:  
+From a user perspective, the script provides immediate, interactive access to Roman numeral conversions. Results are shown in message boxes and can be copied to the clipboard for further use. The hotkeys allow quick testing of different features without modifying the code, and error handling ensures incorrect inputs do not crash the script but instead return safe fallback values. This design makes it approachable for casual users, while still offering enough depth for advanced usage such as validating extended numerals, handling negative values, or processing multiple conversions at once.  
+
+.
