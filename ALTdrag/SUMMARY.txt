@@ -1,0 +1,78 @@
+
+*  ALTdrag: Mouse Window Management with Snapping.
+
+
+PURPOSE:
+This AutoHotkey script provides comprehensive mouse-based window management through a series of Alt key combinations with mouse actions. It enables users to move, resize, scale, minimize, maximize, and toggle borderless fullscreen on application windows without relying on traditional title bars or system menus. The script excludes system windows like the NVIDIA GeForce Overlay, taskbar, and desktop background to prevent unintended interactions with critical system components.
+
+KEY FEATURES:
+The script implements both traditional and non-traditional window manipulation techniques through intuitive mouse and keyboard combinations. It includes advanced snapping functionality that allows windows to align with monitor edges and other windows during movement and resizing operations. The borderless fullscreen feature provides a cinematic viewing experience by removing window chrome while maintaining the window's original position and style for easy restoration.
+
+• Traditional Hotkeys:
+   • Alt + Left Mouse Button: Click and drag to move windows
+   • Alt + Right Mouse Button: Click and drag to resize from any edge/corner
+   • Alt + Middle Mouse Button: Toggle between maximized and restored states
+
+• Non-Traditional Hotkeys:
+   • Alt + Scroll Wheel: Scale windows up/down while maintaining aspect ratio
+   • Alt + Mouse Back Button: Minimize windows
+   • Alt + Mouse Forward Button: Toggle borderless fullscreen mode
+
+• Advanced Functionality:
+   • Monitor and window edge snapping during drag/resize operations
+   • Window alignment during resize operations
+   • Smart scaling that respects window size limits
+   • Configurable snapping radius and behavior
+
+LOGIC SUMMARY:
+The script operates through an event-driven architecture where each hotkey triggers specific window manipulation functions. The core functionality involves calculating mouse movement deltas and applying those changes to window position and size while respecting system limits and user configuration. The snapping system uses distance-based algorithms to detect when a window edge approaches monitor boundaries or other windows, then adjusts the position accordingly. The borderless fullscreen implementation works by storing original window properties before modification and restoring them when toggled off.
+
+• Initialization:
+   • Sets up system hooks and initial configuration values
+   • Creates tray menu for snapping toggle functionality
+   • Defines blacklist for system windows to exclude
+
+• Window Manipulation:
+   • Calculates mouse offsets relative to window position
+   • Applies movement and size changes with boundary checking
+   • Implements smoothing through controlled sleep intervals
+
+• Snapping System:
+   • Uses monitorFromPoint and GetMonitorInfo API calls
+   • Calculates distances to edges and applies snapping within radius
+   • Supports both monitor and window-to-window snapping
+
+LAYOUT:
+The script follows a structured organization beginning with hotkey definitions, followed by initialization routines, and then the core function library. Each section is clearly marked with comments and separators for maintainability. The hotkey section defines all user-input combinations and their corresponding function calls. The initialization function sets up global variables and system tray menu options. The function library contains all the window manipulation logic, organized by functionality type (movement, resizing, scaling, etc.).
+
+• Header Section:
+   • Hotkey definitions with clear labeling
+   • Initialization function call
+
+• Core Functions:
+   • Movement and resizing with snapping logic
+   • Scaling and minimization routines
+   • Borderless fullscreen implementation
+
+• Support Functions:
+   • Monitor information retrieval
+   • Window property management
+   • Coordinate calculation and clamping
+
+USER EXPERIENCE:
+Users experience fluid window management through intuitive mouse gestures combined with the Alt modifier key. The snapping functionality provides tactile feedback as windows align with screen edges and other applications, creating an organized workspace without precise mouse positioning. The scaling feature allows for gradual window size adjustment while maintaining proportions, and the borderless fullscreen mode offers immersive application viewing. The system tray menu provides quick access to toggle snapping behavior on/off, making the tool adaptable to different workflow needs.
+
+• Visual Feedback:
+   • Smooth window movement and resizing
+   • Immediate snapping response when thresholds are met
+   • Audible cues for borderless fullscreen toggling
+
+• Configuration:
+   • Tray menu for enabling/disabling snapping
+   • Adjustable snapping radius (40 pixels default)
+   • Modifier key requirement option for snapping
+
+• Compatibility:
+   • Works with most standard application windows
+   • Excludes system windows to prevent interference
+   • Handles minimized/maximized state restrictions
