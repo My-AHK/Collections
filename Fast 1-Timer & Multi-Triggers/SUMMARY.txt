@@ -1,0 +1,47 @@
+
+*  Precision second-based timer with toggleable hotkeys.
+
+PURPOSE:
+This script functions as a high-precision timing assistant, designed to execute specific actions at exact moments within a minute-long cycle. 
+It provides a persistent, on-screen GUI that displays the current second and the status of two toggleable hotkeys, F1 and F2. 
+The core utility lies in its ability to trigger distinct audio-visual alerts precisely at the 15/45-second and 00/30-second marks, 
+respectively, making it ideal for users who need to perform time-sensitive tasks synchronized to the system clock.
+
+KEY FEATURES:
+The script's functionality is built around two main hotkeys and a precision timer, all monitored by a compact GUI.
+   •   Toggleable Hotkeys (F1 & F2):
+       ⮞   F1 is programmed to activate its routine at the 15-second and 45-second marks of any minute.
+       ⮞   F2 is programmed to activate its routine at the 00-second and 30-second marks of any minute.
+   •   High-Precision Timing:
+           ⮚   Utilizes the Windows API's `QueryPerformanceCounter` for microsecond-accurate timing measurements, far surpassing the standard `A_TickCount`.
+   •   Visual Status Interface:
+       ⮞   A small, always-on-top GUI displays the current second, the status of each hotkey (ENABLED/DISABLED), and a running elapsed time counter.
+   •   User Feedback:
+           ⮚   Audible beeps confirm the toggling of hotkeys and the execution of their timed routines.
+           ⮚   Tooltips provide immediate, context-sensitive status updates and performance metrics near the mouse cursor.
+
+LOGIC SUMMARY:
+The script operates through a continuous loop managed by timers. The `PrecisionTimer` subroutine, which runs every 100 milliseconds, is the heart of the timing mechanism. 
+It calculates the current time with high precision and checks if the conditions for triggering the F1 or F2 actions are met. 
+This check involves verifying that the hotkey is active, the current system second matches the target (15/45 for F1, 00/30 for F2), 
+and that a cooldown period (900ms) has passed since the last trigger to prevent multiple firings within the same target second. 
+When conditions are satisfied, it launches the corresponding action subroutine (`F1_Action` or `F2_Action`) with the highest priority. 
+A separate `UpdateGUI` timer frequently refreshes the on-screen display to show the current status and elapsed time.
+
+LAYOUT:
+The user interface is a small, borderless window strategically positioned in the bottom-right corner of the primary monitor by default. Its design is minimalist and focused on functionality.
+   •   Primary Display: A large, central number shows the current second of the minute.
+   •   Status Indicators: Two lines of text below the large number show the enabled/disabled state of the F1 and F2 hotkeys, changing color and font size for emphasis.
+   •   Information Line: A line at the top shows the total milliseconds elapsed since the script started.
+   •   Exit Control: A clickable "EXIT" text label is provided at the bottom to terminate the script.
+
+USER EXPERIENCE:
+Interaction is simple and intuitive. 
+The user presses F1 or F2 to toggle the respective timer on or off, receiving an audible beep and a temporary tooltip for confirmation. 
+Once enabled, the script runs autonomously in the background. 
+The user is notified of a successful trigger with a unique beep and a detailed tooltip that reports the subroutine's response time in microseconds, providing valuable performance feedback. 
+The GUI serves as a constant, unobtrusive reference for the current time and hotkey status. 
+The script is exited gracefully by either clicking the "EXIT" text on the GUI or pressing the Escape key.
+
+
+.
