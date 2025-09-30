@@ -1,0 +1,50 @@
+
+*  Quick Spanish accent typing via ALT double-tap mode.
+
+PURPOSE:
+This script enables users to easily type Spanish accented characters and punctuation by temporarily entering a special "Accent Mode" through a double-tap of the ALT key. 
+It simplifies the input of characters like á, é, í, ó, ú, ñ, ¡, ¿ and their capitalized forms without switching keyboard layouts. 
+The script is designed for efficiency and minimizes disruption to regular typing.
+
+KEY FEATURES:
+The script activates a temporary mode for typing Spanish characters, which automatically disables itself after use or after a timeout period. 
+It offers user guidance through tooltips and sound cues, and provides a built-in help system for reference.
+   • Double-tap ALT to enable Accent Mode.
+   • Active keys: a, e, i, o, u, n, !, ? → accented characters; Shift variants produce uppercase accented letters.
+   • ESC exits Accent Mode without sending a character.
+   • Mode auto-cancels after 5 seconds or after a character is sent.
+   • Ctrl+Alt+H shows help instructions in a message box.
+   • Ctrl+Alt+Q allows for a clean exit of the script.
+
+LOGIC SUMMARY:
+The script relies on tracking ALT key presses within a short interval to detect a double-tap. 
+If triggered, it enables hotkeys for Spanish characters, provides a tooltip notification, and plays a system sound. 
+Sending an accented character or pressing ESC deactivates Accent Mode. 
+Background timers ensure that single taps reset correctly and that Accent Mode cancels automatically if unused.
+   • A counter increments with each ALT press and is reduced by a timer.
+   • A value of 2 within 750ms activates Accent Mode.
+   • Another timer enforces auto-cancel at 5 seconds.
+   • Accent hotkeys send specific characters and immediately exit the mode.
+   • Helper functions cleanly disable all active hotkeys and tooltips.
+
+LAYOUT:
+The script is structured with clear labels, timers, and functions to ensure modular handling of each feature. 
+Initialization disables accent hotkeys by default, which are enabled only in Accent Mode. 
+Dedicated subroutines handle tooltips, cancellation, and cleanup to maintain stability.
+   • ALT hotkeys track taps and trigger activation.
+   • Separate labels exist for each accented character and uppercase version.
+   • Utility functions (DisableAccentMode) reset state, timers, and hotkeys.
+   • A help dialog outlines all usage instructions.
+
+USER EXPERIENCE:
+The script is designed to be intuitive, requiring only a double-tap of ALT to activate. 
+Clear visual and audio feedback indicates when Accent Mode is active, reducing guesswork. 
+Automatic cancellation prevents accidental keystrokes from producing accented characters after delays. 
+The inclusion of ESC as a manual cancel key and Ctrl+Alt+H as a help shortcut ensures smooth usability for both beginners and advanced users.
+   • Fast entry and exit of Accent Mode with minimal keystrokes.
+   • Immediate character input with a single press.
+   • Built-in safeguards against accidental accent typing.
+   • Lightweight and unobtrusive integration into daily typing.
+
+
+.
