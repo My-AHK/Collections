@@ -1,0 +1,34 @@
+
+*  AHK #Directives & Settings Multi-Profile Speed & Stability Performance Guide.
+
+PURPOSE:
+This guide defines the optimal performance settings and directive configurations for AutoHotkey v1.1 scripts across different usage profiles. 
+It explains which directives improve speed, stability, or reliability and provides tailored combinations for gaming, GUI automation, text expansion, and background systems. 
+Its goal is to help script authors maximize performance without sacrificing functionality or stability.
+
+KEY FEATURES:
+Each directive and setting is categorized by speed impact, from tiny to major, and grouped under clear performance contexts. 
+The guide emphasizes conditional usage, showing when a directive is critical, recommended, conditional, or to be avoided, ensuring adaptability to different environments.
+   • Profiles include Gaming, GUI-heavy, Text Processing, System Automation, Business, Pixel-based, and Server/Headless.
+   • Each setting is labeled with its effect level and context, detailing whether it boosts responsiveness, stability, or CPU efficiency.
+   • A final section lists the ideal execution order for applying directives to maximize performance consistency.
+
+LOGIC SUMMARY:
+The document organizes directives into logical layers that affect initialization, concurrency, performance, and fine-tuning. 
+Settings that control environment and activation behavior come first, followed by timing and input accelerators, then coordinate consistency, and finally debug and system optimizations.
+   • Initialization layer: environment control (#NoEnv, #SingleInstance).
+   • Performance layer: timing and Send/Mouse/Control speeds.
+   • Stability and reliability layer: logging and priority management.
+   • Conditional use ensures balance between raw speed and predictable execution.
+
+LAYOUT:
+The script follows a consistent structure using labeled sections, separators, and commentary explaining purpose and context. 
+Each performance profile ends with a ready-to-use configuration example.
+   • Sections include detailed commentary and indentation for readability.
+   • Group headers and comments maintain visual and conceptual clarity.
+
+USER EXPERIENCE:
+Readers gain a practical, visual understanding of how to tune AutoHotkey directives efficiently. 
+The multi-profile examples allow quick implementation for specific needs, ranging from ultra-fast gaming to stable background operation, without requiring advanced scripting knowledge.
+
+.
