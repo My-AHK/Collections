@@ -1,0 +1,70 @@
+
+*  Grid-based Window Snapper with Multi-Monitor Logic
+
+PURPOSE:
+This AutoHotkey v1.1 script provides a comprehensive grid-based window management system. 
+It allows the user to snap active windows into specific portions of the screen using intuitive keyboard shortcuts. 
+By combining different modifier keys with arrow keys or Numpad keys, users can rapidly move or resize windows 
+to precise positions, effectively creating a customizable tiling window manager for Windows. 
+Its main objective is to simplify multitasking and layout control without external tools.
+
+KEY FEATURES:
+The script offers a robust and highly flexible system for controlling window geometry across multiple monitors. 
+Each positioning command is powered by a unified function that calculates precise dimensions and applies adjustments to eliminate visual gaps.  
+   • Supports single-cell and multi-cell window placement across user-defined grid layouts.  
+   • Includes predefined hotkeys for 1x2, 2x2, 3x3, 4x4, 5x7, 6x6, 8x12, and 10x10 grid systems.  
+   • Provides half, third, quarter, and custom-spanning positions for maximum control.  
+   • Compatible with multi-monitor setups, automatically detecting the active monitor.  
+   • Uses `WinGetPosEx` and DWM API for precise edge alignment on modern systems.  
+   • Offers examples in the header for clear, immediate reference.  
+   • Optimized for performance with `SetBatchLines -1` and minimal processing delays.  
+   • Automatically compensates for window frame offsets, ensuring pixel-perfect alignment.  
+   • Includes clear categorization of hotkeys for easier memorization and modification.  
+   • Uses modular functions (`SnapActiveWindowGridSpan`, `GetMonitorIndexFromWindow`, `WinGetPosEx`) for maintainability and clarity.
+
+LOGIC SUMMARY:
+The script’s operation centers on a key function, `SnapActiveWindowGridSpan`, which calculates and applies window positioning based on grid geometry. 
+The process begins by determining the monitor associated with the active window, retrieving its usable work area, and dividing it into grid cells.  
+   • The window’s destination coordinates and size are computed by multiplying grid indices and spans by cell dimensions.  
+       ⮞ `row` and `col` define the cell position.  
+       ⮞ `rowSpan` and `colSpan` define how many cells the window should cover.  
+   • The `WinGetPosEx` function retrieves accurate frame offsets by calling `DwmGetWindowAttribute` or `GetWindowRect` when DWM is unavailable.  
+       ⮞ This correction prevents visible gaps or misalignments when resizing or moving windows.  
+   • Once dimensions are calculated, `WinMove` is called to adjust window position and size precisely.  
+   • The secondary function `GetMonitorIndexFromWindow` uses Windows API calls (`MonitorFromWindow`, `GetMonitorInfo`) to match the window to its monitor index, ensuring grid boundaries are monitor-specific.  
+   • Error handling ensures compatibility with older systems that lack DWM support.  
+   • Each hotkey triggers this function with custom parameters defining rows, columns, and spans for a specific target position.
+
+LAYOUT:
+The layout is logically structured with clearly separated sections for directives, hotkeys, and functions.  
+   • The “Directives & Settings” section optimizes execution and environment variables.  
+       ⮞ It sets single instance mode, persistent operation, and performance flags.  
+   • The “Hotkeys” section is organized by key combinations for intuitive recall.  
+       ⮞ (Win + Alt + Arrows): basic vertical halves.  
+       ⮞ (Ctrl + Win + Alt + Arrows): vertical thirds.  
+       ⮞ (Win + Alt + Numpad): horizontal and center combinations.  
+       ⮞ (Ctrl + Win + Numpad): vertical segment divisions.  
+       ⮞ (Ctrl + Numpad): complex multi-span grids for fine control.  
+       ⮞ (Ctrl + Win + Alt + Numpad): full 3×3 matrix for intuitive spatial mapping.  
+   • Function blocks follow, each dedicated to modular operations:  
+       ⮞ `SnapActiveWindowGridSpan` handles main grid snapping and dimension logic.  
+       ⮞ `GetMonitorIndexFromWindow` ensures cross-monitor accuracy.  
+       ⮞ `WinGetPosEx` performs extended frame-bound calculations and DWM fallback.  
+   • Inline comments follow a consistent visual style (`;;∙------∙`), enhancing readability while retaining compact structure.
+
+USER EXPERIENCE:
+This script delivers a professional-grade, keyboard-driven experience for users who value layout efficiency. 
+It transforms static desktops into dynamic workspace grids with seamless transitions.  
+   • Provides immediate feedback and consistent behavior regardless of monitor configuration.  
+   • Hotkey combinations are mnemonic and ergonomic, aligning grid logic with intuitive spatial controls.  
+   • Eliminates the need for external tiling utilities or complex GUI tools.  
+   • Perfect for developers, designers, and power users managing multiple windows simultaneously.  
+   • Because of its modular structure, customization is straightforward—users can easily redefine grid sizes or create new keybindings.  
+   • The documentation within the header ensures users can modify layouts without external reference.  
+   • The script’s use of advanced API calls enhances smoothness, accuracy, and modern Windows compatibility.  
+   • All adjustments occur instantly, with virtually no lag due to performance-tuned directives.  
+   • Multi-monitor adaptability ensures windows remain within their active screen boundaries without misplacement.  
+   • The script maintains full backward compatibility with legacy Windows versions lacking DWM.
+
+
+.
