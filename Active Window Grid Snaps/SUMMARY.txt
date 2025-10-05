@@ -1,0 +1,69 @@
+
+*  Grid-based Window Snapper with Multi-Monitor Logic
+
+PURPOSE:
+Implements a powerful grid-based window management system that allows users to snap and resize 
+active windows with precision across one or multiple monitors.
+The Retain Size Mode is a feature that lets users move windows without changing their current dimensions. 
+This enables fluid repositioning of custom-sized windows while preserving their existing width and height.
+
+KEY FEATURES:
+The script provides a professional-grade set of window management tools using customizable grid layouts and ergonomic hotkey combinations.
+It combines advanced API calls, performance-optimized settings, and now, a flexible size-retention mechanism.
+    • Grid-based positioning supporting single-cell and multi-cell layouts across 1×2, 2×2, 3×3, 4×4, 5×7, 6×6, 8×12, and 10×10 grids.
+    • Unified control system: All movement and resizing operations are handled through the modular SnapActiveWindowGridSpan() function.
+    • Retain Size Mode (Ctrl+F1 toggle):
+        ⮞ Keeps the current window dimensions while repositioning within any grid cell or span.
+        ⮞ Displays on-screen confirmation via tooltip, showing current width and height.
+        ⮞ Easily toggled ON/OFF to switch between standard resizing and size retention.
+    • Precision alignment: Utilizes WinGetPosEx() with DWM API for exact frame-bound measurements.
+    • Automatic monitor detection: Ensures proper positioning even in multi-monitor configurations.
+    • Performance-focused: Implements SetBatchLines -1, SendMode Input, and no delays for seamless execution.
+    • Pixel-perfect geometry: Accounts for frame borders and offsets to eliminate visible gaps.
+    • Comprehensive documentation: Includes inline examples for all grid sizes and usage cases.
+    • Intuitive hotkey organization: Modifier combinations mirror spatial logic for natural window control.
+
+LOGIC SUMMARY:
+At the core of the system lies SnapActiveWindowGridSpan(), which computes exact window geometry based on grid division and placement.
+    • The script calculates monitor work areas using GetMonitorIndexFromWindow() and divides them into equal grid cells.
+    • Window coordinates are derived from the selected grid position (row, col) and the defined spans (rowSpan, colSpan).
+    • When Retain Size Mode is active:
+        ⮞ The function retrieves the current window size from WinGetPos, stores it globally, and uses those values during subsequent moves.
+        ⮞ Window movement ignores grid cell dimensions, preserving custom sizing.
+    • When Retain Size Mode is off:
+        ⮞ The window is resized proportionally to fit the specified grid area, including adjustments for offsets and borders.
+    • WinGetPosEx() refines the edge calculations using DwmGetWindowAttribute for accuracy or falls back to GetWindowRect when unavailable.
+    • GetMonitorIndexFromWindow() ensures the snapping logic is localized to the correct monitor in multi-display setups.
+    • The ToolTip and SetTimer pair provide smooth, automatic feedback for size-retention status.
+
+LAYOUT:
+The script maintains a clean, modular architecture divided into structured sections for ease of navigation and modification.
+    • Directives & Settings:
+        ⮞ Optimizes runtime performance and ensures single-instance execution.
+    • Global Variables:
+        ⮞ Tracks state of size retention (g_RetainSizeMode, g_RetainedWidth, g_RetainedHeight).
+    • Hotkeys:
+        ⮞ Organized by intuitive grouping:
+            ▪ (Win + Alt + Arrows): Halves.
+            ▪ (Ctrl + Win + Alt + Arrows): Thirds.
+            ▪ (Win + Alt + Numpad): Horizontal or central spans.
+            ▪ (Ctrl + Win + Numpad): Vertical and middle grid sections.
+            ▪ (Ctrl + Numpad): Complex spans for custom layouts.
+            ▪ (Ctrl + Win + Alt + Numpad): Full 3×3 grid navigation.
+        ⮞ Ctrl+F1: Toggles Retain Size Mode with tooltip feedback.
+    • Functions:
+        ⮞ SnapActiveWindowGridSpan() – Core logic for snapping and resizing/moving windows.
+        ⮞ GetMonitorIndexFromWindow() – Determines which monitor the active window belongs to.
+        ⮞ WinGetPosEx() – Retrieves accurate window boundaries using DWM or fallback APIs.
+
+USER EXPERIENCE:
+This introduces a new layer of flexibility for power users and multi-window workflows.
+    • Retain Size Mode enhances productivity by enabling precise repositioning of uniquely sized windows without losing custom dimensions.
+    • Hotkey design ensures consistent, spatially intuitive control schemes.
+    • Tooltips provide immediate, unobtrusive visual confirmation of active modes and sizes.
+    • Advanced users can easily expand grid logic, add layouts, or redefine shortcuts.
+    • The script offers smooth transitions, minimal CPU load, and compatibility across modern and legacy systems.
+    • Its combination of precision grid snapping and adaptive size retention makes it ideal for developers, designers, and multitaskers seeking refined, keyboard-driven workspace control.
+
+
+.
