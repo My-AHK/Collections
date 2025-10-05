@@ -1,0 +1,58 @@
+
+*  Ctrl/Alt shortcuts to snap windows by grid zones.
+
+PURPOSE:
+This script provides an efficient method for repositioning the currently active window to precise coordinates across one or two monitors using keyboard shortcuts. It translates directional combinations (such as "Up Left" or "Vertical-Center Right") into pixel-perfect window placements, allowing users to quickly organize windows in a structured grid layout on either display.  
+
+   • Its goal is to streamline workspace management without relying on external utilities.  
+   • The method supports two monitors and both standard number keys and numpad keys.  
+   • It includes optional visual feedback via a brief window flash after each move.  
+
+KEY FEATURES:
+The script uses hotkeys bound to Ctrl and Alt key combinations to control window placement across monitors. Ctrl is designated for the primary display, while Alt targets the secondary one. Each number key corresponds to a region in a 3x3 positional grid, simulating a coordinate-based placement model.  
+
+   • **Multi-monitor support:** Assigns primary and secondary screens with independent control.  
+   • **Grid-based mapping:** Nine distinct zones (top-left through bottom-right) represent window destinations.  
+   • **Hotkey scheme:**  
+       ⮞ Ctrl + [1–9] → Primary monitor positions.  
+       ⮞ Alt + [1–9] → Secondary monitor positions.  
+   • **Dual keypad compatibility:** Works with both top-row numbers and numpad inputs.  
+   • **Smart positioning:** Automatically determines window coordinates using system monitor boundaries.  
+   • **Optional feedback:** Calls `FlashWindow()` to signal successful repositioning.  
+
+LOGIC SUMMARY:
+At its core, the script retrieves the active window handle, determines its current position and size, and calculates a new destination point based on both the requested position (e.g., "U HC") and target monitor. It uses `SysGet` to access the work area of each monitor and applies coordinate arithmetic to achieve accurate centering or alignment.  
+
+   • The main logic resides in the function `MoveActiveWindow(position, monitor)`.  
+   • `InStr()` checks determine if “L”, “R”, “HC”, “U”, “D”, or “VC” are included in the command.  
+   • Conditional arithmetic sets the X and Y coordinates based on horizontal and vertical zones.  
+   • The window is then moved with `WinMove` using the computed coordinates.  
+   • The function restores any altered hidden window settings to maintain consistent behavior.  
+   • The `FlashWindow()` subroutine briefly toggles window flashing for confirmation.  
+       ⮞ A short timer disables the flash after 200 milliseconds for minimal disruption.  
+
+LAYOUT:
+The hotkey mapping follows an intuitive numeric keypad pattern, mirroring the visual arrangement of window regions. This makes it easy to mentally associate numbers with screen zones. For instance, 7–8–9 map to the top row (U L / U HC / U R), while 1–2–3 correspond to the bottom (D L / D HC / D R).  
+
+   • **Numerical layout:**  
+       ⮞ Numpad 7, 8, 9 → Top row (Up).  
+       ⮞ Numpad 4, 5, 6 → Middle row (Vertical-Center).  
+       ⮞ Numpad 1, 2, 3 → Bottom row (Down).  
+   • **Symbol mapping:**  
+       ⮞ L (Left), HC (Horizontal-Center), R (Right).  
+       ⮞ U (Up), VC (Vertical-Center), D (Down).  
+   • **Display differentiation:**  
+       ⮞ Ctrl = Monitor 1 (Primary).  
+       ⮞ Alt = Monitor 2 (Secondary).  
+   • **Comment formatting:** Uses visually distinct “∙” markers to separate script sections for readability.  
+
+USER EXPERIENCE:
+The result is a highly responsive and user-friendly window management tool, especially suited for power users or multi-monitor setups. Its logical key mapping and instant movement response allow effortless window organization with minimal cognitive load.  
+
+   • The user can realign windows without mouse interaction, improving workflow speed.  
+   • The brief flash indicator acts as nonintrusive confirmation of a successful reposition.  
+   • Because of the precise coordinate logic, windows snap perfectly to intended zones without overlap.  
+   • The script operates silently in the background and requires no GUI or external dependencies.  
+   • Error handling ensures the user receives an alert if no active window is found.  
+
+.
