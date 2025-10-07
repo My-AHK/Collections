@@ -1,0 +1,72 @@
+
+*  Temporarily disable and unlock windows safely.
+
+PURPOSE:
+Provides a method to temporarily disable interaction with specific windows on the user’s system. 
+It employs direct Windows API calls to “lock” windows, preventing clicks or key input until they are explicitly unlocked. 
+This tool is particularly valuable for managing workflow interruptions or controlling window behavior during multitasking, demonstrations, or focused work sessions.
+   • The lock only persists while the script is running; all windows unlock automatically on exit.  
+   • Ideal for preventing accidental input in background or sensitive applications.  
+   • Uses lightweight API calls for immediate responsiveness and minimal system load.  
+
+KEY FEATURES:
+The script is structured around hotkeys that lock, unlock, or manually select windows for control. It maintains an internal array of locked windows and ensures state reliability through redundant verification steps.
+   • Ctrl+1 / Ctrl+Numpad1 → Locks the currently active window.  
+   • Ctrl+2 / Ctrl+Numpad2 → Unlocks the most recently locked window.  
+   • Ctrl+3 / Ctrl+Numpad3 → Unlocks all windows currently in the array.  
+   • Ctrl+4 / Ctrl+Numpad4 → Prompts manual unlock by mouse click.  
+   • Auto-unlock → Ensures all locked windows are re-enabled when the script terminates.  
+   • Visual confirmations via message boxes after each major action.  
+       ⮞ Core enhancements include multiple unlock strategies and validation of success.  
+       ⮞ Uses Win32 functions directly for accurate and reliable control.  
+       ⮞ Supports multiple concurrent locks with full handle and title tracking.  
+
+LOGIC SUMMARY:
+The script uses a centralized array (`LockedWindows`) to store objects containing each locked window’s handle, title, and process name. 
+Each hotkey triggers a specific procedure to modify this array or window state, ensuring synchronization between interface and logic.
+   • **Lock Routine:** Retrieves active window information and disables it with `EnableWindow(hWnd, 0)`.  
+       ⮞ Adds window details to the global tracking array.  
+       ⮞ Verifies successful disable using `IsWindowEnabled`.  
+   • **Unlock Routine:** Pops the most recent window from the array and attempts to re-enable it.  
+       ⮞ Uses multiple fallback strategies if the first attempt fails.  
+       ⮞ Removes window from tracking only on verified success.  
+   • **Unlock All Routine:** Iteratively re-enables each stored window and clears the array afterward.  
+       ⮞ Skips non-existent windows while maintaining unlock count accuracy.  
+   • **Manual Unlock Routine:** Waits for a mouse click to determine which window to unlock.  
+       ⮞ Unlocks the clicked window and synchronizes the array accordingly.  
+   • **Auto-Unlock on Exit:** Iterates through all stored windows and ensures they’re restored before the script closes.  
+
+   ⮞ Every major function checks for the existence and current enabled state of a window before acting.  
+   ⮞ Repeated verification reduces the risk of desynchronization between array state and real window state.  
+   ⮞ Designed to gracefully handle closed or missing windows without producing errors.  
+
+LAYOUT:
+The layout is modular and highly structured, dividing script sections clearly for readability and maintainability. 
+Each hotkey corresponds to a logically grouped function with supporting helpers located near the end of the file.
+   • Directives & Settings define environment behavior for consistent operation speed.  
+   • Global declarations establish a shared array and control constants.  
+   • Hotkey sections are isolated and annotated for immediate identification.  
+   • Helper functions (`IsWindowLocked`, `UnlockWindow`, `RemoveWindowFromLocked`) are reusable and modular.  
+   • Exit handler (`ExitFunc`) guarantees cleanup through the `OnExit()` callback mechanism.  
+       ⮞ Function definitions follow strict spacing and indentation for visual clarity.  
+       ⮞ Structured comment style provides inline documentation and role explanations.  
+       ⮞ Logical separation mirrors functional hierarchy: directives → hotkeys → helpers → exit.  
+
+USER EXPERIENCE:
+From the user’s perspective, the system is intuitive, responsive, and visually informative. 
+All actions are tied to familiar keyboard combinations and accompanied by confirmation dialogs. 
+This design encourages confidence in the script’s reliability and clarity of operation.
+   • Locks occur instantly without flicker or delay.  
+   • Message boxes provide descriptive feedback including window titles and current lock counts.  
+   • Multi-window tracking ensures flexibility for managing several concurrent tasks.  
+   • Manual unlock mode adds an interactive layer for troubleshooting or selective control.  
+       ⮞ Users can freely test locking behavior without fear of permanent window disablement.  
+       ⮞ The auto-cleanup feature ensures no lingering system state after script termination.  
+       ⮞ Error messages (e.g., “Window no longer exists”) are explicit, guiding the user to correct action.  
+
+Overall, **Targeted Window Locks** is a versatile utility emphasizing stability, transparency, and control. 
+It merges fine-grained handle-based manipulation with a user-friendly interface, ensuring safe temporary window locking for multitasking or presentation environments. 
+The layered unlocking system and built-in fail-safes make it both powerful and secure to operate.
+
+
+.
