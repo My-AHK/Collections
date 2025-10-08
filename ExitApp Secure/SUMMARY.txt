@@ -1,0 +1,63 @@
+
+*  Secure Hold-to-Exit System with Timed Control
+
+PURPOSE:
+Both “ExitApp Secure Hold-to-Exit” and “ExitApp Secure Timed Auto-Exit” implement a controlled, intentional shutdown mechanism for AutoHotkey scripts. 
+They prevent accidental termination by requiring the user to hold down the Escape key for a set duration (typically 3 seconds) before the script exits. 
+This design ensures a deliberate exit sequence, reducing disruptions or unintended closures during runtime.
+   • The primary goal is to introduce a secure, time-based exit process.
+   • Both scripts maintain the same operational principle, differing subtly in event handling order and logic emphasis.
+   • They serve as user safety features—especially useful in persistent background or automation scripts.
+
+KEY FEATURES:
+Each version contains nearly identical structure and logic but focuses on slightly different user exit behavior timing and tooltip feedback. 
+The “Hold-to-Exit” version measures duration continuously and exits only *after* the required hold period is met and the key is released. 
+The “Timed Auto-Exit” variant emphasizes the *timing event* itself, potentially allowing smoother timing validation upon release.
+   • Requires holding ESC for a user-defined time (default 3000 ms).
+   • Provides live feedback using a dynamic tooltip updated every 100 ms.
+   • Displays elapsed hold time and remaining duration in milliseconds.
+   • Cancels the exit sequence if the key is released early.
+   • Executes a confirmation beep and exits only if held long enough.
+   • Built with full global variable references for reliable runtime control.
+   • Designed for scripts that must not terminate accidentally.
+       ⮞ The Hold-to-Exit model focuses on *post-hold confirmation*.
+       ⮞ The Timed Auto-Exit model places emphasis on *time validation upon release*.
+
+LOGIC SUMMARY:
+When the ESC key is first pressed, the script records the system tick count (A_TickCount) as the starting point. 
+A timer begins running every 100 ms to calculate the elapsed time and update the tooltip. 
+If the duration surpasses the preset 'ExitTimeHeld' threshold, the tooltip switches to a confirmation state, notifying the user that they can release to exit. 
+When the key is released (~Esc Up event), the script stops the timer, clears the tooltip, and compares the total held duration to the threshold.
+   • If held for less than the required duration → exit is canceled.
+   • If held for the full required duration or longer → sound beep confirms successful hold and triggers 'ExitApp'.
+   • The global scope maintains consistency across hotkeys and timers.
+   • Tooltips dynamically display either elapsed/total time or the “Release to Exit” message.
+   • The logic ensures that premature key release resets the timer, enforcing true intent-based termination.
+       ⮞ Script flow: press → measure → verify → release → exit.
+       ⮞ The timer loop continuously updates hold progress in real-time.
+       ⮞ A precise timing threshold ensures secure and predictable exits.
+
+LAYOUT:
+Both scripts follow a structured AutoHotkey v1.1 layout emphasizing readability, timing accuracy, and logical separation of sections. 
+Variables are defined globally for persistence, and the event handling sequence is divided into distinct labeled blocks (~Esc, UpdateToolTip, ~Esc Up). 
+Each component serves a specific purpose: input capture, display update, and conditional exit. 
+Comments use standardized alignment and the user’s signature “∙------∙” notation for consistent documentation.
+   • Organized in clearly defined segments: Description, Behavior Summary, Globals, Hotkeys, Timer, and Exit routines.
+   • 'ToolTip' is employed as an unobtrusive user interface element to display timing feedback.
+   • 'SetTimer' provides smooth interval-based monitoring without performance degradation.
+   • 'SoundBeep' offers a short audio cue for successful completion.
+   • Logical indentation and spacing (4 spaces) maintain script clarity and professional format.
+       ⮞ The scripts’ structure mirrors modern AHK best practices.
+       ⮞ Explicit use of global variables enhances maintainability.
+       ⮞ Minimal resource footprint ensures reliability across extended uptime sessions.
+
+USER EXPERIENCE:
+The user experience emphasizes safety, clarity, and responsiveness. When the user holds down the ESC key, a tooltip immediately appears, providing visual feedback. The gradual increase in the displayed milliseconds builds awareness of progress toward the exit threshold. If the user releases too early, the message disappears, confirming the cancellation without side effects. Upon a valid hold, a brief beep confirms completion, followed by script termination.
+   • Visual and audio confirmation assures user intent before exiting.
+   • Prevents accidental shutdowns in long-running or sensitive automation tasks.
+   • Requires only a single familiar key (ESC), maintaining intuitive simplicity.
+   • The dynamic tooltip provides transparency during the hold phase.
+   • No additional GUI clutter or intrusive prompts are required.
+       ⮞ Ideal for users who want controlled exits in background tools.
+       ⮞ Non-intrusive design minimizes visual distractions.
+       ⮞ The responsive timer interval (100 ms) provides a smooth countdown effect.
