@@ -1,0 +1,76 @@
+
+
+* The MD5 verification adds a layer of security by not storing the actual password, only its hash!
+
+SETUP INSTRUCTIONS:
+1. Choose your password and generate its MD5 hash using 'MD5 Hash Creator.ahk'.
+2. Replace storedPasswordHash with your actual MD5 hash in 'FolderGuard.ahk'.
+3. Change protectedFolder to your desired folder path.
+4. Save the script and run it.
+
+IMPORTANT SECURITY NOTES:
+ • This provides basic protection - not military-grade security.
+ • Tech-savvy users can still access hidden folders.
+ • The password hash is stored in plain text in the script.
+ • For real security, use proper encryption tools like VeraCrypt or BitLocker.
+
+
+========================================================
+
+
+ THE SHARE: "The MD5 Function"
+At the bottom of both scripts, you'll see the same block of code called MD5(). This is the "engine" that does the actual work of converting text into a hash.
+  • In Script 1, it's used to create the hash you see and copy.
+  • In Script 2, it's used to turn the password you type in (e.g., "cookie123") into a hash, so it can check if it matches the stored hash (e.g., "bc2ab4d7c238297dcef22007254ac5e0"). The script never knows or stores your actual password, which is a safe way to do it!
+
+In a Nutshell
+  • Use Script 1 when you just need to quickly make an MD5 hash of some text.
+  • Use Script 2 when you want a simple way to hide a folder on your PC and make it reappear with a password.
+
+--------------------------------------
+
+** Script 1 is a "Text-to-MD5 Converter"
+  - What it does:
+This is a simple tool that takes any word or sentence you type and turns it into a special code called an "MD5 Hash." This code is a jumbled-up version of your text that is always the same length.
+
+  - Why you might use it:
+  • To create a password for a website without sending your actual password.
+  • To quickly generate a unique code for a file or piece of data.
+  • Just to see what the MD5 hash of a word looks like.
+
+  - How it works, step-by-step:
+  1. You run the script.
+  2. A small box pops up asking you to "Please Enter String to convert to MD5 hash."
+  3. You type something, like hello, and click OK.
+  4. The script works its magic in the background, converting hello into its MD5 hash: 5d41402abc4b2a76b9719d911017c592.
+  5. A message box shows you both your original text and the new hash.
+  6. Most importantly, it automatically copies the hash to your computer's clipboard, so you can just press Ctrl+V to paste it anywhere you need it.
+
+--------------------------------------
+
+** Script 2 is a "Simple Folder Locker"
+  - What it does:
+This script lets you "lock" and "unlock" a specific folder on your computer using a password. "Locking" makes the folder invisible in File Explorer. "Unlocking" makes it visible again.
+
+  - Important Note: This is a basic "hide-and-seek" lock, not a military-grade encryption. It's perfect for keeping things out of casual view (like from siblings or coworkers), but a tech-savvy person could find it. It's for privacy, not top-secret security.
+
+  - Before you use it, you need to set it up:
+  • Tell it which folder to protect: You change the protectedFolder line to the path of your folder (e.g., protectedFolder := "D:\MySecretStuff").
+  • Set the password: You don't put your password directly in the script. Instead, you use Script 1 to convert your desired password into an MD5 hash, and then you paste that hash into the storedPasswordHash line.
+
+  - How it works, step-by-step:
+  1. You run the script. It sits quietly in the background, visible as an icon in your system tray (the area with the clock and volume control).
+  2. You right-click on its icon to see a menu with options.
+  3. To Lock (Hide) the Folder:
+      • You click "Lock Folder" in the menu.
+      • The folder instantly becomes hidden.
+  4. To Unlock (Show) the Folder:
+      • You click "Unlock Folder" in the menu.
+      • A password box appears.
+      • You type your password and click OK.
+      • If the password is correct, the folder becomes visible and opens in a File Explorer window for you.
+      • If the password is wrong, you get an "Access Denied" message.
+
+
+--------------------------------------
+
