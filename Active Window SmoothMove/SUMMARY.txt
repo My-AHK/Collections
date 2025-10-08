@@ -1,0 +1,62 @@
+
+*  Smooth, animated window repositioning.
+
+═══════════════════════════════════════
+PURPOSE:
+═══════════════════════════════════════
+This script enables smooth, animated movement of a selected window to a new position on the screen. 
+Instead of instantly jumping to coordinates, the active window glides across the screen in visually progressive steps, creating a natural motion effect ideal for transitions or visual emphasis.
+   • Triggered with Ctrl + F1 to move the active window.
+   • Smoothly transitions the window from current to target position (300,100).
+   • Adjustable smoothness and speed through defined steps and delay.
+
+═══════════════════════════════════════
+KEY FEATURES:
+═══════════════════════════════════════
+The script focuses on user-defined motion behavior and flexibility while maintaining simplicity and performance. 
+It employs incremental window repositioning for an animated experience.
+   • Customizable Parameters  
+       ⮞ `steps` defines the number of movement increments, controlling smoothness.  
+       ⮞ `delay` defines the pause between each incremental move.  
+   • Keyboard Shortcut  
+       ⮞ `Ctrl + F1` instantly starts a smooth move for the currently active window.  
+   • Direct Window Targeting  
+       ⮞ Uses `"A"` for active window selection to avoid window title dependency.  
+   • Performance Optimized  
+       ⮞ `SetBatchLines -1` and `SetWinDelay 0` ensure uninterrupted motion.  
+   • Reusable Function  
+       ⮞ `SmoothMove()` can be applied to any window by adjusting arguments.
+
+═══════════════════════════════════════
+LOGIC SUMMARY:
+═══════════════════════════════════════
+At its core, the logic calculates the difference between the current and target window positions, divides it into equal increments, and moves the window step-by-step using a timed loop.
+   • The function retrieves the active window’s current position.  
+   • Mathematical deltas (`deltaX` and `deltaY`) determine per-step motion.  
+   • A loop iterates through each step, incrementally moving the window.  
+   • Each iteration includes a controlled delay to regulate animation speed.  
+   • Once the loop completes, the window arrives precisely at the destination.
+       ⮞ Example: A move from (0,0) → (300,100) with 25 steps and 10ms delay results in smooth movement lasting roughly 250ms total.  
+       ⮞ Users can fine-tune both values for faster or slower motion effects.
+
+═══════════════════════════════════════
+LAYOUT:
+═══════════════════════════════════════
+The script is concise and logically separated into a hotkey trigger and a dedicated function block. 
+Documentation is provided inline for clarity.
+   • Header: Initialization directives for optimal runtime efficiency.  
+   • Hotkey: Ctrl + F1 defined as the motion trigger.  
+   • Function: `SmoothMove()` encapsulates reusable motion logic.  
+   • Footer: Final Return for script closure consistency.
+
+═══════════════════════════════════════
+USER EXPERIENCE:
+═══════════════════════════════════════
+The user experiences visually fluid window movement with minimal effort. 
+The animation effect adds polish to workspace interactions while remaining practical and responsive.
+   • Smoothness gives an aesthetic appeal during repositioning.  
+   • Adjustable motion parameters enable personalized experience.  
+   • Non-intrusive hotkey allows use during multitasking.  
+   • Simple code structure makes future modifications straightforward.
+
+.
