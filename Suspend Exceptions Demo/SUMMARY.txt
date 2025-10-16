@@ -1,0 +1,46 @@
+
+*  AHK suspend toggle demo with visual feedback.
+
+PURPOSE:  
+This script demonstrates how AutoHotkey’s suspend state affects hotkey behavior while providing clear on-screen feedback. 
+The design visually distinguishes between enabled and disabled states, allowing the user to understand which hotkeys remain functional when suspension is active. 
+It serves as both a teaching example and a quick toggle utility for script control testing.
+
+KEY FEATURES:  
+The core feature revolves around toggling the suspend mode and observing real-time feedback. 
+Each hotkey responds differently depending on whether `Suspend, Permit` is used.  
+   • Pressing **F1** toggles the suspended state of the entire script.  
+   • Tooltips provide immediate status updates (“Suspended ON” or “Suspended OFF”).  
+   • The **‘x’ hotkey** remains functional during suspension, demonstrating `Suspend, Permit`.  
+   • The **‘y’ hotkey** becomes disabled when suspension is active, illustrating default suspend behavior.  
+   • A brief on-screen message appears whenever each hotkey is pressed, displayed via a temporary GUI window.
+
+LOGIC SUMMARY:  
+The script begins in an active, unsuspended state. Pressing **F1** acts as a toggle switch to control the suspended mode. Internally, a Boolean variable (`SuspendToggle`) alternates between true and false to track state.  
+   • When suspension is enabled:  
+       ⮞ All hotkeys are paused unless they include `Suspend, Permit`.  
+       ⮞ Tooltip “Suspended ON” appears for 1.5 seconds.  
+   • When suspension is disabled:  
+       ⮞ All hotkeys resume normal function.  
+       ⮞ Tooltip “Suspended OFF” confirms the change.  
+   • The `RemoveToolTip` subroutine automatically clears the tooltip after a delay.  
+   • The `$*x::` hotkey explicitly uses `Suspend, Permit`, allowing execution even when suspension is active.  
+   • The `$*y::` hotkey omits this line, making it an example of what happens when a hotkey is not exempted.
+
+LAYOUT:  
+The structure is cleanly divided into labeled sections with consistent indentation and comment markers. The main components include:  
+   • Header block explaining all hotkey behaviors and states.  
+   • The **F1** section for suspension control and tooltip display.  
+   • A short **RemoveToolTip** label to clear notifications.  
+   • The **‘x’ hotkey** block with visual feedback and exemption.  
+   • The **‘y’ hotkey** block for comparison without exemption.  
+Each GUI display is styled using `+AlwaysOnTop`, `-Caption`, and `+ToolWindow`, appearing centered and fading after three seconds.
+
+USER EXPERIENCE:  
+From a user standpoint, the experience is immediate and instructive. Each interaction shows both a tooltip and a GUI-based confirmation, ensuring the user understands what state the script is in.  
+   • Visual feedback through tooltips ensures clarity without clutter.  
+   • Users can directly compare how `Suspend, Permit` influences hotkey responsiveness.  
+   • The design uses short-lived windows and minimal input, making it an excellent debugging and teaching tool for AutoHotkey suspension logic.
+
+
+.
