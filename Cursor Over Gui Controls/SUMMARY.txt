@@ -1,0 +1,68 @@
+
+*  Dynamic GUI with control-specific cursors.
+
+PURPOSE:
+This script demonstrates how to assign different mouse cursor types to specific GUI elements within an AutoHotkey interface. 
+By intercepting cursor events through Windows messages, it allows each control to visually respond to cursor movement, improving feedback and usability. 
+The goal is to create an interactive window where buttons and list items use unique cursors without relying on external libraries or additional dependencies.
+   • Designed as a demonstration of cursor customization.
+   • Uses DllCall and Windows message interception for full control.
+   • Offers an example for GUI-based drag movement without a caption bar.
+
+KEY FEATURES:
+This GUI provides a compact yet complete system to handle cursor variation, button interactivity, and ListView events under one unified interface.
+   • Multiple cursors defined and assigned using system cursor IDs.
+   • Context-specific cursor switching via WM_SETCURSOR message hook.
+   • Interactive GUI elements (buttons, ListView) with hover-specific behavior.
+   • Dynamic ListView population and column auto-sizing for demonstration.
+   • Click and double-click message boxes for contextual feedback.
+   • Movable borderless window using a simulated drag message.
+   • All elements remain responsive under #Persistent and AlwaysOnTop.
+       ⮞ Demonstrates cursor consistency even during focus changes.
+       ⮞ Prevents unwanted window caption flicker via -Caption and ToolWindow.
+       ⮞ Simplifies user interaction feedback through custom cursors.
+
+LOGIC SUMMARY:
+The script begins by defining system cursor identifiers and loading them via DllCall("LoadCursor"). 
+A GUI is then constructed with several buttons and a ListView control. 
+When the mouse moves over any control, Windows sends a WM_SETCURSOR message (code 0x20). 
+This message is intercepted by a custom function that compares the hovered control’s handle (HWND) with stored values to decide which cursor to apply.
+   • Each control’s handle (hButton1–hButton5, hListView1) is stored at creation.
+   • The handler function uses conditional logic to set BCursor, LVCursor, or DefCursor.
+   • DllCall("SetCursor") assigns the appropriate icon for that hovered region.
+   • Returning true prevents Windows from overriding the cursor choice.
+
+Additional message interception is used for dragging (WM_LBUTTONDOWN), allowing the entire GUI to move freely even though it lacks a caption bar. 
+The script also defines handlers for button clicks and ListView events to show real-time feedback.
+       ⮞ Button clicks are detected through GuiControlGet with FocusV.
+       ⮞ ListView interactions are processed via A_GuiEvent types:
+           ⮚ "DoubleClick" triggers row and column detail display.
+           ⮚ "Normal" click shows single row content if selected.
+       ⮞ The GUI auto-sizes columns to fit either headers or content text.
+
+LAYOUT:
+The interface layout consists of five vertically aligned buttons on the left and a two-column ListView on the right. 
+Its compact arrangement (320×230 pixels) provides a test environment that highlights cursor behavior differences between elements.
+   • Left side: five stacked buttons labeled “Button 1” through “Button 5”.
+   • Right side: ListView control showing four rows of sample data.
+   • Window is styled as a small teal rectangle with no title bar.
+   • GUI placement centered via fixed x, y coordinates and fixed width/height.
+       ⮞ ListView dimensions align with the button stack to balance composition.
+       ⮞ The AlwaysOnTop flag ensures cursor testing remains visible.
+       ⮞ ToolWindow hides the GUI from taskbar to emphasize workspace neatness.
+
+USER EXPERIENCE:
+From the user’s perspective, the interface is smooth, responsive, and visually clear. 
+Hovering over different elements provides instant feedback through unique cursor changes...hand cursors for buttons, help cursors for the ListView, and a normal arrow elsewhere. 
+This direct response communicates functionality intuitively without labels or instructions.
+   • Hover feedback enhances discoverability of interactive areas.
+   • Button clicks trigger timed confirmation dialogs for engagement testing.
+   • ListView clicks confirm selection or double-click events visually.
+   • The GUI’s ability to be dragged around reinforces user control.
+   • The compact, color-coded design ensures a clean test environment.
+       ⮞ Ideal for use as a teaching or prototype module in interface design.
+       ⮞ Illustrates real-time cursor manipulation without third-party tools.
+       ⮞ Provides a clear reference point for future multi-control GUIs requiring distinct cursor behavior.
+
+
+.
