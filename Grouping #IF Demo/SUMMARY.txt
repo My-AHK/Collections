@@ -1,0 +1,33 @@
+
+*  Demo: grouping #If statements with browsers.
+
+PURPOSE:
+This script serves as a demonstration of how to group multiple executables under one conditional directive using AutoHotkey’s `#IfWinActive` in combination with `GroupAdd`. 
+It provides a clear example of how to manage context-sensitive hotkeys that only trigger within specific grouped applications.
+
+KEY FEATURES:
+The focus is on teaching and illustrating conditional grouping rather than on functionality itself.  
+   • Demonstrates the creation of an application group named “browsers.”  
+   • Shows how to apply `#IfWinActive` conditions to a defined group.  
+   • Includes five example executables: Chrome, Firefox, Edge, Brave, and Opera.  
+   • Demonstrates context-sensitive hotkeys limited to the active group.  
+   • Ends with `#IfWinActive` reset to restore global scope and a closing Return.
+
+LOGIC SUMMARY:
+The script begins by using several `GroupAdd` commands to compile all listed browser executables into a single group identifier. 
+The `#IfWinActive ahk_group browsers` directive follows, activating custom hotkeys only when a window from this group is active.  
+   • `RButton & WheelUp` and `RButton & WheelDown` are used as sample actions.  
+   • `Send ^{PgDn}` and `Send ^{PgUp}` simulate tab navigation for illustration.  
+   • The logic highlights separation of grouped vs. global input conditions.
+
+LAYOUT:
+The script layout is simple and pedagogical, designed to make the grouping structure immediately clear. 
+Each logical section is separated with visible dividers and annotated comments to reinforce its demonstration purpose.
+
+USER EXPERIENCE:
+For learners, the script provides a clear, functional reference for understanding `#IfWinActive` grouping.  
+   • Offers hands-on insight into how grouped hotkeys behave.  
+   • Encourages experimentation by replacing or adding executables.  
+   • Serves as a reliable teaching and testing framework for AHK context control.
+
+.
