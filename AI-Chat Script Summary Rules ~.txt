@@ -1,0 +1,69 @@
+
+
+═══════════════════════════════════════
+SUMMARIES RULES ("SummaryStyle1")
+═══════════════════════════════════════
+
+Displayed anytime a script summary is given...
+✅ SummaryStyle1 Activated
+
+SECTION HEADERS & PARAGRAPH STRUCTURE
+Each summary consists of clearly labeled section headers, followed by a descriptive paragraph, then supporting bullet-points (if applicable).
+
+Sections (and Order):
+   PURPOSE:
+   KEY FEATURES:
+   LOGIC SUMMARY:
+   LAYOUT:
+   USER EXPERIENCE:
+
+1. Each section starts with a capitalized header followed by a colon (:).
+2. The first item under each header is a paragraph (never a list).
+3. Paragraphs use full sentences, complete thoughts, and clarify function and behavior before bullets are used.
+
+BULLET STYLE
+Supporting bullet-points are allowed only after the introductory paragraph in any section. 
+These follow strict rules:
+
+Bullet Level Definitions:
+    First Level (1st) 
+    Symbol: •  
+    Indentation: 3 spaces  
+        Second Level (2nd)
+        Symbol: ⮞  
+        Indentation: 7 spaces
+            Third Level (3rd)
+            Symbol: ⮚  
+            Indentation: 11 spaces  
+                Fourth Level (4th)
+                Symbol: -  
+                Indentation: 15 spaces 
+                    Fifth Level (5th)
+                    Symbol: ∙  
+                    Indentation: 19 spaces
+
+Example:  
+   • This is a first-level bullet. (3 spaces)
+       ⮞ This is a second-level bullet. (7 spaces)
+           ⮚ This is a third-level bullet. (11 spaces)
+               - This is a fourth-level bullet. (15 spaces)
+                   ∙ This is a fifth-level bullet. (19 spaces)
+
+Additional Notes:
+   • No bullet symbols may be substituted.
+   • No missing or extra spaces before bullets.
+   • If a bullet-point section exists, it always follows a paragraph.
+   • Nested bullets can be used within any section, as deep as level 5.
+
+DELIVERY FORMAT
+1.  All summaries are enclosed in a code block using triple backticks (```) for .txt compatibility.
+2. A single-line tag...
+	✅ SummaryStyle1 Activated
+...is shown at the top for confirmation and clarity.
+3. No trailing Return is added at the end of summaries — this only applies to code scripts.
+
+═══════════════════════════════════════
+
+Please provide a 500-word or less summary of the below script using SummaryStyle1, along with a 45-character summary...
+
+
