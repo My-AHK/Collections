@@ -1,49 +1,109 @@
 
-*  Custom colored GUI with colorized edit fields.
+*  Frequency Tone Generator Suite Of Three.
 
 PURPOSE:
-This script creates a compact, color-customized AutoHotkey GUI featuring editable fields for “Start Macro” and “Stop Macro” key inputs. 
-Its design emphasizes visual clarity, focus control, and placeholder text styling for a refined user experience.
+This three-script collection demonstrates progressive methods for generating audible tones through AutoHotkey v1.1, 
+ranging from the built-in `SoundBeep` command to fully custom waveform synthesis using temporary `.wav` files. 
+Each version adds functional depth and precision to tone generation, illustrating different approaches to producing pure and dual-frequency sounds. 
+Together, they form a compact educational suite that bridges simple frequency playback and real-time digital audio creation.
+   • Script 1 focuses on quick, direct tone playback via `SoundBeep`.
+   • Script 2 expands to synthesized single-tone WAV generation with `SoundPlay`.
+   • Script 3 extends this further to generate and mix two frequencies simultaneously.
+
 
 KEY FEATURES:
-The GUI integrates both aesthetic and functional enhancements through Windows API calls and color management. 
-The use of `WM_CTLCOLOREDIT` allows control over background and text color for each Edit box, achieving a cohesive theme.
-   • Always-on-top GUI ensures visibility over other windows.  
-   • Dynamic placeholder text (“****”) appears inside Edit controls.  
-   • Custom color coordination with a blue background and yellow text.  
-   • Focus removal prevents blinking caret distraction.  
-   • Immediate GUI repaint enforces consistent visual initialization.  
-   • Graceful closure through `GuiClose` safely terminates the app.  
+Each script shares a consistent GUI-based interface and keyboard shortcut (Ctrl + T) but differs in tone generation complexity. 
+Their design emphasizes modular structure, validation safety, and real-time sound response.
+   • All GUIs maintain minimal, caption-free, dark-blue window styles with readable light-blue text.
+   • Frequency and duration inputs are user-editable, with validation ensuring valid playback ranges.
+   • Both the single-tone and dual-tone SoundPlay versions dynamically create temporary `.wav` files and delete them afterward for efficiency.
+   • Error handling prevents out-of-range frequencies and invalid durations.
+   • “Play” and “Exit” buttons provide direct control without needing to reload scripts.
+   • Use of `AlwaysOnTop` ensures the GUI remains visible while adjusting or testing sounds.
+   • All scripts are self-contained and can run independently without dependencies.
+
 
 LOGIC SUMMARY:
-The script begins by intercepting the `WM_CTLCOLOREDIT` message to manage color drawing for Edit controls. 
-A solid blue brush is created via `CreateSolidBrush`, applied to both the GUI and Edit elements. 
-During GUI creation, the Edit controls are given specific handles (`hwnd`) to permit targeted redraws and custom message calls. 
-Placeholder text is set through `SendMessage` using the `EM_SETCUEBANNER` message (0x1501). 
-Focus is programmatically cleared to enhance presentation, and repaint calls guarantee color uniformity immediately after the GUI is shown.
-   • Registers `WM_CTLCOLOREDIT` message for color control.  
-   • Defines static brush to avoid redundant handle creation.  
-   • Uses DllCalls for background, text, and placeholder manipulation.  
-   • Separates GUI display from setup with `Gui, Hide` to prevent flicker.  
-   • Forces full refresh (`InvalidateRect`) to apply final visuals.  
+Each script implements user-driven tone generation via GUI submission, using internal logic to interpret frequency and duration values, validate them, and produce sound through appropriate methods.
+   • **Script 1 (SoundBeep):**
+       ⮞ Relies on Windows’ `SoundBeep` API for tone output.
+       ⮞ Input validation enforces standard 37–32767 Hz frequency limits.
+       ⮞ Duration must be ≥1 ms to prevent null or stalled playback.
+       ⮞ This method requires no file creation, providing instant feedback but no waveform control.
+
+   • **Script 2 (Single-Tone SoundPlay):**
+       ⮞ Builds a custom sine wave and writes it to a `.wav` file in real time.
+       ⮞ Employs PCM-encoded waveform data with defined headers and amplitude control.
+       ⮞ Reduces distortion by using a 0.4 amplitude multiplier.
+       ⮞ After playback via `SoundPlay`, the temporary file is immediately deleted.
+
+   • **Script 3 (Dual-Tone SoundPlay):**
+       ⮞ Extends waveform synthesis to combine two simultaneous sine waves.
+       ⮞ Uses two angular frequency calculations to generate composite signals.
+       ⮞ Normalizes mixed samples to avoid clipping when tones overlap.
+       ⮞ Employs slightly lower amplitude (0.3 each) for balance and safety.
+       ⮞ Utilizes dynamic filename generation with timestamps for safe concurrency.
+
+   • All scripts share consistent exit handling using multiple fallback labels (`GuiClose`, `GuiEscape`, `ExitScript`) for reliability.
+   • Each follows the same initialization structure (`#NoEnv`, `#SingleInstance`, `SetWorkingDir %A_ScriptDir%`), ensuring proper environment setup and file-path consistency.
+
 
 LAYOUT:
-The layout employs a concise and symmetrical two-row format. 
-Each row features a descriptive label on the left and its corresponding input box aligned on the right. 
-The overall window height is restricted to 100 pixels for minimal screen intrusion.
-   • “Start Macro” label at coordinates (x30, y20) with Edit box at (x140, y18).  
-   • “Stop Macro” label directly beneath, maintaining vertical spacing.  
-   • Uniform Edit widths (60) ensure balanced alignment.  
-   • Font set to bold 11pt with light cyan color (RGB 2e77ff).  
-   • GUI color (0000FF) provides a cohesive blue background.  
+The GUIs across all scripts adhere to a clear, compact format emphasizing usability and minimalism.
+   • Windows use `-Caption +Border` to appear frameless but still draggable when modified.
+   • Color scheme: deep navy background (`010B43`) with bright cyan text (`3D9EFF`) for contrast.
+   • Font choices alternate between bold Arial for labels and italic for interactive buttons, giving a subtle visual hierarchy.
+   • Input fields (Edit controls) are color-matched to the text for aesthetic consistency.
+   • In SoundPlay-based versions, slight spatial adjustments accommodate added fields and buttons.
+   • GUI dimensions (≈240×100 pixels) maintain a clean, unobtrusive footprint suitable for small-screen use.
+   • Both “Play” and “Exit” buttons are consistently positioned to the right of editable fields for natural eye flow.
+   ⮞ Layout uniformity allows all three to feel like versions of the same application despite increasing complexity.
+   ⮞ This cohesive design makes testing across all scripts seamless and visually consistent.
+
 
 USER EXPERIENCE:
-The interface feels professional and modern due to color synchronization, focus handling, and clean geometry. 
-By using DllCalls rather than higher-level commands, the GUI achieves instant and smooth rendering. 
-The placeholders hint at functionality while maintaining a minimal, distraction-free design.
-   • Bright text on blue offers strong readability.  
-   • Hidden caret enhances aesthetic appeal.  
-   • Consistent brush reuse avoids flickering.  
-   • Close event terminates application immediately without residual artifacts.  
+The user experience emphasizes direct control, immediate auditory response, and visual clarity. 
+Each version enhances both interactivity and sound fidelity while preserving intuitive operation.
+   • **Ease of Use:**
+       ⮞ Pressing Ctrl + T instantly brings up the floating tone generator.
+       ⮞ Users can quickly experiment with different tones by typing new values and clicking “Play.”
+       ⮞ The small footprint prevents visual clutter while staying persistent above other windows.
+
+   • **Feedback and Responsiveness:**
+       ⮞ Instant playback ensures users can hear the result of frequency or duration adjustments without delay.
+       ⮞ Error dialogs appear only when invalid values are entered, using modal `MsgBox` alerts with clear descriptions.
+       ⮞ The dual-tone version adds perceptual richness and harmonic variation, demonstrating frequency blending.
+
+   • **Performance and File Handling:**
+       ⮞ Scripts that use WAV synthesis leverage temporary file storage in `%A_Temp%`, automatically cleaned after use.
+       ⮞ Each run produces a unique filename based on timestamp (`A_Now`) to prevent collisions during rapid testing.
+       ⮞ File deletion after playback preserves system cleanliness and memory efficiency.
+
+   • **Technical Refinements:**
+       ⮞ `SoundPlay` versions simulate analog tone behavior with precise digital synthesis, making them independent of system sound chip quality.
+       ⮞ Use of mathematical sine functions allows predictable, stable tone generation and enables easy extension to multi-channel or polyphonic versions.
+       ⮞ Amplitude control prevents distortion and provides flexibility for blending multiple signals safely.
+       ⮞ Parameterization (SampleRate, BitsPerSample, etc.) ensures future expandability to stereo or higher fidelity audio.
+
+   • **Visual and Functional Consistency:**
+       ⮞ Unified visual design reinforces a professional feel and encourages quick adaptation between single and dual-tone modes.
+       ⮞ Use of italic fonts for buttons and frequency units `(Hz)` adds a sleek aesthetic touch while improving legibility.
+       ⮞ Consistent control spacing and predictable button placement reduce cognitive load during use.
+
+   • **Learning and Demonstration Value:**
+       ⮞ The suite collectively illustrates the progressive leap from basic AHK sound commands to custom audio synthesis.
+       ⮞ Demonstrates file I/O operations (`FileOpen`, `WriteUInt`, `WriteUShort`) and mathematical transformations in an accessible, functional context.
+       ⮞ Encourages experimentation with sound wave theory and offers practical examples for AHK learners interested in digital audio programming.
+       ⮞ Useful for testing speakers, auditory responses, or even teaching the relationship between frequency, amplitude, and duration.
+
+   • **Usability Edge Cases:**
+       ⮞ Validation prevents crashing or inaudible frequencies that could otherwise occur outside acceptable ranges.
+       ⮞ GUI can be closed by Escape, the window’s close event, or Exit button—ensuring graceful termination paths.
+       ⮞ Minimal system overhead means all scripts run effectively on low-end hardware.
+
+   • **Overall Experience:**
+       ⮞ Compact, efficient, and interactive.
+       ⮞ Simple enough for quick testing, yet technical enough for instructive demonstration.
+       ⮞ Offers satisfying auditory feedback for immediate learning reinforcement.
 
 .
