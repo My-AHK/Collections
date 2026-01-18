@@ -1,63 +1,77 @@
 
-PURPOSE:
-Implements a fully interactive TreeView-based bookmark and link manager using AutoHotkey. Its primary purpose is to allow users to create, organize, edit, search, and persistently store categorized links in a hierarchical structure, functioning as a localized homepage or personal bookmark database.
-   • Provides a desktop-based alternative to browser bookmark managers.
-   • Supports hierarchical organization through root categories and child links.
-   • Persists all data locally for reuse across sessions.
+*  Advanced TreeView Link Manager with GUI
 
-KEY FEATURES:
-The script delivers complete CRUD (Create-Read-Update-Delete) functionality for bookmarks while integrating menu commands, hotkeys, and GUI controls to streamline link management. It emphasizes usability, persistence, and structural integrity of the stored data.
-   • TreeView-driven category and link organization.
-       ⮞ Root categories and nested child links.
-       ⮞ Automatic selection and expansion behaviors.
-   • Full CRUD operations.
-       ⮞ Add, edit, delete, and search links.
-       ⮞ Confirmation prompts for destructive actions.
-   • Persistent storage system.
-       ⮞ Saves all tree data to a structured text file.
-       ⮞ Reloads and reconstructs hierarchy on startup.
-   • Menu bar and hotkey integration.
-       ⮞ Menu-based access to all major actions.
-       ⮞ Keyboard shortcuts for power users.
-   • Status bar feedback.
-       ⮞ Real-time messages for user actions and results.
 
-LOGIC SUMMARY:
-The script maintains an internal object-based data model synchronized with a TreeView control. Each TreeView item maps to an entry in the TreeData object, allowing GUI interactions to remain consistent with stored data. Changes are immediately reflected both visually and in persistent storage.
-   • TreeData object acts as the authoritative data source.
-       ⮞ Stores text, URL, description, and parent ID.
-   • Menu handlers drive user actions.
-       ⮞ Add, edit, delete, search, expand, and collapse logic.
-   • Two-pass load algorithm ensures hierarchy integrity.
-       ⮞ First pass creates root nodes.
-       ⮞ Second pass rebuilds child relationships using ID mapping.
-   • Safeguards prevent invalid operations.
-       ⮞ Selection checks before edits or deletions.
-       ⮞ Loop attempt limits avoid infinite rebuild cycles.
+PURPOSE:  
+This script functions as a comprehensive link management system with a hierarchical TreeView interface. 
+It allows users to organize, edit, and quickly access a variety of links and associated credentials, providing both a visual structure and data storage for easy management.
 
-LAYOUT:
-The GUI is divided into a left-side TreeView for navigation and a right-side detail panel for editing link properties. Dynamic resizing logic ensures usability across varying window sizes without breaking layout consistency.
-   • Left panel.
-       ⮞ TreeView displaying categories and links.
-   • Right panel.
-       ⮞ Editable fields for title, URL, and description.
-       ⮞ Action buttons and quick-access link controls.
-   • Responsive resizing handler.
-       ⮞ Adjusts control sizes and positions on window resize.
-       ⮞ Maintains margins and proportional spacing.
 
-USER EXPERIENCE:
-The user experience is designed to be efficient, informative, and forgiving. Immediate visual feedback, keyboard shortcuts, and automatic field population reduce friction, while confirmation dialogs and status messages help prevent accidental data loss.
-   • Immediate feedback for all actions.
-       ⮞ Status bar updates confirm results.
-   • Reduced manual effort.
-       ⮞ Auto-population of edit fields on selection.
-       ⮞ Auto-selection of newly created items.
-   • Keyboard-centric workflow.
-       ⮞ Hotkeys for common operations like add, save, delete, and search.
-   • Safe interaction model.
-       ⮞ Confirmation prompts before deletions.
-       ⮞ Graceful handling of missing or empty data files.
+KEY FEATURES:  
+The script offers a rich set of features for link management in a GUI environment. 
+Users can add, edit, and delete links or categories, store login credentials securely, and sort or search the TreeView. 
+Quick access buttons allow instant navigation to frequently used websites. 
+A menu system provides additional functionality including import/export placeholders and help documentation.
+    • TreeView with root categories and child links for hierarchical organization.  
+    • Edit fields for link text, URL, description, login, username, and password.  
+    • Password visibility toggle with a VIEW/HIDE button.  
+    • Buttons for saving edits, adding child/sibling/root links, deleting items, and canceling edits.  
+    • Quick Open buttons for immediate access to predefined URLs.  
+    • Menu bar with File, Edit, and Help options for managing links, expanding/collapsing nodes, and help access.  
+    • Status bar displays contextual feedback such as selected item and actions taken.  
+    • Alphabetical sorting of the TreeView on startup and via a dedicated button.  
+    • Search functionality to locate items by text, description, or credentials.  
+    • Data persistence via a local file (tree_data.txt).  
 
+
+LOGIC SUMMARY:  
+The script initializes by creating a GUI with a TreeView on the left and an edit panel on the right. 
+TreeData objects store all link details. User interactions with the TreeView, such as selection or double-clicking, update the edit panel or open links. 
+Adding or editing links updates both the TreeView and the underlying TreeData. 
+Sorting uses a bubbleSort algorithm applied separately to root and child nodes, ensuring hierarchical integrity. 
+Menu commands mirror GUI actions and provide additional management options.
+    • On startup, TreeView is populated with sample categories and links if no saved data exists.  
+    • Selection of a TreeView item populates the right-side edit fields with corresponding data.  
+    • Double-clicking an item opens its URL in the default browser.  
+    • Save operations validate input and update TreeData and persistent storage.  
+    • Add operations determine context (root, child, or sibling) and insert items accordingly.  
+    • Delete operations remove items from TreeView and TreeData with confirmation.  
+    • Sorting rearranges items alphabetically, maintaining parent-child relationships.  
+    • Quick Open buttons launch predefined URLs immediately.  
+    • Menu handlers support root/child addition, editing, deletion, importing/exporting, and help display.  
+
+
+LAYOUT:  
+The GUI is divided into a left TreeView panel and a right edit panel with labeled fields. 
+Buttons are arranged in a centered “Quick Open” group and bottom-aligned action buttons. 
+A status bar at the bottom provides feedback, while the menu bar offers file, edit, and help options. 
+Tabbed help documentation explains basics, hotkeys, and workflow for users.
+    • Left panel: 300px-wide TreeView for hierarchical link display.  
+    • Right panel: Editable fields for link details with password masking and toggle.  
+    • Action buttons below edit fields for Save, Add Child/Sibling/Root, Delete, Cancel.  
+    • Quick Open buttons within a centered group box for rapid access.  
+    • Bottom buttons for opening, copying, or managing selected links.  
+    • Sort button to arrange TreeView items alphabetically.  
+    • Status bar shows current activity or selection feedback.  
+    • Menu bar provides structured access to file operations, edit functions, and help.  
+
+
+USER EXPERIENCE:  
+Users interact primarily through the TreeView and right-side fields. 
+Selection updates the interface in real time. 
+Adding and editing links is context-sensitive, guided by prompts and visual feedback. 
+Passwords are masked but can be toggled visible. 
+Status messages and tooltips ensure users are aware of changes and actions. 
+Predefined Quick Open buttons and hotkeys streamline frequent operations, while the help tabs provide immediate guidance.
+    • Clicking an item selects it, populating edit fields and displaying link info.  
+    • Double-clicking opens the link in the default web browser.  
+    • InputBoxes guide the addition of new root, child, or sibling items.  
+    • Save, Cancel, and Delete buttons provide intuitive management of selected items.  
+    • Hotkeys accelerate common actions such as adding, saving, deleting, opening, or copying links.  
+    • Users receive feedback via the status bar for every operation.  
+    • Help tab system explains interface, hotkeys, workflow, and tips for effective link management.  
+    • Data is automatically saved to ensure persistence between sessions.  
+    • Sorting, search, and expand/collapse actions maintain usability for large link sets.
 
 .
+
