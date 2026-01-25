@@ -1,0 +1,59 @@
+
+  *  Desktop reminder scheduler with cascading GUIs
+
+
+PURPOSE:
+This script implements a persistent desktop reminder system that allows users to schedule, store, and receive timed reminders through custom always-on-top GUIs. 
+It is designed to provide precise date and time selection, visual feedback, and optional audible alerts, while remaining lightweight and fully self-contained without external dependencies.
+   • Enables users to schedule reminders using a calendar-style interface.
+   • Persists reminders across script reloads and system restarts.
+   • Displays reminders in visually distinct, non-intrusive popup windows.
+
+KEY FEATURES:
+The script offers a comprehensive set of features centered around usability, validation, and persistence, ensuring reminders are reliable, flexible, and clearly communicated to the user at every stage.
+   • Custom calendar GUI with month, day, year, hour, minute, and AM/PM selection.
+   • Live display of the current date and time within the calendar window.
+   • Optional chime playback when a reminder is triggered.
+   • Robust input validation with dedicated error and warning dialogs.
+   • Persistent reminder storage using a plain-text file.
+   • Cascading and quadrant-based GUI positioning to prevent overlap.
+   • Multiple GUI types for feedback:
+       ⮞ Error dialogs for invalid input.
+       ⮞ Warning dialogs for past-date confirmations.
+       ⮞ Success dialogs confirming scheduled reminders.
+       ⮞ Reminder popups when reminders are due.
+
+LOGIC SUMMARY:
+The internal logic is organized around timed checks, structured reminder objects, and modular helper functions that handle validation, parsing, and GUI behavior. 
+Reminders are represented as objects containing date, time, text, timestamp, and chime state, allowing consistent handling throughout the script.
+   • A timer periodically checks for due reminders using system time comparisons.
+   • Reminder timestamps are generated in sortable YYYYMMDDHHMMSS format.
+   • Date and time parsing supports flexible 12-hour input with AM/PM conversion.
+   • Leap years and month-specific day limits are correctly calculated.
+   • Past reminders trigger a confirmation workflow instead of silent rejection.
+   • All reminder changes immediately update the persistent storage file.
+   • On exit, reminders are automatically saved to prevent data loss.
+
+LAYOUT:
+The visual layout is carefully structured to balance clarity, compactness, and screen-awareness. 
+All GUIs are border-based, captionless, and always-on-top, giving them a clean utility-style appearance.
+   • Screen positioning is based on configurable screen quarters.
+   • Cascading offsets are applied to prevent overlapping GUIs in the same region.
+   • GUI dimensions dynamically adjust based on message length.
+   • Color themes differentiate purpose and status:
+       ⮞ Primary text, current time, messages, warnings, errors, and success states each use distinct colors.
+   • Fonts are chosen per context to improve readability and emphasis.
+
+USER EXPERIENCE:
+From a user perspective, the script prioritizes clarity, feedback, and minimal friction when creating and receiving reminders. 
+Every user action results in immediate visual confirmation or guidance, reducing ambiguity and preventing silent failures.
+   • A double-tap Ctrl+R hotkey quickly opens the calendar interface.
+   • Default selections are pre-filled with the current date and time.
+   • Clear prompts guide users through scheduling a reminder.
+   • Errors and warnings explain exactly what needs correction.
+   • Success dialogs confirm scheduling with both current and future timestamps.
+   • Reminder popups clearly show the message, scheduled time, and presentation time.
+   • Optional audio cues reinforce time-sensitive notifications without being mandatory.
+
+
+.
