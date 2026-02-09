@@ -1,0 +1,46 @@
+
+* Monthly rent reminder with Edge launch and alert
+
+
+PURPOSE:
+This script provides a lightweight monthly reminder system that alerts the user on the first day of each month to pay rent. 
+It performs an automatic date check, ensures the reminder runs only once per month, and presents both an audible cue and a visible on-screen notification while opening the payment portal in a web browser.
+
+KEY FEATURES:
+The script combines time-based automation, state tracking, browser launching, and a custom GUI alert to ensure the reminder is noticeable without being intrusive or repetitive.
+   • Automatically checks the current day on startup and hourly thereafter.
+   • Ensures the reminder triggers only once per calendar month.
+   • Emits an audible beep to immediately grab attention.
+   • Opens the rent payment website directly in Microsoft Edge.
+   • Displays a custom always-on-top GUI reminder window.
+       ⮞ Includes a draggable, borderless design.
+       ⮞ Provides a clickable close button.
+
+LOGIC SUMMARY:
+The logic centers around validating the calendar date and maintaining a simple monthly execution record. 
+When conditions are met, the script performs all alert actions in a single pass.
+   • Compares the current day against a fixed target date (the 1st).
+   • Uses a stored year-month value to prevent duplicate execution.
+   • Executes notification actions only when both conditions are satisfied.
+       ⮞ Updates the stored month marker.
+       ⮞ Triggers sound, browser launch, and GUI creation.
+   • Continues running in the background for future checks.
+
+LAYOUT:
+The graphical layout is minimalistic and intentionally attention-grabbing, designed to remain visible without traditional window chrome.
+   • Black background with high-contrast yellow and red text.
+   • Large central message reading “Time To Pay Rent!!”.
+   • Rounded window corners for a softer visual appearance.
+   • Close button positioned just below and to the right of the main text.
+   • Window positioned explicitly on screen for consistency.
+
+USER EXPERIENCE:
+From the user’s perspective, the script operates silently until needed, then provides a clear and unmistakable reminder with minimal interaction required.
+   • No manual activation once running.
+   • Immediate visual and audio feedback on the due date.
+   • One-click access to the payment portal.
+   • Simple dismissal via an on-screen close control.
+   • Non-repeating behavior avoids alert fatigue.
+
+
+.
