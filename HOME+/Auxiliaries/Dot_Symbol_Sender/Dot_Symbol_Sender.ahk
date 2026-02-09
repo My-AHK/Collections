@@ -1,60 +1,54 @@
-﻿;;∙------------------------------------------------------------------------------------------∙
+﻿
+;;∙------------------------------------------------------------------------------------------∙
 ;;∙============================================================∙
-;;∙======∙AUTO-EXECUTE∙==============∙
+;;∙======∙AUTO-EXECUTE∙========∙
 #Requires AutoHotkey 1
 #NoEnv
 #Persistent
-#SingleInstance Force
-#InstallKeybdHook
+#SingleInstance, Force
 SendMode, Input
 SetBatchLines -1
-SetWorkingDir %A_ScriptDir%
+SetWinDelay 0 
 OnMessage(0x0201, "WM_LBUTTONDOWNdrag")
 SetTimer, UpdateCheck, 750
-ScriptID := "Home+"
+ScriptID := "Dot_Symbol_Sender"
 
-Menu, Tray, Icon, compstui.dll, 7
+Menu, Tray, Icon, shell32.dll, 313
 GoSub, TrayMenu
+#NoTrayIcon
 
 
-
-;;∙======∙INITIALIZERS∙================∙
-SetNumLockState, AlwaysOn
-SetScrollLockState, AlwaysOff
-SetCapsLockState, Off
-SoundSet, 1 
-
-
-;;∙======∙RUN APPS∙===================∙
-Run, Auxiliaries\Locking_Keys\Locking_Keys.ahk
-    Sleep, 50
-Run, Auxiliaries\Dot_Symbol_Sender\Dot_Symbol_Sender.ahk
-    Sleep, 50
-Run, Auxiliaries\Get_File_Path\Get_File_Path.ahk
-    Sleep, 50
-Run, Auxiliaries\Open_Images\Open_Images.ahk
-    Sleep, 50
-Run, Auxiliaries\Rent_Is_Due\Rent_Is_Due.ahk
-    Sleep, 50
-Run, Auxiliaries\Screen_Saver\Screen_Saver.ahk
-    Sleep, 50
-Run, Auxiliaries\Philips_Smart_Control\Philips_Smart_Control.ahk
-    Sleep, 50
-Run, Auxiliaries\Text_Assist\Text_Assist.ahk
+;;∙======∙SEND-DOTS∙===========∙
+^.::    ;;∙------∙🔥∙(Ctrl + Period)
+Switch, Morse() {
+    Case "0": SendInput {U+2022} 	;;∙------∙ • (bullet)
+    Case "00": SendInput {U+2219} 	;;∙------∙ ∙ (bullet operator)
+    Case "000": SendInput {U+00B0} 	;;∙------∙ ° (degree symbol)
+}
 Return
 
 
-;;∙======∙Undo-Sound-Notification∙======∙
-~^z::
-    SoundGet, master_volume
-    SoundSet, 3
-        Sleep, 50
-        Soundbeep, 1000, 75
-    SoundSet, master_volume
-Return
+;;∙======∙MORSE-PATTERN∙=======∙
+Morse(Timeout = 400) {
+    Global Pattern := ""
+    RegExMatch(A_ThisHotkey, "\W$|\w*$", Key)
+    While, !ErrorLevel {
+        T := A_TickCount
+        KeyWait %Key%
+        PressDuration := A_TickCount - T
+        If (PressDuration > Timeout) {
+            SoundBeep, 800, 200    ;;∙------∙Long beep - pressed too long.
+            Pattern .= 1
+        } Else {
+       ;     SoundBeep, 1100, 75    ;;∙------∙Short beep - short press.
+            Pattern .= 0
+        }
+        KeyWait %Key%, % "DT" Timeout/1000
+    }
+    Return Pattern
+}
 ;;∙============================================================∙
 ;;∙------------------------------------------------------------------------------------------∙
-
 
 
 
@@ -76,7 +70,7 @@ Return
 ^Esc:: 
     If (A_ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey < 200)    ;;∙------∙Double-Tap.
     Script·Exit:    ;;∙------∙Menu Call.
-        Run, Auxiliaries\AHK_Killer\AHK_Killer.ahk
+        Soundbeep, 1000, 300
     ExitApp
 Return
 
@@ -111,8 +105,8 @@ Menu, Tray, Add
 Menu, Tray, Add, Key History, ShowKeyHistory
 Menu, Tray, Icon, Key History, wmploc.dll, 65
 Menu, Tray, Add
-Menu, Tray, Add, Window Spy Dark, ShowWindowSpyDark
-Menu, Tray, Icon, Window Spy Dark, wmploc.dll, 21
+Menu, Tray, Add, Window Spy, ShowWindowSpy
+Menu, Tray, Icon, Window Spy, wmploc.dll, 21
 Menu, Tray, Add
 
 ;;∙------∙MENU-OPTIONS∙-------------∙
@@ -136,13 +130,12 @@ Return
 ShowKeyHistory:
     KeyHistory
 Return
-ShowWindowSpyDark:
-;    Run, "C:\Program Files\AutoHotkey\WindowSpy.ahk"
-    Run, Auxiliaries\WindowSpy_DarkMode\WindowSpy_DarkMode.ahk
+ShowWindowSpy:
+    Run, "C:\Program Files\AutoHotkey\WindowSpy.ahk"
 Return
 
 ;;∙------∙MENU-HEADER∙---------------∙
-Home+:    ;;∙------∙Suspends hotkeys then pauses script.
+Dot_Symbol_Sender:    ;;∙------∙Suspends hotkeys then pauses script.
     Suspend
     Soundbeep, 700, 100
     Pause

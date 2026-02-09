@@ -1,60 +1,81 @@
-﻿;;∙------------------------------------------------------------------------------------------∙
+﻿
+;;∙------------------------------------------------------------------------------------------∙
 ;;∙============================================================∙
-;;∙======∙AUTO-EXECUTE∙==============∙
+;;∙======∙AUTO-EXECUTE∙========∙
 #Requires AutoHotkey 1
 #NoEnv
 #Persistent
-#SingleInstance Force
-#InstallKeybdHook
+#SingleInstance, Force
 SendMode, Input
 SetBatchLines -1
-SetWorkingDir %A_ScriptDir%
+SetWinDelay 0
 OnMessage(0x0201, "WM_LBUTTONDOWNdrag")
 SetTimer, UpdateCheck, 750
-ScriptID := "Home+"
+ScriptID := "Rent_Is_Due"
 
-Menu, Tray, Icon, compstui.dll, 7
+Menu, Tray, Icon, shell32.dll, 313    ;;∙------∙Sets the system tray icon.
 GoSub, TrayMenu
+#NoTrayIcon
 
 
+;;∙======∙CHECK_DAY∙===========∙
+;;∙------∙Check immediately on startup.
+GoSub, Check_Day_Of_Month
 
-;;∙======∙INITIALIZERS∙================∙
-SetNumLockState, AlwaysOn
-SetScrollLockState, AlwaysOff
-SetCapsLockState, Off
-SoundSet, 1 
-
-
-;;∙======∙RUN APPS∙===================∙
-Run, Auxiliaries\Locking_Keys\Locking_Keys.ahk
-    Sleep, 50
-Run, Auxiliaries\Dot_Symbol_Sender\Dot_Symbol_Sender.ahk
-    Sleep, 50
-Run, Auxiliaries\Get_File_Path\Get_File_Path.ahk
-    Sleep, 50
-Run, Auxiliaries\Open_Images\Open_Images.ahk
-    Sleep, 50
-Run, Auxiliaries\Rent_Is_Due\Rent_Is_Due.ahk
-    Sleep, 50
-Run, Auxiliaries\Screen_Saver\Screen_Saver.ahk
-    Sleep, 50
-Run, Auxiliaries\Philips_Smart_Control\Philips_Smart_Control.ahk
-    Sleep, 50
-Run, Auxiliaries\Text_Assist\Text_Assist.ahk
+;;∙------∙Then check once per hour.
+SetTimer, Check_Day_Of_Month, 3600000
 Return
 
+Check_Day_Of_Month:
+    ;;∙------∙Check if today is the desired date AND we haven't run it today yet.
+    if (A_DD = "01" && A_LastMonthlyCheck != A_YYYY A_MM)
+    {
+        A_LastMonthlyCheck := A_YYYY A_MM    ;;∙------∙Store that it ran this month.
 
-;;∙======∙Undo-Sound-Notification∙======∙
-~^z::
-    SoundGet, master_volume
-    SoundSet, 3
-        Sleep, 50
-        Soundbeep, 1000, 75
-    SoundSet, master_volume
+        SoundBeep, 1200, 350
+
+        ;;∙------∙Open in Microsoft Edge browser.
+        Edge_Path := "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+        Run, "%Edge_Path%" "https://conestogapark.residentportal.com/auth"
+
+
+;;∙======∙GUI_NOTICE∙==========∙
+Gui, +AlwaysOnTop -Caption +hwndHGUI +Owner
+        +LastFound +E0x02000000 +E0x00080000
+Gui, Color, Black
+Gui, Font, s24 cYellow Bold, ARIAL
+Gui, Margin, 15, 10
+Gui, Add, Text, vMainText +0x0200 w320 h50 +Border Center BackgroundTrans, Time To Pay Rent!!
+
+GuiControlGet, Pos, Pos, MainText
+Xpos := PosX + PosW - 20    ;;∙------∙Right edge inside border.
+Ypos := PosY + PosH + 5    ;;∙------∙Just below the textbox, small gap.
+
+Gui, Font, s14 cRed Bold
+Gui, Add, Text, x%Xpos% y%Ypos% w20 h20 gCloseGUI, X
+
+Gui, Show, Hide
+WinGetPos, X, Y, W, H
+R := Min(W, H) // 5
+WinSet, Region, 0-0 W%W% H%H% R%R%-%R%
+Gui, Show, x1150 y250
+    }
 Return
+
+CloseGUI:
+    Gui, Destroy
+Return
+
+WM_LBUTTONDOWNdrag() {
+   PostMessage, 0x00A1, 2, 0
+}
+;;∙------------------------------------------------------------------------------------------∙
+;;∙============================================================∙
+
+
+
 ;;∙============================================================∙
 ;;∙------------------------------------------------------------------------------------------∙
-
 
 
 
@@ -76,7 +97,7 @@ Return
 ^Esc:: 
     If (A_ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey < 200)    ;;∙------∙Double-Tap.
     Script·Exit:    ;;∙------∙Menu Call.
-        Run, Auxiliaries\AHK_Killer\AHK_Killer.ahk
+        Soundbeep, 1000, 300
     ExitApp
 Return
 
@@ -111,8 +132,8 @@ Menu, Tray, Add
 Menu, Tray, Add, Key History, ShowKeyHistory
 Menu, Tray, Icon, Key History, wmploc.dll, 65
 Menu, Tray, Add
-Menu, Tray, Add, Window Spy Dark, ShowWindowSpyDark
-Menu, Tray, Icon, Window Spy Dark, wmploc.dll, 21
+Menu, Tray, Add, Window Spy, ShowWindowSpy
+Menu, Tray, Icon, Window Spy, wmploc.dll, 21
 Menu, Tray, Add
 
 ;;∙------∙MENU-OPTIONS∙-------------∙
@@ -136,13 +157,12 @@ Return
 ShowKeyHistory:
     KeyHistory
 Return
-ShowWindowSpyDark:
-;    Run, "C:\Program Files\AutoHotkey\WindowSpy.ahk"
-    Run, Auxiliaries\WindowSpy_DarkMode\WindowSpy_DarkMode.ahk
+ShowWindowSpy:
+    Run, "C:\Program Files\AutoHotkey\WindowSpy.ahk"
 Return
 
 ;;∙------∙MENU-HEADER∙---------------∙
-Home+:    ;;∙------∙Suspends hotkeys then pauses script.
+Rent_Is_Due:    ;;∙------∙Suspends hotkeys then pauses script.
     Suspend
     Soundbeep, 700, 100
     Pause

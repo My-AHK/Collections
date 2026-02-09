@@ -1,56 +1,28 @@
-﻿;;∙------------------------------------------------------------------------------------------∙
+﻿
+;;∙------------------------------------------------------------------------------------------∙
 ;;∙============================================================∙
-;;∙======∙AUTO-EXECUTE∙==============∙
+;;∙======∙AUTO-EXECUTE∙===============∙
 #Requires AutoHotkey 1
 #NoEnv
 #Persistent
 #SingleInstance Force
-#InstallKeybdHook
 SendMode, Input
 SetBatchLines -1
 SetWorkingDir %A_ScriptDir%
+ScriptID := "Screen_Saver"
 OnMessage(0x0201, "WM_LBUTTONDOWNdrag")
 SetTimer, UpdateCheck, 750
-ScriptID := "Home+"
 
-Menu, Tray, Icon, compstui.dll, 7
+Menu, Tray, Icon, shell32.dll, 313
 GoSub, TrayMenu
+#NoTrayIcon
 
 
-
-;;∙======∙INITIALIZERS∙================∙
-SetNumLockState, AlwaysOn
-SetScrollLockState, AlwaysOff
-SetCapsLockState, Off
-SoundSet, 1 
-
-
-;;∙======∙RUN APPS∙===================∙
-Run, Auxiliaries\Locking_Keys\Locking_Keys.ahk
-    Sleep, 50
-Run, Auxiliaries\Dot_Symbol_Sender\Dot_Symbol_Sender.ahk
-    Sleep, 50
-Run, Auxiliaries\Get_File_Path\Get_File_Path.ahk
-    Sleep, 50
-Run, Auxiliaries\Open_Images\Open_Images.ahk
-    Sleep, 50
-Run, Auxiliaries\Rent_Is_Due\Rent_Is_Due.ahk
-    Sleep, 50
-Run, Auxiliaries\Screen_Saver\Screen_Saver.ahk
-    Sleep, 50
-Run, Auxiliaries\Philips_Smart_Control\Philips_Smart_Control.ahk
-    Sleep, 50
-Run, Auxiliaries\Text_Assist\Text_Assist.ahk
-Return
-
-
-;;∙======∙Undo-Sound-Notification∙======∙
-~^z::
-    SoundGet, master_volume
-    SoundSet, 3
-        Sleep, 50
-        Soundbeep, 1000, 75
-    SoundSet, master_volume
+;;∙======∙TRIGGER_SCREENSAVER∙========∙
+^Enter::    ;;∙------∙🔥∙(Ctrl + Enter)
+^NumpadEnter::     ;;∙------∙🔥∙(Ctrl + NumpadEnter)
+        Soundbeep, 1700, 75
+SendMessage, 0x0112, 0xF140, 0,, Program Manager  ; 0x0112 is WM_SYSCOMMAND, and 0xF140 is SC_SCREENSAVE.
 Return
 ;;∙============================================================∙
 ;;∙------------------------------------------------------------------------------------------∙
@@ -76,7 +48,7 @@ Return
 ^Esc:: 
     If (A_ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey < 200)    ;;∙------∙Double-Tap.
     Script·Exit:    ;;∙------∙Menu Call.
-        Run, Auxiliaries\AHK_Killer\AHK_Killer.ahk
+        Soundbeep, 1000, 300
     ExitApp
 Return
 
@@ -111,8 +83,8 @@ Menu, Tray, Add
 Menu, Tray, Add, Key History, ShowKeyHistory
 Menu, Tray, Icon, Key History, wmploc.dll, 65
 Menu, Tray, Add
-Menu, Tray, Add, Window Spy Dark, ShowWindowSpyDark
-Menu, Tray, Icon, Window Spy Dark, wmploc.dll, 21
+Menu, Tray, Add, Window Spy, ShowWindowSpy
+Menu, Tray, Icon, Window Spy, wmploc.dll, 21
 Menu, Tray, Add
 
 ;;∙------∙MENU-OPTIONS∙-------------∙
@@ -136,13 +108,12 @@ Return
 ShowKeyHistory:
     KeyHistory
 Return
-ShowWindowSpyDark:
-;    Run, "C:\Program Files\AutoHotkey\WindowSpy.ahk"
-    Run, Auxiliaries\WindowSpy_DarkMode\WindowSpy_DarkMode.ahk
+ShowWindowSpy:
+    Run, "C:\Program Files\AutoHotkey\WindowSpy.ahk"
 Return
 
 ;;∙------∙MENU-HEADER∙---------------∙
-Home+:    ;;∙------∙Suspends hotkeys then pauses script.
+Screen_Saver:    ;;∙------∙Suspends hotkeys then pauses script.
     Suspend
     Soundbeep, 700, 100
     Pause

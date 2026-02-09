@@ -1,60 +1,50 @@
-﻿;;∙------------------------------------------------------------------------------------------∙
+﻿
+;;∙------------------------------------------------------------------------------------------∙
 ;;∙============================================================∙
-;;∙======∙AUTO-EXECUTE∙==============∙
+;;∙======∙AUTO-EXECUTE∙========∙
 #Requires AutoHotkey 1
 #NoEnv
 #Persistent
-#SingleInstance Force
-#InstallKeybdHook
+#SingleInstance, Force
 SendMode, Input
 SetBatchLines -1
+SetWinDelay 0
 SetWorkingDir %A_ScriptDir%
 OnMessage(0x0201, "WM_LBUTTONDOWNdrag")
 SetTimer, UpdateCheck, 750
-ScriptID := "Home+"
+ScriptID := "TEMPLATE"
 
-Menu, Tray, Icon, compstui.dll, 7
+Menu, Tray, Icon, shell32.dll, 313
 GoSub, TrayMenu
+#NoTrayIcon
 
 
-
-;;∙======∙INITIALIZERS∙================∙
-SetNumLockState, AlwaysOn
-SetScrollLockState, AlwaysOff
-SetCapsLockState, Off
-SoundSet, 1 
+;;∙======∙INITIALIZE∙============∙
+TargetProcess := "SmartControl.exe"
+CheckInterval := 3000 
+SetTimer, CheckPROG, %CheckInterval% 	 
 
 
-;;∙======∙RUN APPS∙===================∙
-Run, Auxiliaries\Locking_Keys\Locking_Keys.ahk
-    Sleep, 50
-Run, Auxiliaries\Dot_Symbol_Sender\Dot_Symbol_Sender.ahk
-    Sleep, 50
-Run, Auxiliaries\Get_File_Path\Get_File_Path.ahk
-    Sleep, 50
-Run, Auxiliaries\Open_Images\Open_Images.ahk
-    Sleep, 50
-Run, Auxiliaries\Rent_Is_Due\Rent_Is_Due.ahk
-    Sleep, 50
-Run, Auxiliaries\Screen_Saver\Screen_Saver.ahk
-    Sleep, 50
-Run, Auxiliaries\Philips_Smart_Control\Philips_Smart_Control.ahk
-    Sleep, 50
-Run, Auxiliaries\Text_Assist\Text_Assist.ahk
+;;∙======∙CLOSE∙================∙
+CheckPROG:
+    If (ProcessDoesExist(TargetProcess)) {    ;;∙------∙Check if process is running.
+    Sleep, 3000
+        If (ProcessDoesExist(TargetProcess)) {    ;;∙------∙Check if process is still running.
+            Process, Close, %TargetProcess%    ;;∙------∙If still running, terminate process.
+    Soundbeep, 500, 75
+        } 
+    }
 Return
 
 
-;;∙======∙Undo-Sound-Notification∙======∙
-~^z::
-    SoundGet, master_volume
-    SoundSet, 3
-        Sleep, 50
-        Soundbeep, 1000, 75
-    SoundSet, master_volume
+;;∙======∙CLOSE-FUNCTION∙======∙
+ProcessDoesExist(Name){
+    Process, Exist, %Name%
+    Return ErrorLevel
+}
 Return
 ;;∙============================================================∙
 ;;∙------------------------------------------------------------------------------------------∙
-
 
 
 
@@ -76,7 +66,7 @@ Return
 ^Esc:: 
     If (A_ThisHotkey = A_PriorHotkey && A_TimeSincePriorHotkey < 200)    ;;∙------∙Double-Tap.
     Script·Exit:    ;;∙------∙Menu Call.
-        Run, Auxiliaries\AHK_Killer\AHK_Killer.ahk
+        Soundbeep, 1000, 300
     ExitApp
 Return
 
@@ -111,8 +101,8 @@ Menu, Tray, Add
 Menu, Tray, Add, Key History, ShowKeyHistory
 Menu, Tray, Icon, Key History, wmploc.dll, 65
 Menu, Tray, Add
-Menu, Tray, Add, Window Spy Dark, ShowWindowSpyDark
-Menu, Tray, Icon, Window Spy Dark, wmploc.dll, 21
+Menu, Tray, Add, Window Spy, ShowWindowSpy
+Menu, Tray, Icon, Window Spy, wmploc.dll, 21
 Menu, Tray, Add
 
 ;;∙------∙MENU-OPTIONS∙-------------∙
@@ -136,13 +126,12 @@ Return
 ShowKeyHistory:
     KeyHistory
 Return
-ShowWindowSpyDark:
-;    Run, "C:\Program Files\AutoHotkey\WindowSpy.ahk"
-    Run, Auxiliaries\WindowSpy_DarkMode\WindowSpy_DarkMode.ahk
+ShowWindowSpy:
+    Run, "C:\Program Files\AutoHotkey\WindowSpy.ahk"
 Return
 
 ;;∙------∙MENU-HEADER∙---------------∙
-Home+:    ;;∙------∙Suspends hotkeys then pauses script.
+TEMPLATE:    ;;∙------∙Suspends hotkeys then pauses script.
     Suspend
     Soundbeep, 700, 100
     Pause
@@ -174,4 +163,3 @@ Return
 ;;∙------------------------------------------------------------------------------------------∙
 ;;∙========================∙SCRIPT END∙=========================∙
 ;;∙------------------------------------------------------------------------------------------∙
-
