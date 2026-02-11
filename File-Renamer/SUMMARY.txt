@@ -1,0 +1,85 @@
+
+*  File renaming GUI with append, prepend, numbering.
+
+PURPOSE:
+This script provides a graphical AutoHotkey-based utility for safely renaming multiple files within a selected folder by appending or prepending custom text and optional sequential numbering. 
+It emphasizes preview-first behavior to reduce errors and gives the user granular control over filename structure before committing changes.
+   • Enables bulk file renaming without manual command-line usage.
+   • Focuses on clarity, preview accuracy, and confirmation before execution.
+   • Designed for repeat use through reloadable and persistent GUI behavior.
+
+KEY FEATURES:
+The script offers a comprehensive set of filename modification options through a single always-on-top GUI, combining text insertion, separator control, and configurable numbering logic. 
+All transformations are previewed live before being applied.
+   • Folder selection with live file list population.
+       ⮞ Supports optional inclusion of subfolders.
+   • Append or prepend custom text to filenames.
+       ⮞ User-defined separator character(s).
+   • Sequential numbering system with padding control.
+       ⮞ Configurable start number.
+       ⮞ Zero-padded numbering (e.g., 001, 002).
+       ⮞ Number placement before or after custom text.
+   • Live preview of renamed filenames.
+       ⮞ Displayed directly in the ListView.
+   • Selective file processing.
+       ⮞ Individual checkboxes per file.
+       ⮞ Select All / Deselect All controls.
+   • Safe execution workflow.
+       ⮞ Confirmation dialog before renaming.
+       ⮞ Error reporting with per-file failure logging.
+   • Reload and exit controls for rapid iteration.
+
+LOGIC SUMMARY:
+The script maintains an internal array of file objects representing each discovered file, storing its full path, base name, extension, and directory. 
+GUI input controls directly influence how new filenames are generated, and a shared generation function ensures consistency between preview and actual rename operations.
+   • File discovery:
+       ⮞ Files are gathered using a Loop, Files construct.
+       ⮞ Directories are explicitly skipped.
+   • Data modeling:
+       ⮞ Each file is stored as an object containing name components.
+   • Preview generation:
+       ⮞ Iterates through ListView rows.
+       ⮞ Uses a sequential counter to simulate numbering.
+       ⮞ Calls a centralized filename generator.
+   • Filename construction:
+       ⮞ Applies prepend or append logic.
+       ⮞ Inserts numbering based on user-selected position.
+       ⮞ Preserves file extensions.
+   • Rename execution:
+       ⮞ Processes only checked files.
+       ⮞ Reuses the same generation logic as preview.
+       ⮞ Tracks success and failure counts.
+   • Error handling:
+       ⮞ Failed operations are logged and displayed post-run.
+
+LAYOUT:
+The GUI is compact, borderless, and always on top, designed for efficiency rather than decoration.
+Controls are grouped logically to guide the user from folder selection through preview and execution.
+   • Top section:
+       ⮞ Folder path display with browse button.
+   • Text configuration:
+       ⮞ Append/prepend text input.
+       ⮞ Separator input with usage examples.
+       ⮞ Radio buttons for prepend vs append.
+   • Numbering section:
+       ⮞ Checkbox to enable numbering.
+       ⮞ Inputs for start number and padding.
+       ⮞ Radio buttons for number placement.
+   • File list:
+       ⮞ ListView with columns for selection, current name, new name, and path.
+       ⮞ Grid-enabled for readability.
+   • Action buttons:
+       ⮞ Select/Deselect all.
+       ⮞ Preview and Rename.
+       ⮞ Reload and Exit.
+
+USER EXPERIENCE:
+The script prioritizes safety, transparency, and user confidence by ensuring that no file is renamed without explicit selection, preview, and confirmation. 
+Immediate visual feedback and clear messaging reduce the risk of accidental or malformed renames.
+   • Predictable behavior through live previews.
+   • No irreversible actions without confirmation.
+   • Errors are clearly reported without halting the entire process.
+   • Fast iteration enabled via reload functionality.
+   • Minimal distractions due to captionless, focused GUI design.
+
+.
