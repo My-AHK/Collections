@@ -37,10 +37,10 @@ GoSub, TrayMenu
 ;;∙========∙INITIALIZE VARIABLES
 global FileList := []
 
-;;∙------∙Set default folder here (example: "C:\Users\YourUsername\Documents").
+;;∙------∙Set default folder here.
 global CurrentFolder := ""
+global CurrentFolder := "C:\Users\YourUsername\Documents""
 
-global CurrentFolder := "C:\Users\rjcof\Downloads\AHK Collections\AHK WIP\File Renaming\TEST MAIN"
 global AppendText := ""
 global IncludeSubfolders := false
 
@@ -556,4 +556,5 @@ Return
 ;;∙------------------------------------------------------------------------------------------∙
 ;;∙========================∙SCRIPT END∙=========================∙
 ;;∙------------------------------------------------------------------------------------------∙
+
 
