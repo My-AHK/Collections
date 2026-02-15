@@ -10,6 +10,60 @@
 • Any combination of Bold/Italic/Norm styles.
 • Optional Gui timeout.
 • Positional MsgBoxes with customizable coordinates.
+
+∙------∙PARAMETERS∙-----------------------------------∙
+guiNotify(guiColor, icon1, icon2, text1, text1Font, text1Color, text2, text2Font, text2Color, button1, button2, button3, timeout := 0, shadowOffset := 2)
+∙------------------------------------------------------------∙
+guiColor      - Background color of the GUI window (hex code without # or color name like "Yellow", "Red", etc.)
+                Examples: "6F6F6F", "Purple", "B2B2B2"
+∙------------------------------------------------------------∙
+icon1         - First icon to display (format: "file,index" where file is DLL/EXE path and index is icon number)
+                Examples: "shell32.dll,41", "shell32.dll,167"
+                Use "" for no icon
+∙------------------------------------------------------------∙
+icon2         - Second icon to display (same format as icon1, positioned after icon1)
+                Examples: "shell32.dll,278", "shell32.dll,245"
+                Use "" for no second icon
+∙------------------------------------------------------------∙
+text1         - Main heading/title text displayed at the top
+                Examples: "Warning!", "Success!", "URGENT!"
+∙------------------------------------------------------------∙
+text1Font     - Font settings for text1 (size and style)
+                Format: "s[size] [Bold] [Italic]"
+                Examples: "s20 Bold", "s18 Italic", "s32 Bold Italic"
+                Use "" for default (s26 Norm)
+∙------------------------------------------------------------∙
+text1Color    - Color of text1 (hex code without # or color name)
+                Examples: "Red", "Blue", "DE6F00", "Green"
+∙------------------------------------------------------------∙
+text2         - Secondary message text displayed below text1
+                Examples: "Proceed with caution", "Files processed successfully"
+∙------------------------------------------------------------∙
+text2Font     - Font settings for text2 (same format as text1Font)
+                Examples: "s12 Italic", "s11 Norm", "s10 Italic"
+                Use "" for default (s10 Norm)
+∙------------------------------------------------------------∙
+text2Color    - Color of text2 (hex code without # or color name)
+                Examples: "Yellow", "Cyan", "6FDEDE", "LightGray"
+∙------------------------------------------------------------∙
+button1       - Text label for the left button
+                Examples: "Cancel", "Dismiss", "Ignore"
+∙------------------------------------------------------------∙
+button2       - Text label for the center button
+                Examples: "Ignore", "Read More", "Later"
+∙------------------------------------------------------------∙
+button3       - Text label for the right button
+                Examples: "Continue", "OK", "Act Now"
+∙------------------------------------------------------------∙
+timeout       - Auto-close timer in milliseconds (optional, default: 0)
+                0 = No timeout (stays open until user interaction)
+                Examples: 3000 (3 seconds), 5000 (5 seconds), 7000 (7 seconds)
+∙------------------------------------------------------------∙
+shadowOffset  - Text shadow offset in pixels for text1 (optional, default: 2)
+                0 = No shadow
+                Higher values = larger shadow offset
+                Examples: 2 (subtle), 4 (medium), 6 (prominent)
+∙------------------------------------------------------------∙
 */
 
 ;;∙========∙DIRECTIVES/AUTO-EXECUTE∙===============∙
@@ -380,3 +434,4 @@ Return True
 }
 Return
 ∙========∙SCRIPT END∙==============================∙
+
