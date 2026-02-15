@@ -1,0 +1,95 @@
+
+
+NEW FEATURES:
+    ★ Replace Mode Added
+        • New ReplaceRadio option
+        • Allows complete filename overwrite (instead of only prepend/append)
+    ★ Revert (Undo) System
+        • Creates automatic rename backup in INI
+        • RevertFiles function restores original filenames
+        • Deletes backup after successful revert
+        • Prevents revert if no backup exists
+    ★ Per-Extension Sequential Numbering
+        • Numbering restarts for each file extension group
+        • Example:
+            ▸ .jpg → 001, 002, 003
+            ▸ .png → 001, 002
+        • More logical grouping than global numbering
+
+    ★ Sorted File Display
+        • Files sorted by:
+            ▸ Extension (alphabetical)
+            ▸ Then filename (alphabetical)
+        • Custom sort function: SortFilesByExtensionAndName()
+    ★ Automatic Checkbox State Monitoring
+        • Timer-based CheckCheckboxChanges
+        • Preview updates automatically when checkboxes change
+        • No manual preview refresh required
+    ★ INI-Based Persistence
+        • Saves last used folder
+        • Automatically reloads it on next script launch
+        • Falls back to default if folder no longer exists
+
+
+BACKUP & DATA HANDLING IMPROVEMENTS
+    ★ Single INI File for:
+        • Last folder used
+        • Rename backup mapping
+    ★ Hidden INI file
+        • Hidden attribute set automatically
+    ★ Backup section cleared before new rename
+        • Prevents stale revert data
+    ★ Skips renaming its own INI file
+        • Prevents corruption
+
+
+GUI & UX IMPROVEMENTS
+    ★ Visual Name Plate Header
+        • Large stylized title
+        • Decorative separator lines
+    ★ Color Theming Variables
+        • Centralized GUI color control
+        • Easy styling adjustments
+    ★ GroupBox for Logical Layout
+        • Cleaner visual grouping of controls
+    ★ Improved Window Dimensions
+        • Larger height for better spacing
+    ★ Focus Set on Startup
+        • Cursor automatically placed in “Text to Add”
+    ★ AlwaysOnTop toggled during MsgBox
+        • Prevents dialog hiding behind GUI
+    ★ Preview Column Fully Cleared Before Regeneration
+        • Prevents stale preview artifacts
+
+
+STRUCTURAL / CODE IMPROVEMENTS
+    ★ Better Preview Logic
+        • Clears all preview values first
+        • Only populates checked rows
+        • Organized by extension group
+    ★ Extension-Aware Rename Loop
+        • Same grouping logic used in preview and actual rename
+        • Ensures numbering matches preview exactly
+    ★ Safer File Processing
+        • Explicitly skips:
+            ▸ Directories
+            ▸ The INI file
+        • Validates saved folder existence
+    ★ Cleaner Sequential Counting
+        • No longer increments for unchecked rows
+        • More precise control of numbering
+
+
+OVERALL
+    ✧ A more polished, safer, and more feature-complete version
+    ✧ Adds undo capability
+    ✧ Adds Replace mode
+    ✧ Adds smarter numbering
+    ✧ Adds sorting
+    ✧ Adds state persistence
+    ✧ Improves GUI presentation
+    ✧ Improves preview reliability
+    ✧ Improves rename safety
+
+
+

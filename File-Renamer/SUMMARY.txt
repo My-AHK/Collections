@@ -1,0 +1,127 @@
+
+*  Bulk file renamer with preview & revert.
+
+
+PURPOSE:
+This script provides a fully interactive graphical file renaming utility that allows users to append, prepend, or replace filenames with custom text and optional sequential numbering. 
+It is designed to simplify bulk file renaming tasks while offering precise control over formatting, numbering behavior, and file selection. 
+The script also includes built-in preview functionality and a reversible backup system to protect against accidental changes.
+   • Allows bulk renaming of selected files within a chosen folder.
+   • Supports prepend, append, and full replace rename modes.
+   • Includes optional sequential numbering with custom start and padding.
+   • Provides a reversible backup system using an INI file.
+   • Displays real-time previews before any renaming occurs.
+
+KEY FEATURES:
+The script combines a custom GUI interface with dynamic preview logic and structured file handling to provide a safe and flexible renaming workflow. 
+It persists the last-used folder, sorts files intelligently, groups numbering by extension, and allows users to revert changes even after batch renaming.
+   • Folder Management
+       ⮞ Remembers the last selected folder using a hidden INI file.
+       ⮞ Falls back to a default folder if the saved folder no longer exists.
+       ⮞ Optional inclusion of subfolders during file loading.
+   • Intelligent File Loading
+       ⮞ Skips directories and the script’s own INI file.
+       ⮞ Sorts files first by extension, then alphabetically by name.
+       ⮞ Displays files in a ListView with checkbox selection.
+   • Rename Modes
+       ⮞ Prepend mode adds text (and optional numbering) before the original filename.
+       ⮞ Append mode adds text (and optional numbering) after the original filename.
+       ⮞ Replace mode completely overwrites the original filename.
+   • Sequential Numbering System
+       ⮞ Optional numbering toggle.
+       ⮞ Customizable starting number.
+       ⮞ Configurable zero-padding digit length.
+       ⮞ Restart numbering per file extension group.
+       ⮞ Option to place numbers before or after custom text.
+   • Real-Time Preview
+       ⮞ Dynamically updates as options change.
+       ⮞ Clears and regenerates preview column automatically.
+       ⮞ Only previews checked files.
+   • Backup & Revert System
+       ⮞ Saves original filenames mapped to new paths in the INI file.
+       ⮞ Hidden INI file protects configuration and backup data.
+       ⮞ Revert function restores all renamed files to original names.
+       ⮞ Backup section is deleted after successful revert.
+   • Safety & Validation
+       ⮞ Confirms rename and revert operations.
+       ⮞ Validates numbering settings.
+       ⮞ Reports success and failure counts.
+       ⮞ Logs individual errors for failed operations.
+
+LOGIC SUMMARY:
+The script initializes by setting directives, loading configuration from a hidden INI file, and constructing the GUI. 
+Once running, it loads files from the selected directory into an internal array and corresponding ListView. 
+Files are sorted by extension and name before display. 
+Each file object stores full path, filename, extension, and directory data.
+
+Preview updates occur whenever rename settings change or checkbox states are modified. 
+A timer continuously monitors checkbox changes to ensure the preview stays synchronized. 
+When generating preview names, the script groups checked files by extension, then restarts sequential numbering within each extension group. 
+This ensures numbering consistency across similar file types.
+
+The GenerateNewFileName function is the core formatting engine. 
+It constructs the new base filename based on:
+   • Rename mode (prepend, append, replace).
+   • Whether numbering is enabled.
+   • Number placement relative to custom text.
+   • Separator string.
+   • Zero-padding configuration.
+   • Whether the file has an extension.
+
+When renaming is confirmed, the script:
+   • Validates settings.
+   • Confirms user intent.
+   • Clears previous backup data.
+   • Renames files grouped by extension.
+   • Writes original filename mappings to the INI file.
+   • Displays operation results.
+
+The revert process parses the INI backup section, extracts current path to original name mappings, and renames files back to their original names. 
+Errors are logged and reported. Upon full success, the backup section is deleted.
+
+LAYOUT:
+The interface is a border-framed, captionless, always-on-top GUI window with custom colors and typography. 
+It includes clearly organized sections for folder selection, rename configuration, numbering controls, and file listing.
+   • Header Section
+       ⮞ Styled title text with decorative trim lines.
+   • Folder Selection Area
+       ⮞ Read-only path display.
+       ⮞ Browse button for folder selection.
+   • Rename Configuration Panel
+       ⮞ Text input field for custom addition.
+       ⮞ Separator field with example hint.
+       ⮞ Radio buttons for text placement mode.
+   • Sequential Numbering Panel
+       ⮞ Enable checkbox.
+       ⮞ Start number input.
+       ⮞ Padding digit input.
+       ⮞ Radio buttons for number placement.
+       ⮞ Subfolder inclusion checkbox.
+       ⮞ Refresh button.
+   • File List Section
+       ⮞ Checkbox-enabled ListView.
+       ⮞ Columns: Select | Current Name | New Name | Path.
+       ⮞ Grid and background color customization.
+   • Control Buttons
+       ⮞ Select All / Deselect All.
+       ⮞ Revert.
+       ⮞ Rename.
+       ⮞ Reload.
+       ⮞ Exit.
+
+USER EXPERIENCE:
+The script is designed for clarity, safety, and efficiency. 
+Users can see exactly how filenames will change before committing any action. 
+Sequential numbering behavior is predictable and resets logically per extension group, reducing confusion during multi-type renaming tasks. 
+The built-in backup and revert system provides an additional safety net, ensuring that batch operations are reversible.
+   • Immediate visual feedback through live preview.
+   • Clear confirmation dialogs before destructive actions.
+   • Persistent folder memory across sessions.
+   • Structured sorting for organized presentation.
+   • Automatic reload of file list after operations.
+   • Clean removal of backup data on exit.
+
+Overall, this script functions as a structured, user-friendly bulk file renaming utility with advanced formatting control, extension-aware numbering logic, persistent configuration storage, and built-in rollback protection.
+
+
+.
