@@ -1,0 +1,63 @@
+
+*  Three WiFi toggles with distinct GUI styles
+
+
+PURPOSE:
+These three AutoHotkey scripts provide a fast, keyboard-driven way to check internet connectivity and toggle WiFi on or off, while giving immediate visual and audible feedback. 
+Each script shares identical core networking logic and hotkeys, differing only in how the on-screen status notification is styled and rendered.
+   • Enable instant WiFi disconnect and reconnect without opening Windows settings.
+   • Provide clear confirmation of connection state and internet reachability.
+   • Offer multiple visual presentation styles to suit different aesthetic preferences.
+
+KEY FEATURES:
+All three scripts include a robust, administrator-aware WiFi control system that safely manages connections and reports status. 
+They rely on Windows-native tools and avoid external dependencies while still offering reliability and redundancy.
+   • Hotkeys for status check and toggle actions.
+       ⮞ Ctrl + T checks current internet connectivity.
+       ⮞ Ctrl + Shift + T disconnects or reconnects WiFi.
+   • Automatic elevation to administrator privileges when required.
+   • Multi-stage reconnection logic with fallback strategies.
+   • Audible feedback paired with color-coded visual notifications.
+   • Internet validation using multiple HTTP endpoints for accuracy.
+
+LOGIC SUMMARY:
+The internal logic is identical across all three scripts and is designed for reliability rather than speed alone. 
+Each toggle action begins by determining whether the system is currently connected to a WiFi network, then branches accordingly.
+   • If connected:
+       ⮞ The current SSID is stored.
+       ⮞ WiFi is disconnected using netsh.
+       ⮞ A red status notification confirms disconnection.
+   • If not connected:
+       ⮞ The script attempts reconnection in stages.
+           ⮚ Reconnect to the last known SSID.
+           ⮚ Scan saved WiFi profiles and connect to an available one.
+           ⮚ Disable and re-enable the WiFi adapter as a last resort.
+       ⮞ Connectivity is verified both at the network and internet level.
+   • Internet reachability is confirmed using multiple HTTP test endpoints.
+   • Temporary command output files are created, parsed, and cleaned up automatically.
+
+LAYOUT:
+The primary distinction between the three scripts lies in how the status GUI is drawn and styled. 
+Each version uses the same size, font, and positioning, but applies a different edge treatment.
+   • Border Edge version:
+       ⮞ Uses a simple bordered, rectangular GUI window.
+       ⮞ Clean and minimal with a classic utility look.
+   • Rounded Corners version:
+       ⮞ Applies a rounded region to the GUI window.
+       ⮞ Produces a softer, modern appearance.
+   • Trimmed Edge version:
+       ⮞ Draws a custom inner trim using region masking.
+       ⮞ Allows precise control over trim thickness and color.
+       ⮞ Most visually refined and configurable of the three.
+
+USER EXPERIENCE:
+From a user’s perspective, all three scripts behave identically in operation and responsiveness. 
+The choice between them is purely aesthetic, allowing the user to select the visual style that best fits their desktop environment or personal taste.
+   • Instant visual confirmation reduces uncertainty during network changes.
+   • Color-coded messages clearly distinguish success, failure, and warnings.
+   • Audible cues reinforce actions without requiring visual focus.
+   • Minimal screen footprint avoids disruption during normal workflow.
+   • Consistent hotkeys ensure muscle-memory-friendly operation across all versions.
+
+
+.
