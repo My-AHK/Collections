@@ -1,0 +1,63 @@
+
+  *Grid-aware tooltips with monitor edge control.
+
+PURPOSE:
+  Provides a grid-aware tooltip positioning system that intelligently places tooltips near the mouse cursor without allowing them to overlap the cursor or extend off the edges of the current monitor. 
+  By dividing the active monitor into either a 2×2 or 3×3 logical grid, the script determines where the cursor sits within that grid and adjusts tooltip placement accordingly. 
+  The goal is to maintain consistent visual spacing while preventing tooltips from obscuring the pointer or being clipped by screen boundaries. 
+  Despite the advanced positioning logic, the system is designed to be extremely simple to use, requiring only a single function call line to display a properly positioned tooltip.
+   • Dynamically positions tooltips relative to the mouse location.
+   • Supports both 2×2 and 3×3 grid positioning strategies.
+   • Ensures tooltips remain fully visible within monitor work areas.
+   • Designed so tooltips can be triggered with one simple function call.
+
+KEY FEATURES:
+  The script contains a reusable function that calculates tooltip placement based on cursor position and monitor geometry. 
+  It works seamlessly across multi-monitor systems by identifying the specific monitor where the mouse currently resides and using that monitor’s work area to determine grid positioning and boundary limits. 
+  The function is designed for easy integration into other scripts, meaning a developer can display a grid-aware tooltip anywhere by inserting a single line of code.
+   • Multi-monitor awareness using system monitor work area detection.
+   • Grid-based placement logic that adapts to cursor location.
+   • Automatic tooltip clearing via a timed callback.
+   • Configurable offsets that control tooltip spacing.
+   • Example hotkeys to demonstrate both grid modes.
+   • One-line usage example for quick integration:
+       ⮞ Show_Grid_ToolTip("Tooltip Text", GridSize)
+
+LOGIC SUMMARY:
+  The script begins by capturing the mouse cursor’s screen coordinates and determining which monitor contains the cursor. 
+  It retrieves that monitor’s work area dimensions and divides the area into equal grid cells based on the selected grid size (2 or 3). 
+  The cursor’s position relative to the monitor determines the grid row and column it occupies.
+
+  Once the grid cell is identified, the script applies a set of predefined horizontal and vertical offsets associated with that column and row. 
+  These offsets move the tooltip away from the cursor in a direction that reduces overlap and maintains readability. 
+  Additional boundary checks ensure that the tooltip never appears too close to monitor edges.
+   • Determine monitor containing the cursor.
+   • Calculate monitor width and height.
+   • Divide monitor into grid cells.
+   • Identify cursor row and column within the grid.
+   • Apply direction-specific X/Y offsets.
+   • Clamp position to stay within screen boundaries.
+
+LAYOUT:
+  The script is organized into structured sections including directives, demonstration hotkeys, and the core grid-aware tooltip function. 
+  Comments provide clear separation between functional components and include visual grid diagrams illustrating how tooltip direction changes depending on cursor position.
+   • Initialization directives configure performance and script behavior.
+   • Two hotkeys demonstrate tooltip placement:
+       ⮞ Ctrl+2 activates the 2×2 grid system.
+       ⮞ Ctrl+3 activates the 3×3 grid system.
+   • The Show_Grid_ToolTip() function contains all positioning logic.
+   • A timer-based label removes the tooltip automatically.
+
+USER EXPERIENCE:
+  From the user’s perspective, tooltips appear near the cursor in a consistent and readable location that adapts to screen position. 
+  If the cursor is near the screen edges or corners, the tooltip intelligently flips direction so it remains fully visible and does not collide with monitor borders. 
+  For script developers, the experience is equally streamlined, since implementing this behavior requires only a single function call with the tooltip text and optional grid size.
+   • Tooltips never appear directly under the cursor.
+   • Edge buffering prevents tooltip clipping.
+   • Placement feels natural regardless of cursor location.
+   • Multi-monitor environments behave correctly.
+   • Tooltips automatically disappear after a short delay.
+   • Developers can trigger grid-aware tooltips with a single line.
+
+
+.
