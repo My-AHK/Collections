@@ -1,0 +1,58 @@
+
+*  Audio + ToolTip feedback for copy/paste/undo
+
+PURPOSE:
+Provides immediate confirmation when common clipboard actions are performed by the user. 
+Specifically, it monitors the Copy (Ctrl+C), Paste (Ctrl+V), and Undo (Ctrl+Z) keyboard shortcuts and delivers both an audible beep and a visual ToolTip notification. 
+The goal is to give the user quick feedback that the command was successfully triggered, which can be especially helpful when copying or pasting rapidly or when working with applications that provide little or no visual feedback of their own.
+   • Confirms Copy, Paste, and Undo operations.
+   • Uses both sound and on-screen ToolTips for feedback.
+   • Keeps the experience lightweight and immediate.
+
+KEY FEATURES:
+The script integrates low-level clipboard command monitoring with dynamic visual and audio feedback. 
+Each keyboard action triggers a specific tone so the user can distinguish which operation occurred without looking at the screen. 
+ToolTips are intelligently positioned relative to the cursor using a quadrant-aware placement system to prevent them from covering the cursor itself.
+   • Distinct confirmation tones:
+       ⮞ Copy uses a higher-pitched beep.
+       ⮞ Paste uses a lower tone.
+       ⮞ Undo uses a mid-range tone.
+   • Temporary system volume adjustment ensures the beep is audible.
+   • Volume is restored immediately after playback.
+   • Quadrant-aware ToolTip positioning prevents cursor overlap.
+   • ToolTip text reflects the exact action performed.
+
+LOGIC SUMMARY:
+When Ctrl+C, Ctrl+V, or Ctrl+Z is pressed, the script allows the original command to continue while simultaneously running confirmation logic. 
+It first captures the current system master volume, temporarily reduces or adjusts it to a known audible level, and waits until the change is confirmed. 
+A short beep is then played at a unique frequency corresponding to the action. 
+After the sound plays, the original volume level is restored and a ToolTip describing the action is displayed near the cursor. 
+The ToolTip automatically disappears after a short delay.
+   • Hotkeys are defined with the pass-through (~) modifier.
+   • Current system volume is captured and temporarily changed.
+   • A short polling loop confirms the volume adjustment.
+   • A beep sound is played using a unique frequency.
+   • Volume is restored to its original level.
+   • A cursor-relative ToolTip is displayed briefly.
+
+LAYOUT:
+The script is organized into clearly separated functional sections, making it easy to read and modify. 
+Initialization settings prepare the script environment and configure tray behavior, followed by variable declarations, hotkey definitions, and supporting functions. 
+Each action handler shares nearly identical logic, ensuring consistency and simplifying maintenance.
+   • Initialization and environment configuration.
+   • Variable definitions for sound behavior.
+   • Three hotkey handlers for Copy, Paste, and Undo.
+   • A dedicated function for quadrant-aware ToolTip placement.
+   • A timer-based routine that clears the ToolTip.
+
+USER EXPERIENCE:
+From the user's perspective, the script operates silently in the background while enhancing everyday clipboard interactions. 
+The audio confirmation allows quick recognition of actions without shifting visual focus, while the ToolTip adds a brief on-screen cue that confirms exactly what occurred. 
+Because ToolTips intelligently avoid covering the cursor, the notifications remain visible without interrupting workflow.
+   • Immediate confirmation of common editing commands.
+   • Minimal system overhead and fast response.
+   • Non-intrusive ToolTips positioned near the cursor.
+   • Distinct sounds allow recognition without looking.
+
+.
+
