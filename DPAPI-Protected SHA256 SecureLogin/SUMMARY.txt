@@ -1,0 +1,62 @@
+
+*  DPAPI-secured password login system in AHK
+
+PURPOSE:
+This script implements a secure password authentication system for AutoHotkey using Windows cryptographic services. 
+It allows a user to create, store, verify, and change a password while ensuring that the actual password text is never stored in plaintext. 
+Instead, the script hashes the password with SHA256 and encrypts the resulting hash using Windows DPAPI with an additional entropy key before saving it in an INI file. 
+The system is triggered by a hotkey and provides a GUI-driven workflow for password creation, login verification, and password changes.
+   • Protects credentials by combining hashing and encryption.
+   • Stores only encrypted hash data in a configuration file.
+   • Uses Windows user-account–bound encryption via DPAPI.
+
+KEY FEATURES:
+The script integrates Windows CryptoAPI and DPAPI through direct DLL calls to provide strong, native cryptographic security. 
+It includes several GUI dialogs for password creation, login entry, verification during password changes, and feedback notifications. 
+The script also includes optional password visibility toggles to allow users to temporarily reveal hidden password fields.
+   • SHA256 hashing performed through Windows CryptoAPI.
+   • DPAPI encryption with a custom entropy key for added protection.
+   • Base64 conversion to safely store encrypted binary data in text files.
+   • GUI dialogs for password creation, login, verification, and change.
+   • Password "View" buttons toggle masked input visibility.
+   • Secure INI storage of the encrypted password blob.
+   • Change-password workflow requiring verification of the current password.
+
+LOGIC SUMMARY:
+When the hotkey is pressed, the script checks whether a password has already been stored in the configuration file. 
+If none exists, it prompts the user to create a new password. 
+The password is hashed with SHA256, encrypted using DPAPI with the specified entropy key, and then written to the INI file. 
+For login attempts, the entered password is hashed and compared to the decrypted stored hash. 
+Matching hashes grant access; mismatches deny access. 
+The script also includes a multi-step password change routine that first verifies the current password before allowing a new password to be created and securely stored.
+   • Initialization checks for an existing encrypted password.
+   • Password creation occurs if no stored credential is found.
+   • Login attempts compare a freshly computed hash with the decrypted stored hash.
+   • Password changes require successful current-password verification.
+   • Encryption and decryption rely on Windows DPAPI tied to the current user account.
+
+LAYOUT:
+The script is structured into clearly separated sections that organize configuration variables, GUI logic, security routines, and cryptographic helper functions. 
+GUI event handlers manage user interactions, while dedicated functions perform hashing, encryption, decryption, and Base64 encoding/decoding. 
+This modular organization separates user interface logic from security implementation.
+   • Configuration and initialization section.
+   • GUI dialog creation and interaction handlers.
+   • Password creation, login, and change workflows.
+   • Cryptographic helper functions:
+       ⮞ SHA256 hashing routine.
+       ⮞ DPAPI encryption and decryption functions.
+       ⮞ Base64 encoding and decoding utilities.
+
+USER EXPERIENCE:
+The user interacts with the system entirely through simple graphical dialogs. 
+If no password exists, the script guides the user through creating one. 
+Subsequent executions require password entry before granting access. 
+Clear visual notifications inform the user whether actions succeed or fail, and the password change option is conveniently accessible from the login dialog.
+   • Visual prompts guide first-time password setup.
+   • Login dialog supports masked password entry with optional viewing.
+   • Immediate feedback is given for successful or failed login attempts.
+   • Password change is accessible directly from the login window.
+   • Color-coded notice dialogs indicate success, warning, or error states.
+
+
+.
