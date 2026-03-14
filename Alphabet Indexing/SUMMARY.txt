@@ -1,0 +1,66 @@
+
+*  Zero-based alphabet index name converter GUI.
+
+PURPOSE:
+  Provides a small graphical utility that converts alphabetic characters into their corresponding zero-based numerical index values (a=0 through z=25). 
+  The tool is primarily intended for quickly converting usernames or words, such as Runescape player names, into a continuous string of numeric values that represent each letter’s position in the alphabet. 
+As the user types a name into the input field, the script immediately performs the conversion and displays the numeric result in a separate output field. 
+Non-alphabetic characters are filtered out, except for digits which are preserved. 
+The script emphasizes fast interaction, minimal UI elements, and real-time feedback.
+   • Converts letters to zero-based alphabet index values.
+   • Designed for quick name-to-number conversion.
+   • Automatically processes input as the user types.
+   • Filters unsupported characters while preserving digits.
+
+KEY FEATURES:
+  The script combines a simple graphical interface with automatic text processing to make conversions effortless. 
+  A real-time conversion routine updates the output instantly whenever the input text changes.   
+  Several convenience controls, such as Clear, Copy, Reset, and Close, allow the user to quickly manage the input and resulting numeric string. 
+  The interface also includes a status bar that communicates conversion results and user actions. 
+  Additionally, the window supports drag movement despite lacking a title bar, maintaining a clean minimal layout.
+   • Real-time conversion triggered during typing.
+   • One-click copy of the numeric result to the clipboard.
+   • Clear button resets both input and output fields.
+   • Reset control reloads the script instantly.
+   • Status bar provides feedback and conversion details.
+   • Borderless draggable window via custom mouse handler.
+
+LOGIC SUMMARY:
+  The script processes user input by removing spaces, converting all characters to lowercase, and then parsing each character individually. 
+  When a letter between “a” and “z” is detected, the script calculates its zero-based alphabet index using ASCII values (Asc(Char) − Asc("a")). 
+  Numeric characters are appended directly to the result, while all other characters are ignored. 
+  The resulting sequence of digits is displayed in the output field. 
+  If no valid letters are found, the status bar informs the user accordingly. 
+  This logic ensures that only valid characters contribute to the final numeric conversion.
+   • Spaces removed before processing.
+   • Input normalized to lowercase.
+   • Alphabet letters converted using ASCII math.
+   • Digits preserved exactly as typed.
+   • Unsupported characters skipped automatically.
+
+LAYOUT:
+  The interface uses a compact dark-themed window with minimal decoration. 
+  Labels identify the input and output fields, while color-coded text visually distinguishes interactive areas. 
+  The input field accepts user text, and the output field displays the computed number sequence in read-only form. 
+  Control icons in the top corner allow the script to reload or close, and two buttons provide quick clearing and clipboard copying. 
+  A status bar spans the bottom of the window to display operational messages.
+   • Dark GUI with color-coded text fields.
+   • Input box for entering a name.
+   • Read-only output box for numeric results.
+   • Clear and Copy buttons for quick actions.
+   • Reset and Close icons in the top corner.
+   • Status bar for real-time feedback.
+
+USER EXPERIENCE:
+  The script is designed for simplicity and immediate usability. 
+  Users only need to type a name into the input field, and the conversion occurs automatically without requiring any additional steps. 
+  The numeric result appears instantly and can be copied with a single button press. 
+  Visual feedback from the status bar confirms actions such as copying or clearing text. 
+  The draggable borderless window keeps the tool unobtrusive while remaining accessible on screen.
+   • Conversion begins immediately while typing.
+   • No manual execution required.
+   • Output can be copied with one click.
+   • Status messages confirm user actions.
+   • Lightweight, distraction-free interface.
+
+.
