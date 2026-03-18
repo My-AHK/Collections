@@ -1,0 +1,90 @@
+
+*  Window ownership viewer with GUI & process data.
+
+
+PURPOSE:
+These two scripts provide a graphical tool for identifying ownership details of all visible windows on a system. 
+They enumerate active windows and display key metadata such as process ID, executable name, associated user account, and window title. 
+Script V1 is written in AutoHotkey v1.1, while Script V2 is a modernized rewrite in AutoHotkey v2, maintaining the same core functionality with updated syntax and structure.
+   • Displays ownership data for visible windows in real time.
+   • Helps identify which user and process controls each window.
+   • Serves as a diagnostic or administrative utility.
+
+KEY FEATURES:
+Both versions include a resizable GUI with a ListView that dynamically populates window data. 
+They support manual refresh, script control via tray menu, and automatic reloading when the script file changes. 
+V1 includes additional formatting such as padded numbering, while V2 simplifies structure using native v2 constructs.
+   • Real-time window enumeration and display.
+       ⮞ Filters out windows without titles (hidden/invisible).
+   • Process name retrieval via Windows API (psapi.dll).
+   • User account resolution via token and SID lookup.
+   • Refresh button to manually update window list.
+   • Exit button for immediate script termination.
+   • Custom tray menu with:
+       ⮞ Suspend/Pause toggle.
+       ⮞ Help documentation access.
+       ⮞ Key history and Window Spy tools.
+       ⮞ Script edit, reload, and exit options.
+   • Auto-reload detection using file modification timestamps.
+   • Double-tap hotkeys:
+       ⮞ Ctrl+Home → Reload script.
+       ⮞ Ctrl+Esc → Exit script.
+   • GUI drag functionality via message interception.
+
+LOGIC SUMMARY:
+Each script operates by periodically scanning all top-level windows, filtering visible ones, and extracting associated process and user information. 
+This is done in two main stages: window enumeration and metadata retrieval. 
+The data is then inserted into a ListView for display.
+   • Window enumeration:
+       ⮞ Retrieves all window handles.
+       ⮞ Filters out entries with empty titles.
+   • Process data extraction:
+       ⮞ Uses OpenProcess to access process handle.
+       ⮞ Retrieves executable name via GetModuleBaseNameW.
+   • User resolution:
+       ⮞ Opens process token.
+       ⮞ Extracts SID via GetTokenInformation.
+       ⮞ Resolves SID to DOMAIN\Username via LookupAccountSidW.
+   • GUI population:
+       ⮞ V1 performs a two-pass system:
+           ⮚ First pass counts visible windows for formatting.
+           ⮚ Second pass populates ListView with padded numbering.
+       ⮞ V2 performs a single-pass loop using structured iteration.
+   • Error handling:
+       ⮞ Returns “Access Denied” if process access fails.
+       ⮞ Returns “Unknown” if lookup operations fail.
+
+LAYOUT:
+The interface consists of a simple, functional window with a header label, a multi-column ListView, and two control buttons. 
+V1 uses explicit positioning and styling, while V2 uses a cleaner and more flexible layout approach.
+   • Header text: “Visible Window Owners:”
+   • ListView columns:
+       ⮞ V1: # | PID | Process Name | User | Window Title
+       ⮞ V2: PID | Process Name | User | Window Title
+   • Buttons:
+       ⮞ Refresh (rebuilds the list).
+       ⮞ Exit (terminates script).
+   • GUI properties:
+       ⮞ Always-on-top.
+       ⮞ Resizable with minimum size constraints.
+       ⮞ Draggable via client-area click.
+   • V1 styling:
+       ⮞ Colored fonts and background.
+       ⮞ Numbered rows with dynamic padding.
+   • V2 styling:
+       ⮞ Simplified font usage.
+       ⮞ Grid-enabled ListView for clarity.
+
+USER EXPERIENCE:
+The scripts are designed for quick inspection and minimal interaction. 
+Users can instantly view ownership details and refresh as needed. 
+The tray menu provides centralized control, while hotkeys enable rapid script management. 
+V2 improves responsiveness and readability through modern syntax and reduced complexity.
+   • Instant visibility into running window ownership.
+   • Minimal learning curve with straightforward controls.
+   • Efficient workflow with hotkeys and tray integration.
+   • Visual clarity through structured tabular display.
+   • V1 offers more visual formatting detail.
+   • V2 offers cleaner performance and maintainability.
+
+.
