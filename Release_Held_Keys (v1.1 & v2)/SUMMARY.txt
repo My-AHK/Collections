@@ -1,0 +1,74 @@
+
+*  Releases held keys reliably in AHK v1.1 & v2
+
+
+PURPOSE:
+This script provides a reliable, version-consistent method (AutoHotkey v1.1 and v2) to release only physically held keys using the Windows API. 
+It ensures correct release order and prevents stuck or ghost inputs by acting only on keys actively pressed at the hardware level.
+   • Activated via Ctrl + Alt + T in both versions.
+   • Targets only physically pressed keys using GetAsyncKeyState.
+   • Prevents improper modifier release behavior.
+
+KEY FEATURES:
+Both versions use identical core logic while differing only in syntax style. 
+The script queries real-time key states, categorizes them, and safely releases them in a controlled sequence while temporarily blocking input.
+   • Uses DllCall with GetAsyncKeyState for accurate detection.
+   • Categorizes keys into:
+       ⮞ Normal keys (alphanumeric and others).
+       ⮞ Mouse buttons.
+       ⮞ Modifier keys (Shift, Ctrl, Alt, Win).
+   • Temporarily blocks input:
+       ⮞ v1.1: BlockInput, Send
+       ⮞ v2: BlockInput("Send")
+   • Provides audible feedback:
+       ⮞ v1.1: SoundBeep
+       ⮞ v2: SoundBeep()
+
+LOGIC SUMMARY:
+The script iterates through all virtual key codes (0x01–0xFE), detects which are physically pressed, sorts them into categories, and releases them in a strict order to maintain input integrity.
+* Note: 0xFF is intentionally excluded, as it is a reserved/undefined virtual key code and does not represent a usable physical key.
+   • Loops through all virtual key codes:
+       ⮞ v1.1: Loop, 0xFE
+       ⮞ v2: Loop 0xFE
+   • Detects pressed state using bitmask (0x8000).
+   • Skips keys not currently pressed.
+   • Releases keys in order:
+       ⮞ Normal keys first.
+       ⮞ Mouse buttons second.
+       ⮞ Modifiers last.
+   • Uses version-appropriate send syntax:
+       ⮞ v1.1: Send, {...}
+       ⮞ v2: Send("...")
+
+LAYOUT:
+The structure remains consistent across both versions, consisting of an initialization section, a hotkey trigger, and a dedicated function handling all logic. 
+Differences are limited to syntax modernization in v2.
+   • Auto-execute section initializes script behavior.
+   • Hotkey block triggers ReleaseHeldKeys().
+   • Core logic isolated within a reusable function.
+   • Arrays used for ordered key management.
+   • v2 uses expression-based and function-call syntax throughout.
+
+USER EXPERIENCE:
+The script delivers a fast, predictable, and non-intrusive way to resolve stuck key states across both AutoHotkey versions. 
+It emphasizes stability, accuracy, and minimal disruption during execution.
+   • Immediate response with consistent behavior in both versions.
+   • Prevents unintended input during execution.
+   • Maintains correct modifier handling.
+   * May be affected by UAC elevation differences between processes!
+
+REASON:
+The script uses "GetAsyncKeyState" to query the operating system directly for the physical state of keys, rather than relying on AHK’s internal hook. 
+This ensures that all keys currently pressed, including those in other applications or windows, are accurately detected and released.
+   • Detection queries OS-level key states directly.
+   • Scope includes any physically pressed key regardless of AHK hook.
+   • Advantages over using AHK’s "GetKeyState" hook:
+       ⮞ Captures keys pressed in any window, even outside AHK.
+       ⮞ Provides more accurate recovery of stuck or held keys.
+   • Limitations:
+       ⮞ * May behave unexpectedly if the foreground window has higher UAC or elevation than the script!
+   • Iteration covers VK01 → VKFE (254 virtual-key codes).
+   • Result is reliable detection and release of true physical keys.
+
+
+.
