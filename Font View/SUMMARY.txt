@@ -1,0 +1,115 @@
+
+*  Interactive font preview GUI with live styling.
+
+
+PURPOSE:
+This script creates an interactive font preview utility that allows users to dynamically test and visualize different fonts, styles, sizes, and colors within a resizable GUI. 
+It is designed to provide immediate visual feedback for text formatting choices, making it useful for design, scripting, or UI experimentation.
+   • Enables real-time preview of user-entered text.
+   • Supports font customization including family, size, weight, and style.
+   • Provides color controls for both text and background.
+   • Designed as a lightweight, always-on-top utility.
+
+KEY FEATURES:
+The script offers a comprehensive set of font previewing tools, combining system font detection with a responsive GUI and customizable styling options. 
+It integrates registry-based font retrieval, dynamic font creation via GDI calls, and user-friendly controls.
+   • System font detection:
+       ⮞ Reads installed fonts from both HKLM and HKCU registry paths.
+       ⮞ Cleans and formats font names for display.
+       ⮞ Ensures "Arial" appears first as a default.
+   • Dynamic font rendering:
+       ⮞ Uses CreateFont via DllCall for precise control.
+       ⮞ Supports bold (weight 700) and italic styles.
+       ⮞ Applies fonts using WM_SETFONT messages.
+   • Text customization:
+       ⮞ Editable input field with default sample text.
+       ⮞ Automatic preview updates on input change.
+       ⮞ Ampersand escaping to prevent UI conflicts.
+   • Color controls:
+       ⮞ Dropdowns for background and text colors.
+       ⮞ Predefined color-to-hex mappings.
+       ⮞ Immediate application to GUI and preview.
+   • GUI controls:
+       ⮞ Font selection dropdown.
+       ⮞ Font size selector.
+       ⮞ Bold and italic checkboxes.
+       ⮞ Clear button for input reset.
+   • Window behavior:
+       ⮞ Borderless, draggable window.
+       ⮞ Always-on-top display.
+       ⮞ Resizable with dynamic layout adjustments.
+   • Tray integration:
+       ⮞ Custom tray menu with show, reload, and exit options.
+       ⮞ Tooltip identification using ScriptID.
+
+LOGIC SUMMARY:
+The script initializes by configuring directives, building the GUI, and populating controls with system fonts and default values. 
+It then enters an event-driven loop where user interactions trigger subroutines that update the preview display.
+   • Initialization:
+       ⮞ Sets script directives and performance options.
+       ⮞ Builds GUI layout and controls.
+       ⮞ Loads system fonts and sets defaults.
+   • Event handling:
+       ⮞ Input changes trigger UpdatePreview.
+       ⮞ Font-related changes trigger ChangeFont.
+       ⮞ Color selections trigger ChangeBgColor or ChangeTextColor.
+   • Font processing:
+       ⮞ Deletes previous font handles to prevent memory leaks.
+       ⮞ Creates new font objects based on user selections.
+       ⮞ Applies fonts using SendMessage.
+   • Text processing:
+       ⮞ Escapes ampersands to avoid menu conflicts.
+       ⮞ Adds indentation to each line for readability.
+   • Resize handling:
+       ⮞ Enforces minimum window size.
+       ⮞ Repositions controls proportionally.
+       ⮞ Refreshes preview to maintain rendering accuracy.
+   • Cleanup:
+       ⮞ Deletes GDI font objects on exit.
+       ⮞ Ensures proper resource management.
+
+LAYOUT:
+The GUI is structured into clearly defined sections, with logical grouping of controls to enhance usability and visual clarity. 
+It uses fixed margins and dynamic resizing to maintain consistency.
+   • Top section:
+       ⮞ Input label and clear button.
+       ⮞ Multi-line edit box for text entry.
+   • Title bar area:
+       ⮞ Icon-based buttons for reload, hide, and close.
+       ⮞ No standard caption (custom controls used instead).
+   • Middle section:
+       ⮞ Font selection dropdown.
+       ⮞ Bold and italic checkboxes aligned to the right.
+   • Control strip:
+       ⮞ Background color dropdown.
+       ⮞ Text color dropdown.
+       ⮞ Font size selector.
+   • Bottom section:
+       ⮞ Large preview box for rendered text.
+   • Responsive design:
+       ⮞ Edit and preview boxes expand with window size.
+       ⮞ Buttons reposition relative to right edge.
+
+USER EXPERIENCE:
+The script delivers a smooth and intuitive user experience by combining real-time feedback with flexible controls and minimal visual clutter. 
+Its borderless design and drag-anywhere functionality enhance usability.
+   • Immediate feedback:
+       ⮞ Changes reflect instantly in the preview area.
+   • Ease of use:
+       ⮞ Simple dropdowns and checkboxes for customization.
+       ⮞ Default text ensures instant usability on launch.
+   • Visual clarity:
+       ⮞ Clean white background with optional color changes.
+       ⮞ Indented preview text for readability.
+   • Accessibility:
+       ⮞ Always-on-top window keeps tool visible.
+       ⮞ Tray menu allows quick access and control.
+   • Flexibility:
+       ⮞ Supports a wide range of fonts and styles.
+       ⮞ Resizable layout adapts to user preferences.
+   • Stability:
+       ⮞ Proper memory management prevents leaks.
+       ⮞ Fallback font list ensures reliability if registry fails.
+
+
+.
