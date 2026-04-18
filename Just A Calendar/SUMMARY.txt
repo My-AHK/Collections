@@ -1,0 +1,79 @@
+
+*  Custom GUI calendar with per-day note system.
+
+
+PURPOSE:
+This creates a fully custom, always-on-top desktop calendar with integrated per-day note functionality. 
+It allows users to view any month, navigate through time, and attach editable notes to specific dates, all within a lightweight GUI that avoids standard window decorations for a clean, compact display.
+   • Provides a visual monthly calendar interface.
+   • Enables persistent note storage tied to specific dates.
+   • Uses an INI file for simple, portable data management.
+   • Emphasizes speed by caching note data per month.
+
+KEY FEATURES:
+The script combines a visually styled calendar grid with interactive elements such as clickable days, navigation controls, and a dedicated note editor. 
+It includes customization options for colors, fonts, and styles, along with visual indicators for special states like “today” and days containing notes.
+   • Month navigation controls (previous, current, next).
+   • Clickable day cells triggering a note editor.
+   • Asterisk indicator for dates with saved notes.
+   • Highlighted “today” date with custom font styling.
+   • Fully customizable colors (background, text, grid, accents).
+   • Multi-line note editor with save/cancel functionality.
+   • Automatic refresh of calendar after note changes.
+   • Tooltip feedback confirming note saves.
+
+LOGIC SUMMARY:
+The script initializes by determining the current date and setting global variables. 
+It dynamically builds the calendar GUI based on the selected month and year, calculating the starting weekday and number of days. 
+It reads all notes for the month at once to improve efficiency, then assigns indicators to relevant dates. 
+Clicking a day opens a note editor, where notes are loaded, edited, encoded, and saved back to an INI file.
+   • Startup:
+       ⮞ Detects current system date.
+       ⮞ Initializes global state variables.
+   • Calendar generation:
+       ⮞ Calculates first weekday of the month.
+       ⮞ Determines days in month (including leap year logic).
+       ⮞ Builds a 7x6 grid layout dynamically.
+   • Note handling:
+       ⮞ Reads all notes for the month into memory.
+       ⮞ Uses date keys formatted as MM-DD-YYYY.
+       ⮞ Displays asterisk markers for noted days.
+   • User interaction:
+       ⮞ Clicking a day retrieves its mapped date.
+       ⮞ Opens note editor GUI with existing content.
+       ⮞ Saves or deletes notes via INI operations.
+   • Data encoding:
+       ⮞ Converts line breaks to [BR] for storage.
+       ⮞ Restores line breaks when loading notes.
+
+LAYOUT:
+The interface is a borderless, draggable window with a structured layout consisting of a header, navigation icons, weekday labels, and a grid of date cells. 
+Visual elements such as lines and borders are drawn using progress controls to simulate a styled frame and grid system.
+   • Header section:
+       ⮞ Displays current month and year.
+       ⮞ Includes navigation icons and exit button.
+   • Day labels row:
+       ⮞ Shows Sun–Sat aligned above grid.
+   • Calendar grid:
+       ⮞ 7 columns × up to 6 rows.
+       ⮞ Each cell contains a clickable date.
+   • Visual elements:
+       ⮞ Grid lines between cells.
+       ⮞ Horizontal separator bars.
+       ⮞ Outer border box.
+   • Note editor:
+       ⮞ Separate popup window.
+       ⮞ Multi-line edit field with Save/Cancel buttons.
+
+USER EXPERIENCE:
+The script is designed for quick interaction and clarity, with immediate visual feedback and minimal friction. 
+Users can easily navigate months, identify important dates at a glance, and manage notes without complex menus or delays. 
+The draggable, always-on-top window ensures accessibility while maintaining a compact footprint.
+   • Smooth navigation with instant calendar refresh.
+   • Clear visual distinction for today and noted dates.
+   • Simple click-to-edit workflow for notes.
+   • Persistent storage without external dependencies.
+   • Clean, distraction-free interface (no title bar).
+   • Tooltip confirmations reinforce successful actions.
+
+.

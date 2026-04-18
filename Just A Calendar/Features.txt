@@ -1,0 +1,98 @@
+
+
+Core Calendar Functionality:
+    • Monthly Calendar Display: Shows a full month grid with day numbers.
+    • Month/Year Navigation: Browse through months and years using intuitive arrow buttons.
+    • Current Month Button: Instantly jump back to the current month.
+    • Dynamic Date Handling: Automatically calculates days in month, starting day of week, and leap years.
+
+Note-Taking System
+    • Date-Specific Notes: Attach notes to any day on the calendar.
+    • Visual Note Indicator: An asterisk (*) appears next to dates with saved notes.
+    • Multi-Line Note Editor: Dedicated GUI window for viewing and editing notes with full text support.
+    • Persistent Storage: Notes saved to an INI file (Calendar_Notes.ini) in the script directory.
+    • Note Deletion: Empty notes are automatically removed from storage.
+
+VISUAL CUSTOMIZATION
+
+Comprehensive Color Support:
+    • Calendar background
+    • Day labels (Sun-Sat)
+    • Regular day numbers
+    • Today's number (with special styling)
+    • Note asterisk indicator
+    • Outer border box
+    • Header separator bars
+    • Grid lines
+    • Month/Year header text
+    •  Note editor background, text, and labels
+
+Color Options Include:
+    • Grayscales (Black, Gray, Silver, White)
+    • Reds (Maroon, Red, Rose, Magenta-Red)
+    • Pinks (Salmon, Coral, Hot Pink, Deep Pink, Pink)
+    • Oranges (Orange, Red-Orange, Yellow-Orange)
+    • Yellows (Yellow, Chartreuse)
+    • Greens (Olive, Green, Lime, Spring Green)
+    • Cyans (Teal, Aqua, Azure)
+    • Blues (Blue, Navy)
+    • Violets (Indigo, Violet, Purple)
+    • Magenta (Fuchsia)
+    •  Hex code support (6-digit or with 0x prefix)
+
+Typography:
+    • Customizable font family
+    • Adjustable font size
+    • Today's number font styles (Norm, Bold, Italic, Underline, or combinations)
+
+User Interface Features:
+    • Drag-to-Move: Click and drag anywhere on the calendar to reposition the window.
+    • Clean Design: Borderless window with custom-drawn grid and border elements.
+    • Day Number Grid: 7x6 layout with proper cell alignment and centering.
+    • Day Labels: Sun through Sat displayed at the top of the calendar.
+    • Exit Button: Dedicated close icon in the header.
+
+System Tray Integration:
+    • Custom tray icon (calendar icon from shell32.dll, index 252)
+    • Right-click tray menu with options for:
+        ⮞ Suspend/Pause script
+        ⮞ Help documentation
+        ⮞ Key History viewer
+        ⮞ Window Spy utility
+        ⮞ Script editing, reloading, and exit
+
+Keyboard Shortcuts:
+    • Ctrl+Home (double-click): Reload the script
+    • Ctrl+Esc (double-click): Exit the script
+
+Technical Features:
+    • Auto-Reload on Save: Detects when script file is modified and automatically reloads.
+    • Persistent Operation: Script runs continuously in the background.
+    • Efficient Note Caching: Reads all notes for a month once instead of per-day lookups.
+    • Proper Date Formatting: Month-day-year format (MM-DD-YYYY) for note storage.
+    • Line Break Encoding: Converts line breaks to [BR] for INI file compatibility.
+    • Today Highlighting: Automatically identifies and styles the current date.
+    • Window Always-On-Top: Calendar stays above other windows by default.
+
+Interactive Elements:
+    • Day Click: Click any day number or asterisk to open the note editor.
+    • Navigation Arrows:
+        ⮞ Up arrow: Previous month
+        ⮞ Home icon: Return to current month
+        ⮞ Down arrow: Next month
+    • Note Editor Buttons: Save and Cancel with default action on Enter key.
+    • Automatic Refresh: Calendar updates immediately after saving notes.
+
+Note Editor Features:
+    • Resizable multi-line edit control
+    • Scroll support for long notes
+    • Automatic focus and caret positioning at end of text
+    • Confirmation tooltip after saving
+    • Proper line break preservation
+
+Error Handling:
+    • Tooltip feedback for date lookup errors
+    • Graceful handling of missing INI files
+    • Automatic INI creation on first note save
+
+.
