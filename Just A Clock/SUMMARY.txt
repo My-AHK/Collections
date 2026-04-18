@@ -1,0 +1,84 @@
+
+*  Custom analog clock with alarms and chimes.
+
+
+PURPOSE:
+This script creates a highly customizable analog clock with optional digital overlays, alarm functionality, and hourly chimes. 
+It leverages GDI+ graphics for smooth rendering of clock hands and provides a compact, always-on-top GUI that can display time, date, and week information while supporting user interaction and real-time updates.
+   • Displays an analog clock with smooth, dynamically rendered hands.
+   • Includes optional digital time, date, and ISO week number.
+   • Provides built-in alarm and hourly chime systems.
+   • Focuses on customization, performance, and visual clarity.
+
+KEY FEATURES:
+The script offers extensive customization across visual appearance, behavior, and functionality. 
+It includes flexible color handling (named and hex), configurable clock elements, and interactive features such as hotkeys, alarm settings, and visibility toggles.
+   • Full color customization using names or hex values.
+   • GDI+ rendered clock hands with adjustable size and thickness.
+   • Optional Roman numerals and minute tick markers.
+   • Toggleable digital time, date, and week number display.
+   • Configurable alarm with multiple sound patterns.
+   • Hourly chime with time-range restrictions.
+   • Adjustable transparency and always-on-top behavior.
+   • Hotkeys for quick access to key features.
+       ⮞ Toggle always-on-top (Ctrl + Alt + T).
+       ⮞ Show/unhide clock (Ctrl + Alt + U).
+       ⮞ Open alarm settings (Ctrl + Alt + S).
+       ⮞ Toggle alarm active state (Ctrl + Alt + A).
+
+LOGIC SUMMARY:
+The script initializes system settings, loads GDI+, and builds the GUI layout before entering timed update loops. 
+It continuously updates the clock display every second, recalculating hand positions and refreshing digital elements. 
+Separate routines manage alarms, chimes, and date transitions, ensuring accurate and efficient time-based behavior.
+   • Initialization:
+       ⮞ Loads GDI+ library for graphics rendering.
+       ⮞ Sets timers for clock updates, alarms, and script changes.
+       ⮞ Builds GUI and initializes display elements.
+   • Clock updates:
+       ⮞ Retrieves current system time every second.
+       ⮞ Converts time into angles for hour, minute, and second hands.
+       ⮞ Renders hands onto a bitmap and updates GUI.
+   • Date handling:
+       ⮞ Detects day rollover and updates date/week display.
+       ⮞ Calculates ISO week number with leap year support.
+   • Alarm system:
+       ⮞ Monitors current time against user-defined alarm.
+       ⮞ Prevents repeated triggering within the same minute.
+       ⮞ Executes sound patterns and visual indicators.
+   • Chime system:
+       ⮞ Triggers at the top of each hour within allowed range.
+       ⮞ Supports single, double, or triple beep patterns.
+   • Color handling:
+       ⮞ Converts named or hex colors into GUI and GDI+ formats.
+       ⮞ Ensures consistent rendering across all elements.
+
+LAYOUT:
+The interface is a borderless, draggable window centered around a circular analog clock face. 
+It uses layered GUI controls and GDI+ rendering to simulate a polished clock design, with optional textual elements positioned dynamically below the clock.
+   • Clock face:
+       ⮞ Centered at fixed coordinates (150,150).
+       ⮞ Includes hour markers and optional minute ticks.
+       ⮞ Optional Roman numerals arranged radially.
+   • Decorative elements:
+       ⮞ Dual border frames around clock face.
+       ⮞ Center point indicator.
+   • Information displays:
+       ⮞ Bottom-right: week number (optional).
+       ⮞ Bottom-left: alarm time and status indicator.
+       ⮞ Below clock: digital time and date (optional).
+   • Interactive zones:
+       ⮞ Center click area closes the clock.
+       ⮞ Entire window supports drag movement.
+
+USER EXPERIENCE:
+The script delivers a responsive, visually appealing clock with intuitive controls and minimal clutter. 
+Users can quickly adjust settings, toggle features, and rely on consistent feedback through sound and visual cues. 
+The combination of analog and digital displays enhances readability while maintaining aesthetic flexibility.
+   • Smooth real-time updates with no visible lag.
+   • Clear visual hierarchy between analog and digital elements.
+   • Immediate feedback for alarm toggles and settings changes.
+   • Non-intrusive notifications via sound and subtle indicators.
+   • Lightweight and portable with no external dependencies beyond GDI+.
+   • Flexible display options allow tailoring to user preference.
+
+.

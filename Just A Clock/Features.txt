@@ -1,0 +1,105 @@
+
+
+Core Clock Functionality:
+  •     Analog clock display with hour, minute, and second hands
+  •     Digital time display (optional, with 12/24-hour format toggle)
+  •     Digital date display (optional, format: "Day Month/Day/Year")
+  •     Week number display (optional, ISO week calculation)
+  •     Roman numerals on clock face (optional)
+  •     Minute tick markers (optional)
+
+Visual Customization:
+  • Fully customizable colors for all clock elements via named colors or hex codes:
+      ▸ Background, hands (hour/minute/second), markers (hour/minute)
+      ▸ Roman numerals, inner/outer clock edges
+      ▸ Digital time/date, week number, center point
+      ▸ Alarm text, alarm numbers, alarm indicator
+  • Adjustable hand geometry (length and thickness for all three hands)
+  • Adjustable center point size
+  • Window transparency control (0-255)
+  • Customizable window size and position (start X/Y coordinates)
+
+Alarm System:
+  • Enable/disable alarm functionality
+  • Set specific alarm time (hour/minute)
+  • Multiple alarm sound styles: Single, Double, Triple
+  • Configurable alarm frequency (Hz), duration (ms), and repeat count
+  • Visual alarm indicator (dot display)
+  • Alarm settings dialog with GUI interface
+  • Keyboard shortcut to toggle alarm active state (Ctrl+Alt+A)
+
+Hourly Chime:
+  •     Enable/disable hourly chime
+  •     Three chime styles: Single, Double, Triple
+  •     Configurable chime frequency (Hz) and duration (ms)
+  •     Configurable chime hour window (start/end hours)
+
+User Interaction:
+  •     Window dragging by clicking anywhere on the GUI
+  •     Right-click tray menu with options for:
+      ▸ Toggle Always On Top
+      ▸ Suspend/Pause script
+      ▸ Help documentation
+      ▸ Key History
+      ▸ Window Spy
+      ▸ Script Edit/Reload/Exit
+
+Keyboard shortcuts: (🔥 Hotkeys)
+  • Ctrl+Alt+T: Toggle Always On Top
+  • Ctrl+Alt+U: Unhide clock
+  • Ctrl+Alt+S: Open alarm settings
+  • Ctrl+Alt+A: Toggle alarm active state
+  • Ctrl+Home (double-click): Reload script
+  • Ctrl+Esc (double-click): Exit script
+
+Clock Face Design:
+  •  Border edges with customizable inner/outer colors
+  • 12 Roman numerals (positioned at standard clock angles)
+  • 12 hour markers (always shown)
+  • 60 minute markers (with 5-minute intervals skipped, optional)
+  • All elements properly centered and scaled
+
+Technical Features:
+  • GDI+ graphics for smooth hand rendering
+  • Real-time updates every second (timer-based)
+  • Date rollover detection (updates date at midnight)
+  • Hourly chime trigger (only at exact :00 seconds)
+  • Alarm trigger with pattern repetition and visual feedback
+  • Script modification detection (auto-reloads when file changes)
+  • Unique window identifier (ScriptID: "Just_A_Clock")
+  • Custom tray icon (clock icon from shell32.dll)
+
+Alarm Dialog Features:
+  • Hour selection dropdown (12 or 24-hour format based on clock setting)
+  • Minute selection dropdown (00-59)
+  • Alarm style selection (Single/Double/Triple)
+  • Alarm active checkbox
+  • Confirmation beeps after saving settings
+  • Non-standard GUI window (borderless, tool window style)
+
+Week Number Calculation:
+  • ISO week number algorithm
+  • Handles year boundaries (week 0 becomes previous year's week 52/53)
+  • Handles week 53 edge cases (detects if actually week 1 of next year)
+  • Updates automatically on date rollover
+
+Additional Display Options:
+  • Hide/Show digital time via setting
+  • Hide/Show digital date via setting
+  • Hide/Show week number via setting
+  • Hide/Show Roman numerals via setting
+  • Hide/Show minute markers via setting
+  • Click center point to hide clock (transparent click area)
+  • Click alarm text to open alarm settings
+  • Click week number text to hide Gui
+
+
+
+
+
+
+
+
+
+
+
