@@ -1,0 +1,123 @@
+
+Core Note Functionality:
+    • Multi-Note System: Create and manage multiple independent sticky notes simultaneously.
+    • Unique Note Identification: Each note is assigned a unique ID (e.g., Note_1, Note_2).
+    • Cascading Placement: New notes are offset slightly to prevent overlap.
+    • Always-On-Top by Default: Notes stay above other windows unless toggled off.
+
+Note Content & Editing:
+    • Editable Title Field: Each note includes a customizable title bar.
+    • Multi-Line Text Editor: Full edit control with scrolling and Ctrl+A support.
+    • Real-Time Auto-Save: Every keystroke automatically saves note content.
+    • Line Break Preservation: Uses encoded markers ([BR]) for INI compatibility.
+    • Persistent Storage: All notes saved to StickyNotes.ini in script directory.
+
+NOTE MANAGEMENT
+
+Soft Deletion System:
+    • Close Button (X): Performs a soft delete instead of permanent removal.
+    • Deleted Note Storage: Notes moved to "Deleted_" sections in INI file.
+    • Restoration Capability: Deleted notes can be restored with full properties intact.
+    • User Notification: Confirmation message when a note is deleted.
+
+Permanent Deletion System:
+    • Selective Deletion Menu: Choose specific notes for permanent removal.
+    • Delete All Option: Permanently remove all active notes at once.
+    • Confirmation Prompts: Prevents accidental irreversible deletion.
+    • Full Cleanup: Removes both active and deleted entries from INI.
+
+Restore System:
+    • Restore Individual Notes: Select specific deleted notes to recover.
+    • Restore All Notes: Bulk restore all soft-deleted notes.
+    • Duplicate Prevention: Skips restoration if note already exists.
+    • Full Property Recovery: Restores size, position, colors, and content.
+
+VISUAL CUSTOMIZATION
+
+Note Appearance:
+    • Background Color: Adjustable per note via dropdown menu.
+    • Text Color: Customizable note content color.
+    • Title Color: Independent color for title text.
+    • Accent/Border Color: Used for buttons and UI highlights.
+
+Color Options Include:
+    • Grayscales (Black, Gray, Silver, White)
+    • Reds (Maroon, Red, Magenta-Red, Rose)
+    • Pinks (Salmon, Coral, Hot Pink, Deep Pink, Pink)
+    • Oranges (Orange, Red-Orange, Yellow-Orange)
+    • Yellows (Yellow, Chartreuse)
+    • Greens (Olive, Green, Lime, Spring Green)
+    • Cyans (Teal, Aqua, Azure)
+    • Blues (Blue, Navy)
+    • Violets (Indigo, Violet, Purple)
+    • Magenta (Fuchsia)
+    • Hex Code Support (6-digit or 0x-prefixed values)
+
+Typography:
+    • Custom Font Family (default: Segoe UI)
+    • Adjustable Title Font Size
+    • Adjustable Content Font Size
+
+User Interface Features:
+    • Borderless Window Design: Clean, minimal appearance without standard title bar.
+    • Drag-to-Move: Click anywhere on note to reposition window.
+    • Resizable Windows: Adjustable size with enforced minimum dimensions.
+    • Dynamic Control Positioning: Buttons reposition based on window size.
+    • Double Buffering: Reduces flicker during redraw operations.
+
+Control Buttons:
+    • "T" Button: Toggle always-on-top state with icon feedback.
+    • "--" Button: Minimize (hide) note without deleting.
+    • "X" Button: Soft delete note.
+    • "C" Button: Opens color selection dropdown.
+
+System Tray Integration:
+    • Custom Tray Icon (imageres.dll)
+    • Right-click tray menu with options for:
+        ⮞ New Note
+        ⮞ Hide All Notes
+        ⮞ Show All Notes
+        ⮞ Delete Selected Notes (Permanent)
+        ⮞ Restore Deleted Notes
+        ⮞ Help documentation
+        ⮞ Key History viewer
+        ⮞ Window Spy utility
+        ⮞ Script editing, reloading, and exit
+
+Keyboard Shortcuts:
+    • Ctrl+Alt+N: Create new note
+    • Ctrl+Alt+H: Hide all notes
+    • Ctrl+Alt+S: Show all notes
+    • Ctrl+Alt+R: Restore deleted notes
+    • Ctrl+Alt+D: Open permanent delete menu
+    • Ctrl+Home (double-tap): Reload script
+    • Ctrl+Esc (double-tap): Exit script (with save)
+
+Technical Features:
+    • Auto-Reload on Save: Detects script changes and reloads automatically.
+    • Persistent Operation: Runs continuously in background.
+    • ActiveNotes Object: Centralized runtime storage for all note data.
+    • INI-Based Storage: Lightweight and portable data persistence.
+    • Unique ID Resolution: Avoids conflicts with existing or deleted notes.
+    • Timed Auto-Save: Full backup of all notes every 30 seconds.
+    • State Synchronization: Keeps GUI, memory, and INI data consistent.
+
+Interactive Elements:
+    • Live Editing: Changes instantly reflected and saved.
+    • Resize Handling: GUI dynamically adjusts content and controls.
+    • Color Dropdown Toggle: Opens/closes with focus and auto-selection.
+    • Immediate Visual Updates: Color and layout changes applied in real-time.
+
+Note Behavior & Lifecycle:
+    • Creation → Stored in ActiveNotes + INI
+    • Modification → Auto-saved continuously
+    • Minimize → Hidden but retained in memory
+    • Soft Delete → Moved to Deleted_ section
+    • Restore → Recreated from INI
+    • Permanent Delete → Fully removed from system
+
+Error Handling & Safeguards:
+    • Missing INI Handling: Gracefully initializes if file doesn't exist.
+    • GUI Existence Checks: Prevents saving invalid or closed notes.
+    • Confirmation Dialogs: Protects against accidental permanent deletion.
+    • Menu Cleanup: Prevents memory leaks from dynamic menus.

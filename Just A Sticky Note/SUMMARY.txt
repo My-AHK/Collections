@@ -1,0 +1,96 @@
+
+*  Persistent multi-note sticky system with restore.
+
+
+PURPOSE:
+This script implements a fully-featured sticky notes system, allowing users to create, manage, persist, and restore multiple independent note windows. 
+It is designed to function as a lightweight desktop note manager with persistent storage via an INI file, offering both convenience and resilience through auto-saving, soft deletion, and restoration capabilities.
+   • Creates and manages multiple independent note windows.
+   • Persists all note data (content, position, size, colors) to an INI file.
+   • Provides both temporary (soft) and permanent deletion systems.
+   • Automatically restores notes on script startup.
+
+KEY FEATURES:
+The script includes a wide range of features that elevate it beyond a basic note tool, incorporating real-time saving, dynamic GUI behavior, and extensive user interaction controls through both GUI elements and hotkeys.
+   • Real-time auto-save on every edit and periodic full backup (30 seconds).
+   • Soft delete system with full restoration capability.
+   • Permanent delete system with confirmation safeguards.
+   • Dynamic creation and restoration of notes from INI storage.
+   • Fully resizable and draggable borderless note windows.
+   • Always-on-top toggle per note with visual state indicator.
+   • Color customization via dropdown menu (background focus).
+   • Tray menu integration for global control and utilities.
+   • Keyboard shortcuts for rapid note management.
+   • Automatic script reload on file modification.
+   • Cascading placement of new notes to avoid overlap.
+   • Double-buffered GUI for smoother rendering.
+
+LOGIC SUMMARY:
+The script revolves around a central ActiveNotes object that stores all runtime note data, synchronized with an INI file for persistence. 
+Each note is uniquely identified (e.g., Note_1, Note_2), and all actions—creation, modification, deletion—update both the object and the INI file to maintain consistency.
+   • Initialization:
+       ⮞ Loads all existing notes from INI file.
+       ⮞ Rebuilds GUI windows using stored properties.
+       ⮞ Creates a new note if none exist.
+   • Note Creation:
+       ⮞ Generates unique ID using GetNextNoteNumber.
+       ⮞ Applies default settings and cascaded positioning.
+       ⮞ Initializes GUI and stores properties in ActiveNotes.
+   • State Management:
+       ⮞ All changes (content, size, position, color, title) trigger SaveSingleNote.
+       ⮞ SaveAllNotes periodically backs up all notes.
+   • Deletion System:
+       ⮞ Soft delete moves note to "Deleted_" INI section.
+       ⮞ Permanent delete removes all traces (active + deleted).
+   • Restoration:
+       ⮞ Reads Deleted_ sections and recreates notes.
+       ⮞ Prevents duplicate restoration if note already exists.
+   • Event Handling:
+       ⮞ WM_SIZE updates dimensions and repositions controls.
+       ⮞ Mouse drag simulates title bar movement for borderless windows.
+       ⮞ GUI events trigger updates and persistence.
+
+LAYOUT:
+Each note is a custom, borderless GUI window composed of editable fields and control buttons, carefully positioned relative to the content area to maintain alignment during resizing.
+   • Title bar:
+       ⮞ Editable text field for note name.
+   • Control buttons (top-right):
+       ⮞ "T" → Toggle always-on-top.
+       ⮞ "--" → Minimize (hide).
+       ⮞ "X" → Soft delete (close).
+   • Color control:
+       ⮞ Icon/button opens hidden dropdown list.
+       ⮞ Dropdown contains predefined color palette.
+   • Content area:
+       ⮞ Multi-line edit box with scroll and Ctrl+A support.
+   • Dynamic layout:
+       ⮞ Buttons reposition relative to edit control width.
+       ⮞ Edit control resizes with window dimensions.
+   • Visual styling:
+       ⮞ Custom fonts and colors.
+       ⮞ Double buffering to prevent flicker.
+
+USER EXPERIENCE:
+The script is designed for fast, intuitive interaction with minimal friction, combining keyboard shortcuts, tray controls, and direct GUI manipulation. 
+It emphasizes persistence, recoverability, and responsiveness.
+   • Quick access:
+       ⮞ Ctrl+Alt+N → New note.
+       ⮞ Ctrl+Alt+H / S → Hide/Show all notes.
+       ⮞ Ctrl+Alt+R → Restore deleted notes.
+       ⮞ Ctrl+Alt+D → Permanent delete menu.
+   • Seamless editing:
+       ⮞ Changes saved instantly without user intervention.
+   • Safety features:
+       ⮞ Soft delete prevents accidental data loss.
+       ⮞ Confirmation prompts for permanent deletion.
+   • Recovery:
+       ⮞ Full restoration of deleted notes with all properties intact.
+   • Tray integration:
+       ⮞ Centralized control panel for all actions.
+   • Visual clarity:
+       ⮞ Clean, minimal UI with consistent spacing and alignment.
+   • Reliability:
+       ⮞ Auto-reload ensures script updates are applied instantly.
+       ⮞ Auto-save prevents data loss from crashes or exits.
+
+.
