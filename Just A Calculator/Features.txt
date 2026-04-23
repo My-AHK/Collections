@@ -1,0 +1,142 @@
+
+Core Calculator Functionality:
+    • Full Expression Evaluation: Supports complete mathematical expressions including nested parentheses and exponentiation.
+    • Custom Math Parser: Independently processes expressions without relying on external evaluation functions.
+    • Operator Precedence Handling: Correct order of operations (power → multiply/divide → add/subtract).
+    • Error Detection: Identifies invalid expressions and division-by-zero scenarios with user feedback.
+    • Formatted Results: Automatically removes trailing zeros and rounds results cleanly.
+
+Input & Interaction:
+    • Dual Input Methods: Fully functional via both GUI buttons and keyboard input.
+    • Numpad Support: Seamless integration with numpad keys for rapid entry.
+    • Smart Operator Handling: Prevents duplicate operators and auto-formats spacing.
+    • Backspace & Clear: Supports character removal and full display reset.
+    • Parentheses Support: Allows complex nested calculations.
+
+Result Handling & Clipboard:
+    • Live Result Display: Shows full equation and result after calculation.
+    • Click-to-Copy:
+        ⮞ Click = Copies result only.
+        ⮞ Ctrl + Click = Copies full equation.
+    • Visual Feedback: Result text briefly changes color when copied.
+    • Error Reset Timer: Automatically clears error state after delay.
+
+Calculation History System:
+    • Persistent History Storage: Saves calculations to INI file.
+    • History Limit: Stores up to 20 recent entries.
+    • History Window:
+        ⮞ Displays all past calculations in list format.
+        ⮞ “Use” button loads selected expression back into display.
+    • Clear History Option: Removes all stored entries with confirmation.
+    • Session Persistence: History is restored on script restart.
+
+Memory Functions:
+    • MC (Memory Clear): Resets stored memory value.
+    • MR (Memory Recall): Loads memory value into display.
+    • M+ / M-: Adds or subtracts current value to/from memory.
+    • MS (Memory Store): Saves current value directly to memory.
+    • Memory Indicator: Visual cue when memory is active (non-zero).
+
+Mathematical Functions:
+    • Square Root (sqrt): Calculates √ of current value.
+    • Percentage (%): Converts value into percentage form.
+    • Plus/Minus (±): Toggles sign of current number.
+    • Power Operator (^): Supports exponent calculations.
+
+User Interface Layout:
+    • Structured Grid Layout: Organized button placement with consistent spacing.
+    • Dedicated Display Area: Read-only input field with auto-focus.
+    • Result Text Line: Separate line for equation + result.
+    • Function Rows: Clearly separated advanced function buttons.
+    • Memory Indicator Display: Positioned near function area.
+
+Visual Customization:
+    • Configurable Colors:
+        ⮞ Background color
+        ⮞ Display text color
+        ⮞ Result text color
+        ⮞ Grid and border colors
+        ⮞ Button section highlights
+    • Custom Font Settings:
+        ⮞ Adjustable font family (default: Segoe UI)
+        ⮞ Adjustable display font size
+    • Color Mapping System:
+        ⮞ Named colors (e.g., Aqua, Lime, Silver)
+        ⮞ Hex code support (6-digit or 0x format)
+
+Graphical Enhancements:
+    • Custom Gridlines: Manually drawn vertical and horizontal separators.
+    • Outer Border Rendering: Custom window border using boxline().
+    • Section Highlighting: Visual grouping for H/C buttons.
+    • Double-layer Borders: Enhanced depth for UI elements.
+
+Window Behavior:
+    • Always-On-Top: Calculator remains above other windows.
+    • Borderless Design: Clean interface without standard title bar.
+    • Drag-to-Move: Click anywhere to reposition window.
+    • Compact Form Factor: Efficient use of screen space.
+    • Show/Hide Toggle: Easily controlled via hotkeys or tray.
+
+System Tray Integration:
+    • Custom Tray Icon (shell32.dll)
+    • Right-click menu with options for:
+        ⮞ Show Calculator
+        ⮞ Show History
+        ⮞ Suspend / Pause script
+        ⮞ Help documentation
+        ⮞ Key History viewer
+        ⮞ Window Spy utility
+        ⮞ Script edit, reload, and exit
+
+Keyboard Shortcuts:
+    • F1: Show/Hide calculator
+    • F2: Open history window
+    • F3: Quick calculation input box
+    • Enter: Evaluate expression
+    • Escape: Close calculator
+    • Delete: Clear display
+    • Backspace: Remove last character
+    • Full numeric/operator keyboard mapping
+
+Quick Calculation Mode:
+    • Instant Input Box: Enter expressions without opening GUI.
+    • Tooltip Results: Displays result temporarily on screen.
+    • Auto-History Logging: Saves quick calculations to history.
+    • Lightweight Execution: Minimal interruption to workflow.
+
+Technical Features:
+    • Auto-Reload on Save: Detects script changes and reloads automatically.
+    • Persistent Operation: Runs continuously in background.
+    • INI-Based Storage: Lightweight history persistence.
+    • Custom Color Engine: Converts named/hex colors for GUI use.
+    • Manual GUI Rendering:
+        ⮞ Uses Progress controls for lines and borders.
+    • Keyboard Hook System: Active only when calculator is focused.
+    • Efficient State Management: Tracks display, memory, and history.
+
+Interactive Elements:
+    • Real-Time Input Updates: Display updates instantly with each action.
+    • Focus Retention: Automatically keeps cursor in display field.
+    • Dynamic GUI Feedback:
+        ⮞ Copy color flash
+        ⮞ Error message display
+    • History Interaction:
+        ⮞ Select, reuse, or clear entries easily.
+
+Calculator Behavior & Lifecycle:
+    • Launch → GUI created or restored
+    • Input → Expression built dynamically
+    • Evaluate → Parsed and computed
+    • Result → Displayed and stored in history
+    • Memory Ops → Adjust stored value + indicator
+    • History Access → View, reuse, or clear entries
+    • Exit → History saved to INI file
+
+Error Handling & Safeguards:
+    • Invalid Expression Handling: Returns "Error" with safe reset.
+    • Division by Zero Protection: Prevents crashes.
+    • Display Reset Logic: Clears invalid states automatically.
+    • History Validation: Prevents empty or invalid entries.
+    • Confirmation Prompts: Protects against accidental history deletion.
+
+.

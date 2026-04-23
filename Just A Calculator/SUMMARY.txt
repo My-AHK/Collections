@@ -1,0 +1,109 @@
+
+*  Feature-rich AHK calculator with history & GUI
+
+
+PURPOSE:
+Implements a fully functional, standalone desktop calculator, designed to provide both quick calculations and an interactive GUI-based experience. 
+It combines a custom math parser, persistent history tracking, memory operations, and keyboard integration into a compact, always-on-top utility. 
+The calculator is intended for both casual and frequent use, offering fast access via hotkeys and a visually structured interface.
+   • Provides both GUI-based and quick-input calculation modes.
+   • Includes persistent history storage via an INI file.
+   • Supports advanced expressions including parentheses and exponentiation.
+   • Integrates system tray controls and hotkeys for fast access.
+
+KEY FEATURES:
+The script offers a wide range of calculator capabilities beyond basic arithmetic, including a custom-built expression evaluator, memory functions, history tracking, and dynamic GUI styling. 
+It emphasizes usability, responsiveness, and visual clarity through color customization and structured layout elements.
+   • Custom Expression Parser:
+       ⮞ Supports +, -, *, ÷, ^, and parentheses.
+       ⮞ Handles operator precedence manually (power → mult/div → add/sub).
+       ⮞ Detects and returns errors (e.g., division by zero).
+   • Calculation History:
+       ⮞ Stores up to 20 entries in memory and INI file.
+       ⮞ Allows reuse of previous expressions.
+       ⮞ Includes clear-all functionality with confirmation.
+   • Memory Functions:
+       ⮞ MC (clear), MR (recall), M+ (add), M- (subtract), MS (store).
+       ⮞ Visual indicator when memory is non-zero.
+   • GUI Interaction:
+       ⮞ Clickable buttons for all operations.
+       ⮞ Keyboard input fully mapped (including numpad).
+       ⮞ Copy result or full equation via click + Ctrl modifier.
+   • Quick Calculation Mode:
+       ⮞ F3 opens a secondary calculator window for quick expressions.
+       ⮞ Displays result in tooltip and stores in history.
+   • Visual Customization:
+       ⮞ Configurable colors, fonts, and layout elements.
+       ⮞ Gridlines and borders drawn manually for structured appearance.
+
+LOGIC SUMMARY:
+The script operates through a combination of GUI event handling, expression parsing, and state management. 
+The core logic revolves around interpreting user input, evaluating mathematical expressions, and updating both the display and history accordingly.
+   • Input Handling:
+       ⮞ Button presses and keyboard input append to the display.
+       ⮞ Operators are formatted with spacing and validated.
+   • Expression Evaluation:
+       ⮞ Symbols (×, ÷) converted to standard operators.
+       ⮞ Parentheses resolved recursively.
+       ⮞ Operations processed in precedence order:
+           ⮚ Power (^) first.
+           ⮚ Multiplication/Division next.
+           ⮚ Addition/Subtraction last.
+   • Result Processing:
+       ⮞ Output formatted to remove trailing zeros.
+       ⮞ Errors trigger temporary display reset.
+   • History Management:
+       ⮞ Entries added after successful calculations.
+       ⮞ Old entries removed when exceeding max size.
+       ⮞ Saved and loaded from INI file.
+   • State Tracking:
+       ⮞ Maintains current display, memory value, and history list.
+       ⮞ Updates GUI elements dynamically based on actions.
+
+LAYOUT:
+The calculator GUI is carefully structured with a grid-based layout, custom borders, and grouped functional areas. 
+It uses manual drawing techniques (Progress controls) to create visual separators and borders, resulting in a clean and organized interface.
+   • Top Section:
+       ⮞ Display field (read-only input).
+       ⮞ Result text line (shows full equation).
+       ⮞ History (H) and Clear (C) buttons with bordered container.
+   • Main Grid:
+       ⮞ 5-column layout of numeric and operator buttons.
+       ⮞ Includes parentheses, power, and backspace.
+   • Function Rows:
+       ⮞ First row: sqrt, %, ±, MC, MR.
+       ⮞ Second row: M+, M-, MS.
+       ⮞ Memory indicator displayed alongside.
+   • Visual Elements:
+       ⮞ Inner and outer gridlines for alignment.
+       ⮞ Custom window border using boxline().
+       ⮞ Color-coded text for display, results, and labels.
+   • Additional Windows:
+       ⮞ History window with listbox and control buttons.
+       ⮞ Modal behavior disables main calculator while open.
+
+USER EXPERIENCE:
+The script prioritizes speed, clarity, and flexibility, offering multiple ways to interact with the calculator while maintaining responsiveness and visual feedback. 
+It is designed to feel lightweight yet powerful, with intuitive controls and helpful feedback mechanisms.
+   • Fast Access:
+       ⮞ F1 toggles calculator visibility.
+       ⮞ F3 enables quick calculations without opening GUI.
+   • Responsive Input:
+       ⮞ Keyboard and mouse fully supported.
+       ⮞ Auto-focus ensures seamless typing.
+   • Feedback & Usability:
+       ⮞ Temporary color change when copying results.
+       ⮞ Error messages displayed briefly then cleared.
+       ⮞ Tooltip feedback for quick calculations.
+   • History Interaction:
+       ⮞ Easily reuse past expressions.
+       ⮞ Clear history with confirmation prompt.
+   • Persistence:
+       ⮞ History saved across sessions automatically.
+       ⮞ Script auto-reloads when modified.
+   • Mobility:
+       ⮞ Borderless draggable window.
+       ⮞ Always-on-top for convenience.
+
+
+.

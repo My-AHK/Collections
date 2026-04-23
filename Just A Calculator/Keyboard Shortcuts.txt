@@ -1,0 +1,57 @@
+
+
+	Just A  Calculator - Keyboard Shortcuts
+∙=============================================∙
+	* NOTES *
+∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙
+• Numpad keys work regardless of NumLock state (on or off)
+
+• All keyboard shortcuts are ONLY active when the calculator window has focus
+
+• Exception: Global hotkeys (Ctrl+Alt+C, Ctrl+Alt+H, Win+C) work anywhere
+
+• The multiplication symbol displays as 'x' in the calculator but '*' on keyboard
+∙────────────────────────────────────────∙
+	Global Hotkeys (work at all times)
+∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙
+│ F1	│ Show/Hide calculator
+│ F2	│ Show history window
+│ F3	│ Quick calculation via input box
+∙────────────────────────────────────────∙
+
+∙────────────────────────────────────────∙
+    QWERTY KEYS	│    NUMPAD KEYS
+∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙
+0		│ Numpad0
+1		│ Numpad1
+2		│ Numpad2
+3		│ Numpad3
+4		│ Numpad4
+5		│ Numpad5
+6		│ Numpad6
+7		│ Numpad7
+8		│ Numpad8
+9		│ Numpad9
+∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙
+.  (period) 		│ NumpadDot
+∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙
++     (Shift+=)	│ NumpadAdd
+-      (hyphen)	│ NumpadSub
+*     (Shift+8)	│ NumpadMult
+/ 		│ NumpadDiv
+^     (Shift+6)	│ (NO equivalent) 
+∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙
+=		│ NumpadEnter
+Enter		│ NumpadEnter
+∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙
+(      (Shift+9)	│ (NO equivalent)
+)      (Shift+0)	│ (NO equivalent)
+∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙  ∙
+Backspace    (Delete last character)
+Delete            (Clear display/same as 'C' button)
+Escape           (Hide calculator window)
+∙────────────────────────────────────────∙
+
+
+
+
