@@ -1,0 +1,65 @@
+
+*  18-unit converter with live currency rates.
+
+PURPOSE:
+This script implements a comprehensive, tabbed unit conversion utility with a customizable graphical interface. 
+It supports eighteen distinct conversion categories plus an introductory welcome tab, live currency exchange rates, and extensive color theming options for visual personalization. 
+The application is designed for persistent background operation with system tray integration.
+   • Provides instant conversion calculations as users type values into input fields.
+   • Supports Length, Weight, Volume, Area, Temperature, Speed, Time, Digital Storage, Currency, Pressure, Energy, Power, Fuel Consumption, Data Transfer, Angle, Torque, Force, and Acceleration conversions (18 total).
+   • Fetches live currency exchange rates from a public API (open.er-api.com) when the Currency tab is accessed.
+   • Color customization variables allow modification of all interface elements including headers, input text, result displays, and border accents.
+
+KEY FEATURES:
+The converter offers a user-friendly tabbed interface with standardized conversion logic across all measurement categories. 
+Each conversion tab maintains consistent layout patterns with From/To unit selectors, a numeric input field, a formatted result display, and a full-precision reference value. 
+The application includes window dragging capability, system tray controls, and automatic script reloading when the source file changes.
+   • Tabbed navigation with eighteen conversion panels plus one intro tab, accessible via mouse or tray menu.
+   • Swap unit functionality with audible feedback (beep) for quick reversal of From/To selections.
+   • Intelligent result formatting with scientific notation for very large or very small values.
+   • Custom title bar with minimize and close buttons implemented using icon resources.
+   • Tray menu providing Show/Hide Window, Help Documentation, Key History, Window Spy, Script Edit, Reload, and Exit options.
+   • Always-on-top window option configurable via customization variable.
+   • Window transparency support from fully opaque (255) to invisible (0).
+
+LOGIC SUMMARY:
+The script operates on a base-unit conversion model where each category defines a fundamental reference unit (e.g., meters for length, grams for weight, seconds for time). 
+User inputs are multiplied by conversion factors to reach the base unit, then divided by the target unit's factor. 
+Temperature and fuel economy conversions use specialized formulas due to non-linear scaling. 
+Currency conversions convert through USD as an intermediary using cached API rates.
+   • Each conversion category has dedicated factor functions (e.g., GetMeterFactor, GetGramFactor) returning multipliers relative to the base unit.
+   • Numeric input validation ensures only properly formatted numbers trigger conversion calculations.
+   • Result formatting applies different decimal precision based on magnitude: six decimals for values below 0.01, two decimals for normal ranges, and scientific notation for values exceeding one million.
+   • Currency rates are cached after successful API fetch and persist until the script exits.
+   • Currency tab (Tab 10) triggers automatic rate fetching on first access, with status messages displayed during the process.
+   • Color mapping function supports named colors (from extensive table) and direct hex codes (with or without 0x prefix).
+
+LAYOUT:
+The graphical interface features a border-framed window with a centered title bar, close and minimize buttons, and a main content area containing the tab control. 
+Each conversion tab occupies the same spatial area, with dual-column layout consisting of conversion controls on the left and informational text panel on the right. 
+The intro tab provides clickable category links for direct navigation to any of the 18 converters.
+   • Window dimensions: 640 width by 370 height, positioned at configurable X/Y coordinates (default 200,200).
+   • Tab control spans from x15 y50 with calculated width (GUI width minus 30) and dynamic height.
+   • Conversion controls positioned at x55 with vertical spacing: unit selectors at y90/y110, input field at y150/y170, result label/display at y215/y235, and full precision text at y268.
+   • Information panel box created at x380 y90, 225 width by 250 height containing category-specific notes and unit descriptions.
+   • Return arrow (↩) positioned at x30 with Y coordinate calculated as GUI height minus 45, enabling navigation back to the intro tab.
+   • Border lines drawn using progress bar controls for top, bottom, left, and right edges with configurable colors and thickness.
+
+USER EXPERIENCE:
+The application prioritizes immediate feedback and accessibility. 
+Users can type values directly into input fields to see converted results update automatically without pressing Enter or clicking a convert button. 
+Unit selections update results instantly when changed. 
+The swap button (icon) exchanges From and To units for convenient reverse calculations. 
+The intro tab serves as a command center with clickable links to every converter category.
+   • Tray icon (shell32.dll, index 246) provides access to application controls without cluttering the taskbar.
+   • Tooltip displays script identification on mouse hover over tray icon.
+   • Double-clicking the tray icon shows or hides the window.
+   • Right-click tray icon opens context menu with additional functions.
+   • Hyperlink-style text on intro tab responds to clicks, jumping directly to the selected converter.
+   • Scrollable tab control accommodates all 19 tabs (intro + 18 converters) within the fixed window size.
+   • Keyboard shortcuts: Ctrl+Home reloads the script (double-press required), Ctrl+Esc exits the application (double-press required).
+   • Window can be dragged by clicking anywhere on the client area (custom message handler for left-button down).
+   • Update check timer (750ms interval) monitors script file modification and triggers automatic reload when changes are detected.
+   • Sound feedback (simple beep) confirms swap unit actions and script reload/exit operations.
+
+.

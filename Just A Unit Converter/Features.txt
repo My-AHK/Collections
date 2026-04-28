@@ -1,0 +1,97 @@
+
+Core Conversion Functionality:
+    • 18 distinct conversion categories:
+        ▸ Length, Weight, Volume, Area, Temperature
+        ▸ Speed, Time, Digital Storage, Currency
+        ▸ Pressure, Energy, Power, Fuel Consumption
+        ▸ Data Transfer, Angle, Torque, Force, Acceleration
+   • Real-time automatic conversion as values are typed
+   • Bidirectional unit swap with single click (↔ button)
+   • Full-precision result display (up to 15 decimal places, trailing zeros removed)
+   • Scientific notation for very large or small results
+   • Default starting tab configurable via variable
+
+Visual Customization:
+   • Fully customizable colors for all GUI elements via named colors or hex codes:
+        ▸ Background, content border, outer border
+        ▸ Individual tab header colors (19 category-specific colors)
+        ▸ Input text, result text, full precision text per category
+        ▸ Intro tab link color, return arrow color
+   • Predefined color palette with 40+ named colors:
+        ▸ Grayscales, Reds, Pinks, Oranges, Yellows, Greens, Cyans, Blues, Violets, Magenta
+   • Full 6-digit hex code support (with or without 0x prefix)
+   • Window transparency control (0-255) via hotkey toggle
+   • Customizable window size and position (start X/Y coordinates)
+
+User Interface:
+   • Tab-based navigation with 19 tabs (Intro + 18 converters)
+   • Introduction tab with clickable category links for quick navigation
+   • Return to Intro tab button (↩) on each conversion page
+   • Info panels on each tab with unit descriptions and conversion tips
+   • Borderless, custom-drawn window with colored borders
+   • Window dragging by clicking anywhere on the GUI
+   • Always-on-top option (configurable)
+   • Minimize to tray (click - or tray icon)
+   • Close button (X) exits application
+
+Currency Converter:
+   • Live exchange rates via open.er-api.com (USD-based)
+   • Automatic rate fetching when currency tab is opened
+   • Status text showing fetch progress and results
+   • 8 major world currencies with symbols:
+        ▸ USD (),EUR(€),GBP(£),JPY(¥),CAD(C),EUR(€),GBP(£),JPY(¥),CAD(C), AUD (A$), CHF, CNY (¥)
+   • API error handling and connection status feedback
+
+Conversion Display Formatting:
+   • Four display tiers based on result magnitude:
+        ▸ Zero: displays "0"
+        ▸ Very small (<0.01): 6 decimal places
+        ▸ Very large (≥1,000,000): scientific notation
+        ▸ Normal range: 2-4 decimal places (category-dependent)
+   • Full precision line below main result for detailed values
+   • Trailing zero cleanup for cleaner display
+
+Tray Menu System:
+   • Right-click tray menu with options for:
+        ▸ Show/Hide Window (double-click default)
+        ▸ Help Documentation (AutoHotkey.chm)
+        ▸ Key History
+        ▸ Window Spy
+        ▸ Script Edit
+        ▸ Script Reload
+        ▸ Script Exit
+   • Custom tray icon (shell32.dll icon)
+   • Non-standard tray menu click handling (allows positioning)
+
+Technical Features:
+   • Window detection for show/hide state
+   • Script modification detection (auto-reloads when file changes)
+   • Unique window identifier (ScriptID: "Unit_Converter")
+   • Custom WM_LBUTTONDOWN handler for window dragging
+   • Synchronous HTTP request for currency rates
+   • Comprehensive input validation (regex pattern matching)
+   • Modular conversion functions with base-unit factoring system
+   • Auto-submit on all control interactions
+
+Keyboard & Hotkey Support:
+   • Ctrl+Home (double-click): Reload script with confirmation beep
+   • Ctrl+Esc (double-click): Exit script with confirmation beep
+   • Automatic update check timer (750ms polling)
+
+Conversion Logic Details:
+   • Base-unit conversion architecture (meters, grams, liters, etc.)
+   • Temperature uses formula-based conversion (non-linear)
+   • Fuel consumption uses special MPG/L·100km reciprocal formulas
+   • Digital Storage uses 1024-based binary prefixes
+   • Time uses 365.25-day years for leap year averaging
+   • Speed includes Mach unit (343 m/s standard)
+   • Acceleration supports g-force, Gal, and km/h/s units
+   • Torque uses dyne-centimeters for small-scale measurements
+
+Sound Feedback:
+   • Unit swap confirmation beep (800 Hz, 100ms)
+   • Script reload confirmation beep (1200 Hz, 250ms)
+   • Script exit confirmation beep (1000 Hz, 300ms)
+   • Script update detection beep (1700 Hz, 100ms)
+
+.
