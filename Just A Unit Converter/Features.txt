@@ -31,7 +31,7 @@ User Interface:
    • Borderless, custom-drawn window with colored borders
    • Window dragging by clicking anywhere on the GUI
    • Always-on-top option (configurable)
-   • Minimize to tray (click - or tray icon)
+   • Hide/Show window toggle (via `-` button or tray menu)
    • Close button (X) exits application
 
 Currency Converter:
@@ -39,7 +39,7 @@ Currency Converter:
    • Automatic rate fetching when currency tab is opened
    • Status text showing fetch progress and results
    • 8 major world currencies with symbols:
-        ▸ USD (),EUR(€),GBP(£),JPY(¥),CAD(C),EUR(€),GBP(£),JPY(¥),CAD(C), AUD (A$), CHF, CNY (¥)
+        ▸ USD ($), EUR (€), GBP (£), JPY Yen (¥), CAD (C$), AUD (A$), CHF, CNY Yuan (¥)
    • API error handling and connection status feedback
 
 Conversion Display Formatting:
@@ -74,8 +74,8 @@ Technical Features:
    • Auto-submit on all control interactions
 
 Keyboard & Hotkey Support:
-   • Ctrl+Home (double-click): Reload script with confirmation beep
-   • Ctrl+Esc (double-click): Exit script with confirmation beep
+   • Ctrl+Home (double-press): Reloads the script
+   • Ctrl+Esc (double-press): Exits the script
    • Automatic update check timer (750ms polling)
 
 Conversion Logic Details:
@@ -90,8 +90,7 @@ Conversion Logic Details:
 
 Sound Feedback:
    • Unit swap confirmation beep (800 Hz, 100ms)
-   • Script reload confirmation beep (1200 Hz, 250ms)
-   • Script exit confirmation beep (1000 Hz, 300ms)
    • Script update detection beep (1700 Hz, 100ms)
+   • Currency rate refresh beep (1700 Hz, 300ms then 1400 Hz, 200ms)
 
-.
+.  * Disclaimer: Features list created by AI *

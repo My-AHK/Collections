@@ -51,7 +51,7 @@ Users can type values directly into input fields to see converted results update
 Unit selections update results instantly when changed. 
 The swap button (icon) exchanges From and To units for convenient reverse calculations. 
 The intro tab serves as a command center with clickable links to every converter category.
-   • Tray icon (shell32.dll, index 246) provides access to application controls without cluttering the taskbar.
+   • Tray icon (imageres.dll, index 229) provides access to application controls without cluttering the taskbar.
    • Tooltip displays script identification on mouse hover over tray icon.
    • Double-clicking the tray icon shows or hides the window.
    • Right-click tray icon opens context menu with additional functions.
@@ -60,6 +60,6 @@ The intro tab serves as a command center with clickable links to every converter
    • Keyboard shortcuts: Ctrl+Home reloads the script (double-press required), Ctrl+Esc exits the application (double-press required).
    • Window can be dragged by clicking anywhere on the client area (custom message handler for left-button down).
    • Update check timer (750ms interval) monitors script file modification and triggers automatic reload when changes are detected.
-   • Sound feedback (simple beep) confirms swap unit actions and script reload/exit operations.
+   • Sound feedback (simple beep) confirms swap unit actions and currency rate refresh operations.
 
-.
+.  * Disclaimer: Summary created by AI *
