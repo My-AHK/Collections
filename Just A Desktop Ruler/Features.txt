@@ -1,0 +1,216 @@
+
+
+Core Measurement Tools:
+    • Interactive Distance & Angle Measurement: Measures both pixel distance and the angle between any two points on the screen.
+    • Dual-Mode Operation: Horizontal ruler for width measurement, vertical ruler for height measurement.
+    • Click-to-Measure Workflow: Two-point measurement system activated via keyboard shortcuts.
+    • Real-Time Measurement Display: Shows calculated results directly on the ruler interface.
+    • Multi-Unit Conversion: Automatically converts pixel distance to inches, centimeters, and millimeters.
+    • Angle Calculation: Computes the angle of the measurement line relative to the positive x-axis (0 right, positive up, -180 to 180 range).
+    • Configurable PPI Setting: Adjustable pixels-per-inch value for accurate real-world unit conversion (default: 96 PPI).
+    • Always-On-Top Window: Ruler remains visible above other windows for convenient measurement reference.
+
+Precise Ruler Display:
+    • Accurate Tick Mark System: Ruler ticks at 10-pixel intervals with major ticks at 50-pixel increments.
+    • Bidirectional Tick Marks: Ticks appear on both top/bottom (horizontal) or left/right (vertical) edges.
+    • Numeric Labeling: Major ticks labeled with pixel position values at 50-pixel intervals.
+    • Configurable Ruler Length: Adjustable ruler scale (default: 800 pixels).
+    • Customizable Ruler Thickness: Adjustable bar width (default: 70 pixels).
+    • Outline Border: 1-pixel outline around the main ruler bar for visual clarity.
+
+Measurement Workflow System:
+    • Four-State Mode Tracking:
+        ⮞ Idle  Ready state with instructional text
+        ⮞ Awaiting Start  Activated mode waiting for first point
+        ⮞ Live Preview  First point set, shows live angle/distance tooltip at cursor
+        ⮞ Awaiting Stop  (Legacy state replaced by Live Preview) First point set, waiting for second point
+    • Ctrl+Alt+M Activation: Toggles measurement mode on.
+    • Ctrl+Alt+LClick Point Setting: Sets start and end points for distance/angle calculation.
+    • Live Angle Tooltip: When the start point is set, a tooltip follows the cursor showing real-time angle and distance until the end point is placed.
+    • Dynamic Instructional Text: Display updates to guide user through the measurement process.
+    • Automatic Mode Reset: Measurement mode deactivates after completion.
+    • Escape Key Clear: Cancels active measurement, clears all points, resets to idle state, and hides any active tooltip.
+
+Distance Calculation Engine:
+    • Pythagorean Distance: Uses (dx + dy) for accurate diagonal measurement.
+    • Angle Calculation: Uses ATan2 with a custom function to provide continuous angle feedback from -180 to 180.
+    • Auto Unit Conversion:
+        ⮞ Pixels  Primary measurement unit
+        ⮞ Inches  Pixel distance  PPI
+        ⮞ Centimeters  Inch value  2.54
+        ⮞ Millimeters  Centimeter value  10
+    • Formatted Output Display: Results shown with appropriate decimal precision per unit, including the calculated angle in degrees.
+
+Clipboard Integration:
+    • Automatic Copy on Measure: Measurement result and angle are automatically copied to the clipboard upon completion.
+    • Manual Copy Shortcut (Ctrl+Alt+C): Copies current measurement text to the clipboard.
+    • Copy Validation: Prevents copy attempts when no measurement exists.
+    • Tooltip Confirmation: Provides visual feedback when a measurement is copied or if the action is unavailable.
+
+User Interface Layout:
+    • Adaptive Window Dimensions: Automatically adjusts width/height based on orientation.
+    • Title Bar Display: Shows orientation mode and ruler length in pixels.
+    • Measurement Display Zone: Dedicated area showing current measurement, angle results, or instructions.
+    • Control Button Cluster:
+        ⮞ Close button  Exits application
+        ⮞ Hide button  Minimizes to system tray
+        ⮞ Orientation toggle button  Switches between horizontal/vertical
+        ⮞ Transparency toggle button  Toggles window transparency
+    • Outer Border Frame: Colored border enclosing the entire window.
+    • Icon-Based Controls: Uses system DLL icons for visual button representation.
+
+Visual Customization:
+    • Full Color Configuration:
+        ⮞ GUI Background color
+        ⮞ Outer border color
+        ⮞ Tick mark color
+        ⮞ Tick label color
+        ⮞ Measurement text color
+        ⮞ Title bar text color
+        ⮞ Ruler outline color
+    • Named Color Support: Predefined color mapping system (Black, Gray, Silver, White, Maroon, Red, Magenta-Red, Rose, Salmon, Light Salmon, Coral, Hot Pink, Deep Pink, Rose Pink, Pink, Red-Orange, Orange, Yellow-Red, Yellow-Orange, Yellow, Chartreuse, Olive, Green, Lime, Spring Green, Cyan-Green, Teal, Aqua/Cyan, Azure, Blue, Navy, Indigo, Violet, Purple, Magenta/Fuchsia).
+    • Hex Color Support: Accepts direct 6-digit hex values or 0x-prefixed format.
+    • Icon Theme Selection: Configurable light/dark icon variants (0 = white, 1 = black) to ensure button icons remain visible against light or dark GUI backgrounds.
+    • Transparent Window Option: Adjustable transparency level (0-254) with toggle capability.
+
+Orientation Management:
+    • Horizontal Mode: Wide ruler optimized for measuring screen width.
+    • Vertical Mode: Tall ruler optimized for measuring screen height.
+    • Ctrl+Alt+O Toggle: Quick keyboard shortcut to switch orientations. Resets measurement mode.
+    • Instant GUI Rebuild: Window fully reconstructed on orientation change.
+    • Consistent Tick Logic: Tick marks adapt automatically to orientation.
+    • Label Positioning: Text labels adjust placement for optimal visibility in each mode.
+
+Transparency Control:
+    • Persistent Transparency Setting: Window transparency value saved throughout the session.
+    • Toggle Shortcut (Ctrl+Alt+T): Quick enable/disable of transparent mode.
+    • Configurable Level: Custom transparency intensity (default: 150 of 254).
+    • WinSet Integration: Uses native Windows transparency API for a smooth effect.
+
+Window Behavior:
+    • Always-On-Top: Ruler stays visible above all other windows (configurable).
+    • Borderless Interface: No standard title bar or window frame.
+    • Click-and-Drag Movement: Drag anywhere on the window to reposition.
+    • Configurable Start Position: Adjustable initial X/Y coordinates.
+    • Minimize to Tray: Hide button minimizes ruler to system tray for quick access.
+    • Tray Restoration: Can restore hidden ruler from tray menu.
+
+System Tray Integration:
+    • Custom Tray Icon: Uses imageres.dll icon resource.
+    • Dynamic Show/Hide Toggle:
+        ⮞ Menu text and icon update based on visibility state.
+    • Quick Access Menu:
+        ⮞ Show/Hide Ruler
+        ⮞ Toggle Orientation
+        ⮞ Toggle Transparency
+        ⮞ Copy Measurement
+        ⮞ Help Documentation
+        ⮞ Key History Viewer
+        ⮞ Window Spy Utility
+    • Script Controls:
+        ⮞ Edit Script
+        ⮞ Reload Script
+        ⮞ Exit Script
+    • Smart Menu Positioning: Tray menu appears near mouse cursor location.
+    • Custom Menu Styling: Colored menu with designated default action.
+
+Keyboard Shortcuts:
+    • Ctrl+Alt+C: Copy current measurement to clipboard.
+    • Ctrl+Alt+O: Toggle ruler orientation.
+    • Ctrl+Alt+T: Toggle window transparency.
+    • Ctrl+Alt+M: Activate measurement mode.
+    • Ctrl+Alt+LClick: Set measurement start/end point.
+    • Escape: Clear current measurement, reset mode, and hide live tooltip.
+    • Double-Tap Ctrl+Home: Reload script.
+    • Double-Tap Ctrl+Esc: Exit script.
+
+Graphical Rendering Engine:
+    • boxline() Function: Draws rectangular borders with individual edge colors.
+    • barLine() Function: Renders solid bars for tick marks.
+    • Progress Bar Hack: Uses Progress controls as drawing primitives for lines and borders.
+    • Layered Rendering: Multiple Progress elements compose the visual interface.
+    • Transparent Text Layering: Text controls use BackgroundTrans for seamless overlay.
+
+Color Conversion System:
+    • Named Color Resolution: Converts human-readable color names to hex codes.
+    • Format Flexibility: Outputs raw hex or 0x-prefixed format based on context.
+    • Fallback Handling: Defaults to White if color name is unrecognized.
+    • Case-Insensitive Matching: Color names work regardless of capitalization.
+    • Alias Support: Grey/Gray and Cyan/Aqua color name aliases.
+
+Tooltip Feedback System:
+    • Button Hover Tooltips: Each control button shows a descriptive tooltip on hover.
+        ⮞ Close   Close 
+        ⮞ Hide/Minimize   Hide 
+        ⮞ Orientation   Orientation 
+        ⮞ Transparency   Transparency 
+    • Action Confirmation Tooltips: Brief tooltips confirm successful actions.
+    • Live Measurement Tooltip: Shows real-time distance and angle as the cursor moves after the first point is set.
+    • Auto-Dismiss Timer: Tooltips automatically disappear after a set duration.
+    • GuiTip() Custom Implementation: Uses Windows tooltips_class32 for tooltip functionality.
+    • XP Compatibility: Special handling for older Windows versions.
+
+Update & Monitoring System:
+    • File Change Detection: Timer-based check every 500ms for script modifications.
+    • Auto-Reload on Edit: Automatically reloads script when file is saved externally.
+    • Modification Time Tracking: Compares file timestamps to detect changes.
+    • Audible Reload Indicator: Sound beep plays when script auto-reloads.
+
+Technical Features:
+    • Direct Windows API Integration:
+        ⮞ PostMessage for window dragging (WM_LBUTTONDOWN via 0x00A1).
+        ⮞ CreateWindowEx for custom tooltip control.
+        ⮞ SendMessage for tooltip configuration.
+        ⮞ WinSet for transparency control.
+        ⮞ OnMessage for custom message handling.
+    • AutoHotkey v1 Compatibility: Uses AHK v1 syntax and functions.
+    • Persistent Single Instance: #Persistent and #SingleInstance Force ensure one running copy.
+    • Efficient Batch Processing: SetBatchLines -1 for maximum execution speed.
+    • Minimal Window Delay: SetWinDelay 0 for instant GUI updates.
+
+Interactive Elements:
+    • Real-Time Mode Feedback: Display text updates instantly on mode changes.
+    • Live Cursor Feedback: A tooltip with a live preview of angle and distance is shown after the first measurement point is set.
+    • Guided User Flow: Instructional text walks the user through measurement steps.
+    • Audible Feedback: Sound beep on application close.
+    • Immediate GUI Updates: GuiControl updates display without window refresh.
+    • Cursor Position Detection: MouseGetPos captures screen coordinates for measurement and the live tooltip.
+
+Ruler Lifecycle & States:
+    • Launch  Tray icon appears, ruler GUI built and shown.
+    • Idle  Ruler displays with instructional text.
+    • Measure Mode Active  User activates via Ctrl+Alt+M.
+    • Point 1 Set (Live Preview)  Start coordinates captured, live angle/distance tooltip follows cursor.
+    • Point 2 Set  Final distance and angle are calculated, results are displayed and copied.
+    • Orientation Toggle  GUI destroyed and rebuilt in new orientation; measurement mode is reset.
+    • Minimize  Window hidden, tray icon updates.
+    • Restore  Window reshown, tray icon updates.
+    • Reload  Script auto-reloads on file modification.
+    • Exit  Sound plays, application terminates.
+
+Error Handling & Safeguards:
+    • Mode Validation: Ctrl+Alt+LClick is ignored if measurement mode is not active.
+    • Measurement State Tracking: Prevents conflicting measurement attempts.
+    • Copy Protection: Validates that a measurement exists before copying to the clipboard.
+    • Hidden Window Detection: RestoreRulerWindow checks window state before toggling.
+    • File Time Initialization: Prevents an empty modification time from triggering a reload.
+    • Color Fallback: Unrecognized color names default to White (FFFFFF).
+    • Tooltip Cleanup: The live preview tooltip is explicitly cleared when a measurement is finalized or canceled.
+
+Customization Variables:
+    • defaultOrientation: Initial ruler orientation (Horizontal or Vertical).
+    • iconThemeColor: Icon style for buttons (0 = white, 1 = black).
+    • rulerLength: Total ruler scale in pixels.
+    • rulerThickness: Ruler bar height/width in pixels.
+    • windowTransparency: Initial transparency level (255 = opaque).
+    • transparencyLevel: Transparency intensity when toggled on.
+    • rulerOnTop: Always-on-top toggle.
+    • guiX / guiY: Initial window position.
+    • pixelsPerInch: Conversion factor for physical units.
+    • gBackground: GUI background color.
+    • outerBorder: Outer frame color.
+    • tickColor: Tick mark color.
+    • tickLabelColor: Numeric label color.
+    • measureTextColor: Measurement result color.
+    • titleBarColor: Title text color.
+    • rulerOutlineColor: Ruler bar outline color.

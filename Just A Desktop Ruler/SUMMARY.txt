@@ -1,0 +1,137 @@
+
+*  Desktop ruler with GUI measurement tools.
+
+
+
+PURPOSE:
+This script implements a fully functional, on-screen desktop ruler.
+It provides users with a visual measuring tool that can be positioned anywhere on the screen, allowing precise distance measurement in pixels and real-world units such as inches, centimeters, and millimeters.
+The ruler supports both horizontal and vertical orientations and includes interactive measurement capabilities using mouse input.
+   • Provides a movable, always-on-top desktop ruler overlay.
+   • Enables real-time distance and angle measurement between two screen points.
+   • Converts pixel distances into inches, centimeters, and millimeters.
+
+KEY FEATURES:
+The script offers a rich set of features designed for flexibility, usability, and customization.
+It includes a fully drawn GUI ruler with tick marks, labeled intervals, and dynamic measurement display.
+Users can toggle orientation, transparency, and measurement mode through hotkeys or GUI controls.
+Additionally, it supports extensive color customization via named colors or hex values.
+   • Dual orientation modes:
+       ⮞ Horizontal and vertical ruler layouts.
+   • Measurement system:
+       ⮞ Two-point click measurement using (Ctrl+Alt+M) to activate, then (Ctrl+Alt+LClick) for both Start & End points.
+       ⮞ Outputs pixel, inch, cm, mm, and angle values.
+       ⮞ Live angle/distance tooltip follows cursor after first point is set.
+   • GUI controls:
+       ⮞ Close, hide, orientation toggle, and transparency toggle buttons.
+   • Clipboard integration:
+       ⮞ Automatically copies measurement results upon completion.
+       ⮞ Manual copy available via Ctrl+Alt+C.
+   • Icon theme support:
+       ⮞ Configurable light/dark icon variants (0 = white, 1 = black) for visibility against different backgrounds.
+   • Transparency toggle:
+       ⮞ Switches between fully opaque (255) and a user-defined transparency level (default: 150, range: 0-254).
+   • Extensive color system:
+       ⮞ Supports named colors and hex values via a custom conversion function.
+   • Tray menu:
+       ⮞ Provides quick access to core functions with custom icons and colored styling.
+       ⮞ Menu appears near mouse cursor via smart positioning.
+       ⮞ Includes standard AHK utilities (Help Docs, Key History, Window Spy) with enhanced aesthetic presentation.
+   • Auto-reload system:
+       ⮞ Detects script file changes every 500ms and reloads automatically.
+
+LOGIC SUMMARY:
+The script operates through a combination of GUI rendering, hotkey handling, and state-based measurement logic.
+Upon launch, it initializes configuration variables, builds the ruler interface, and sets up timers and tray menu options.
+The ruler GUI is dynamically constructed based on orientation, with tick marks and labels generated through loops.
+
+Measurement mode is activated via (Ctrl+Alt+M), transitioning the script into a state where it awaits two (2) (Ctrl+Alt+LClick) inputs.
+The first click captures the starting coordinates, and the second click determines the endpoint.
+The script calculates the Euclidean distance and angle between these points and converts it independently into multiple units using a predefined pixels-per-inch value (pixels ÷ PPI for inches, then inches × 2.54 for cm, then cm × 10 for mm).
+
+After the first point is set, a live tooltip follows the cursor showing real-time angle and distance until the second point is placed.
+Display text updates dynamically based on the current state (idle, awaiting start, live preview, complete), ensuring clear user guidance.
+Additional logic handles toggling orientation, clearing measurements with Escape, copying results, and managing transparency via WinSet.
+   • Initialization:
+       ⮞ Sets directives, variables, timers, and tray menu.
+   • GUI construction:
+       ⮞ Dynamically builds ruler layout, tick marks, labels, and control buttons.
+   • Measurement workflow:
+       ⮞ Activate (Ctrl+Alt+M) → Set start (Ctrl+Alt+LClick) → Live preview (cursor tooltip) → Set end (Ctrl+Alt+LClick) → Calculate → Display and copy.
+   • Distance calculation:
+       ⮞ Uses square root of (dx² + dy²) for accurate diagonal measurement.
+   • Angle calculation:
+       ⮞ Uses ATan2 function for continuous angle feedback (-180° to 180° range).
+   • Unit conversion:
+       ⮞ Independent calculation chain from pixels to inches, centimeters, and millimeters.
+   • State management:
+       ⮞ Tracks measurement mode (idle, awaiting start, live preview, complete).
+       ⮞ Click count tracks progress (0, 1, or 2) with live tooltip active after first point.
+       ⮞ Prevents conflicting measurement attempts and validates mode before accepting point input.
+
+LAYOUT:
+The interface is a borderless, always-on-top GUI designed for minimal obstruction and maximum clarity.
+It includes a visually distinct ruler bar with tick marks at 10-pixel intervals and labeled increments every 50 pixels.
+The layout adapts based on orientation, adjusting dimensions, text placement, and measurement display formatting accordingly.
+
+A title bar area displays the current mode and ruler length, while control icons are positioned in the upper-right corner for quick interaction.
+The measurement display is prominently placed and updates in real time with instructional or result text.
+The outer border and ruler outline are drawn using custom box and bar routines for precise visual definition.
+   • Borderless GUI with tool window styling (+ToolWindow +E0x02000000 +E0x00080000).
+   • Dynamic sizing based on orientation:
+       ⮞ Horizontal: wide layout with single-line measurement text.
+       ⮞ Vertical: tall layout with multi-line stacked measurement text.
+   • Tick marks:
+       ⮞ Minor ticks every 10 pixels (10px height/width).
+       ⮞ Major ticks every 50 pixels (20px height/width) with numeric labels.
+       ⮞ Bidirectional: top/bottom for horizontal, left/right for vertical.
+   • Title bar:
+       ⮞ Displays orientation mode and ruler length in pixels.
+   • Control icons:
+       ⮞ Close (X), Hide, Orientation toggle, and Transparency toggle buttons.
+       ⮞ Icons sourced from imageres.dll and shell32.dll with light/dark theme support.
+   • Measurement display:
+       ⮞ Horizontal mode: single-line format (e.g., "Pixels: 150.0px  |  1.56 in  |  3.97 cm  |  39.7 mm  |  45.0°").
+       ⮞ Vertical mode: multi-line stacked format for vertical readability.
+   • Outer border and ruler outline drawn via boxline() and barLine() functions.
+
+USER EXPERIENCE:
+The script is designed for intuitive interaction and immediate feedback.
+Users can quickly activate measurement mode, click two points, and receive precise results without navigating complex menus.
+Tooltips and on-screen prompts guide the user through each step, reducing confusion and improving usability.
+
+Hotkeys provide efficient control, while the tray menu offers alternative access to all major functions.
+The ability to drag the ruler, toggle transparency, and switch orientations enhances flexibility in different workflows.
+Automatic clipboard copying streamlines the process of using measured values elsewhere.
+   • Simple hotkey-driven workflow:
+       ⮞ Ctrl+Alt+M to activate measuring mode.
+       ⮞ Ctrl+Alt+LClick to set both start and end points.
+   • Additional keyboard shortcuts:
+       ⮞ Ctrl+Alt+O to toggle orientation.
+       ⮞ Ctrl+Alt+T to toggle transparency.
+       ⮞ Ctrl+Alt+C to copy current measurement.
+       ⮞ Escape to clear measurement and reset mode.
+       ⮞ Double-tap Ctrl+Home to reload script.
+       ⮞ Double-tap Ctrl+Esc to exit script.
+   • Visual guidance:
+       ⮞ Dynamic instructions in the measurement display area.
+       ⮞ Tooltip notifications for mode activation, point confirmation, and errors.
+       ⮞ Live measurement tooltip shows real-time distance and angle after first point.
+       ⮞ Tooltips auto-dismiss after configurable duration.
+   • Drag functionality:
+       ⮞ Click-and-drag anywhere on the ruler to reposition via WM_LBUTTONDOWN message handling.
+   • Non-intrusive design:
+       ⮞ Optional transparency toggle for overlay use without obstructing content beneath.
+       ⮞ Minimize to tray via hide button for quick access without closing.
+   • Productivity enhancements:
+       ⮞ Automatic clipboard copying upon measurement completion.
+       ⮞ Tray menu with sectioned layout, custom icons, and colored styling.
+       ⮞ Standard AHK utilities (Help, Key History, Window Spy) with polished presentation.
+   • Reliability:
+       ⮞ Auto-reload detects script file modifications and reloads automatically.
+       ⮞ Single instance enforcement prevents duplicate script execution.
+   • Audible feedback:
+       ⮞ Sound beep on application close.
+       ⮞ Sound beep on script reload.
+.
+
