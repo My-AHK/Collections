@@ -1,0 +1,88 @@
+
+*  Multi-segment animated GUI Progress system.
+
+
+PURPOSE:
+This script provides a highly customizable, multi-segment progress bar system, supporting both automatic animation and manual control. 
+It allows developers to visually represent task progression using dynamic colors, titles, and percentage indicators that change as progress advances through defined thresholds. 
+The system is designed to be flexible enough for simple indicators or complex, multi-phase workflows.
+   • Supports both 4-segment and 5-segment progress bar configurations.
+   • Enables dynamic visual feedback through color, text, and percentage changes.
+   • Can operate as a standalone GUI or be embedded within another GUI.
+   • Includes demo hotkeys showcasing various real-world use cases.
+
+KEY FEATURES:
+The script offers extensive customization for each segment of the progress bar, including independent control over titles, colors, thresholds, and behavior. 
+It also includes two operating modes, automatic animation and manual updates, making it adaptable to both simulated and real-time processes.
+   • Dual function system:
+       ⮞ ShowProgress() for up to 4 segments.
+       ⮞ ShowProgress5() for up to 5 segments.
+   • Per-segment customization:
+       ⮞ Title text, title color, percentage color, and bar color.
+       ⮞ Configurable percentage thresholds (Level1–Level5).
+   • Two operation modes:
+       ⮞ Mode 0: Auto-animated progression over a defined duration.
+       ⮞ Mode 1: Manual control via returned object methods.
+   • Built-in object interface:
+       ⮞ Update() to change progress dynamically.
+       ⮞ Destroy() to remove the progress bar.
+   • Positioning options:
+       ⮞ Absolute coordinates or centered placement.
+       ⮞ Optional embedding into a parent GUI.
+   • Visual enhancements:
+       ⮞ Optional titles that change per segment.
+       ⮞ Color transitions tied to progress thresholds.
+       ⮞ Smooth animation using timed steps.
+
+LOGIC SUMMARY:
+The script constructs a GUI-based progress bar composed of layered elements, including borders, background, and multiple colored bar segments. 
+During execution, it calculates the current progress percentage and determines which segment is active based on predefined thresholds. 
+Only one segment is visible at a time, and transitions occur seamlessly as progress advances.
+   • Initialization phase:
+       ⮞ Resolves color defaults and assigns fallback values.
+       ⮞ Calculates layout dimensions and positioning.
+       ⮞ Creates GUI elements (border, bar segments, text).
+   • Animation logic:
+       ⮞ Divides total duration into steps for smooth progression.
+       ⮞ Updates bar position and percentage text each step.
+       ⮞ Switches active segment when thresholds are crossed.
+   • Manual mode logic:
+       ⮞ Returns an object containing GUI references and methods.
+       ⮞ Update functions reposition the bar and refresh text/colors.
+   • Title and color handling:
+       ⮞ Titles update only when segment changes.
+       ⮞ Colors dynamically adjust per active segment.
+   • Cleanup:
+       ⮞ Automatically destroys GUI after completion (non-embedded).
+       ⮞ Manual destruction available via object method.
+
+LAYOUT:
+The visual structure consists of a bordered container, an inner progress track, and a moving bar that represents progress. 
+Optional title text appears above the bar, while percentage text is displayed alongside it. 
+The layout adapts based on configuration parameters such as size, position, and whether a title is present.
+   • Outer border defines the overall container.
+   • Inner box acts as the progress track.
+   • Thin moving bar represents progress across the track.
+   • Title text (optional) appears above the bar.
+   • Percentage text updates in real time next to the bar.
+   • Layout dynamically adjusts for:
+       ⮞ Title presence (adds vertical offset).
+       ⮞ Custom width and height.
+       ⮞ Screen positioning or GUI embedding.
+
+USER EXPERIENCE:
+The script delivers a smooth, visually responsive progress indicator that can communicate status, urgency, or phase transitions clearly. 
+Through color changes and contextual titles, users can quickly understand the current state of a process. 
+The included hotkeys demonstrate practical scenarios such as downloads, warnings, and phased operations.
+   • Smooth animation with consistent timing.
+   • Clear visual transitions between progress stages.
+   • Informative titles that reflect current status.
+   • Flexible interaction:
+       ⮞ Fully automated for simple use cases.
+       ⮞ Manually controlled for precise updates.
+   • Demonstration hotkeys:
+       ⮞ Simulate downloads, system scans, warnings, and more.
+       ⮞ Showcase different segment counts and visual styles.
+   • Draggable window for standalone mode enhances usability.
+
+.
