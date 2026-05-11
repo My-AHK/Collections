@@ -1,0 +1,59 @@
+
+Key Map Inventory
+==============
+Generated: 20260510173650
+
+·====· HOTKEYS ·====·
+
+Master Script (from: C:\Users\You\AHK\Main Script Folder):
+-------------------------------------------
+~^c	(MyScript.ahk)
+~^v	(MyScript.ahk)
+~^z	(MyScript.ahk)
+^Home	(MyScript.ahk)
+^Esc	(MyScript.ahk)
+
+
+Child Scripts (recursive from: C:\Users\You\AHK\Main Script Folder\Child Scripts Folder):
+-------------------------------------------
+WheelDown	(DLL_Icons_Viewer\DLL_Icons_Viewer.ahk)  [IfWinActive: ahk_class AutoHotkeyGUI]
+WheelUp		(DLL_Icons_Viewer\DLL_Icons_Viewer.ahk)  [IfWinActive: ahk_class AutoHotkeyGUI]
+
+^G		(Get_File_Path\Get_File_Path.ahk)
+
+$NumLock	(Locking_Keys\Locking_Keys.ahk)
+!NumLock		(Locking_Keys\Locking_Keys.ahk)
+CapsLock		(Locking_Keys\Locking_Keys.ahk)  [If: (A_TickCount < CapsDouble)]
+ScrollLock		(Locking_Keys\Locking_Keys.ahk)  [If: (A_TickCount < ScrollDouble)]
+
+^P		(Open_Images\Open_Images.ahk)
+
+^Enter		(Screen_Saver\Screen_Saver.ahk)
+^NumpadEnter	(Screen_Saver\Screen_Saver.ahk)
+
+^Y		(Text_Assist\Text_Assist.ahk)
+
+~*Ctrl		(WindowSpy_DarkMode\WindowSpy_DarkMode.ahk)
+~*Shift		(WindowSpy_DarkMode\WindowSpy_DarkMode.ahk)
+
+
+·====· DYNAMIC HOTKEYS (Hotkey Command) ·====·
+
+Master Script (from: C:\Users\You\AHK\Main Script Folder):
+-------------------------------------------
+(none)
+
+Child Scripts (recursive from: C:\Users\You\AHK\Main Script Folder\Child Scripts Folder):
+-------------------------------------------
+(none)
+
+·====· HOTSTRINGS ·====·
+
+Master Script (from: C:\Users\You\AHK\Main Script Folder):
+-------------------------------------------
+(none)
+
+Child Scripts (recursive from: C:\Users\You\AHK\Main Script Folder\Child Scripts Folder):
+-------------------------------------------
+(none)
+

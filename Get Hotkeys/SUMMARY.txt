@@ -1,0 +1,84 @@
+
+*  AHK Key Map Inventory & Extraction Tool
+
+
+PURPOSE:
+This script generates a complete inventory report of AutoHotkey hotkeys, hotstrings, and dynamic Hotkey command entries across a master script and its related child-script folder structure. 
+It is designed as an automated auditing and reference utility that scans recursively, organizes results into categorized sections, and exports everything into a readable text report.
+   • Activated with Ctrl + T.
+   • Prompts the user to choose a master .ahk script.
+   • Automatically discovers child script folders without hardcoded paths.
+   • Produces a consolidated "Key Map Inventory" report.
+
+KEY FEATURES:
+The script performs deep parsing of AutoHotkey source files while intelligently avoiding false positives from comments, block comments, and hotstrings. 
+It separates standard hotkeys, dynamic Hotkey command calls, and hotstrings into dedicated sections, while also preserving contextual #If conditions when detected.
+   • Detects:
+       ⮞ Standard hotkeys.
+       ⮞ Combination hotkeys using "&".
+       ⮞ Dynamic Hotkey command registrations.
+       ⮞ Hotstrings with inline replacements or block actions.
+       ⮞ Context-sensitive #If and #IfWin variants.
+   • Prevents duplicate entries using internal tracking objects.
+   • Handles recursive scanning of all .ahk files inside child folders.
+   • Safely strips inline comments without damaging quoted strings.
+   • Ignores:
+       ⮞ Full-line comments.
+       ⮞ Block comments.
+       ⮞ Hotstrings during hotkey detection.
+   • Supports a large range of recognized AutoHotkey keys:
+       ⮞ Keyboard modifiers.
+       ⮞ Function keys.
+       ⮞ Numpad keys.
+       ⮞ Mouse buttons and wheel actions.
+       ⮞ Joystick inputs.
+       ⮞ Media and browser keys.
+
+LOGIC SUMMARY:
+The script begins by letting the user select a master script. 
+It then locates all immediate subfolders within that script's directory and recursively scans every .ahk file found inside them. 
+Dedicated extraction functions independently process hotkeys, hotstrings, and Hotkey commands. 
+Results are collected into categorized report sections and then exported into a text file.
+   • Uses separate parser functions for:
+       ⮞ ExtractHotkeys().
+       ⮞ ExtractHotstrings().
+       ⮞ ExtractHotkeyCommands().
+   • Maintains parser states for:
+       ⮞ Block comment tracking.
+       ⮞ Active #If context tracking.
+       ⮞ Duplicate prevention.
+   • Builds a final report containing:
+       ⮞ HOTKEYS section.
+       ⮞ DYNAMIC HOTKEYS section.
+       ⮞ HOTSTRINGS section.
+   • Includes source file names beside detected entries.
+   • Recursively scans all nested folders automatically.
+   • Detects when no valid entries were found and displays guidance.
+
+LAYOUT:
+The report is structured into clearly divided sections with labeled headers for the master script and each recursively scanned child folder. 
+Entries are grouped by feature type and formatted for readability.
+   • Report header includes:
+       ⮞ Inventory title.
+       ⮞ Generation timestamp.
+   • Each category contains:
+       ⮞ Master script subsection.
+       ⮞ Child script subsection(s).
+   • Entries display:
+       ⮞ Trigger name.
+       ⮞ Source script path.
+       ⮞ Optional context tags.
+   • Empty categories display "(none)" placeholders.
+
+USER EXPERIENCE:
+The script is highly automated and minimizes manual setup. 
+The user only selects the master script, and the utility handles folder discovery, scanning, parsing, report creation, and save handling automatically. 
+Additional safeguards improve usability when dealing with invalid paths or restricted folders.
+   • Offers save-location choices:
+       ⮞ Save beside the master script.
+       ⮞ Save to a custom location.
+   • Handles Program Files permission restrictions gracefully.
+   • Can relaunch itself as administrator when needed.
+   • Falls back to Desktop saving if elevated saving fails.
+   • Displays completion, error, and cancellation messages clearly.
+   • Designed for rapid auditing of large AutoHotkey script collections.
