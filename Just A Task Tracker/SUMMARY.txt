@@ -1,0 +1,53 @@
+
+*  AutoHotkey task tracker with custom GUI overlay.
+
+
+PURPOSE:
+This script implements a fully interactive, always-on-top task tracker with a custom-drawn graphical user interface. 
+It allows users to manage tasks by adding, completing, filtering, and deleting items while persisting data to a local text file.
+
+KEY FEATURES:
+The script provides a visually distinctive task management overlay featuring custom color schemes, priority indicators, category labels, progress bars, and scrollable task lists.
+   • Task persistence is handled through automatic saving and loading from a local pipe-delimited text file.
+      ⮞ Sample tasks are generated automatically when no data file exists.
+   • A custom color converter function maps human-readable color names to hexadecimal values for GUI elements.
+      ⮞ Both predefined named colors and direct hex codes are supported.
+   • Visual progress tracking includes a text-based progress bar built from Unicode block characters.
+      ⮞ The bar shows completed versus total tasks with colored fill, empty, and cap segments.
+   • Filtering modes allow viewing all tasks, only active tasks, or only completed tasks.
+      ⮞ A clear button removes all completed tasks at once.
+   • Task rendering supports scroll up and down navigation when more than seven tasks exist.
+      ⮞ Each task row shows a toggle checkbox, priority dot, task text, category tag, and delete button.
+   • Tray menu integration provides show/hide toggling, documentation access, key history, window spy, and script management options.
+      ⮞ The tray icon dynamically changes to reflect the tracker’s visibility state.
+
+LOGIC SUMMARY:
+The script initializes by loading tasks from a data file or generating sample entries, then constructs the GUI using box-drawing routines and color mappings. 
+User interactions trigger immediate data updates, file saves, and GUI rebuilds to reflect current state. 
+A timer checks for script file modifications to auto-reload. 
+The tray menu uses a custom notification click handler for positioning. 
+Task operations manipulate an indexed object array where each task stores an ID, text, priority, category, completion flag, and creation timestamp. 
+Filtering and scrolling logic adjusts which subset of tasks is rendered based on the current filter mode and scroll offset.
+
+LAYOUT:
+The GUI window measures 380 by 555 pixels and uses a borderless, always-on-top tool window style with a custom-colored border drawn via the boxline function.
+   • A title section at the top displays “Task Tracker” with a close button and statistics line.
+      ⮞ The stats line shows progress percentage, completed/total counts, and outstanding high-priority items.
+   • A progress bar constructed from text controls sits below the stats using block characters.
+      ⮞ Left cap, filled blocks, empty blocks, and right cap are repositioned dynamically based on completion percentage.
+   • Filter controls appear as bordered text labels that act as buttons for All, Active, and Done modes.
+      ⮞ A Clear button removes completed tasks.
+   • The new task entry area includes a text input field, priority dropdown, category dropdown, and an Add button.
+      ⮞ Pressing Enter in the input field triggers task addition.
+   • The task list section renders up to seven visible tasks at a time with scroll controls when needed.
+      ⮞ Each task row includes a checkbox, colored priority dot, strikethrough-capable text, category tag, and delete cross.
+
+USER EXPERIENCE:
+Interacting with the tracker is designed to be immediate and keyboard-friendly, with tooltips guiding input validation and sound feedback on show/hide actions. 
+The interface updates instantly on any task modification, maintaining visual consistency through complete GUI rebuilds. 
+The color scheme uses high-contrast combinations against a dark background, with priority levels distinguished by red, orange, and lime dots. 
+Window dragging is enabled by clicking anywhere on the surface. 
+The tray menu provides quick access to common AutoHotkey utilities and script management without interrupting workflow.
+
+
+.

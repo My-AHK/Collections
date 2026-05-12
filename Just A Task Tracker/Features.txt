@@ -1,0 +1,98 @@
+
+
+Task Management & Operations:
+    • Task Creation System: Adds new tasks with description, priority level, and category assignment.
+    • One-Click Toggle Completion: Checkbox-style markers switch tasks between active and completed states.
+    • Individual Task Deletion: Each task row includes a dedicated delete control for removal.
+    • Bulk Clear Completed: Single action removes all finished tasks from the list.
+    • Priority Classification: Tasks are assigned High, Medium, or Low priority levels.
+        ⮞ Red dot → High priority
+        ⮞ Orange dot → Medium priority
+        ⮞ Lime dot → Low priority
+    • Category Organization: Tasks can be grouped into Work, Personal, Health, Learning, Career, or Other categories.
+    • Enter Key Submission: Pressing Enter while focused on the task input field triggers task addition.
+    • Input Validation: Empty task descriptions are rejected with a tooltip notification.
+
+Data Persistence:
+    • Automatic Save on Change: Task data is written to file after every add, toggle, delete, or clear operation.
+    • Local File Storage: Tasks are saved as pipe-delimited records in a text file within the script directory.
+    • Startup Load Routine: Existing task data is loaded automatically when the script launches.
+    • Fallback Sample Data: Six pre-defined sample tasks are generated if no data file exists.
+    • Complete State Preservation: All task attributes including completion status, priority, category, and creation time are persisted.
+
+Filtering & Navigation:
+    • Three-Mode Filter System: Toggle between viewing All tasks, only Active tasks, or only Completed tasks.
+        ⮞ Filter buttons update visual styling to indicate the active mode.
+    • Scrollable Task List: Up to seven tasks are displayed at once with scroll controls for larger lists.
+        ⮞ ▲ Scroll Up appears when tasks exist above the visible window.
+        ⮞ ▼ Scroll Down appears when tasks exist below the visible window.
+    • Filter-Aware Item Count: The task count display reflects the number of items in the current filtered view.
+    • Scroll Offset Reset: Changing filters or clearing completed tasks resets the scroll position to the top.
+
+Visual Feedback & Styling:
+    • Completion Strikethrough: Completed task text is rendered with a strikethrough font style.
+    • Priority Color Coding: Each task displays a colored dot indicating its priority level.
+    • Category Tag Display: Task categories appear as bracketed labels beneath the task text.
+    • Dynamic Checkbox Symbols:
+        ⮞ ✓ symbol with green color for completed tasks.
+        ⮞ ○ symbol with blue color for active tasks.
+    • Delete Cross Symbol: × character rendered in red for the delete control.
+    • Filter Button Borders: Active filter mode receives visual border highlighting.
+    • Custom Progress Bar: Text-based bar using Unicode block characters with left cap, filled, empty, and right cap segments.
+        ⮞ Bar length and segment counts adjust proportionally to completion percentage.
+
+User Interface Layout:
+    • Fixed Window Dimensions: GUI occupies 380x555 pixels at a user-defined starting position.
+    • Structured Vertical Flow: Title, stats, progress bar, filters, input area, and task list arranged sequentially.
+    • Section Dividers: Horizontal and vertical lines separate logical interface zones using barLine().
+    • Title Box Framing: Title text is enclosed within a drawn border rectangle.
+    • Input Row Grid: Priority dropdown, category dropdown, and Add button aligned horizontally with the text field.
+    • Two-Line Task Rows: Each task displays primary text on the first line and category tag on the second.
+    • Scroll Control Placement: Scroll indicators appear at the bottom of the task area when needed.
+
+Custom Drawing System:
+    • boxline() Border Routine: Draws four individual progress bars to create a complete rectangular border.
+        ⮞ Supports independent coloring for top, bottom, left, and right edges.
+        ⮞ Configurable border thickness parameter.
+    • barLine() Divider Routine: Creates single-line dividers using progress bar controls.
+    • Color Converter Engine: Maps named colors and hex values to GUI-compatible format codes.
+        ⮞ Supports over 40 predefined color names including custom hex entries.
+        ⮞ Output formatting for standard GUI, background, and 0x-prefixed hex.
+    • Borderless Window Construction: Uses tool window styling with custom-drawn borders replacing standard OS chrome.
+
+Tray Menu Integration:
+    • Dynamic Visibility Toggle: Menu text switches between “Hide Tracker” and “Show Tracker” based on state.
+        ⮞ Tray icon changes to indicate current visibility status.
+    • Utility Shortcuts: Direct access to AutoHotkey help documentation, key history, and window spy.
+    • Script Management Options: Edit, Reload, and Exit commands available from the tray menu.
+    • Smart Menu Positioning: Custom NotifyTrayClick function positions the menu near the mouse cursor.
+    • Tip Display: Hovering over the tray icon shows the script identifier.
+
+Keyboard Shortcuts & Controls:
+    • Ctrl + Alt + T: Toggle the task tracker window visibility.
+    • Double-Tap Ctrl + Home: Reload the script.
+    • Double-Tap Ctrl + Esc: Exit the script.
+    • Window Drag Support: Clicking anywhere on the GUI surface allows dragging to reposition.
+
+Window Behavior:
+    • Always-On-Top Display: Tracker remains visible above other application windows.
+    • Borderless Interface: No standard Windows title bar or window frame elements.
+    • Click-Drag Movement: WM_LBUTTONDOWN message handler enables window repositioning.
+    • Sound Feedback: Descending tone on hide, ascending tone on show.
+    • Instant GUI Rebuild: The entire interface is reconstructed on any state change for guaranteed consistency.
+
+Script Lifecycle & Maintenance:
+    • Auto-Reload Monitor: SetTimer checks every 500ms whether the script file has been modified externally.
+    • Clean Initialization: GUI is built on startup and hidden to tray by default.
+    • Persistent Execution: Script remains running in the system tray until explicitly exited.
+    • Stateful Tray Integration: Tray menu labels and icons reflect the current show/hide condition.
+    • Efficient Rendering: Tasks are rebuilt from the filtered array on each GUI regeneration cycle.
+
+Color Scheme Configuration:
+    • Comprehensive Color Variables: Separate settings for borders, headers, backgrounds, dividers, text, labels, inputs, and all functional elements.
+    • Priority-Specific Colors: High, Medium, and Low priorities each have dedicated color assignments.
+    • Progress Bar Customization: Independent colors for fill, empty, and cap segments with configurable bar length.
+    • Scroll and Delete Accents: Distinct colors for navigation controls and destructive actions.
+    • Category Tag Coloring: Category labels rendered in a dedicated accent color.
+
+.

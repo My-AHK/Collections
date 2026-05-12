@@ -1,0 +1,84 @@
+
+
+
+
+
+Common task tracker features to consider adding:
+
+Task Management:
+
+    Due dates - Add date picker and show overdue tasks in red
+
+    Task editing - Double-click to edit existing task text/priority/category
+
+    Subtasks - Nested tasks with parent/child relationships
+
+    Drag & drop reordering - Reprioritize by dragging tasks
+
+    Bulk actions - Select multiple tasks to delete/move/complete at once
+
+    Undo - Ability to undo last action (delete, complete, etc.)
+
+    Search/filter by text - Search bar to find tasks by keyword
+
+Organization:
+
+    Sort options - Sort by priority, date added, alphabetical, due date
+
+    Custom categories - Allow users to add/remove categories dynamically
+
+    Tags/labels - Multiple tags per task beyond just category
+
+    Notes/descriptions - Expandable task details with longer descriptions
+
+Data & Persistence:
+
+    Export/Import - CSV, JSON, or text file export
+
+    Backup system - Automatic backups of tasks_data.txt
+
+    Cloud sync - Save to a shared location or cloud folder
+
+    Multiple lists - Separate task lists (Work, Personal, Projects, etc.)
+
+UI/UX:
+
+    Minimize to tray - Option to minimize instead of hide
+
+    Transparency control - Adjustable GUI transparency
+
+    Resizable window - Allow dragging edges to resize
+
+    Compact mode - Smaller view with fewer details
+
+    Animations - Smooth transitions when completing/deleting tasks
+
+    Keyboard shortcuts - More hotkeys for common actions (Ctrl+N for new task, etc.)
+
+    Sound options - Toggle completion sounds, different sounds per priority
+
+Productivity:
+
+    Pomodoro timer - Built-in focus timer
+
+    Statistics dashboard - Charts showing completion rates over time
+
+    Recurring tasks - Daily/weekly/monthly repeating tasks
+
+    Reminders - Popup notifications for due tasks
+
+    Time tracking - Track time spent on each task
+
+    Priority matrix - Eisenhower matrix view (Urgent/Important grid)
+
+Accessibility:
+
+    Font size options - Adjustable text size
+
+    High contrast mode - Alternative color schemes
+
+    Screen reader support - Better accessibility labels
+
+
+
+The most impactful ones to add next would probably be due dates, task editing (double-click), and sort options. Which of these interest you?
