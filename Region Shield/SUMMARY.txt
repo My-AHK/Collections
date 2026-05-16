@@ -1,0 +1,72 @@
+
+*  Toggleable Screen Region Mouse Shield Gui Overlay.
+
+
+PURPOSE:
+Creates a toggleable on-screen “shield” region that physically blocks mouse interaction inside a defined rectangular area. 
+It provides both a visual border overlay and a small control GUI button that switches between locked and unlocked states while updating tray icons and colors to reflect the current protection status.
+   • Designed to prevent accidental clicks or interaction within a specific screen region.
+   • Uses layered GUIs to separate visual effects from actual mouse blocking behavior.
+   • Includes built-in script maintenance tools such as reload, edit, and exit options.
+
+KEY FEATURES:
+The script combines transparent GUI layers, visual borders, live status indicators, tray integration, and automatic reload monitoring into a compact utility. 
+A small floating button controls the entire system and changes appearance depending on whether the shield is active.
+   • Toggle button changes between “LOCK” and “UNLOCK”.
+   • Includes an optional commented-out hotkey (F1) for toggle control when the button GUI is not desired.
+   • Transparent blocking layer prevents mouse interaction in the target region.
+   • Separate click-through border layer displays a visible outline.
+   • Customizable:
+       ⮞ Shield position.
+       ⮞ Shield size.
+       ⮞ Border thickness.
+       ⮞ Border colors.
+       ⮞ Button dimensions and placement.
+   • Tray menu includes:
+       ⮞ Script edit.
+       ⮞ Reload.
+       ⮞ Exit.
+       ⮞ Key history.
+       ⮞ Window Spy.
+       ⮞ Help documentation.
+   • Auto-reloads if the script file is modified externally.
+   • Double-tap hotkeys:
+       ⮞ Ctrl + Home → Reload script.
+       ⮞ Ctrl + Esc → Exit script.
+
+LOGIC SUMMARY:
+The script operates by toggling a Boolean state variable that determines whether the shield is active. 
+When enabled, two GUIs are created simultaneously: one invisible GUI intercepts mouse input, while another transparent click-through GUI draws only the visible border.
+   • GUI 2:
+       ⮞ Acts as the physical mouse-blocking surface.
+       ⮞ Uses transparency without click-through mode.
+   • GUI 3:
+       ⮞ Displays only the border outline.
+       ⮞ Uses TransColor and +E0x20 for click-through behavior.
+   • The toggle routine can be triggered from:
+       ⮞ The floating GUI button.
+       ⮞ The optional F1 hotkey if uncommented.
+   • The button GUI updates colors and label visibility during toggles.
+   • A reusable “boxLine” function dynamically draws borders using Progress controls.
+
+LAYOUT:
+The interface uses three independent GUIs layered together for different purposes. 
+The control button remains separate from the shield area and stays always-on-top for quick access.
+   • GUI 1:
+       ⮞ Floating toggle control button.
+   • GUI 2:
+       ⮞ Transparent mouse-blocking shield region.
+   • GUI 3:
+       ⮞ Border-only overlay surrounding the shield.
+   • Tray menu provides centralized utility access.
+
+USER EXPERIENCE:
+The script delivers a lightweight and visually clear interaction model. 
+Users can instantly enable or disable a protected screen zone while receiving visual confirmation through GUI color changes and tray icon updates.
+   • Shield activation feels immediate and responsive.
+   • Border overlay clearly marks the protected area.
+   • Supports both mouse-driven and keyboard-driven operation.
+   • Minimal interface clutter due to captionless GUIs.
+   • Useful for gaming, streaming, kiosk setups, testing environments, or protecting UI areas from accidental input.
+
+.
