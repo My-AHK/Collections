@@ -1,0 +1,88 @@
+
+*  Mouse Cage GUI With Cursor Lock System.
+
+
+PURPOSE:
+Creates a toggleable on-screen “mouse cage” that traps the mouse cursor inside a defined rectangular region. 
+It uses layered GUIs, transparent overlays, and rapid mouse position correction to physically prevent the cursor from leaving the cage area until the user releases it through the toggle button or escape corner.
+   • Provides a lightweight desktop mouse confinement system.
+   • Designed for focus control, cursor restriction, or testing environments.
+   • Includes a clickable GUI toggle button for activating and releasing the cage.
+   • Uses AutoHotkey GUI layering instead of external libraries.
+
+KEY FEATURES:
+The script combines multiple GUI windows and timer-driven cursor clamping to create a responsive mouse restriction system. 
+It also includes visual styling, tray integration, reload monitoring, and utility menu options for easier control and maintenance.
+   • Toggle button swaps between:
+       ⮞ “CAGE” state.
+       ⮞ “RELEASE” state.
+   • Transparent blocker GUI physically intercepts mouse interaction.
+   • Decorative click-through border overlay outlines the cage area.
+   • Red diagonal escape triangle acts as a hidden release hotspot.
+   • Mouse position is corrected every 10ms for containment.
+   • Fully customizable:
+       ⮞ Cage position.
+       ⮞ Cage dimensions.
+       ⮞ Border thickness.
+       ⮞ Border colors.
+       ⮞ Button colors and sizing.
+   • Tray icon changes dynamically based on cage state.
+   • Includes auto-reload when the script file is modified.
+   • Built-in tray utilities:
+       ⮞ AutoHotkey help documentation.
+       ⮞ Key history viewer.
+       ⮞ Window Spy launcher.
+       ⮞ Edit / Reload / Exit controls.
+
+LOGIC SUMMARY:
+The script starts by creating a persistent GUI button and initializing timers and tray controls. 
+When the cage is enabled, two additional GUIs are generated: one acts as a nearly invisible mouse blocker while the other provides the visible border and escape indicator. 
+A high-speed timer repeatedly checks cursor coordinates and instantly forces the mouse back inside the cage boundaries if it escapes.
+   • GUI 1:
+       ⮞ Main toggle button interface.
+   • GUI 2:
+       ⮞ Near-transparent physical mouse blocker.
+       ⮞ Contains hidden clickable release zone.
+   • GUI 3:
+       ⮞ Click-through decorative overlay.
+       ⮞ Displays border and diagonal escape marker.
+   • ClampMouse routine:
+       ⮞ Reads current cursor coordinates.
+       ⮞ Calculates valid in-bounds coordinates.
+       ⮞ Teleports cursor back if outside cage.
+   • boxLine() routine:
+       ⮞ Draws rectangular borders using Progress controls.
+   • barLineAngle() routine:
+       ⮞ Draws diagonal lines pixel-by-pixel at custom angles.
+   • UpdateCheck timer:
+       ⮞ Detects script file modifications.
+       ⮞ Automatically reloads updated script.
+
+LAYOUT:
+The interface is intentionally compact and visually simple. 
+A small top-level button controls the entire system, while the cage itself is outlined using a colored border and marked with a red diagonal corner indicator for escape access.
+   • Main button:
+       ⮞ Positioned independently from cage.
+       ⮞ Changes color and label when toggled.
+   • Cage area:
+       ⮞ Defined by configurable X/Y coordinates.
+       ⮞ Uses a yellow rectangular border by default.
+   • Escape corner:
+       ⮞ Located near the upper-right border edge.
+       ⮞ Rendered with multiple angled red line segments.
+   • Tray menu:
+       ⮞ Custom colored context menu.
+       ⮞ Double-click access enabled.
+
+USER EXPERIENCE:
+The script is designed to feel immediate and responsive. 
+Cursor confinement occurs fast enough to appear physically locked, while the GUI visuals clearly indicate whether the cage is active or inactive. 
+The hidden escape hotspot prevents accidental release while still allowing intentional exit.
+   • Minimal interface footprint.
+   • Very low visual clutter.
+   • Fast activation and release behavior.
+   • Responsive cursor restriction with minimal flicker.
+   • Tray tools improve script management and debugging.
+   • Double-tap reload and exit hotkeys reduce accidental triggering.
+
+.
