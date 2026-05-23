@@ -1,0 +1,149 @@
+
+*  Multi-Monitor Modifier-Based Hot Corners.
+
+
+PURPOSE:
+This script creates a customizable hot-corner system for multi-monitor setups using AutoHotkey v1.1. 
+It continuously monitors the mouse position and triggers specific actions when the cursor enters one of the screen corners on any connected monitor. 
+The system is designed with flexibility, DPI-awareness, configurable modifier-key requirements, and robust fallback/error handling so it can reliably function across different monitor layouts and scaling configurations.
+   • Supports multiple monitors independently.
+   • Allows different actions per monitor corner.
+   • Uses optional modifier-key protection to prevent accidental triggers.
+   • Includes DPI-awareness handling for accurate coordinate detection.
+   • Provides fallback actions and logging for missing functions or invalid monitor data.
+
+KEY FEATURES:
+The script combines monitor-aware corner detection, configurable modifier logic, cached monitor boundaries, dynamic function execution, and detailed error handling into a modular framework. 
+Each monitor corner can launch a completely different function, making the system highly expandable for automation, shortcuts, window management, media controls, or productivity workflows.
+   • DPI-awareness initialization:
+       ⮞ Attempts legacy DPI awareness first.
+       ⮞ Falls back to newer Windows DPI APIs if needed.
+       ⮞ Warns the user if scaling alignment may become inaccurate.
+
+   • Multi-monitor boundary caching:
+       ⮞ Detects all connected monitors at startup.
+       ⮞ Stores monitor boundaries in an object for fast access.
+       ⮞ Skips monitors with invalid coordinate ranges.
+       ⮞ Logs suspicious monitor coordinates that may indicate driver issues.
+
+   • Flexible modifier-key system:
+       ⮞ Supports single modifiers:
+           ⮚ Ctrl
+           ⮚ Shift
+           ⮚ Alt
+           ⮚ Win
+       ⮞ Supports OR-style arrays:
+           ⮚ Example: Ctrl OR Shift OR Alt.
+       ⮞ Supports AND-style object logic:
+           ⮚ Example: Ctrl AND Shift together.
+       ⮞ Modifier enforcement can be fully disabled.
+
+   • Corner detection system:
+       ⮞ Detects:
+           ⮚ Top-left
+           ⮚ Top-right
+           ⮚ Bottom-left
+           ⮚ Bottom-right
+       ⮞ Uses configurable corner radius sizing.
+       ⮞ Prevents repeat-trigger spam while remaining inside a corner.
+
+   • Dynamic action routing:
+       ⮞ Uses an action matrix object.
+       ⮞ Maps monitor/corner combinations to function names.
+       ⮞ Executes functions dynamically with Func().Call().
+
+   • Error handling and recovery:
+       ⮞ Logs missing functions.
+       ⮞ Handles unmapped corners gracefully.
+       ⮞ Uses fallback tooltip actions when needed.
+       ⮞ Writes timestamped log entries to a text file.
+
+LOGIC SUMMARY:
+The script begins by configuring AutoHotkey performance settings, enabling DPI awareness, and switching all coordinate systems to screen-relative mode. 
+It then detects connected monitors and stores their boundary coordinates into a cache object for faster processing during runtime.
+
+After initialization, the script creates an action matrix that associates monitor corners with specific function names. 
+A timer then repeatedly runs the HotCorner routine every 200 milliseconds.
+
+During each timer cycle, the script first checks whether the required modifier key configuration is currently active. 
+If the modifier condition is satisfied, the current mouse position is retrieved and compared against the cached boundaries of each monitor.
+
+For every monitor, the script checks whether the mouse is within the configured corner radius for one of the four corners. 
+Once a match is found, the corresponding monitor number and corner identifier are stored.
+
+The script prevents repeated execution while the cursor remains parked inside the same corner by comparing the current corner against the previously triggered corner. 
+Only transitions into a new corner trigger an action.
+
+When a valid corner transition occurs, execution is passed to the action dispatcher. 
+The dispatcher retrieves the assigned function name from the action matrix, verifies that the function exists, and then dynamically calls it.
+
+If the assigned function does not exist or no mapping is found, the script logs the issue and falls back to a generic tooltip-based corner notification.
+   • Timer polling interval:
+       ⮞ 200 milliseconds.
+   • Corner re-trigger prevention:
+       ⮞ Uses LastCorner tracking.
+   • Runtime dispatching:
+       ⮞ Function names stored as strings.
+       ⮞ Executed dynamically at runtime.
+   • Logging format:
+       ⮞ Timestamp
+       ⮞ Message
+       ⮞ Optional monitor number
+       ⮞ Optional corner identifier
+
+LAYOUT:
+The script is organized into clearly separated functional sections using labeled comment headers. 
+Each major subsystem is isolated into its own area, improving readability, maintenance, and scalability for future expansion.
+   • Directives & Settings:
+       ⮞ Performance settings.
+       ⮞ DPI awareness.
+       ⮞ Coordinate configuration.
+       ⮞ Modifier settings.
+       ⮞ Logging configuration.
+
+   • Monitor Cache:
+       ⮞ Detects and stores monitor boundaries.
+
+   • Action Matrix:
+       ⮞ Maps monitor corners to function names.
+
+   • Hot Corner Routine:
+       ⮞ Main detection loop.
+
+   • Modifier Checker:
+       ⮞ Handles all modifier validation logic.
+
+   • Action Execution:
+       ⮞ Dispatches mapped functions dynamically.
+
+   • Monitor Action Sections:
+       ⮞ Separate functions for Monitor 1.
+       ⮞ Separate functions for Monitor 2.
+       ⮞ Separate functions for Monitor 3.
+       ⮞ Expansion placeholder for additional monitors.
+
+   • Fallback & Error Handling:
+       ⮞ Default tooltip action.
+       ⮞ Log-writing system.
+       ⮞ Tooltip cleanup timer.
+
+USER EXPERIENCE:
+The script is designed to remain lightweight, responsive, and resistant to accidental activation. 
+By requiring optional modifier keys and preventing repeated triggers while hovering inside a corner, it avoids becoming intrusive during normal mouse movement. 
+The modular structure also makes customization straightforward for users who want to assign automation tasks to specific monitor corners.
+   • Fast response with low overhead.
+   • Safer activation through modifier requirements.
+   • Works across multi-monitor environments.
+   • Handles mixed scaling setups more reliably due to DPI-awareness support.
+   • Easily expandable for more monitors or custom actions.
+   • Provides visible and audible feedback through:
+       ⮞ Tooltips
+       ⮞ Message boxes
+       ⮞ Sound beeps
+   • Maintains stability through:
+       ⮞ Validation checks
+       ⮞ Fallback behaviors
+       ⮞ Error logging
+
+
+.
