@@ -1,0 +1,50 @@
+
+
+GUI & INTERACTION
+  - Always-on-top, borderless, draggable window with custom trim colors
+  - Click the title bar to hide/show the GUI
+  - Tray menu: hide/show, help, key history, Window Spy, edit, reload, exit
+  - Last window position saved automatically to an INI file
+  - ListView with checkboxes showing current name, preview name, and full path
+  - Hover tooltip over the "New Name" column shows the previewed filename
+
+FILE MANAGEMENT
+  - Browse to select any folder (last folder is remembered)
+  - Include Subfolders...[optionally scan all subdirectories]
+  - Filter by Extension (e.g. mp3, .mp3, or blank for all files)
+  - Refresh button to reload file list with current filter(s)
+  - Files are automatically sorted by extension, then by name
+
+CORE RENAMING
+  - Add custom text with a configurable separator ( _ - • etc.)
+  - Placement modes:
+      * Prepend...[add text before the original name]
+      * Append...[add text after the original name]
+      * Replace Entire Name...[replace name with custom text]
+      * Find & Replace...[find and replace (or remove) text in the name]
+  - Sequential numbering:
+      * Enable/disable, set start number, zero‑padding (e.g. 3 → 001, 002...)
+      * Position: number before or after the text
+  - Case transformation: None, UPPERCASE, lowercase, Title Case, Sentence case, iNVERT cASE
+  - Date/Time insertion:
+      * Insert current date (format MM-dd-yyyy)
+      * Insert current time (12‑hour with AM/PM or 24‑hour)
+  - Trimming: remove characters from the start and/or end BEFORE any other changes
+  - Organize by extension: auto‑create subfolders (jpg/, mp3/, etc.) and move renamed files
+
+PREVIEW & SAFETY
+  - Real‑time preview of new filenames for checked items only
+  - Duplicate detection within the same extension group...[warning shown in preview]
+  - Confirmation dialog before applying any rename
+  - Undo (Revert):
+      * Selectively revert checked files to their original names using a backup
+      * Files are moved back to the parent folder, empty extension folders are removed
+
+UTILITIES & SCRIPT MANAGEMENT
+  - Select All / Deselect All buttons
+  - Reload script (Ctrl+Home twice) and Exit (Ctrl+Esc twice)
+  - Auto‑reload when the script file is edited
+  - Settings and backup stored in a single FileRenamer.ini file (can be hidden)
+  - Built‑in tooltips for almost every control
+
+

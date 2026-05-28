@@ -1,0 +1,189 @@
+
+*  Advanced Bulk File Renaming Utility GUI
+
+
+PURPOSE:
+This script is a highly customizable bulk file renaming utility built in AutoHotkey v1. 
+It provides a polished GUI-based workflow for renaming large groups of files using append, prepend, replace, numbering, trimming, date/time insertion, case conversion, and find/replace operations. 
+The script focuses heavily on live previewing, safety checks, rollback support, and organized file management while maintaining a responsive desktop-style interface.
+   • Designed for batch-renaming files with real-time previews before execution.
+   • Supports multiple rename strategies within a single unified interface.
+   • Includes rollback/revert functionality using INI-based backups.
+   • Organizes files optionally into extension-based subfolders.
+   • Stores persistent settings such as last-used folder and window position.
+
+KEY FEATURES:
+The script contains a large collection of renaming tools intended to handle both simple and advanced workflows.
+It combines interactive GUI controls, automatic preview generation, duplicate detection, sequential numbering, case transformations, extension filtering, and file organization features into a single application.
+   • Rename Modes:
+       ⮞ Prepend text to filenames.
+       ⮞ Append text to filenames.
+       ⮞ Replace entire filenames.
+       ⮞ Find and replace specific text inside filenames.
+
+   • Sequential Numbering:
+       ⮞ Adds incrementing numbers to renamed files.
+       ⮞ Supports configurable starting numbers.
+       ⮞ Supports numeric padding.
+           ⮚ Examples:
+               - 1, 2, 3
+               - 001, 002, 003
+       ⮞ Allows numbering before or after inserted text.
+
+   • Date & Time Insertion:
+       ⮞ Inserts current date into filenames.
+       ⮞ Inserts current time into filenames.
+       ⮞ Supports 12-hour and 24-hour formats.
+       ⮞ Combines with numbering and appended text.
+
+   • Filename Manipulation:
+       ⮞ Trims characters from the start of filenames.
+       ⮞ Trims characters from the end of filenames.
+       ⮞ Applies trimming before all other rename logic.
+
+   • Case Conversion:
+       ⮞ UPPERCASE
+       ⮞ lowercase
+       ⮞ Title Case
+       ⮞ Sentence case
+       ⮞ iNVERT cASE
+
+   • File Filtering & Sorting:
+       ⮞ Filters displayed files by extension.
+       ⮞ Supports recursive subfolder scanning.
+       ⮞ Sorts files alphabetically by extension and name.
+
+   • File Organization:
+       ⮞ Automatically creates extension-based folders.
+       ⮞ Moves renamed files into matching extension folders.
+           ⮚ Example:
+               - .jpg → /jpg/
+               - .mp3 → /mp3/
+
+   • Safety Features:
+       ⮞ Duplicate filename detection before rename execution.
+       ⮞ Conflict prevention when target files already exist.
+       ⮞ Confirmation dialogs before rename/revert operations.
+       ⮞ Backup logging for selective file restoration.
+
+   • Revert System:
+       ⮞ Restores renamed files to original names.
+       ⮞ Returns files from extension folders back to parent folder.
+       ⮞ Preserves remaining backup entries after partial reverts.
+       ⮞ Removes empty extension folders automatically after reverts.
+
+   • GUI Enhancements:
+       ⮞ Custom border trim rendering.
+       ⮞ Dynamic tooltips for controls and previews.
+       ⮞ Hover tooltips showing generated filenames.
+       ⮞ Hide/show GUI through header click or tray menu.
+       ⮞ Draggable borderless interface.
+
+LOGIC SUMMARY:
+The script operates around a centralized preview-and-confirm workflow. 
+Files are first loaded into an internal array structure, displayed inside a ListView, then dynamically processed through layered rename logic whenever settings change. 
+The actual rename phase only occurs after duplicate checks, validation checks, and user confirmation succeed.
+   • Startup Logic:
+       ⮞ Loads saved folder and window position from INI.
+       ⮞ Verifies folder existence before loading files.
+       ⮞ Builds tray menu and GUI.
+       ⮞ Starts timers for auto-reload and checkbox monitoring.
+
+   • File Loading Process:
+       ⮞ Scans selected directory for files.
+       ⮞ Optionally includes subfolders.
+       ⮞ Excludes directories and script INI file.
+       ⮞ Creates structured file objects containing:
+           ⮚ Full path
+           ⮚ Filename
+           ⮚ Extension
+           ⮚ Parent directory
+
+   • Preview Generation:
+       ⮞ Runs continuously whenever:
+           ⮚ Controls change
+           ⮚ Checkboxes change
+           ⮚ Rename modes change
+       ⮞ Rebuilds all preview names in ListView column 3.
+       ⮞ Tracks duplicate output names by extension group.
+
+   • Rename Engine Order:
+       ⮞ Trim characters.
+       ⮞ Generate numbering.
+       ⮞ Generate date/time strings.
+       ⮞ Apply rename mode logic.
+       ⮞ Apply case transformation.
+       ⮞ Reattach file extension.
+
+   • Duplicate Prevention:
+       ⮞ Performs preview duplicate detection visually.
+       ⮞ Performs preflight duplicate validation before rename execution.
+       ⮞ Blocks rename process entirely if conflicts exist.
+
+   • Rename Execution:
+       ⮞ Groups checked files by extension.
+       ⮞ Generates final filenames sequentially.
+       ⮞ Optionally creates extension folders.
+       ⮞ Moves files using FileMove.
+       ⮞ Stores original filename mappings inside INI backup section.
+
+   • Revert Logic:
+       ⮞ Reads stored backup mappings from INI.
+       ⮞ Matches selected files against backup entries.
+       ⮞ Restores original filenames and locations.
+       ⮞ Cleans up empty extension folders afterward.
+
+LAYOUT:
+The interface is arranged vertically into organized functional groups, giving the script the feel of a compact desktop utility application. 
+The GUI uses a dark-themed design with blue accent colors, custom borders, grouped controls, and a large file preview area.
+   • Top Header Area:
+       ⮞ Stylized title display.
+       ⮞ Invisible clickable hide/show region.
+       ⮞ Decorative border lines.
+
+   • Folder Section:
+       ⮞ Folder selection field.
+       ⮞ Browse button.
+       ⮞ Persistent last-folder tracking.
+
+   • Rename Configuration Areas:
+       ⮞ Text insertion controls.
+       ⮞ Separator configuration.
+       ⮞ Rename mode radio buttons.
+       ⮞ Find/replace inputs.
+       ⮞ Sequential numbering controls.
+       ⮞ Case conversion dropdown.
+       ⮞ Extension filter field.
+       ⮞ Date/time options.
+       ⮞ Character trimming controls.
+
+   • File Preview Area:
+       ⮞ Multi-column ListView.
+       ⮞ Checkbox selection system.
+       ⮞ Live preview column.
+       ⮞ Hover filename tooltips.
+
+   • Bottom Action Row:
+       ⮞ Select All
+       ⮞ Deselect All
+       ⮞ Revert
+       ⮞ Rename
+       ⮞ Reload
+       ⮞ Exit
+
+USER EXPERIENCE:
+The script is designed to provide a highly interactive and safe renaming experience while minimizing accidental mistakes.
+Most actions immediately reflect inside the preview panel, allowing users to experiment with naming rules before committing changes.
+   • Live previews update continuously for immediate feedback.
+   • Tooltips explain controls and formatting options.
+   • Duplicate filenames are visibly flagged before execution.
+   • Confirmation prompts reduce accidental bulk renames.
+   • The GUI remains always-on-top for convenience.
+   • Borderless drag behavior gives the interface a custom utility feel.
+   • Tray menu integration provides quick access to reload, edit, and hide functions.
+   • Automatic script reload detects saved script edits during development.
+   • Persistent settings reduce repetitive setup between sessions.
+   • Revert support provides a recovery mechanism after bulk operations.
+
+
+.
