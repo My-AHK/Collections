@@ -1,0 +1,63 @@
+
+*  Asynchronous MsgBox & SoundBeep Demo Collection.
+
+PURPOSE:
+This script demonstrates two custom asynchronous AutoHotkey functions, aMsgBox() and aSoundBeep(), which execute MsgBox and SoundBeep operations in separate AutoHotkey processes. 
+Their primary purpose is to eliminate the normal blocking behavior of these commands, allowing the main script to continue running immediately while dialogs and sounds operate independently in the background.
+   • Shows practical methods for non-blocking user notifications.
+   • Demonstrates background execution using spawned AutoHotkey processes.
+   • Provides multiple real-world usage examples.
+
+KEY FEATURES:
+The script includes two reusable asynchronous functions and six demonstration hotkeys that showcase situations where standard MsgBox and SoundBeep commands would normally interrupt script execution. 
+Each example highlights how the asynchronous versions allow execution to continue without waiting for user interaction or sound completion.
+   • aMsgBox()
+       ⮞ Launches a separate AutoHotkey process.
+       ⮞ Displays a MsgBox independently of the main script.
+       ⮞ Supports custom titles and optional auto-close timeouts.
+   • aSoundBeep()
+       ⮞ Launches a separate AutoHotkey process.
+       ⮞ Plays sounds independently of the main script.
+       ⮞ Returns control immediately to the caller.
+   • Demonstration hotkeys:
+       ⮞ F1: MsgBox remains open while multiple beeps continue playing.
+       ⮞ F2: Long beep plays while a MsgBox appears immediately.
+       ⮞ F3: Long beep runs while Send and Sleep execute instantly.
+       ⮞ F4: Clipboard-monitor timer remains responsive during notifications.
+       ⮞ F5: Loop processing continues while progress notifications occur.
+       ⮞ F6: Error handler reports exceptions without delaying recovery.
+
+LOGIC SUMMARY:
+Both asynchronous functions create a WScript.Shell COM object and use Shell.Exec() to launch a new AutoHotkey interpreter instance. 
+A small temporary script is written directly to the child process through Standard Input. 
+The child process performs the requested action, then immediately exits. 
+Because the work is performed by a separate process, the calling script regains control instantly.
+   • Main script calls asynchronous function.
+   • Function launches a new AutoHotkey process.
+   • Child process receives dynamically generated script code.
+   • Child process performs MsgBox or SoundBeep operation.
+   • Child process exits automatically when finished.
+   • Main script never waits for completion.
+
+LAYOUT:
+The script is organized into clearly separated sections that progress from setup, to function definitions, and finally to practical demonstrations. 
+The examples become increasingly realistic, moving from simple proof-of-concept demonstrations to timer, loop, and error-handling scenarios.
+   • Directives and startup configuration.
+   • Asynchronous function definitions.
+   • F1–F6 demonstration hotkeys.
+   • Clipboard monitoring timer routine.
+   • Exception handling example.
+   • Supporting tray menu and update timer references.
+
+USER EXPERIENCE:
+The script provides a noticeably more responsive experience than traditional MsgBox and SoundBeep usage. 
+Notifications remain visible and sounds continue playing while the user and script can continue working normally. 
+The examples effectively illustrate how asynchronous execution can improve responsiveness in automation tasks, monitoring tools, file-processing routines, and error reporting systems.
+   • No waiting for dialogs before execution continues.
+   • No waiting for long beeps before additional actions occur.
+   • Timers continue firing normally.
+   • Loops continue processing uninterrupted.
+   • Error reporting does not stall recovery logic.
+   • Demonstrates practical asynchronous behavior using only built-in AutoHotkey capabilities.
+
+.
