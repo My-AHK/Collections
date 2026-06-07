@@ -1,0 +1,17 @@
+
+
+
+Selected Input:
+Step-2 Execute 10 Zebra 2 Monkey b) Bird 2. Banana 3. Apple 5 Elephant a) Cat c) Dog Step-1 Plan 1. Cherry Step-3 Review
+
+Expected Output:
+1. Cherry 2 Monkey 2. Banana 3. Apple 5 Elephant 10 Zebra Step-1 Plan Step-2 Execute Step-3 Review a) Bird b) Cat c) Dog
+
+
+
+
+
+
+
+
+

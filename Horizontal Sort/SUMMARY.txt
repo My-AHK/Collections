@@ -1,0 +1,78 @@
+
+*  Horizontal Text Cluster Sorter & Rewriter
+
+PURPOSE:
+This script provides a hotkey-driven text sorting tool that operates directly on highlighted text. 
+When activated, it copies the selected text, analyzes its structure, sorts the content according to a set of custom classification rules, then replaces the original selection with the reorganized version. 
+It is designed for structured lists that contain prefixes such as symbols, numbers, or letters rather than performing a simple alphabetical word sort.
+   • Triggered with Ctrl + Shift + H.
+   • Works on currently selected text.
+   • Automatically pastes the sorted result back into place.
+   • Preserves the user's original clipboard contents.
+
+KEY FEATURES:
+The script uses a multi-stage sorting system that recognizes different prefix types and applies specialized sorting behavior to each category. 
+Rather than treating all entries equally, it groups items by their prefix characteristics and processes them independently before rebuilding the final output.
+   • Separates entries into three primary groups:
+       ⮞ Symbol-prefixed items.
+       ⮞ Numeric-prefixed items.
+       ⮞ Letter-prefixed items.
+   • Maintains a dedicated bucket for each unique symbol prefix.
+   • Sorts symbol groups according to their first appearance.
+   • Extracts numeric values from numbered prefixes for proper numeric sorting.
+   • Detects trailing numbers in lettered prefixes and sorts by those values.
+   • Preserves clipboard contents before and after processing.
+   • Emits an audible confirmation beep when activated.
+
+LOGIC SUMMARY:
+The script begins by copying the selected text into memory and parsing it into clusters consisting of a prefix and its associated body text. 
+Each cluster is classified into a category based on whether the prefix contains symbols, numbers, or letters.
+
+For symbol-prefixed entries, separate buckets are created for each unique symbol encountered. 
+Bodies within each bucket are alphabetically sorted, while the symbol buckets themselves remain in the order they first appeared.
+
+Numeric entries have their leading number extracted and stored as a sorting key. 
+These entries are then sorted numerically using insertion sort.
+
+Letter-prefixed entries are divided into two subgroups. 
+Entries whose prefixes end with numbers are sorted numerically by those trailing values. 
+Entries without trailing numbers are sorted alphabetically using their body text. 
+During this process, prefixes and bodies are sorted separately and then recombined.
+
+If only a single cluster is detected, the script assumes the input is a simple list of words and performs a standard alphabetical sort instead.
+   • Pass 1:
+       ⮞ Parse text into prefix/body clusters.
+       ⮞ Classify each cluster.
+       ⮞ Store entries in category-specific containers.
+   • Pass 2:
+       ⮞ Sort each category according to its rules.
+       ⮞ Reassemble all groups in fixed order:
+           ⮚ Symbols first.
+           ⮚ Numbers second.
+           ⮚ Letters third.
+   • Return the rebuilt text string.
+
+LAYOUT:
+The script is organized into a small main section and two dedicated functions. 
+The hotkey serves only as a launcher, while all processing logic is isolated inside reusable functions.
+   • Directives and runtime settings section.
+   • Single hotkey definition.
+   • Clipboard handling function:
+       ⮞ SelectedText_SortHorizontal().
+   • Core sorting function:
+       ⮞ SortHorizontal().
+   • Extensive internal comments describing classification and sorting behavior.
+
+USER EXPERIENCE:
+From the user's perspective, operation is simple and immediate. 
+The user highlights text, presses the hotkey, and the selected content is replaced with a sorted version. 
+The clipboard is restored afterward, minimizing disruption to normal workflow.
+   • One-key operation after text selection.
+   • Audible feedback confirms activation.
+   • Original clipboard data is preserved.
+   • Handles structured lists more intelligently than a normal alphabetical sort.
+   • Automatically falls back to a simple word sort when complex structures are not detected.
+   • Requires no GUI, menus, or configuration.
+
+
+.
