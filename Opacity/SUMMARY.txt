@@ -1,0 +1,78 @@
+
+*  Per-Window Opacity & Always-On-Top Tool.
+
+
+PURPOSE:
+This script provides per-window opacity control and always-on-top management for the currently active window. 
+Unlike simple transparency scripts that use a single global value, it tracks each window independently, allowing every window to maintain its own opacity level, toggle state, and always-on-top status. 
+It also includes visual feedback through ToolTips and optional on-screen indicators.
+   • Adjusts transparency for individual windows without affecting others.
+   • Adds always-on-top toggling with a visible status indicator.
+   • Automatically restores modified windows when the script exits.
+
+KEY FEATURES:
+
+The script offers a complete window-management toolkit centered around transparency control and topmost-window handling. 
+It remembers settings per window, provides multiple hotkeys for convenience, and includes cleanup routines to prevent stale tracking data from accumulating.
+   • Opacity controls:
+       ⮞ Increase opacity.
+       ⮞ Decrease opacity.
+       ⮞ Reset to full opacity.
+       ⮞ Toggle between full opacity and a remembered transparency level.
+   • Per-window memory:
+       ⮞ Tracks opacity separately for each window handle.
+       ⮞ Stores the last non-opaque level for quick restoration.
+   • Always-On-Top controls:
+       ⮞ Toggles topmost state independently per window.
+       ⮞ Displays a floating indicator when enabled.
+   • Automatic maintenance:
+       ⮞ Removes data for closed windows.
+       ⮞ Destroys orphaned indicator GUIs.
+       ⮞ Restores all modified windows on exit.
+
+LOGIC SUMMARY:
+When a hotkey is pressed, the script retrieves the active window handle and verifies that the window still exists. 
+If the window is being accessed for the first time, the script reads its current transparency state and creates tracking entries. 
+Opacity changes are stored internally as percentages while AutoHotkey receives the required 0–255 transparency value.
+The toggle system remembers the last transparency value below 100% and allows quick switching between that level and full opacity. 
+The always-on-top system maintains a separate tracking table and synchronizes the window's actual topmost state with an internal record.
+   • Opacity values are stored as percentages.
+   • Transparency sent to Windows is converted to a 0–255 scale.
+   • First-time window access initializes tracking automatically.
+   • Toggle mode restores either:
+       ⮞ The last remembered transparency value.
+       ⮞ A user-defined default transparency level if no prior value exists.
+   • Timers perform background maintenance tasks:
+       ⮞ Indicator repositioning every 100 milliseconds.
+       ⮞ Closed-window cleanup every 60 seconds.
+
+LAYOUT:
+The script is organized into clearly separated sections for configuration, hotkeys, routines, utility functions, and shutdown handling. 
+User-adjustable settings are grouped near the top, making customization straightforward without modifying operational logic.
+   • Directives and startup configuration.
+   • User-defined opacity settings.
+   • User-defined always-on-top appearance settings.
+   • Hotkey handlers.
+   • Verification routines.
+   • Indicator GUI creation and destruction.
+   • Cleanup and maintenance routines.
+   • Exit and restoration logic.
+
+USER EXPERIENCE:
+The script is designed to provide immediate visual feedback while remaining unobtrusive. 
+ToolTips confirm successful actions, and the always-on-top indicator follows its associated window so the status remains visible. 
+Error handling prevents operations on invalid or closed windows and informs the user when changes cannot be applied.
+   • ToolTips display:
+       ⮞ Current opacity percentage.
+       ⮞ Reset actions.
+       ⮞ Toggle actions.
+       ⮞ Always-on-top status changes.
+       ⮞ Error conditions.
+   • Always-on-top windows receive a movable visual banner.
+   • Window states are remembered while the script runs.
+   • Exiting the script returns tracked windows to normal:
+       ⮞ Full opacity restored.
+       ⮞ Always-on-top disabled.
+       ⮞ Indicator GUIs removed.
+
+.
