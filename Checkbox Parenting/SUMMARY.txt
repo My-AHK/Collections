@@ -1,0 +1,78 @@
+
+*  TreeView Checkbox Hierarchy Sync Manager.
+
+PURPOSE:
+This script creates a TreeView-based checklist interface with two independent task groups and automatically keeps parent, child, and grandchild checkbox states synchronized. 
+It allows users to check or uncheck higher-level items to affect subordinate items while also updating parent items when all subordinate items become checked.
+   • Provides hierarchical checklist management.
+   • Supports both downward and upward checkbox synchronization.
+   • Maintains logical completion tracking for grouped items.
+   • Uses a polling routine instead of TreeView event notifications.
+
+KEY FEATURES:
+The script contains two separate checklist structures. 
+The first list contains a three-level hierarchy consisting of a parent item, child items, and grandchildren. 
+The second list contains a simpler two-level hierarchy consisting of a parent item and multiple child items. 
+Automatic propagation ensures that checking or unchecking a parent affects all related descendants.
+   • Always-on-top GUI window.
+   • TreeView control with built-in checkboxes.
+   • Two independent checklist groups.
+   • Parent-to-child propagation.
+   • Child-to-grandchild propagation.
+   • Automatic completion detection.
+   • Timer-driven monitoring system.
+   • Recursion protection using a busy flag.
+
+LOGIC SUMMARY:
+A timer runs every 100 milliseconds and continuously evaluates checkbox states throughout the TreeView. 
+The routine compares current checkbox states against previously recorded values to detect manual user changes. 
+When a parent item changes, all subordinate items are updated to match. 
+Likewise, when a specific child node changes, its grandchildren are updated accordingly.
+
+After processing user changes, the script performs reverse synchronization. 
+It checks whether all grandchildren under Item A are selected and automatically checks or unchecks Item A. 
+It then checks whether all first-level children under List 1 are selected and updates the List 1 parent item accordingly. 
+Finally, it evaluates all children under List 2 and updates the List 2 parent item to reflect overall completion status.
+   • Polling interval: 100 milliseconds.
+   • Previous-state tracking detects manual changes.
+   • busy flag prevents re-entrant processing.
+   • ParentA controls:
+       ⮞ Item A
+       ⮞ Item B
+       ⮞ Item C
+   • Item A controls:
+       ⮞ Item A 1
+       ⮞ Item A 2
+       ⮞ Item A 3
+   • ParentB controls:
+       ⮞ Item B 1 through Item B 7
+   • Reverse synchronization updates completion states automatically.
+   • Parent checkboxes represent completion of all subordinate items.
+
+LAYOUT:
+The GUI contains a single TreeView control positioned within an always-on-top window. 
+The first checklist group is expanded by default so its hierarchy is immediately visible. 
+The second checklist group is displayed beneath it and contains seven child entries.
+   • TreeView width: 250 pixels.
+   • TreeView height: 10 visible rows.
+   • Checkbox-enabled nodes.
+   • Red TreeView text color.
+   • Initial expansion of List 1 and Item A branches.
+   • Window displayed near screen coordinates X1500 Y200.
+
+USER EXPERIENCE:
+
+Users can interact with the checklist naturally by checking either parent items or individual task items. 
+Selecting a parent instantly marks all related descendants as complete, while manually checking every required child item automatically marks the corresponding parent as completed. 
+This provides a simple visual indication of progress without requiring manual synchronization.
+   • Checking "List 1 Completed" checks all items within List 1.
+   • Checking "Item A" checks all three grandchildren.
+   • Checking "List 2 Completed" checks all seven List 2 items.
+   • Unchecking any required child automatically removes completion status from its parent.
+   • Completion status is continuously updated.
+   • No buttons or menus are required.
+   • Closing the GUI immediately exits the script.
+
+
+.
+
