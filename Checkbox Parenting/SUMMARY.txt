@@ -1,0 +1,120 @@
+
+*  TreeView Checkbox Hierarchy Sync Manager.
+
+
+PURPOSE:
+Both scripts implement checkbox-parenting behavior within an AutoHotkey TreeView control. 
+Their shared goal is to keep parent and child checkboxes synchronized so that checking a parent affects its descendants and child checkbox states determine the checked status of their ancestors. 
+The primary difference is how each script detects and responds to changes: 
+  Script 1 reacts immediately to TreeView events, while Script 2 continuously monitors checkbox states through polling.
+   • Both scripts provide bidirectional checkbox synchronization.
+   • Both support parent-to-child propagation.
+   • Both support child-to-parent evaluation.
+   • Both use TreeView controls with hierarchical checkbox structures.
+   • Both prevent recursive update loops using a lock variable.
+
+KEY FEATURES:
+The two scripts achieve similar visible behavior but use very different architectures internally. 
+Script 1 is fully dynamic and recursive, automatically handling any tree depth and sibling count without additional coding. 
+Script 2 is manually defined and relies on explicit checkbox monitoring logic for every relationship in the tree.
+   • Script 1 (gLabel/Event Driven)
+       ⮞ Uses TreeView notification events.
+       ⮞ Processes changes only when user interaction occurs.
+       ⮞ Automatically handles unlimited hierarchy depth.
+       ⮞ Uses recursive functions for child propagation.
+       ⮞ Uses recursive parent assessment.
+       ⮞ Requires minimal maintenance when nodes are added.
+   • Script 2 (Timer/Polling Driven)
+       ⮞ Uses a timer running every 100 ms.
+       ⮞ Continuously scans checkbox states.
+       ⮞ Uses manually coded relationships.
+       ⮞ Explicitly references every TreeView item.
+       ⮞ Requires additional code whenever nodes are added.
+       ⮞ Provides predictable step-by-step logic.
+   • Shared Features
+       ⮞ Parent checkboxes can affect children.
+       ⮞ Child checkboxes can affect parents.
+       ⮞ Prevent re-entry using lock variables.
+       ⮞ Use AutoHotkey v1 TreeView controls.
+       ⮞ Maintain hierarchical checkbox consistency.
+
+LOGIC SUMMARY:
+Script 1 operates as an event-driven system. 
+Whenever a TreeView interaction occurs, the event handler determines which item changed and immediately processes that branch. 
+If a parent becomes checked, all descendants are recursively checked. 
+If a parent becomes unchecked, all descendants are recursively unchecked. 
+Afterwards, the script walks upward through the hierarchy, checking whether all sibling items are selected and updating parent states accordingly.
+
+Script 2 operates as a polling system. 
+Every 100 milliseconds, the timer examines checkbox states and compares them against previously stored values. 
+When changes are detected, the script manually updates related nodes. 
+Separate sections handle downward propagation and upward evaluation, with each relationship explicitly coded.
+   • Script 1 Workflow
+       ⮞ User changes a checkbox.
+       ⮞ TreeView event fires.
+       ⮞ Descendants are updated recursively.
+       ⮞ Ancestors are evaluated recursively.
+       ⮞ Processing ends until next event.
+   • Script 2 Workflow
+       ⮞ Timer fires every 100 ms.
+       ⮞ Checkbox states are scanned.
+       ⮞ Changes are compared against stored values.
+       ⮞ Related nodes are manually updated.
+       ⮞ Process repeats indefinitely.
+   • Major Difference
+       ⮞ Script 1 reacts to events.
+       ⮞ Script 2 constantly checks for events.
+
+LAYOUT:
+Visually, the scripts are nearly identical. 
+Both create the same TreeView structure consisting of Parent-A, Parent-B, children, and grandchildren. 
+Both display a small always-on-top utility window and use TreeView checkboxes for interaction.
+
+Internally, however, their layouts differ significantly. 
+Script 1 is organized around reusable functions that operate on any branch of the tree. 
+Script 2 is organized around a single timer routine containing dedicated logic blocks for specific nodes.
+   • Script 1 Structure
+       ⮞ GUI section.
+       ⮞ Single TreeView event handler.
+       ⮞ Recursive child functions.
+       ⮞ Recursive parent evaluation function.
+       ⮞ Compact and scalable design.
+   • Script 2 Structure
+       ⮞ GUI section.
+       ⮞ Large variable declaration section.
+       ⮞ Timer routine.
+       ⮞ Explicit handling for each branch.
+       ⮞ Larger and less scalable design.
+   • Scalability Comparison
+       ⮞ Script 1 expands naturally as the tree grows.
+       ⮞ Script 2 grows in complexity with every added node.
+
+USER EXPERIENCE:
+From a user's perspective, both scripts provide checkbox-parenting behavior and appear very similar during normal operation. 
+However, Script 1 typically feels more responsive because updates occur immediately when interaction happens, while Script 2 relies on timer intervals to detect changes.
+
+Script 1 is best suited for production-quality TreeViews, large hierarchies, reusable projects, and situations where performance and maintainability are important. 
+Its recursive design automatically adapts to future tree expansion with little additional effort.
+
+Script 2 is best suited for learning, experimentation, debugging, proof-of-concept development, or situations where explicit control over every relationship is preferred. 
+Because every dependency is visible in code, it can be easier for beginners to follow despite requiring more maintenance.
+   • Best Use Cases for Script 1
+       ⮞ Large TreeViews.
+       ⮞ Deep hierarchies.
+       ⮞ Dynamic node creation.
+       ⮞ Long-term projects.
+       ⮞ Performance-sensitive applications.
+   • Best Use Cases for Script 2
+       ⮞ Educational examples.
+       ⮞ Small fixed TreeViews.
+       ⮞ Debugging checkbox logic.
+       ⮞ Experimental prototypes.
+       ⮞ Situations requiring explicit control.
+   • Overall Assessment
+       ⮞ Script 1 is the more advanced, scalable, and maintainable solution.
+       ⮞ Script 2 is the more straightforward and visually traceable solution.
+       ⮞ Both achieve similar user-facing behavior, but Script 1 accomplishes it with a more generalized and efficient architecture.
+
+
+.
+
