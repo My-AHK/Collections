@@ -1,0 +1,80 @@
+
+*  Position-Aware Timed ToolTip Utility System.
+
+PURPOSE:
+A reusable ToolTip function named ToastTip() that simplifies displaying temporary notifications on-screen. 
+It supports three display behaviors: showing a ToolTip at fixed screen coordinates, spawning it at the current mouse position, or having it continuously follow the mouse cursor until a timeout expires. 
+The function is designed to be easy to call, requiring only a message while supplying sensible defaults for all other parameters.
+   • Provides a single function for temporary on-screen notifications.
+   • Supports fixed-position, cursor-position, and cursor-following modes.
+   • Automatically removes ToolTips after a specified duration.
+   • Supports ToolTip slots 1–20 for multiple independent ToolTips.
+   • Designed for quick one-line function calls.
+
+KEY FEATURES:
+The script combines flexible positioning, automatic cleanup, and cursor-tracking behavior into a lightweight notification utility. 
+Users can choose static or dynamic display modes without needing separate functions, making the utility adaptable to many scripting situations.
+   • Three demonstration hotkeys are included:
+       ⮞ F1 displays a ToolTip at fixed screen coordinates.
+       ⮞ F2 displays a ToolTip at the current cursor location.
+       ⮞ F3 displays a ToolTip that follows the cursor.
+   • Configurable display duration in milliseconds.
+   • Optional X and Y coordinates.
+   • Optional ToolTip ID selection.
+   • Cursor-follow mode updates every 10 milliseconds.
+   • Uses bound timer functions for clean parameter passing.
+   • Includes automatic ToolTip removal timers.
+   • Uses screen-based coordinate mode for consistency.
+
+LOGIC SUMMARY:
+The ToastTip() function determines which display mode should be used based on the supplied parameters. 
+If follow mode is enabled, a timer repeatedly calls FollowTip(), which tracks the cursor position and continuously redraws the ToolTip. 
+If follow mode is disabled, the ToolTip is displayed once at either the specified coordinates or the current mouse location, then removed using a one-shot timer.
+   • ToastTip() acts as the primary entry point.
+       ⮞ Configures ToolTip and Mouse coordinate modes.
+       ⮞ Evaluates the Trail parameter.
+   • Static Mode:
+       ⮞ Uses supplied X/Y coordinates when available.
+       ⮞ Otherwise obtains current mouse coordinates.
+       ⮞ Displays ToolTip once.
+       ⮞ Starts a negative one-shot timer for removal.
+   • Follow Mode:
+       ⮞ Creates a bound FollowTip() timer function.
+       ⮞ Runs every 10 milliseconds.
+       ⮞ Continuously updates ToolTip position.
+   • FollowTip():
+       ⮞ Stores timer state using static variables.
+       ⮞ Records initial start time.
+       ⮞ Monitors elapsed runtime.
+       ⮞ Stops itself when timeout expires.
+       ⮞ Tracks current mouse position.
+       ⮞ Displays ToolTip 35 pixels above and left of the cursor.
+   • EndTip():
+       ⮞ Clears the specified ToolTip slot.
+
+LAYOUT:
+The script is organized into clearly separated sections containing directives, hotkey examples, function documentation, and the core implementation. 
+Extensive comments explain both usage and internal behavior, making the script easy to understand and modify.
+   • Header comment block describing functionality.
+   • Directives and startup settings section.
+   • Demonstration hotkeys section.
+   • Function documentation section.
+   • ToastTip() main function.
+   • FollowTip() tracking function.
+   • EndTip() cleanup function.
+   • Consistent visual comment formatting throughout.
+
+USER EXPERIENCE:
+The user only needs to call a single function to display temporary notifications. 
+Most parameters are optional, allowing quick usage while still supporting advanced positioning and tracking behaviors. 
+The included hotkeys immediately demonstrate each display mode and provide practical examples for future implementation.
+   • Minimal learning curve.
+   • Sensible default values reduce required parameters.
+   • Immediate visual feedback through ToolTips.
+   • Flexible placement options.
+   • Automatic cleanup prevents lingering ToolTips.
+   • Cursor-follow mode creates interactive notifications.
+   • Example hotkeys provide ready-to-use demonstrations.
+
+
+.
