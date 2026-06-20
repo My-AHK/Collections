@@ -1,0 +1,67 @@
+
+*  Checks Network & Internet Status.
+
+PURPOSE:
+This script provides a quick way to check both local network connectivity and internet access using a single hotkey. 
+When activated, it queries Windows networking status through a COM object, evaluates the results, and displays a brief status report in a timed message box.
+   • Designed as a simple connectivity diagnostic tool.
+   • Separately checks network connection and internet access.
+   • Presents results in an easy-to-read format.
+   • Requires only a single hotkey to run.
+
+KEY FEATURES:
+The script uses a Windows networking COM interface to determine whether the computer is connected to a network and whether that network currently has internet access. 
+It converts the raw Boolean results into user-friendly status indicators and provides a plain-language explanation of the detected condition.
+   • Ctrl+T hotkey triggers the connectivity check.
+   • Audible confirmation beep plays when activated.
+   • Creates a Windows network-status COM object.
+   • Checks:
+       ⮞ Network connection status.
+       ⮞ Internet connection status.
+   • Displays results using:
+       ⮞ ✅ Yes indicators.
+       ⮞ ❌ No indicators.
+   • Provides condition-specific status messages.
+
+LOGIC SUMMARY:
+When the hotkey is pressed, the script first plays a short beep to confirm activation. 
+It then creates a Windows network-management COM object and retrieves two independent status values: whether a network connection exists and whether internet access is available. 
+These values are translated into readable text and assembled into a report message.
+After gathering the results, the script evaluates the possible connection states and appends an appropriate explanation. 
+Finally, a timed message box displays the completed report.
+   • Beep confirms hotkey activation.
+   • COM object is created.
+   • Network status is retrieved.
+   • Internet status is retrieved.
+   • Status values are converted into readable text.
+   • Report message is assembled.
+   • Connection condition is evaluated:
+       ⮞ Network + Internet available.
+       ⮞ Network available but no internet.
+       ⮞ No network and no internet.
+   • Message box is shown for 3 seconds.
+
+LAYOUT:
+The script follows a compact and straightforward structure. 
+Directives and startup settings appear first, followed by a single hotkey routine containing all connectivity-check logic. 
+The report is constructed incrementally before being displayed.
+   • Directives and environment settings section.
+   • Single Ctrl+T hotkey routine.
+   • COM object creation.
+   • Status retrieval.
+   • Human-readable status conversion.
+   • Message construction.
+   • Conditional status summary.
+   • Timed MsgBox output.
+
+USER EXPERIENCE:
+The user receives immediate feedback through a short beep and then sees a concise status report indicating both network and internet availability. 
+The added explanatory text helps identify whether the issue is with the local connection or with internet access beyond the local network.
+   • Fast one-key operation.
+   • Clear visual status indicators.
+   • Easy-to-understand diagnostic messages.
+   • No GUI windows required.
+   • Automatically closes after 3 seconds.
+   • Useful for quickly verifying connectivity problems.
+
+.
