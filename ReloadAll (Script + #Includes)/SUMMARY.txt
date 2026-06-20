@@ -1,0 +1,71 @@
+
+*  Auto-Reloads When Script or #Includes Change.
+
+PURPOSE:
+This script is designed to automatically reload itself whenever the main script file or any referenced #Include file is modified and saved. 
+This allows changes to take effect immediately during development without requiring manual reloads. 
+A small F1-triggered GUI is included only as demonstration code to verify that the script is running.
+   • Monitors the parent script for file changes.
+   • Monitors included files for file changes.
+   • Automatically reloads when changes are detected.
+   • Provides audible feedback before reloading.
+
+KEY FEATURES:
+The script scans its own source code to locate #Include directives, stores the modification times of valid include files, and continuously checks both the parent script and included files for updates. 
+Different beep tones identify whether the change originated from the main script or an included file.
+   • Uses a 500ms monitoring timer.
+   • Detects both "#Include" and "#include" directives.
+   • Supports relative and absolute include paths.
+   • Removes inline comments from include declarations.
+   • Stores include file modification times in an object.
+   • Uses separate beep tones for different change sources.
+       ⮞ Parent script change = 1700 Hz beep.
+       ⮞ Include file change = 1500 Hz beep.
+   • Automatically reloads after detecting a change.
+
+LOGIC SUMMARY:
+When the script launches, it scans itself for #Include directives and records the modification timestamps of all valid include files. 
+A timer then repeatedly checks the current modification times of both the parent script and every tracked include file. 
+If any timestamp differs from its previously recorded value, the script sounds a notification beep and reloads itself.
+   • Startup process:
+       ⮞ Loads script settings and directives.
+       ⮞ Loads include files.
+       ⮞ Starts the monitoring timer.
+       ⮞ Builds an include-file timestamp cache.
+   • Parent script monitoring:
+       ⮞ Checks the current script's modification time.
+       ⮞ Ignores the initial comparison during startup.
+       ⮞ Reloads when a save is detected.
+   • Include file monitoring:
+       ⮞ Loops through tracked include files.
+       ⮞ Compares stored and current timestamps.
+       ⮞ Reloads when a change is detected.
+
+LAYOUT:
+The script is organized into distinct sections that separate initialization, include handling, demonstration GUI code, include scanning, and reload monitoring. 
+This structure makes the auto-reload functionality easy to locate and maintain.
+   • AUTO-EXEC section:
+       ⮞ Script initialization and startup actions.
+   • #INCLUDE FILE(s) section:
+       ⮞ Include declarations and monitoring startup.
+   • GUI demonstration section:
+       ⮞ F1 displays a simple borderless GUI.
+       ⮞ Clicking HELLO plays a beep and closes the GUI.
+   • ScanIncludes() function:
+       ⮞ Locates and tracks include files.
+   • UpdateCheck timer:
+       ⮞ Detects file modifications and triggers reloads.
+
+USER EXPERIENCE:
+Once launched, the script operates automatically in the background. 
+Saving either the parent script or a tracked include file causes the script to reload almost immediately, allowing developers to test changes without manual intervention. 
+Audible notifications indicate what type of file triggered the reload.
+   • No manual reloads are required.
+   • Parent script saves are detected automatically.
+   • Include file saves are detected automatically.
+   • Different beep tones identify the source of the change.
+   • F1 provides a simple visual test that the script is running.
+   • Particularly useful for projects that use multiple #Include files.
+
+
+.
