@@ -1,0 +1,67 @@
+
+*  High-DPI Draggable GUI With Crisp Text
+
+
+PURPOSE:
+This script demonstrates how to create a simple border-only GUI that remains sharp and properly scaled on high-DPI displays. 
+Pressing Ctrl+T displays a small draggable window containing instructional text, and clicking the main message closes the script.
+   • Enables Per-Monitor DPI awareness before GUI creation.
+   • Creates a compact Always-On-Top GUI.
+   • Provides a captionless window that can still be dragged.
+   • Exits the script when the main message is clicked.
+
+KEY FEATURES:
+The script combines DPI-awareness, custom GUI styling, and mouse-drag functionality into a minimal example. 
+Its primary goal is to show how to produce crisp text and proper scaling on modern high-resolution monitors.
+   • Uses SetProcessDpiAwarenessContext() for DPI scaling support.
+   • Removes the standard title bar using -Caption.
+   • Keeps the GUI above other windows with +AlwaysOnTop.
+   • Uses a ToolWindow style for a cleaner appearance.
+   • Assigns a custom tray icon from shell32.dll.
+   • Implements click-and-drag movement through a message handler.
+   • Uses a g-label on a text control to close the application.
+
+LOGIC SUMMARY:
+When the script launches, it configures its environment and registers a handler for left mouse button messages. 
+DPI awareness is enabled immediately so any GUI created afterward is rendered correctly on high-DPI displays. 
+Pressing Ctrl+T builds and displays the GUI. 
+Clicking the large text closes the application, while clicking and dragging anywhere on the window allows it to be moved.
+   • Auto-execute section:
+       ⮞ Applies standard script directives and settings.
+       ⮞ Registers WM_LBUTTONDOWN message monitoring.
+       ⮞ Enables DPI-awareness before GUI creation.
+   • Ctrl+T hotkey:
+       ⮞ Creates a new GUI.
+       ⮞ Sets colors, fonts, margins, and styles.
+       ⮞ Adds instructional text controls.
+       ⮞ Displays the window.
+   • Close label:
+       ⮞ Exits the script when activated.
+   • Drag function:
+       ⮞ Simulates dragging a title bar.
+       ⮞ Allows movement despite having no caption bar.
+
+LAYOUT:
+The interface is intentionally minimal and occupies a small 220×100 pixel window. 
+A yellow background is used with centered blue text, making the demonstration visually obvious and easy to test.
+   • Yellow GUI background.
+   • Blue Arial text.
+   • Top centered instruction line.
+   • Large bold centered clickable message.
+   • Border visible.
+   • Title bar removed.
+   • Window size:
+       ⮞ Width: 220 pixels.
+       ⮞ Height: 100 pixels.
+
+USER EXPERIENCE:
+The user simply presses Ctrl+T to display the GUI. 
+The window appears above other applications, displays crisp text on high-DPI monitors, and can be repositioned by dragging it with the mouse. 
+Clicking the main message immediately closes the script.
+   • Simple one-hotkey activation.
+   • Crisp text rendering on high-resolution displays.
+   • Easy drag-anywhere window movement.
+   • No title bar clutter.
+   • Immediate script exit via clickable text.
+   • Useful as a DPI-awareness GUI template for future projects.
+
