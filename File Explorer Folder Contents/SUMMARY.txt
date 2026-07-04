@@ -1,0 +1,76 @@
+
+*  Displays and exports folder contents.
+
+
+
+PURPOSE:
+This script displays the contents of the currently active File Explorer folder inside a custom AutoHotkey GUI.
+It automatically detects the active folder when possible, allows manual folder selection if detection fails, and presents the folder contents in a sortable ListView with creation and modification timestamps.
+It is designed as a quick inspection tool for viewing, refreshing, and exporting directory listings without opening additional Explorer windows.
+    • Supports both automatic and manual folder selection.
+    • Displays folders before files.
+    • Shows creation and last modified dates.
+    • Copies the displayed list to the clipboard in tab-separated format.
+
+KEY FEATURES:
+The script combines automatic folder detection, recursive directory traversal, hidden-item filtering, and a clean graphical interface into a single utility.
+Runtime settings can be changed instantly without restarting the script, allowing the displayed results to update immediately.
+    • Detects the active File Explorer folder using COM.
+        ⮞ Falls back to several alternate detection methods if COM fails.
+    • Optional recursive listing of all subfolders.
+    • Optional inclusion of hidden files and folders.
+    • Color-coded status indicators for current settings.
+        ⮞ Green indicates enabled.
+        ⮞ Red indicates disabled.
+    • Refresh button reloads the current folder contents.
+    • Clipboard export preserves all displayed columns.
+    • Borderless, draggable, always-on-top GUI.
+    • High-DPI awareness for proper scaling on modern displays.
+
+LOGIC SUMMARY:
+Pressing F1 attempts to determine the currently active File Explorer folder.
+If automatic detection fails, the user is prompted to browse for a folder manually.
+Once a valid folder is available, the GUI is created and populated with the directory contents.
+Folders are processed first, followed by files.
+When recursive mode is enabled, each subfolder is explored through a recursive function that increases indentation to visually represent folder depth.
+Hidden items are either included or skipped according to the current setting.
+The Retry button rebuilds the ListView, while the toggle buttons immediately update both the display and the status indicators.
+The Copy button exports every visible row to the clipboard as tab-separated text.
+    • Uses COM to locate the active Explorer window.
+    • Falls back to multiple legacy path detection techniques.
+    • Uses separate recursive and non-recursive population functions.
+    • Formats timestamps into a readable date and time format.
+    • Updates the ListView dynamically after setting changes.
+
+LAYOUT:
+The interface is organized for quick readability and minimal user interaction.
+A header displays the current folder path, followed by a three-column ListView containing the item name, creation date, and modification date.
+The lower portion of the window displays the current configuration settings on the left and the available controls on the right.
+    • Header showing the active folder path.
+    • Three-column ListView.
+        ⮞ Name.
+        ⮞ Date Created.
+        ⮞ Date Modified.
+    • Current Settings section.
+        ⮞ Recursive Subfolders status.
+        ⮞ Show Hidden Items status.
+    • Toggle buttons.
+        ⮞ Recursive.
+        ⮞ Hidden.
+    • Action buttons.
+        ⮞ Copy to Clipboard.
+        ⮞ Retry.
+        ⮞ Close.
+
+USER EXPERIENCE:
+The script is intended to feel lightweight and responsive while requiring very little user input.
+Most operations occur automatically, and the interface provides immediate visual feedback whenever options are changed.
+Fallback folder selection prevents failures when automatic detection is unavailable, while clipboard export makes the displayed information easy to reuse in documents, spreadsheets, or reports.
+    • One-key activation using F1.
+    • Immediate refresh after changing options.
+    • Simple color-coded status display.
+    • Automatic recovery when folder detection fails.
+    • Easy export of the displayed results for external use.
+
+.
+
