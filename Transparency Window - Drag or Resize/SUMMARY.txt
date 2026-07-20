@@ -1,0 +1,74 @@
+
+*  Temporary transparency while moving windows.
+
+PURPOSE:
+  This script creates a temporary window transparency effect while the user moves or resizes application windows.
+It improves visibility during window manipulation by making the active window partially transparent only while a drag operation is in progress.
+The transparency automatically returns to normal when the drag operation ends.
+    • Temporarily reduces opacity while dragging windows.
+    • Restores full opacity after movement or resizing is complete.
+    • Supports both moving and resizing transparency modes.
+    • Provides an optional elevation toggle for working with administrator-level applications.
+
+KEY FEATURES:
+  The script uses Windows API hit-testing and AutoHotkey window commands to detect when a valid drag operation is occurring.
+It operates silently in the background and modifies only the window currently being moved or resized.
+    • Uses the left mouse button as the drag detection trigger.
+    • Includes a short activation delay to prevent transparency during normal clicks.
+    • Allows the transparency level to be adjusted through a variable.
+    • Allows the activation delay to be adjusted through a variable.
+    • Detects title bar movement areas.
+    • Detects selected resize border areas.
+    • Avoids applying transparency to the Windows taskbar.
+    • Supports switching between elevated and non-elevated execution.
+    • Uses Windows messages to determine the cursor location within a window.
+
+LOGIC SUMMARY:
+  The script begins by loading AutoHotkey settings and defining variables that control transparency behavior.
+The semiTransparentLevel variable determines how transparent a window becomes while dragging, while holdDelay controls how long the mouse button must be held before the effect activates.
+The enableResizeTransparency setting determines whether only moving or both moving and resizing should trigger the effect.
+
+A left mouse button hotkey starts a one-time timer whenever the user clicks.
+The timer waits briefly before checking whether the left mouse button is still being held.
+This prevents quick clicks from causing unnecessary transparency changes.
+
+If the button remains pressed, the script retrieves the current mouse position and identifies the window beneath the cursor.
+It then checks the window class to prevent the effect from being applied to the Windows taskbar.
+
+The script uses the WM_NCHITTEST Windows message to determine where the cursor is located relative to the window.
+This allows it to identify whether the cursor is over the title bar or one of the supported resize areas.
+If the detected location matches an allowed drag area, the script marks the window as being actively dragged.
+
+The target window handle is stored and its transparency is changed to the configured semi-transparent level.
+The script then waits in a loop until the left mouse button is released.
+Once dragging stops, the window transparency is restored to full opacity and the drag state is cleared.
+    • Detects possible drag operations.
+    • Confirms the mouse button remains pressed.
+    • Identifies the active window.
+    • Performs Windows hit-testing.
+    • Applies temporary transparency.
+    • Monitors the drag duration.
+    • Restores normal appearance afterward.
+
+LAYOUT:
+  This script does not create a visible graphical interface because it operates entirely through background monitoring and hotkeys.
+All behavior is controlled through variables and keyboard commands defined within the script.
+    • Configuration variables are located near the beginning of the script.
+    • Administrative toggle hotkey is Ctrl + Alt + Shift + F1.
+    • Mouse monitoring is handled through the left button hotkey.
+    • Window hit-test constants define supported drag locations.
+    • No additional windows or controls are displayed.
+
+USER EXPERIENCE:
+  The script provides an automatic visual enhancement to normal Windows window management.
+When the user begins dragging or resizing a supported window, the window becomes partially transparent, allowing other content behind it to remain visible.
+When the operation finishes, the window immediately returns to its normal opaque state without requiring any user interaction.
+    • Normal clicking behavior remains unchanged.
+    • Transparency activates only during actual drag operations.
+    • The effect works with standard Windows applications.
+    • Users can adjust behavior by changing a few variables.
+    • Administrator-level applications can be handled by restarting the script with matching privileges.
+    • The utility remains lightweight because it only performs additional processing during drag attempts.
+
+
+.
