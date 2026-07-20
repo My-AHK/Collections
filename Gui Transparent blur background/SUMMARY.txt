@@ -1,0 +1,102 @@
+
+*  Custom blurred GUI with clipboard utilities demo
+
+PURPOSE:
+  This script demonstrates how to build a custom AutoHotkey v1 graphical interface that combines a transparent parent window with a separate child window containing normal controls.
+The primary goal is to create a modern-looking interface that supports the Windows blur-behind effect while preserving fully functional Edit, Button, and CheckBox controls.
+It also serves as an example of using the Windows API to enable and disable blur dynamically without affecting the usability of the controls.
+    • Creates a frameless always-on-top GUI.
+    • Separates visual effects from interactive controls.
+    • Demonstrates parent and child window relationships.
+    • Shows how to use Windows composition attributes.
+    • Includes simple clipboard functionality.
+
+KEY FEATURES:
+  The script combines several Windows GUI techniques into a compact demonstration that highlights appearance, usability, and interaction.
+Its design intentionally separates the decorative background from the interactive elements, allowing blur and transparency to coexist with reliable user input.
+    • Creates a transparent parent GUI using a color key.
+    • Creates a child GUI with standard controls.
+    • Attaches the child window to the parent using SetParent().
+    • Enables Windows blur using SetWindowCompositionAttribute().
+    • Allows the blur effect to be enabled or disabled with a CheckBox.
+    • Provides an Edit control with a 20-character limit.
+    • Includes Copy and Clear buttons.
+    • Displays a temporary ToolTip after copying text.
+    • Shows a warning message if Copy is pressed with no text entered.
+    • Supports dragging the entire window by clicking anywhere.
+    • Prevents multiple script instances.
+    • Keeps the GUI above other windows.
+
+LOGIC SUMMARY:
+  The script begins by applying several AutoHotkey directives that configure script behavior, including persistent execution, single-instance protection, and minimal window delay.
+It also registers a custom message handler so the borderless GUI can be dragged like a normal window.
+Next, position and size variables are defined so the interface dimensions can be changed easily from one location.
+
+The first GUI acts as the visual container.
+It is created without a title bar or standard window frame and is configured to remain on top of other windows.
+Its background is assigned a transparent color, producing an invisible surface that later receives the Windows blur effect.
+Only a descriptive text label is added to this parent window.
+
+The second GUI serves as the functional interface.
+Unlike the parent, it is responsible for hosting the interactive controls because normal controls display more reliably on a standard child window than on a fully transparent blurred window.
+This child window contains a single-line Edit control, a Copy button, a CheckBox used to toggle blur, and a Clear button.
+
+After both windows are created, the child window is attached to the parent through the Windows SetParent() API.
+From that point forward, both windows behave as one unified interface.
+The parent is shown first, blur is enabled, and then the child is displayed directly on top of it.
+
+When the CheckBox changes state, the ToggleBlur routine submits the current control values without hiding the GUI.
+If the CheckBox remains checked, EnableBlur() applies the blur composition attribute.
+If it is unchecked, DisableBlur() restores a normal background.
+
+The Copy button submits the Edit control contents before checking whether any text was entered.
+If text exists, it is copied directly to the clipboard.
+A temporary ToolTip confirms success, and a one-shot timer removes the ToolTip after 1.5 seconds.
+If the Edit control is empty, a warning message box informs the user that there is nothing to copy.
+
+The Clear button simply empties the Edit control and immediately resubmits the GUI so the internal variable remains synchronized with the control.
+
+Both blur functions perform nearly identical operations.
+Each prepares an ACCENT_POLICY structure and a WINDOWCOMPOSITIONATTRIBUTEDATA structure before calling SetWindowCompositionAttribute().
+The only meaningful difference is the accent state value, which either enables blur-behind or disables the composition effect.
+
+The WM_LBUTTONDOWN message handler allows the borderless interface to be dragged naturally.
+Instead of implementing custom mouse movement logic, it posts the standard WM_NCLBUTTONDOWN message with the HTCAPTION value so Windows believes the title bar is being dragged.
+
+Finally, closing the GUI immediately exits the script, ensuring a clean shutdown without leaving any background processes running.
+    • Initializes script directives and window settings.
+    • Creates separate parent and child GUIs.
+    • Applies transparency only to the parent.
+    • Places controls only on the child window.
+    • Links both windows into one interface.
+    • Enables blur during startup.
+    • Lets the user toggle blur at any time.
+    • Copies entered text to the clipboard.
+    • Clears the Edit control.
+    • Removes temporary ToolTips automatically.
+    • Supports dragging without a title bar.
+    • Exits cleanly when closed.
+
+LAYOUT:
+  The interface is intentionally simple and compact, making it suitable as a reusable template for custom desktop utilities.
+The top portion contains an instructional label, while the lower portion provides text entry and command controls arranged in a clean horizontal layout.
+    • Blue instructional text appears near the top.
+    • Single-line Edit control spans most of the window width.
+    • Copy button appears on the lower left.
+    • Blur Effect CheckBox appears near the center.
+    • Clear button appears on the lower right.
+    • Overall window size is approximately 300 × 135 pixels.
+    • Window position is controlled by configurable variables.
+
+USER EXPERIENCE:
+  The interface behaves like a lightweight floating utility that emphasizes appearance without sacrificing functionality.
+Users can freely drag the window, enter text, copy it with immediate visual confirmation, clear the field, and switch the blur effect on or off instantly.
+The separation between the blurred background and the child controls remains invisible to the user, creating the impression of a single polished window.
+    • Responsive borderless interface.
+    • Immediate clipboard feedback.
+    • Simple error handling for empty input.
+    • Instant blur toggling.
+    • Familiar drag behavior.
+    • Minimal, uncluttered design.
+
+.
