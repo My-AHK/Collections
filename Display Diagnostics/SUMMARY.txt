@@ -1,0 +1,103 @@
+
+*  Complete Multi-Monitor & GPU Diagnostic Tool
+
+PURPOSE:
+This script is a comprehensive monitor and GPU diagnostic utility for AutoHotkey v1 that collects detailed display information directly from Windows using WMI, EDID data, SysGet, and native Windows API calls.
+It combines hardware identification, display capabilities, GPU information, current operating modes, and supported resolutions into a single organized report that can be viewed, copied, or exported in multiple formats.
+Its primary goal is to make it easy to inspect, document, or troubleshoot monitor configurations without requiring any third-party utilities.
+    • Displays results in a color-coded GUI.
+    • Automatically copies the report to the clipboard.
+    • Saves reports as plain text.
+    • Saves reports as colorized HTML.
+    • Supports systems with multiple active monitors.
+
+KEY FEATURES:
+The script gathers information from several independent Windows sources, allowing it to report significantly more detail than any single API provides.
+It intelligently combines the collected data into a unified report while removing duplicate display modes, identifying native resolutions, calculating aspect ratios, and highlighting important information for quick reference.
+    • Retrieves monitor manufacturer and model from EDID.
+    • Falls back to alternate EDID values when necessary.
+    • Obtains Windows monitor names using SysGet.
+    • Detects the primary monitor.
+    • Reports connector type, including:
+        ⮞ HDMI.
+        ⮞ DisplayPort.
+        ⮞ DVI.
+        ⮞ VGA.
+        ⮞ LVDS.
+        ⮞ Miracast.
+        ⮞ Internal displays.
+        ⮞ Additional connector types supported by Windows.
+    • Determines physical monitor dimensions in millimeters.
+    • Calculates approximate diagonal screen size in inches.
+    • Identifies the highest available native resolution.
+    • Determines the highest refresh rate available for the native resolution.
+    • Retrieves:
+        ⮞ Current desktop resolution.
+        ⮞ Refresh rate.
+        ⮞ Color depth.
+    • Enumerates supported display modes.
+    • Removes duplicate mode entries.
+    • Calculates readable aspect ratios.
+    • Highlights the detected native display mode with a star.
+    • Collects GPU information including:
+        ⮞ GPU model.
+        ⮞ Driver version.
+        ⮞ Driver date.
+        ⮞ Installed VRAM.
+        ⮞ Current video mode.
+        ⮞ Current resolution.
+        ⮞ Refresh rate.
+        ⮞ Color depth.
+    • Supports configurable sorting by:
+        ⮞ Resolution.
+        ⮞ Refresh rate.
+        ⮞ Aspect ratio.
+        ⮞ Any combination of those criteria.
+
+LOGIC SUMMARY:
+The script begins by establishing connections to the required WMI namespaces before collecting monitor, GPU, EDID, and display capability information.
+It supplements WMI data with Windows API calls to retrieve the currently active desktop display settings, ensuring the report contains both hardware capabilities and live operating values.
+After gathering all information, the script processes the results by decoding EDID strings, determining physical dimensions, identifying the native display mode, calculating aspect ratios, eliminating duplicate resolutions, sorting display modes according to the selected criteria, and assembling a formatted report for each monitor.
+The finished report is stored once and then reused for the GUI, clipboard, text export, and HTML export, avoiding unnecessary duplicate processing.
+    • Uses multiple WMI classes to gather monitor capabilities.
+    • Reads EDID manufacturer and model information.
+    • Converts raw EDID byte arrays into readable text.
+    • Uses SysGet for Windows monitor identification.
+    • Calls EnumDisplaySettings() for current desktop settings.
+    • Uses custom sorting routines for supported modes.
+    • Calculates common aspect ratios with automatic fallback.
+    • Uses a Greatest Common Divisor routine to simplify uncommon ratios.
+    • Removes duplicate display modes before sorting.
+    • Detects the highest native resolution automatically.
+    • Separates GPU information from per-monitor information.
+    • Builds reusable output for every export method.
+
+LAYOUT:
+The generated report is organized into clearly separated sections that make large amounts of display information easy to browse.
+GPU information is presented first because it applies to the entire system, while each monitor receives its own independent section containing identification, hardware specifications, operating information, and supported display modes.
+Within the graphical interface, monitor sections are displayed side by side using different text colors so multiple displays can be compared at a glance.
+    • GPU information appears once at the top.
+    • Each monitor is clearly labeled.
+    • Primary monitor is identified.
+    • Information is grouped into logical categories.
+    • Supported display modes appear in a dedicated section.
+    • Native mode is visually highlighted.
+    • GUI uses Consolas for consistent alignment.
+    • HTML export preserves color formatting.
+    • Clipboard and text exports remain clean plain text.
+
+USER EXPERIENCE:
+The script is designed to operate with minimal user interaction while producing an extensive hardware report suitable for diagnostics, documentation, and troubleshooting.
+Simple hotkeys provide quick access to every function, and the report is automatically copied to the clipboard so it can immediately be pasted into emails, forum posts, or support requests.
+Built-in error handling reports problems such as unavailable WMI services or missing monitor data, while save operations provide audible confirmation when completed successfully.
+The overall design emphasizes readability, consistency, and convenience, making it useful for both casual users and advanced technicians who need complete display configuration information.
+    • F1 generates and displays the report.
+    • F2 saves the report as plain text.
+    • F3 saves and opens a colorized HTML report.
+    • Reports are automatically copied to the clipboard.
+    • Save operations provide confirmation beeps.
+    • GUI can be dragged from anywhere.
+    • Closes cleanly with Escape or the window close button.
+
+
+.
